@@ -1,0 +1,1457 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jpa:entity-mappings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:java="http://jcp.org/en/jsr/detail?id=270" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jpa="http://java.sun.com/xml/ns/persistence/orm" v="4.2" status="GENERATED" sm="false" xs="false" id="_14926285319161" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_1.xsd">
+    <jpa:entity xre="false" abs="false" class="SmaempreEntity" v="true" m="false" rootElement="_14926285319161" id="_14926285319252">
+        <jpa:attributes>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idAeasitve" id="_14926285319504">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_AEASITVE" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idAeasitit" id="_14926285319505">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_AEASITIT" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idAealoces" id="_14926285319506">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_AEALOCES" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idAeaunven" id="_14926285319507">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_AEAUNVEN" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idCfaviatr" id="_14926285319508">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_CFAVIATR" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idCfamoeda" id="_14926285319509">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_CFAMOEDA" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idCfamoedaPais" id="_149262853195010">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_CFAMOEDA_PAIS" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idAeaplpgtVare" id="_149262853195011">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_AEAPLPGT_VARE" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idAeaplpgtAtac" id="_149262853195012">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_AEAPLPGT_ATAC" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idAeaplpgtAtacVista" id="_149262853195013">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_AEAPLPGT_ATAC_VISTA" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idAeaplpgtVareVista" id="_149262853195114">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_AEAPLPGT_VARE_VISTA" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idAeaplpgtVendaRap" id="_149262853195115">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_AEAPLPGT_VENDA_RAP" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idAeaformaVare" id="_149262853195116">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_AEAFORMA_VARE" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idAeaformaAtac" id="_149262853195117">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_AEAFORMA_ATAC" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idCfaclifoVendLoja" id="_149262853195118">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_CFACLIFO_VEND_LOJA" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idAeaseriePedEcf" id="_149262853195119">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_AEASERIE_PED_ECF" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idAeaserieEcf" id="_149262853195120">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_AEASERIE_ECF" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idAeaseriePed" id="_149262853195121">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_AEASERIE_PED" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idAeaserieOrc" id="_149262853195122">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_AEASERIE_ORC" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idAeaserieOrcPalm" id="_149262853195123">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_AEASERIE_ORC_PALM" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idAeaserieNf" id="_149262853195124">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_AEASERIE_NF" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idAeaseriePen" id="_149262853195125">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_AEASERIE_PEN" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idAeaserieOs" id="_149262853195126">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_AEASERIE_OS" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idAeacodstEnt" id="_149262853195127">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_AEACODST_ENT" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idAeacodst" id="_149262853195128">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_AEACODST" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idCfaestadFiscal" id="_149262853195229">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_CFAESTAD_FISCAL" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idCfatpdocLfNf" id="_149262853195230">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_CFATPDOC_LF_NF" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idCfatpdocLfMf" id="_149262853195231">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_CFATPDOC_LF_MF" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idCfatpdocLfCn" id="_149262853195232">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_CFATPDOC_LF_CN" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idCfatpdocRefat" id="_149262853195233">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_CFATPDOC_REFAT" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idCfaclifoVista" id="_149262853195234">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_CFACLIFO_VISTA" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idCfaclifoCaixa" id="_149262853195235">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_CFACLIFO_CAIXA" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idCfaclifoCartao" id="_149262853195236">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_CFACLIFO_CARTAO" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idCfaportaCaixa" id="_149262853195237">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_CFAPORTA_CAIXA" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idCfatpcobCaixa" id="_149262853195238">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_CFATPCOB_CAIXA" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idCfatpfatRecPvv" id="_149262853195239">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_CFATPFAT_REC_PVV" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idCfatpfatRecPva" id="_149262853195240">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_CFATPFAT_REC_PVA" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idCfatpfatRecVfv" id="_149262853195241">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_CFATPFAT_REC_VFV" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idCfatpfatRecVfa" id="_149262853195242">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_CFATPFAT_REC_VFA" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idCfatpfatRecCon" id="_149262853195243">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_CFATPFAT_REC_CON" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idCfatpfatPagEd" id="_149262853195244">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_CFATPFAT_PAG_ED" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idCfatpfatPagEn" id="_149262853195245">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_CFATPFAT_PAG_EN" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idCfatpfatPagDv" id="_149262853195246">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_CFATPFAT_PAG_DV" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idCfatpfatPagDf" id="_149262853195247">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_CFATPFAT_PAG_DF" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idCfatpfatPagPc" id="_149262853195248">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_CFATPFAT_PAG_PC" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idCfatpfatPagFreteD" id="_149262853195249">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_CFATPFAT_PAG_FRETE_D" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idCfatpfatPagFreteN" id="_149262853195250">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_CFATPFAT_PAG_FRETE_N" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idCfaestadUfOrgao" id="_149262853195251">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_CFAESTAD_UF_ORGAO" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idCbaplctaJurosRefat" id="_149262853195252">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_CBAPLCTA_JUROS_REFAT" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idCbaplctaDescRefat" id="_149262853195253">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_CBAPLCTA_DESC_REFAT" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idCbaplctaRetorno" id="_149262853195254">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_CBAPLCTA_RETORNO" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idCbaplctaCRetorno" id="_149262853195255">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_CBAPLCTA_C_RETORNO" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idCbaplctaEstFis" id="_149262853195256">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_CBAPLCTA_EST_FIS" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idCbaplctaCEstFis" id="_149262853195257">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_CBAPLCTA_C_EST_FIS" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idCbaplctaEstCon" id="_149262853195258">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_CBAPLCTA_EST_CON" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idCbaplctaCEstCon" id="_149262853195259">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_CBAPLCTA_C_EST_CON" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idCbaplctaCmvFis" id="_149262853195260">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_CBAPLCTA_CMV_FIS" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idCbaplctaCmvCon" id="_149262853195261">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_CBAPLCTA_CMV_CON" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idAeapesos" id="_149262853195262">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_AEAPESOS" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idCfastatu" id="_149262853195263">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_CFASTATU" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idCbadcont" id="_149262853195264">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_CBADCONT" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="idCfaativi" id="_149262853195265">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_CFAATIVI" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="String" v="true" name="guid" id="_149262853195366">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="GUID" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE" length="16"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="usCad" id="_149262853195367">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="US_CAD" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE" length="20"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="java.util.Date" v="true" name="dtCad" id="_149262853195368">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:temporal>TIMESTAMP</jpa:temporal>
+                <jpa:column name="DT_CAD" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="java.util.Date" v="true" name="dtAlt" id="_149262853195369">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:temporal>TIMESTAMP</jpa:temporal>
+                <jpa:column name="DT_ALT" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="ctInteg" id="_149262853195370">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="CT_INTEG" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="int" v="true" name="codigo" id="_149262853195371">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="CODIGO" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="String" v="true" name="nomeRazao" id="_149262853195372">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="NOME_RAZAO" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE" length="60"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="nomeFantasia" id="_149262853195373">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="NOME_FANTASIA" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE" length="60"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="cpfCgc" id="_149262853195374">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="CPF_CGC" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE" length="18"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="pessoa" id="_149262853195375">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="PESSOA" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="ieRg" id="_149262853195376">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="IE_RG" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE" length="18"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="orgaoEmissor" id="_149262853195377">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ORGAO_EMISSOR" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE" length="3"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="double" v="true" name="curvaAFis" id="_149262853195378">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="CURVA_A_FIS" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="double" v="true" name="curvaBFis" id="_149262853195379">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="CURVA_B_FIS" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="double" v="true" name="curvaCFis" id="_149262853195380">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="CURVA_C_FIS" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="double" v="true" name="curvaAFin" id="_149262853195381">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="CURVA_A_FIN" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="double" v="true" name="curvaBFin" id="_149262853195382">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="CURVA_B_FIN" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="double" v="true" name="curvaCFin" id="_149262853195383">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="CURVA_C_FIN" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="validade" id="_149262853195384">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="VALIDADE" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="int" v="true" name="peso" id="_149262853195385">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="PESO" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="atacVarejo" id="_149262853195386">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ATAC_VAREJO" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="vendeAtacVare" id="_149262853195387">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="VENDE_ATAC_VARE" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE" length="3"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="int" v="true" name="validadeOrcamento" id="_149262853195388">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="VALIDADE_ORCAMENTO" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="orcSemEstoque" id="_149262853195389">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ORC_SEM_ESTOQUE" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="pedSemEstoque" id="_149262853195390">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="PED_SEM_ESTOQUE" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="nfsSemEstoque" id="_149262853195391">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="NFS_SEM_ESTOQUE" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="centavos" id="_149262853195392">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="CENTAVOS" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="geraLisai" id="_149262853195393">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="GERA_LISAI" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="geraLient" id="_149262853195394">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="GERA_LIENT" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="double" v="true" name="valMarkupAtac1" id="_149262853195395">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="VAL_MARKUP_ATAC1" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="double" v="true" name="valMarkupAtac2" id="_149262853195396">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="VAL_MARKUP_ATAC2" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="double" v="true" name="valMarkupAtac3" id="_149262853195397">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="VAL_MARKUP_ATAC3" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="double" v="true" name="valMarkupVare1" id="_149262853195398">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="VAL_MARKUP_VARE1" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="double" v="true" name="valMarkupVare2" id="_149262853195399">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="VAL_MARKUP_VARE2" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="double" v="true" name="valMarkupVare3" id="_1492628531953100">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="VAL_MARKUP_VARE3" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="double" v="true" name="markupAtac1" id="_1492628531953101">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="MARKUP_ATAC1" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="double" v="true" name="markupAtac2" id="_1492628531953102">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="MARKUP_ATAC2" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="double" v="true" name="markupAtac3" id="_1492628531953103">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="MARKUP_ATAC3" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="double" v="true" name="markupVare1" id="_1492628531953104">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="MARKUP_VARE1" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="double" v="true" name="markupVare2" id="_1492628531953105">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="MARKUP_VARE2" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="double" v="true" name="markupVare3" id="_1492628531953106">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="MARKUP_VARE3" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="int" v="true" name="diasAtrazo" id="_1492628531953107">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="DIAS_ATRAZO" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="int" v="true" name="semMovimento" id="_1492628531953108">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="SEM_MOVIMENTO" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="int" v="true" name="anoAtual" id="_1492628531953109">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ANO_ATUAL" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="int" v="true" name="mesAtual" id="_1492628531953110">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="MES_ATUAL" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="int" v="true" name="mesesAnalise" id="_1492628531953111">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="MESES_ANALISE" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="int" v="true" name="incrementoSequencia" id="_1492628531953112">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="INCREMENTO_SEQUENCIA" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="double" v="true" name="sugestaoQuantidade" id="_1492628531953113">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="SUGESTAO_QUANTIDADE" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="leituraOtica" id="_1492628531953114">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="LEITURA_OTICA" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="geraImpPed" id="_1492628531953115">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="GERA_IMP_PED" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="geraImpSeparPed" id="_1492628531953116">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="GERA_IMP_SEPAR_PED" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="geraImpNf" id="_1492628531953117">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="GERA_IMP_NF" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="usaSimilar" id="_1492628531953118">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="USA_SIMILAR" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="faturaNf" id="_1492628531953119">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="FATURA_NF" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="faturaPedido" id="_1492628531953120">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="FATURA_PEDIDO" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="double" v="true" name="jurosDiario" id="_1492628531953121">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="JUROS_DIARIO" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="capitaliza" id="_1492628531953122">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="CAPITALIZA" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="emiteRecibo" id="_1492628531953123">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="EMITE_RECIBO" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="indexa" id="_1492628531953124">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="INDEXA" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="indiceValor" id="_1492628531953125">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="INDICE_VALOR" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="distServOrc" id="_1492628531953126">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="DIST_SERV_ORC" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="distServReq" id="_1492628531953127">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="DIST_SERV_REQ" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="distServPed" id="_1492628531953128">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="DIST_SERV_PED" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="distServNf" id="_1492628531954129">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="DIST_SERV_NF" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="dtGeraFat" id="_1492628531954130">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="DT_GERA_FAT" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="dtGeraNf" id="_1492628531955131">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="DT_GERA_NF" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="dtFatSegue" id="_1492628531955132">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="DT_FAT_SEGUE" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="dtNfSegue" id="_1492628531955133">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="DT_NF_SEGUE" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="modeloContabil" id="_1492628531955134">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="MODELO_CONTABIL" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="integCxregMov" id="_1492628531955135">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="INTEG_CXREG_MOV" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="integCxregAce" id="_1492628531955136">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="INTEG_CXREG_ACE" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="integFin" id="_1492628531955137">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="INTEG_FIN" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="int" v="true" name="diasVendaVista" id="_1492628531955138">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="DIAS_VENDA_VISTA" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="romaneioFechadoCarga" id="_1492628531955139">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ROMANEIO_FECHADO_CARGA" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="double" v="true" name="percDescPgtoAnt" id="_1492628531955140">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="PERC_DESC_PGTO_ANT" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="temDoctoRec" id="_1492628531955141">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="TEM_DOCTO_REC" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="temDoctoPag" id="_1492628531955142">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="TEM_DOCTO_PAG" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="int" v="true" name="diasCarencia" id="_1492628531955143">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="DIAS_CARENCIA" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="baixaSemDoctoRec" id="_1492628531955144">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="BAIXA_SEM_DOCTO_REC" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="baixaSemDoctoPag" id="_1492628531955145">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="BAIXA_SEM_DOCTO_PAG" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="int" v="true" name="diasPedidosPalm" id="_1492628531955146">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="DIAS_PEDIDOS_PALM" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="pathFtpRec" id="_1492628531955147">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="PATH_FTP_REC" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE" length="128"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="pathFtpEnv" id="_1492628531955148">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="PATH_FTP_ENV" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE" length="128"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="java.util.Date" v="true" name="validadePrecoPalmIni" id="_1492628531955149">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:temporal>DATE</jpa:temporal>
+                <jpa:column name="VALIDADE_PRECO_PALM_INI" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="java.util.Date" v="true" name="validadePrecoPalmFim" id="_1492628531955150">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:temporal>DATE</jpa:temporal>
+                <jpa:column name="VALIDADE_PRECO_PALM_FIM" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="double" v="true" name="percJrVencParcMenor" id="_1492628531955151">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="PERC_JR_VENC_PARC_MENOR" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="numParcela" id="_1492628531955152">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="NUM_PARCELA" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="codProdOrc" id="_1492628531955153">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="COD_PROD_ORC" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="codProdPed" id="_1492628531955154">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="COD_PROD_PED" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="codProdTrans" id="_1492628531955155">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="COD_PROD_TRANS" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="codProdNf" id="_1492628531955156">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="COD_PROD_NF" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="codProdCom" id="_1492628531955157">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="COD_PROD_COM" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="codProdDefault" id="_1492628531955158">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="COD_PROD_DEFAULT" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="codProdTelas" id="_1492628531955159">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="COD_PROD_TELAS" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="temDoctoNaoAlteraCr" id="_1492628531955160">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="TEM_DOCTO_NAO_ALTERA_CR" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="temDoctoNaoAlteraCp" id="_1492628531955161">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="TEM_DOCTO_NAO_ALTERA_CP" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="autDoctoNaoAlteraCr" id="_1492628531955162">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="AUT_DOCTO_NAO_ALTERA_CR" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="autDoctoNaoAlteraCp" id="_1492628531955163">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="AUT_DOCTO_NAO_ALTERA_CP" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="checaNumEmissoes" id="_1492628531955164">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="CHECA_NUM_EMISSOES" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="descUnitEcf" id="_1492628531955165">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="DESC_UNIT_ECF" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="java.util.Date" v="true" name="dtMovimento" id="_1492628531955166">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:temporal>DATE</jpa:temporal>
+                <jpa:column name="DT_MOVIMENTO" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="ordemProdConsulta" id="_1492628531955167">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ORDEM_PROD_CONSULTA" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="mudaContaCp" id="_1492628531955168">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="MUDA_CONTA_CP" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="mudaContaCr" id="_1492628531955169">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="MUDA_CONTA_CR" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="venctoEmFeriado" id="_1492628531955170">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="VENCTO_EM_FERIADO" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="vendeBloqueadoOrc" id="_1492628531955171">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="VENDE_BLOQUEADO_ORC" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="vendeBloqueadoPed" id="_1492628531955172">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="VENDE_BLOQUEADO_PED" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="vendeBloqueadoFat" id="_1492628531955173">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="VENDE_BLOQUEADO_FAT" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="validaProdOrc" id="_1492628531955174">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="VALIDA_PROD_ORC" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="validaProdPed" id="_1492628531955175">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="VALIDA_PROD_PED" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="validaProdNfs" id="_1492628531955176">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="VALIDA_PROD_NFS" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="validaProdInv" id="_1492628531955177">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="VALIDA_PROD_INV" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="validaProdEnt" id="_1492628531955178">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="VALIDA_PROD_ENT" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="validaProdTra" id="_1492628531955179">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="VALIDA_PROD_TRA" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="validaProdCom" id="_1492628531955180">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="VALIDA_PROD_COM" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="fonteRelatNome" id="_1492628531955181">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="FONTE_RELAT_NOME" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE" length="20"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="int" v="true" name="fonteRelatSize" id="_1492628531955182">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="FONTE_RELAT_SIZE" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="agrupaPedidos" id="_1492628531955183">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="AGRUPA_PEDIDOS" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="workOnDateServer" id="_1492628531955184">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="WORK_ON_DATE_SERVER" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="codigoSpc" id="_1492628531955185">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="CODIGO_SPC" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE" length="18"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="duplicataUnica" id="_1492628531955186">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="DUPLICATA_UNICA" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="aguardaFaturamento" id="_1492628531955187">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="AGUARDA_FATURAMENTO" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="entradaProdSoComPedido" id="_1492628531955188">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ENTRADA_PROD_SO_COM_PEDIDO" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="int" v="true" name="validadeFichaCliente" id="_1492628531955189">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="VALIDADE_FICHA_CLIENTE" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="double" v="true" name="percJrVencParcMaior" id="_1492628531955190">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="PERC_JR_VENC_PARC_MAIOR" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="double" v="true" name="percJurosDiaRefat" id="_1492628531955191">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="PERC_JUROS_DIA_REFAT" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="sugereProdutoGrid" id="_1492628531955192">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="SUGERE_PRODUTO_GRID" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="acessaEstoqMovim" id="_1492628531955193">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ACESSA_ESTOQ_MOVIM" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="acessaPlanoMovim" id="_1492628531955194">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ACESSA_PLANO_MOVIM" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="aceitaQtdeNegOrc" id="_1492628531955195">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ACEITA_QTDE_NEG_ORC" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="aceitaQtdeNegPed" id="_1492628531955196">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ACEITA_QTDE_NEG_PED" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="aceitaQtdeNegEnt" id="_1492628531955197">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ACEITA_QTDE_NEG_ENT" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="entregaSoConferido" id="_1492628531955198">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ENTREGA_SO_CONFERIDO" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="double" v="true" name="percCreditoRenda" id="_1492628531955199">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="PERC_CREDITO_RENDA" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="usaRendaConjLimcre" id="_1492628531955200">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="USA_RENDA_CONJ_LIMCRE" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="tipoAnaliseCredito" id="_1492628531955201">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="TIPO_ANALISE_CREDITO" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="fonteAnaliseCredito" id="_1492628531955202">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="FONTE_ANALISE_CREDITO" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="double" v="true" name="lucroMinimo" id="_1492628531955203">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="LUCRO_MINIMO" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="opcaoPen" id="_1492628531955204">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="OPCAO_PEN" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="double" v="true" name="vlMinPrazoVarejo" id="_1492628531955205">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="VL_MIN_PRAZO_VAREJO" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="double" v="true" name="vlMinPrazoAtacado" id="_1492628531955206">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="VL_MIN_PRAZO_ATACADO" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="double" v="true" name="vlMinVistaVarejo" id="_1492628531955207">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="VL_MIN_VISTA_VAREJO" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="double" v="true" name="vlMinVistaAtacado" id="_1492628531955208">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="VL_MIN_VISTA_ATACADO" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="faturaVlMin" id="_1492628531955209">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="FATURA_VL_MIN" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="suframa" id="_1492628531955210">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="SUFRAMA" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE" length="20"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="inscMunicipal" id="_1492628531955211">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="INSC_MUNICIPAL" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE" length="20"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="cnae" id="_1492628531955212">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="CNAE" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE" length="10"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="perfilSped" id="_1492628531955213">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="PERFIL_SPED" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="double" v="true" name="percFatAtac" id="_1492628531955214">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="PERC_FAT_ATAC" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="double" v="true" name="percFatVare" id="_1492628531955215">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="PERC_FAT_VARE" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="permiteRetornoComNf" id="_1492628531955216">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="PERMITE_RETORNO_COM_NF" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="multiplosPlanos" id="_1492628531955217">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="MULTIPLOS_PLANOS" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="parcelasCredito" id="_1492628531955218">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="PARCELAS_CREDITO" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="pedidoFechado" id="_1492628531955219">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="PEDIDO_FECHADO" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="fichaSemDoc" id="_1492628531955220">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="FICHA_SEM_DOC" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="tipoProduto" id="_1492628531955221">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="TIPO_PRODUTO" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="crt" id="_1492628531955222">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="CRT" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="csosn" id="_1492628531955223">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="CSOSN" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE" length="3"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="indAtiv" id="_1492628531955224">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="IND_ATIV" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="double" v="true" name="aliquotaSn" id="_1492628531955225">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ALIQUOTA_SN" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="tipoBaixaDevol" id="_1492628531955226">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="TIPO_BAIXA_DEVOL" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="codigoPrefeituraNfse" id="_1492628531955227">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="CODIGO_PREFEITURA_NFSE" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE" length="20"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="int" v="true" name="horasDiaInd" id="_1492628531955228">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="HORAS_DIA_IND" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="spcWsOperador" id="_1492628531955229">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="SPC_WS_OPERADOR" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE" length="26"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="spcWsSenha" id="_1492628531955230">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="SPC_WS_SENHA" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE" length="20"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="spcWsCodigo" id="_1492628531955231">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="SPC_WS_CODIGO" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE" length="26"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="int" v="true" name="qtdDiasDestacaProduto" id="_1492628531955232">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="QTD_DIAS_DESTACA_PRODUTO" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="fechaVendaCredNegAtac" id="_1492628531955233">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="FECHA_VENDA_CRED_NEG_ATAC" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="fechaVendaCredNegVare" id="_1492628531955234">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="FECHA_VENDA_CRED_NEG_VARE" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="tipoAcumuloCredAtac" id="_1492628531955235">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="TIPO_ACUMULO_CRED_ATAC" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="tipoAcumuloCredVare" id="_1492628531955236">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="TIPO_ACUMULO_CRED_VARE" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="periodoCredAtac" id="_1492628531955237">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="PERIODO_CRED_ATAC" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="periodoCredVare" id="_1492628531955238">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="PERIODO_CRED_VARE" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="nfVlVista" id="_1492628531955239">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="NF_VL_VISTA" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="checaZonaFranca" id="_1492628531955240">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="CHECA_ZONA_FRANCA" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE" length="5"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Character" v="true" name="consFinalOutraUf" id="_1492628531955241">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="CONS_FINAL_OUTRA_UF" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:basic>
+            <jpa:id attribute-type="Integer" v="true" name="idSmaempre" id="_14926285319503">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="ID_SMAEMPRE" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:table name="SMAEMPRE">
+            <jpa:unique-constraint>
+                <jpa:column-name>CODIGO</jpa:column-name>
+            </jpa:unique-constraint>
+        </jpa:table>
+    </jpa:entity>
+    <jpa:snp loc="BEFORE_PACKAGE" e="true">/**
+ * This file was generated by the Jeddict
+ */</jpa:snp>
+    <jpa:diagram>
+        <plane elementRef="_14926285319161"/>
+    </jpa:diagram>
+</jpa:entity-mappings>
