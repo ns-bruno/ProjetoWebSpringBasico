@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jpa="http://www.springframework.org/schema/jpa"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+          http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+          http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+          http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+          http://www.springframework.org/schema/jpa http://www.springframework.org/schema/jpa/spring-jpa-1.8.xsd
+">
+
+    <context:component-scan base-package="br.com.sisinfoweb" />
+    
+    <mvc:annotation-driven/>
+    
+    <mvc:resources mapping="/lib/**" location="/lib/" />
+    
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          p:prefix="/WEB-INF/jsp/"
+          p:suffix=".jsp" />
+    
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <!--
+                        <property name="showSql" value="true" />
+                -->
+                <property name="databasePlatform" value="org.hibernate.dialect.FirebirdDialect" />
+                <property name="generateDdl" value="true" />
+            </bean>
+        </property>
+        <property name="loadTimeWeaver">
+            <bean class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver" />
+        </property>
+    </bean>
+
+    <!-- la source de donnéees DBCP -->
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="org.firebirdsql.jdbc.FBDriver" />
+        <property name="url" value="jdbc:firebirdsql:172.16.0.251/3050:C:\SisInfo\delphi\SINOVO.FIR" />
+        <property name="username" value="sysdba" />
+        <property name="password" value="1" />
+    </bean>
+
+    <!-- le gestionnaire de transactions -->
+    <tx:annotation-driven transaction-manager="txManager" />
+    <bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory" />
+    </bean>
+    
+<!--    <jpa:repositories base-package="br.com.sisinfoweb.repository" />-->
+</beans>
