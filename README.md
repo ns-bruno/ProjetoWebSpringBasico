@@ -19,6 +19,7 @@ SisInfoWeb/
 │       │       │       └── JPADiagramaBanco.jpa
 │       │       ├── controller/
 │       │       ├── entity/
+│       │       │   └── SmaempreEntity.jpa
 │       │       ├── repository/
 │       │       └── service/
 │       ├── resources/
