@@ -17,17 +17,20 @@
 <!-- Ionicons (Obrigatorio) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 
-<!-- Logo -->
-<!--    <a href="index.jsp" class="logo">
-         mini logo for sidebar mini 50x50 pixels 
-        <span class="logo-mini"><b>Sis</b>Info</span>
-         logo for regular state and mobile devices 
-        <span class="logo-lg"><b>SisInfo</b> Web</span>
-    </a>-->
-
 <header class="main-header">
+    <!-- Logo -->
+    <a href="/Index" class="logo">
+        <!--         mini logo for sidebar mini 50x50 pixels -->
+        <span class="logo-mini"><b>SI</b>W</span>
+        <!--         logo for regular state and mobile devices -->
+        <span class="logo-lg"><b>SisInfo</b> Web</span>
+    </a>
+
     <nav class="navbar navbar-fixed-top">
 
+        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle navigation</span>
+        </a>
         <div class="container-fluid">
             <div class="navbar-header">
                 <a href="Dashboard" class="navbar-brand"><b>Início do Dashboard</b></a>

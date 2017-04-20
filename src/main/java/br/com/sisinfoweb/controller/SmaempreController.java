@@ -5,7 +5,12 @@
  */
 package br.com.sisinfoweb.controller;
 
+import br.com.sisinfoweb.entity.SmaempreEntity;
+import br.com.sisinfoweb.service.SmaempreService;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,8 +22,16 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class SmaempreController {
     
+    @Autowired
+    private SmaempreService smaempreService;
+    
     @RequestMapping(value = {"/Empresa", "/CadastroEmpresa", "/Smpempre"}, method = RequestMethod.GET) 
-    public ModelAndView indexInit(){
-        return new ModelAndView("smpempre");
+    public ModelAndView init(Model model){
+        ModelAndView modelView = new ModelAndView("smpempre");
+        
+        List<SmaempreEntity> lista = smaempreService.findAll();
+        model.addAttribute("lista", lista);
+        modelView.addObject(lista);
+        return modelView;
     }
 }

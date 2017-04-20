@@ -5,13 +5,13 @@
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:tx="http://www.springframework.org/schema/tx"
-       xmlns:jpa="http://www.springframework.org/schema/jpa"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
           http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
-          http://www.springframework.org/schema/jpa http://www.springframework.org/schema/jpa/spring-jpa-1.8.xsd
+          http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.8.xsd
 ">
 
     <context:component-scan base-package="br.com.sisinfoweb" />
@@ -29,9 +29,9 @@
         <property name="dataSource" ref="dataSource" />
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-                <!--
+                
                         <property name="showSql" value="true" />
-                -->
+                
                 <property name="databasePlatform" value="org.hibernate.dialect.FirebirdDialect" />
                 <property name="generateDdl" value="true" />
             </bean>
@@ -48,12 +48,39 @@
         <property name="username" value="sysdba" />
         <property name="password" value="1" />
     </bean>
-
+    
     <!-- le gestionnaire de transactions -->
-    <tx:annotation-driven transaction-manager="txManager" />
-    <bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+    <tx:annotation-driven transaction-manager="transactionManager" />
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory" />
     </bean>
     
-<!--    <jpa:repositories base-package="br.com.sisinfoweb.repository" />-->
+    <jpa:repositories base-package="br.com.sisinfoweb.repository" entity-manager-factory-ref="entityManagerFactory" transaction-manager-ref="transactionManager" />
+
+<!--    Configuracao do entityManager e dataSource para usar o banco de dados Oracle
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                
+                        <property name="showSql" value="true" />
+                
+                <property name="databasePlatform" value="org.hibernate.dialect.OracleDialect" />
+                <property name="generateDdl" value="true" />
+            </bean>
+        </property>
+        <property name="loadTimeWeaver">
+            <bean class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver" />
+        </property>
+    </bean>
+
+     la source de donnéees DBCP 
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="oracle.jdbc.OracleDriver" />
+        <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
+        <property name="username" value="jpa" />
+        <property name="password" value="jpa" />
+    </bean>-->
+    
+    
 </beans>

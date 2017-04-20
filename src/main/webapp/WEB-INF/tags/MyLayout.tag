@@ -13,6 +13,10 @@
 <html lang="pt-br">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!-- Icone da pagina -->
+        <link rel="shortcut icon" href="${pageContext.request.contextPath}/lib/img/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="${pageContext.request.contextPath}/lib/img/favicon.ico" type="image/x-icon">
+        
         <title>${title}</title>
     </head>
 
@@ -28,7 +32,7 @@
 
                 <jsp:invoke fragment="mycontent"></jsp:invoke>
 
-            </div>
+                </div>
 
             <%@include file="rodape.jsp" %>
         </div>
