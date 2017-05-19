@@ -11,7 +11,7 @@
 <mylayout:MyLayout title="Cadastro de Empresa">
     <jsp:attribute name="mycontent">
 
-        <script src="${pageContext.request.contextPath}/lib/myJs/smpempre.js" type="text/javascript"></script>
+
         <!-- Conteudo da pagina -->
         <div class="content-header">
             <h1>Empresa<small>Lista</small></h1>
@@ -33,16 +33,32 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="col-md-6">
+                                <div class="input-group navbar-text">
+                                    <select id="filterSelectDataTable" class="form-control">
+                                        <option>Pick</option>
+                                        <option>mm</option>
+                                        <option>in</option>
+                                    </select>
+                                    <span class="input-group-addon" style="width:0px; padding-left:0px; padding-right:0px; border:none;"></span>
+                                    <input id="filterBoxDataTable" type="text" class="form-control" placeholder="Pesquisar">
+                                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- Corpo da tabela -->
                         <div class="box-body">
-                            <div id="listaEmpresa" class="dataTables_wrapper form-inline dt-bootstrap">
+                            <div class="dataTables_wrapper form-inline dt-bootstrap">
 
 
-                                <table id="tabelaEmpresa" class="table table-striped table-bordered dataTable" cellspacing="0" width="100%">
+                                <table id="tabela" class="table table-striped table-bordered dataTable" cellspacing="0" width="100%">
                                     <thead>
                                         <tr>
+                                            <th class="dt-body-center sorting_disabled" rowspan="1" colspan="1" aria-label="" style="width: 12px;">
+                                                <input name="select_all" value="1" id="example-select-all" type="checkbox" />
+                                            </th>
                                             <th>Código</th>
                                             <th>Razão Social</th>
                                             <th>Fantasia</th>
@@ -55,6 +71,7 @@
                                     <tbody>
                                         <core:forEach items="${lista}" var="empresas">
                                             <tr>
+                                                <td class=" dt-body-center"><input type="checkbox" name="id[]" value="${empresas.idSmaempre}"></td>
                                                 <td><a class="" href="">${empresas.codigo}</a></td>
                                                 <td><a class="" href="">${empresas.nomeRazao}</a></td>
                                                 <td><a class="" href="">${empresas.nomeFantasia}</a></td>
@@ -66,7 +83,7 @@
                                         </core:forEach>
                                     </tbody>
                                 </table>
-                                
+
                             </div>
                         </div>
                     </div>

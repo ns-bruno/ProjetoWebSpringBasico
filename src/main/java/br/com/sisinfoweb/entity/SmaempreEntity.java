@@ -3,6 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -11,12 +12,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "SMAEMPRE", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"CODIGO"})})
-public class SmaempreEntity {
+public class SmaempreEntity implements Serializable {
 
     @Column(name = "ID_SMAEMPRE", table = "SMAEMPRE", nullable = false)
     @Id
@@ -290,6 +292,7 @@ public class SmaempreEntity {
 
     @Column(name = "CT_INTEG", table = "SMAEMPRE")
     @Basic
+    @Transient
     private Integer ctInteg;
 
     @Column(name = "CODIGO", table = "SMAEMPRE", nullable = false)
@@ -302,6 +305,7 @@ public class SmaempreEntity {
 
     @Column(name = "NOME_FANTASIA", table = "SMAEMPRE", length = 60)
     @Basic
+    @Transient
     private String nomeFantasia;
 
     @Column(name = "CPF_CGC", table = "SMAEMPRE", length = 18)
@@ -314,10 +318,12 @@ public class SmaempreEntity {
 
     @Column(name = "IE_RG", table = "SMAEMPRE", length = 18)
     @Basic
+    @Transient
     private String ieRg;
 
     @Column(name = "ORGAO_EMISSOR", table = "SMAEMPRE", length = 3)
     @Basic
+    @Transient
     private String orgaoEmissor;
 
     @Column(name = "CURVA_A_FIS", table = "SMAEMPRE", nullable = false)
@@ -346,6 +352,7 @@ public class SmaempreEntity {
 
     @Column(name = "VALIDADE", table = "SMAEMPRE")
     @Basic
+    @Transient
     private Character validade;
 
     @Column(name = "PESO", table = "SMAEMPRE", nullable = false)

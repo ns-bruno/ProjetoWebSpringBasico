@@ -6,12 +6,20 @@
 package br.com.sisinfoweb.repository;
 
 import br.com.sisinfoweb.entity.SmaempreEntity;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author Bruno
  */
-public interface SmaempreRepository extends JpaRepository<SmaempreEntity, Integer>{
+public interface SmaempreRepository extends BaseMyRepository<SmaempreEntity, Integer>{
+    String COLUMNS_RESUME = 
+            "SMAEMPRE.ID_SMAEMPRE, SMAEMPRE.GUID, SMAEMPRE.DT_ALT, SMAEMPRE.CODIGO, SMAEMPRE.NOME_RAZAO, SMAEMPRE.NOME_FATASIA, "
+            + "SMAEMPRE.CPF_CGC, SMAEMPRE.PESSOA, SMAEMPRE.IE_RG, SMAEMPRE.ORGAO_EMISSOR";
     
+    
+    //@Query(value = "SELECT * FROM SMAEMPRE :where", nativeQuery = true)
+    //List<SmaempreEntity> findCustomNativeQuery(@Param("where")String where);
+ 
+    //@Query(value = "SELECT " + COLUMNS_RESUME + " FROM SMAEMPRE ID_SMAEMPRE = :where", nativeQuery = true)
+    //List<SmaempreEntity> resumeFindCustomNativeQuery(@Param("where")String where);
 }

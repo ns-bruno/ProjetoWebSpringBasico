@@ -5,10 +5,11 @@
  * @returns {undefined}
  */
 window.onload = function () {
-    
-    dicionarioTipoPessoa();
 
+    dicionarioTipoPessoa();
+    preencheSelectNomeColunasTabela();
 };
+
 
 /**
  * Pega todos os elementos com a class tipoPessoa, onde vai definir se a pessoa
@@ -23,12 +24,21 @@ function dicionarioTipoPessoa() {
         // Checa se o que esta dentro da tag
         if (elementosPessoa[i].innerHTML == "0") {
             elementosPessoa[i].innerHTML = "Física";
-        
+
         } else if (elementosPessoa[i].innerHTML == "1") {
             elementosPessoa[i].innerHTML = "Jurídica";
-        
+
         } else {
             elementosPessoa[i].innerHTML = "Desconhecida";
         }
     }
+}
+;
+
+
+function preencheSelectNomeColunasTabela() {
+    var tabela = document.getElementsByTagName("table");
+
+    // Column header
+    console.log("Header:", tabela.header().text());
 };

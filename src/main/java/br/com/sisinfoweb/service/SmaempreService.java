@@ -7,9 +7,7 @@ package br.com.sisinfoweb.service;
 
 import br.com.sisinfoweb.entity.SmaempreEntity;
 import br.com.sisinfoweb.repository.SmaempreRepository;
-import java.util.List;
 import javax.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -18,12 +16,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @Transactional
-public class SmaempreService {
+public class SmaempreService extends BaseMyService<SmaempreRepository, SmaempreEntity>{
 
-    @Autowired
-    private SmaempreRepository smaempreRepository;
 
-    public List<SmaempreEntity> findAll() {
-        return smaempreRepository.findAll();
+    public SmaempreService(SmaempreRepository smaempreRepository) {
+        super(smaempreRepository);
     }
 }

@@ -30,7 +30,7 @@
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
                 
-                        <property name="showSql" value="true" />
+                <property name="showSql" value="true" />
                 
                 <property name="databasePlatform" value="org.hibernate.dialect.FirebirdDialect" />
                 <property name="generateDdl" value="true" />
@@ -45,7 +45,7 @@
     <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="org.firebirdsql.jdbc.FBDriver" />
         <property name="url" value="jdbc:firebirdsql:172.16.0.251/3050:C:\SisInfo\delphi\SINOVO.FIR" />
-        <property name="username" value="sysdba" />
+        <property name="username" value="SYSDBA" />
         <property name="password" value="1" />
     </bean>
     
@@ -55,8 +55,12 @@
         <property name="entityManagerFactory" ref="entityManagerFactory" />
     </bean>
     
-    <jpa:repositories base-package="br.com.sisinfoweb.repository" entity-manager-factory-ref="entityManagerFactory" transaction-manager-ref="transactionManager" />
+    <jpa:repositories base-package="br.com.sisinfoweb.repository" entity-manager-factory-ref="entityManagerFactory" transaction-manager-ref="transactionManager" base-class="br.com.sisinfoweb.repository.BaseMyRepositoryImpl"/>
 
+    <mvc:interceptors>
+        <bean class="br.com.sisinfoweb.interceptor.AutorizadorInterceptor" />
+    </mvc:interceptors>
+    
 <!--    Configuracao do entityManager e dataSource para usar o banco de dados Oracle
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource" />

@@ -1,25 +1,8 @@
-<!-- jQuery 2.2.3 (Obrigatorio) -->
-<script src="${pageContext.request.contextPath}/lib/AdminLTE/plugins/jQuery/jquery-2.2.3.min.js"></script>
-<!-- Bootstrap 3.3.7 (Obrigatorio) -->
-<script src="${pageContext.request.contextPath}/lib/bootstrap/js/bootstrap.min.js"></script>
-<!-- iCheck (Obrigatorio) -->
-<script src="${pageContext.request.contextPath}/lib/AdminLTE/plugins/iCheck/icheck.min.js"></script>
-<!-- (Obrigatorio) -->
-<script src="${pageContext.request.contextPath}/lib/AdminLTE/dist/js/app.js" type="text/javascript"></script>
-<!-- Bootstrap CSS (Obrigatorio) -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/lib/bootstrap/css/bootstrap.min.css">
-<!-- Theme style (Obrigatorio) -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/lib/AdminLTE/dist/css/AdminLTE.min.css">
-<!-- (Obrigatorio)  -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/lib/AdminLTE/dist/css/skins/_all-skins.min.css">
-<!-- Font Awesome (Obrigatorio) -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-<!-- Ionicons (Obrigatorio) -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+<%@include file="importsCss.jsp" %>
 
 <header class="main-header">
     <!-- Logo -->
-    <a href="/Index" class="logo">
+    <a href="Index" class="logo">
         <!--         mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>SI</b>W</span>
         <!--         logo for regular state and mobile devices -->
@@ -98,7 +81,7 @@
                                     <a href="#" class="btn btn-default btn-flat">Meu Perfil</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="#" class="btn btn-default btn-flat">Sair</a>
+                                    <a href="Logout" class="btn btn-default btn-flat">Sair</a>
                                 </div>
                             </li>
                         </ul>

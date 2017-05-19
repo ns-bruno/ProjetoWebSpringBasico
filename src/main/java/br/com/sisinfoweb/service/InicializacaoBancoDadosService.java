@@ -6,6 +6,7 @@
 package br.com.sisinfoweb.service;
 
 import br.com.sisinfoweb.repository.SmaempreRepository;
+import br.com.sisinfoweb.repository.SmausuarRepository;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

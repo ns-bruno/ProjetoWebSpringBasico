@@ -36,5 +36,6 @@
 
             <%@include file="rodape.jsp" %>
         </div>
+            <%@include file="importsJavaScript.jsp" %>
     </body>
 </html>
