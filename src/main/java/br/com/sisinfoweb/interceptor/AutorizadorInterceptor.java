@@ -57,6 +57,8 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
             
             if( (request.getParameterMap() != null) && (request.getParameter(KEY_DISPOSITIVO_JSON) != null) ){
         
+                //String s1 = request.getParameter(KEY_DISPOSITIVO_JSON);
+                
                 SmadispoEntity smadispoEntity = new Gson().fromJson(request.getParameter(KEY_DISPOSITIVO_JSON), SmadispoEntity.class);
                 
                 // Checa se pegou o dispositivo

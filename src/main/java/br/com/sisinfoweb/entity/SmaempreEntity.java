@@ -985,6 +985,10 @@ public class SmaempreEntity implements Serializable {
     @Column(name = "CONS_FINAL_OUTRA_UF", table = "SMAEMPRE")
     @Basic
     private Character consFinalOutraUf;
+    
+    @Column(name = "VERSAO_SAVARE", table = "SMAEMPRE")
+    @Basic
+    private Integer versaoSavare;
 
     public Integer getIdSmaempre() {
         return this.idSmaempre;
@@ -2896,6 +2900,14 @@ public class SmaempreEntity implements Serializable {
 
     public void setConsFinalOutraUf(Character consFinalOutraUf) {
         this.consFinalOutraUf = consFinalOutraUf;
+    }
+
+    public Integer getVersaoSavare() {
+        return versaoSavare;
+    }
+
+    public void setVersaoSavare(Integer versaoSavare) {
+        this.versaoSavare = versaoSavare;
     }
 
 }

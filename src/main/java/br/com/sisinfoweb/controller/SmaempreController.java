@@ -31,7 +31,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Bruno
  */
 @Controller
-public class SmaempreController extends MyController {
+public class SmaempreController extends BaseMyController {
 
     @Autowired
     private SmaempreService smaempreService;
@@ -101,7 +101,7 @@ public class SmaempreController extends MyController {
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_INTERNAL_ERROR);
             statusRetorno.setMensagemRetorno(String.valueOf(e.getMessage()));
-            statusRetorno.setExtra(e.getMessage());
+            statusRetorno.setExtra(e.getLocalizedMessage());
             
             // Adiciona o status
             retornoWebService.statusRetorno = statusRetorno;

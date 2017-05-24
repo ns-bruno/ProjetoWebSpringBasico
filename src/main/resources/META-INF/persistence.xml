@@ -5,4 +5,12 @@
     <properties>
     </properties>
   </persistence-unit>
+  <persistence-unit name="DEFAULT_PU" transaction-type="JTA">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>br.com.sisinfoweb.entity.SmadispoEntity</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <property name="javax.persistence.schema-generation.database.action" value="create"/>
+    </properties>
+  </persistence-unit>
 </persistence>

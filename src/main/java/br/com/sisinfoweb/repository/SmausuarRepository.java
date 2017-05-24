@@ -6,7 +6,6 @@
 package br.com.sisinfoweb.repository;
 
 import br.com.sisinfoweb.entity.SmausuarEntity;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -14,7 +13,7 @@ import org.springframework.data.repository.query.Param;
  *
  * @author Bruno
  */
-public interface SmausuarRepository extends JpaRepository<SmausuarEntity, Integer>{
+public interface SmausuarRepository extends BaseMyRepository<SmausuarEntity, Integer>{
     
     @Query(value = "select * from smausuar where smausuar.nome = :nome", nativeQuery = true)
     SmausuarEntity findByFirstnameEquals(@Param("nome") String nome);
