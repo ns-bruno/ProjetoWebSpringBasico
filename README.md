@@ -100,7 +100,7 @@ Todas as classes do pacote `controller` tem que estender a classe `BaseMyControl
 
 ```
 
-Foi criado uma classe de base para todas as classes de interface Repository, onde pode ser adicionado uma função na classe base (`BaseMyRepository.java`) e todas as outras interfaces Repository vai ter a função adicionada.
+Foi criado uma classe de base para todas as classes de interface Repository, onde pode ser adicionado uma função na classe base (`BaseMyRepository.java`) e todas as outras interfaces Repository vai ter a função adicionada. Foi feito um classe de implementação de acordo com o que é pedido nas instruções do Spring.
 Todas as classes de interface do pacote `repository` tem que estender a classe `BaseMyRepository.java`.
 
 ## BaseMyService.java
