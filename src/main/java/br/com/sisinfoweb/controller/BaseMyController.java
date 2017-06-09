@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  *
  * @author Bruno
  */
-public abstract class MyController {
+public abstract class BaseMyController {
     public static final String STATUS_RETURN = "statusRetorno";
     public static final String DISPOSITIVO_JSON = "dispositivoJson";
     public static final String COLUMN_SELECTED_JSON = "columnSelectedJson";

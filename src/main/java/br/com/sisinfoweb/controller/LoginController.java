@@ -29,13 +29,13 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Bruno
  */
 @Controller
-public class LoginController extends MyController {
+public class LoginController extends BaseMyController {
     
     @Autowired
     SmausuarService smausuarService;
 
     @RequestMapping(value = {"/Login", "/login"}, method = RequestMethod.GET)
-    public ModelAndView init(Model model, @RequestHeader() HttpHeaders httpHeaders, @RequestParam(defaultValue = "{}", required = false) String dispositivoJson) {
+    public ModelAndView init(Model model, @RequestHeader() HttpHeaders httpHeaders, @RequestParam(defaultValue = "{}", required = false) String dispositivo) {
 
         return new ModelAndView("login");
     }
@@ -50,7 +50,7 @@ public class LoginController extends MyController {
         
         ModelAndView modelAndView = new ModelAndView();
         
-        SmausuarEntity smausuarEntity = smausuarService.usuar(nomeUsuario);
+        SmausuarEntity smausuarEntity = smausuarService.findCustomNativeQuery(false, null, null, "(NOME = '" + nomeUsuario + "')").get(0);
         
         if((smausuarEntity != null) && (smausuarEntity.getNome() != null) && (smausuarEntity.getNome().length() > 0)){
             
@@ -74,7 +74,7 @@ public class LoginController extends MyController {
         return "redirect:Login";
     }
 
-    @RequestMapping(value = {"/Smausuar"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = {"/Login"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     @Override
     public String initJson( Model model, 

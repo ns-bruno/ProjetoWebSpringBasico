@@ -5,9 +5,6 @@
  */
 package br.com.sisinfoweb.funcoes;
 
-import br.com.sisinfoweb.controller.MyController;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -49,7 +46,7 @@ public class FuncoesPersonalizadas {
                     // Transforma em um objeto o json passado por parametro
                     /*JsonObject object = new Gson().fromJson(columns, JsonObject.class);
                     // Checa se dentro o object json tem as colunas
-                    if (object.has(MyController.COLUMN_SELECTED_JSON)) {
+                    if (object.has(BaseMyController.COLUMN_SELECTED_JSON)) {
                         // Adiciona as coluna na query
                     } else {
                         query.append(" * ");
@@ -67,7 +64,7 @@ public class FuncoesPersonalizadas {
                     // Transforma em um objeto o json passado por parametro
                     /*JsonObject object = new Gson().fromJson(columns, JsonObject.class);
                     // Checa se dentro o object json tem as colunas
-                    if (object.has(MyController.WHERE_JSON)) {
+                    if (object.has(BaseMyController.WHERE_JSON)) {
                         // Adiciona as coluna na query
                     }*/
                 }

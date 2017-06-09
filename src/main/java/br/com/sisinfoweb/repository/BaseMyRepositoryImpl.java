@@ -5,20 +5,10 @@
  */
 package br.com.sisinfoweb.repository;
 
-import br.com.sisinfoweb.entity.SmaempreEntity;
 import java.io.Serializable;
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
 import java.util.List;
-import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import javax.persistence.Tuple;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import org.eclipse.persistence.config.QueryHints;
-import org.eclipse.persistence.config.ResultType;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,8 +37,18 @@ public class BaseMyRepositoryImpl<T, ID extends Serializable> extends SimpleJpaR
         //List<T> resultados = (List<T>) query.getResultList();
 
         //List<T> lista = entityManager.createNativeQuery(sqlQuery, this.getDomainClass()).getResultList();
-
         return entityManager.createNativeQuery(sqlQuery, this.getDomainClass()).getResultList();
     }
 
+    @Transactional
+    @Override
+    public T findOneByGuid(String guid) {
+        String consultaJpql = "SELECT A FROM " + this.getDomainClass().getSimpleName().toUpperCase().replace("ENTITY", "") + " A WHERE A.GUID = :GUID";
+        Query query = entityManager.createQuery(consultaJpql, this.getDomainClass());
+        query.setParameter("GUID", guid);
+        
+        return (T) query.getSingleResult();
+    }
+
+    
 }

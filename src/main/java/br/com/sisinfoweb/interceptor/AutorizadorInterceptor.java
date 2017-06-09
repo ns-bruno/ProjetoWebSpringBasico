@@ -57,12 +57,14 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
             
             if( (request.getParameterMap() != null) && (request.getParameter(KEY_DISPOSITIVO_JSON) != null) ){
         
+                //String s1 = request.getParameter(KEY_DISPOSITIVO_JSON);
+                
                 SmadispoEntity smadispoEntity = new Gson().fromJson(request.getParameter(KEY_DISPOSITIVO_JSON), SmadispoEntity.class);
                 
                 // Checa se pegou o dispositivo
                 if ( (smadispoEntity != null) && (smadispoEntity.getGuidClifo() != null) && (!smadispoEntity.getGuidClifo().isEmpty()) ){
                     // Pega os dados do clifo
-                    CfaclifoEntity cfaclifoEntity = cfaclifoService.findResumeByGuidEquals(smadispoEntity.getGuidClifo());
+                    CfaclifoEntity cfaclifoEntity = cfaclifoService.findCustomNativeQuery(Boolean.FALSE, null, null, "(GUID = '"+smadispoEntity.getGuidClifo() + "')").get(0);
                     
                     // Checa se retornou o usuario e se ele esta ativo
                     if((cfaclifoEntity != null) && (cfaclifoEntity.getAtivo().equals('1'))){

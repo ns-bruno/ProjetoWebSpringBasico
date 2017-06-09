@@ -7,9 +7,7 @@ package br.com.sisinfoweb.service;
 
 import br.com.sisinfoweb.entity.SmausuarEntity;
 import br.com.sisinfoweb.repository.SmausuarRepository;
-import java.util.List;
 import javax.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -18,20 +16,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @Transactional
-public class SmausuarService {
+public class SmausuarService extends BaseMyService<SmausuarRepository, SmausuarEntity>{
     
-    @Autowired
-    private SmausuarRepository smausuarRepository;
-    
-    public List<SmausuarEntity> findAll() {
-        return smausuarRepository.findAll();
+    public SmausuarService(SmausuarRepository smaempreRepository) {
+        super(smaempreRepository);
     }
     
-    public SmausuarEntity usuar(String nome){
-        return smausuarRepository.findByFirstnameEquals(nome);
-    }
-    
-    public SmausuarEntity findByGuid(String guid){
-        return smausuarRepository.findByGuidEquals(guid);
-    }
 }

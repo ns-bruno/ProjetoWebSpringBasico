@@ -767,6 +767,9 @@
         </jpa:table>
     </jpa:entity>
     <jpa:entity xre="false" compositePrimaryKeyClass="SmaempreEntityPK" abs="false" class="SmaempreEntity" v="true" gen="false" m="false" rootElement="_1494080663750764" id="_1494080663754766">
+        <jpa:ts e="true"/>
+        <jpa:hc e="true"/>
+        <jpa:eq e="true"/>
         <jpa:attributes>
             <jpa:basic optional="true" attribute-type="Integer" v="true" name="idAeasitve" id="_1494080663756892">
                 <jpa:bv/>
@@ -2201,6 +2204,12 @@
                 <jpa:vbv/>
                 <jpa:column name="CONS_FINAL_OUTRA_UF" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE"/>
             </jpa:basic>
+            <jpa:basic attribute-type="Integer" v="true" name="versaoSavare" id="_149557091139414">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="VERSAO_SAVARE" unique="false" nullable="true" insertable="true" updatable="true" table="SMAEMPRE" precision="0"/>
+            </jpa:basic>
             <jpa:id attribute-type="Integer" v="true" name="idSmaempre" id="_1494080663756891">
                 <jpa:bv/>
                 <jpa:kbv/>
@@ -2208,6 +2217,13 @@
                 <jpa:column name="ID_SMAEMPRE" unique="false" nullable="false" insertable="true" updatable="true" table="SMAEMPRE"/>
             </jpa:id>
         </jpa:attributes>
+        <jpa:nq e="false" name="SmaempreEntity.findByVersaoSavare">
+            <jpa:query>Select s from SmaempreEntity s where s.versaoSavare=:versaoSavare</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="SmaempreEntity.findByAttribute1">
+            <jpa:query>Select s from SmaempreEntity s where s.attribute1=:attribute1</jpa:query>
+        </jpa:nq>
+        <jpa:el/>
         <jpa:table name="SMAEMPRE">
             <jpa:unique-constraint>
                 <jpa:column-name>CODIGO</jpa:column-name>
@@ -3514,6 +3530,12 @@
                 <jpa:vbv/>
                 <jpa:column name="GUID_CLIFO" unique="false" nullable="true" insertable="true" updatable="true" table="SMADISPO"/>
             </jpa:basic>
+            <jpa:basic attribute-type="String" v="true" name="plataforma" id="_14954604800919">
+                <jpa:bv/>
+                <jpa:kbv/>
+                <jpa:vbv/>
+                <jpa:column name="PLATAFORMA" unique="false" nullable="true" insertable="true" updatable="true" table="SMADISPO" length="40"/>
+            </jpa:basic>
             <jpa:id attribute-type="Integer" v="true" name="idSmadispo" id="_14940806637601329">
                 <jpa:bv/>
                 <jpa:kbv/>
@@ -3523,6 +3545,9 @@
         </jpa:attributes>
         <jpa:nq e="false" name="SmadispoEntity.findByGuidClifo">
             <jpa:query>Select s from SmadispoEntity s where s.guidClifo=:guidClifo</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="SmadispoEntity.findByPlataforma">
+            <jpa:query>Select s from SmadispoEntity s where s.plataforma=:plataforma</jpa:query>
         </jpa:nq>
         <jpa:el/>
         <jpa:table name="SMADISPO"/>

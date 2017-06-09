@@ -8,7 +8,10 @@ package br.com.sisinfoweb.service;
 import br.com.sisinfoweb.funcoes.FuncoesPersonalizadas;
 import br.com.sisinfoweb.repository.BaseMyRepository;
 import java.util.List;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
 
 /**
  *
@@ -19,10 +22,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class BaseMyService<R extends BaseMyRepository, E> {
     
     public String COLUMNS_RESUME = null;
+    //protected final Log logger = LogFactory.getLog(getClass());
     
     @Autowired
     private final R baseMyRepository;
-
+    
     public BaseMyService(R smaempreRepository) {
         this.baseMyRepository = smaempreRepository;
     }
@@ -30,6 +34,11 @@ public class BaseMyService<R extends BaseMyRepository, E> {
     
     public List<E> findAll() {
         return baseMyRepository.findAll();
+    }
+    
+    public E findOneByGuid(String guid){
+        
+        return (E) baseMyRepository.findOneByGuid(guid);
     }
 
     public List<E> findCustomNativeQuery(Boolean resume, String sqlCustomParam, String columns, String where) {
@@ -45,7 +54,8 @@ public class BaseMyService<R extends BaseMyRepository, E> {
                 sqlQuery = new FuncoesPersonalizadas().construirSelectFromParamJson(this.getClass().getSimpleName().toUpperCase().replace("SERVICE", ""), COLUMNS_RESUME, where);
             
             } else {
-                sqlQuery = new FuncoesPersonalizadas().construirSelectFromParamJson(this.getClass().getSimpleName().toUpperCase().replace("SERVICE", ""), columns, where);
+                FuncoesPersonalizadas funcoes = new FuncoesPersonalizadas();
+                sqlQuery = funcoes.construirSelectFromParamJson(this.getClass().getSimpleName().toUpperCase().replace("SERVICE", ""), columns, where);
             }
         }
         return baseMyRepository.findCustomNativeQuery(sqlQuery);
