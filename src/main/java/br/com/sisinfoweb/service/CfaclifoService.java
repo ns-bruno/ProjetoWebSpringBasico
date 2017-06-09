@@ -7,7 +7,6 @@ package br.com.sisinfoweb.service;
 
 import br.com.sisinfoweb.entity.CfaclifoEntity;
 import br.com.sisinfoweb.repository.CfaclifoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,12 +16,10 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class CfaclifoService {
+public class CfaclifoService extends BaseMyService<CfaclifoRepository, CfaclifoEntity>{
  
-    @Autowired
-    private CfaclifoRepository cfaclifoRepository;
     
-    public CfaclifoEntity findResumeByGuidEquals(String guid){
-        return cfaclifoRepository.findResumeByGuidEquals(guid);
+    public CfaclifoService(CfaclifoRepository smaempreRepository) {
+        super(smaempreRepository);
     }
 }

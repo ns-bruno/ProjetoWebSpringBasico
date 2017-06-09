@@ -5,9 +5,6 @@
  */
 package br.com.sisinfoweb.funcoes;
 
-import br.com.sisinfoweb.controller.BaseMyController;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import java.util.Enumeration;
 import java.util.HashMap;

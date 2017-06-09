@@ -13,11 +13,13 @@ import org.springframework.data.repository.NoRepositoryBean;
 /**
  *
  * @author Bruno
- * @param <T>
+ * @param <T> - Classe que representa a Entidade (Entity)
  * @param <ID>
  */
 @NoRepositoryBean
 public interface BaseMyRepository<T, ID extends Serializable> extends JpaRepository<T, ID>{
     
     List<T> findCustomNativeQuery(String sqlQuery);
+    
+    T findOneByGuid(String guid);
 }

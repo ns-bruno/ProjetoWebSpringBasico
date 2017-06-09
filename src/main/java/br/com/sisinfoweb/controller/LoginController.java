@@ -50,7 +50,7 @@ public class LoginController extends BaseMyController {
         
         ModelAndView modelAndView = new ModelAndView();
         
-        SmausuarEntity smausuarEntity = smausuarService.usuar(nomeUsuario);
+        SmausuarEntity smausuarEntity = smausuarService.findCustomNativeQuery(false, null, null, "(NOME = '" + nomeUsuario + "')").get(0);
         
         if((smausuarEntity != null) && (smausuarEntity.getNome() != null) && (smausuarEntity.getNome().length() > 0)){
             
@@ -74,7 +74,7 @@ public class LoginController extends BaseMyController {
         return "redirect:Login";
     }
 
-    @RequestMapping(value = {"/Smausuar"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = {"/Login"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     @Override
     public String initJson( Model model, 

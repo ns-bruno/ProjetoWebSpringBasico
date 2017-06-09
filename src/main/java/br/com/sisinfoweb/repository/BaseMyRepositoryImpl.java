@@ -8,7 +8,7 @@ package br.com.sisinfoweb.repository;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
-import org.springframework.data.jpa.repository.Query;
+import javax.persistence.Query;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,4 +40,15 @@ public class BaseMyRepositoryImpl<T, ID extends Serializable> extends SimpleJpaR
         return entityManager.createNativeQuery(sqlQuery, this.getDomainClass()).getResultList();
     }
 
+    @Transactional
+    @Override
+    public T findOneByGuid(String guid) {
+        String consultaJpql = "SELECT A FROM " + this.getDomainClass().getSimpleName().toUpperCase().replace("ENTITY", "") + " A WHERE A.GUID = :GUID";
+        Query query = entityManager.createQuery(consultaJpql, this.getDomainClass());
+        query.setParameter("GUID", guid);
+        
+        return (T) query.getSingleResult();
+    }
+
+    
 }
