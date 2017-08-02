@@ -18,7 +18,6 @@ import org.springframework.stereotype.Service;
 @Transactional
 public class SmaempreService extends BaseMyService<SmaempreRepository, SmaempreEntity>{
 
-
     public SmaempreService(SmaempreRepository smaempreRepository) {
         super(smaempreRepository);
     }

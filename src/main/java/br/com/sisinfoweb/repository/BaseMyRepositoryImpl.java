@@ -6,11 +6,18 @@
 package br.com.sisinfoweb.repository;
 
 import java.io.Serializable;
+import java.sql.Connection;
 import java.util.List;
+import java.util.Map;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
+import org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -32,23 +39,52 @@ public class BaseMyRepositoryImpl<T, ID extends Serializable> extends SimpleJpaR
     @Override
     public List<T> findCustomNativeQuery(String sqlQuery) {
 
-        //Query query = entityManager.createNativeQuery(sqlQuery, this.getDomainClass());
+        Object obj = entityManager.getDelegate();
+        String s = obj.toString();
+        Map<String, Object> maps = entityManager.getProperties();
+        EntityManagerFactory emf = entityManager.getEntityManagerFactory();
         
-        //List<T> resultados = (List<T>) query.getResultList();
-
-        //List<T> lista = entityManager.createNativeQuery(sqlQuery, this.getDomainClass()).getResultList();
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName("org.firebirdsql.jdbc.FBDriver");
+        dataSource.setUrl("jdbc:firebirdsql:172.16.0.251/3050:C:\\SisInfo\\delphi\\SINOVO.FIR");
+        dataSource.setUsername("SAVARE");
+        dataSource.setPassword("123");
+        
+        LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
+        entityManagerFactory.setDataSource(dataSource);
+        
+        HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+        vendorAdapter.setShowSql(true);
+        vendorAdapter.setDatabasePlatform("org.hibernate.dialect.FirebirdDialect");
+        vendorAdapter.setGenerateDdl(true);
+        
+        entityManagerFactory.setJpaVendorAdapter(vendorAdapter);
+        InstrumentationLoadTimeWeaver loadTimeWeaver = new InstrumentationLoadTimeWeaver();
+        entityManagerFactory.setLoadTimeWeaver(loadTimeWeaver);
+        
+        List<T> lista = entityManagerFactory.getObject().createEntityManager().createNativeQuery(sqlQuery, this.getDomainClass()).getResultList();
+        
+        int i = lista.size();
+        
         return entityManager.createNativeQuery(sqlQuery, this.getDomainClass()).getResultList();
     }
 
     @Transactional
     @Override
     public T findOneByGuid(String guid) {
-        String consultaJpql = "SELECT A FROM " + this.getDomainClass().getSimpleName().toUpperCase().replace("ENTITY", "") + " A WHERE A.GUID = :GUID";
+        String consultaJpql = "SELECT A FROM " + this.getDomainClass().getSimpleName().toUpperCase().replace("ENTITY", "").replace("CUSTOM", "") + " A WHERE A.GUID = :GUID";
         Query query = entityManager.createQuery(consultaJpql, this.getDomainClass());
         query.setParameter("GUID", guid);
         
         return (T) query.getSingleResult();
     }
 
+    @Transactional
+    @Override
+    public Integer saveCustomNativeQuery(String sqlQuery) {
+        return entityManager.createNativeQuery(sqlQuery).executeUpdate();
+    }
+
+    
     
 }

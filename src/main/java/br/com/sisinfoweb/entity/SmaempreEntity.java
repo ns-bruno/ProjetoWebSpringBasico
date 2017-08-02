@@ -3,8 +3,6 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,13 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "SMAEMPRE", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"CODIGO"})})
-public class SmaempreEntity implements Serializable {
+public class SmaempreEntity {
 
     @Column(name = "ID_SMAEMPRE", table = "SMAEMPRE", nullable = false)
     @Id
@@ -282,17 +279,14 @@ public class SmaempreEntity implements Serializable {
 
     @Column(name = "DT_CAD", table = "SMAEMPRE")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCad;
+    private String dtCad;
 
     @Column(name = "DT_ALT", table = "SMAEMPRE")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "CT_INTEG", table = "SMAEMPRE")
     @Basic
-    @Transient
     private Integer ctInteg;
 
     @Column(name = "CODIGO", table = "SMAEMPRE", nullable = false)
@@ -305,7 +299,6 @@ public class SmaempreEntity implements Serializable {
 
     @Column(name = "NOME_FANTASIA", table = "SMAEMPRE", length = 60)
     @Basic
-    @Transient
     private String nomeFantasia;
 
     @Column(name = "CPF_CGC", table = "SMAEMPRE", length = 18)
@@ -318,12 +311,10 @@ public class SmaempreEntity implements Serializable {
 
     @Column(name = "IE_RG", table = "SMAEMPRE", length = 18)
     @Basic
-    @Transient
     private String ieRg;
 
     @Column(name = "ORGAO_EMISSOR", table = "SMAEMPRE", length = 3)
     @Basic
-    @Transient
     private String orgaoEmissor;
 
     @Column(name = "CURVA_A_FIS", table = "SMAEMPRE", nullable = false)
@@ -352,7 +343,6 @@ public class SmaempreEntity implements Serializable {
 
     @Column(name = "VALIDADE", table = "SMAEMPRE")
     @Basic
-    @Transient
     private Character validade;
 
     @Column(name = "PESO", table = "SMAEMPRE", nullable = false)
@@ -613,13 +603,11 @@ public class SmaempreEntity implements Serializable {
 
     @Column(name = "VALIDADE_PRECO_PALM_INI", table = "SMAEMPRE")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date validadePrecoPalmIni;
+    private String validadePrecoPalmIni;
 
     @Column(name = "VALIDADE_PRECO_PALM_FIM", table = "SMAEMPRE")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date validadePrecoPalmFim;
+    private String validadePrecoPalmFim;
 
     @Column(name = "PERC_JR_VENC_PARC_MENOR", table = "SMAEMPRE", nullable = false)
     @Basic(optional = false)
@@ -683,8 +671,7 @@ public class SmaempreEntity implements Serializable {
 
     @Column(name = "DT_MOVIMENTO", table = "SMAEMPRE")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtMovimento;
+    private String dtMovimento;
 
     @Column(name = "ORDEM_PROD_CONSULTA", table = "SMAEMPRE")
     @Basic
@@ -756,7 +743,7 @@ public class SmaempreEntity implements Serializable {
 
     @Column(name = "WORK_ON_DATE_SERVER", table = "SMAEMPRE")
     @Basic
-    private Character workOnDateServer;
+    private Character workOnStringServer;
 
     @Column(name = "CODIGO_SPC", table = "SMAEMPRE", length = 18)
     @Basic
@@ -985,10 +972,38 @@ public class SmaempreEntity implements Serializable {
     @Column(name = "CONS_FINAL_OUTRA_UF", table = "SMAEMPRE")
     @Basic
     private Character consFinalOutraUf;
-    
+
     @Column(name = "VERSAO_SAVARE", table = "SMAEMPRE")
     @Basic
     private Integer versaoSavare;
+
+    @Column(name = "IP_SERVIDOR_SISINFO", table = "SMAEMPRE", length = 128)
+    @Basic
+    private String ipServidorSisinfo;
+
+    @Column(name = "IP_SERVIDOR_WEBSERVICE", table = "SMAEMPRE", length = 128)
+    @Basic
+    private String ipServidorWebservice;
+
+    @Column(name = "USU_SISINFO_WEBSERVICE", table = "SMAEMPRE", length = 20)
+    @Basic
+    private String usuSisinfoWebservice;
+
+    @Column(name = "SENHA_SISINFO_WEBSERVICE", table = "SMAEMPRE", length = 20)
+    @Basic
+    private String senhaSisinfoWebservice;
+
+    @Column(name = "CAMINHO_BANCO_SISINFO", table = "SMAEMPRE", length = 128)
+    @Basic
+    private String caminhoBancoSisinfo;
+
+    @Column(name = "PORTA_BANCO_SISINFO", table = "SMAEMPRE")
+    @Basic
+    private Integer portaBancoSisinfo;
+
+    @Column(name = "MODO_CONEXAO_WEBSERVICE", table = "SMAEMPRE")
+    @Basic
+    private Character modoConexaoWebservice;
 
     public Integer getIdSmaempre() {
         return this.idSmaempre;
@@ -1510,19 +1525,19 @@ public class SmaempreEntity implements Serializable {
         this.usCad = usCad;
     }
 
-    public Date getDtCad() {
+    public String getDtCad() {
         return this.dtCad;
     }
 
-    public void setDtCad(Date dtCad) {
+    public void setDtCad(String dtCad) {
         this.dtCad = dtCad;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 
@@ -2158,19 +2173,19 @@ public class SmaempreEntity implements Serializable {
         this.pathFtpEnv = pathFtpEnv;
     }
 
-    public Date getValidadePrecoPalmIni() {
+    public String getValidadePrecoPalmIni() {
         return this.validadePrecoPalmIni;
     }
 
-    public void setValidadePrecoPalmIni(Date validadePrecoPalmIni) {
+    public void setValidadePrecoPalmIni(String validadePrecoPalmIni) {
         this.validadePrecoPalmIni = validadePrecoPalmIni;
     }
 
-    public Date getValidadePrecoPalmFim() {
+    public String getValidadePrecoPalmFim() {
         return this.validadePrecoPalmFim;
     }
 
-    public void setValidadePrecoPalmFim(Date validadePrecoPalmFim) {
+    public void setValidadePrecoPalmFim(String validadePrecoPalmFim) {
         this.validadePrecoPalmFim = validadePrecoPalmFim;
     }
 
@@ -2294,11 +2309,11 @@ public class SmaempreEntity implements Serializable {
         this.descUnitEcf = descUnitEcf;
     }
 
-    public Date getDtMovimento() {
+    public String getDtMovimento() {
         return this.dtMovimento;
     }
 
-    public void setDtMovimento(Date dtMovimento) {
+    public void setDtMovimento(String dtMovimento) {
         this.dtMovimento = dtMovimento;
     }
 
@@ -2438,12 +2453,12 @@ public class SmaempreEntity implements Serializable {
         this.agrupaPedidos = agrupaPedidos;
     }
 
-    public Character getWorkOnDateServer() {
-        return this.workOnDateServer;
+    public Character getWorkOnStringServer() {
+        return this.workOnStringServer;
     }
 
-    public void setWorkOnDateServer(Character workOnDateServer) {
-        this.workOnDateServer = workOnDateServer;
+    public void setWorkOnStringServer(Character workOnStringServer) {
+        this.workOnStringServer = workOnStringServer;
     }
 
     public String getCodigoSpc() {
@@ -2903,11 +2918,67 @@ public class SmaempreEntity implements Serializable {
     }
 
     public Integer getVersaoSavare() {
-        return versaoSavare;
+        return this.versaoSavare;
     }
 
     public void setVersaoSavare(Integer versaoSavare) {
         this.versaoSavare = versaoSavare;
+    }
+
+    public String getIpServidorSisinfo() {
+        return this.ipServidorSisinfo;
+    }
+
+    public void setIpServidorSisinfo(String ipServidorSisinfo) {
+        this.ipServidorSisinfo = ipServidorSisinfo;
+    }
+
+    public String getIpServidorWebservice() {
+        return this.ipServidorWebservice;
+    }
+
+    public void setIpServidorWebservice(String ipServidorWebservice) {
+        this.ipServidorWebservice = ipServidorWebservice;
+    }
+
+    public String getUsuSisinfoWebservice() {
+        return this.usuSisinfoWebservice;
+    }
+
+    public void setUsuSisinfoWebservice(String usuSisinfoWebservice) {
+        this.usuSisinfoWebservice = usuSisinfoWebservice;
+    }
+
+    public String getSenhaSisinfoWebservice() {
+        return this.senhaSisinfoWebservice;
+    }
+
+    public void setSenhaSisinfoWebservice(String senhaSisinfoWebservice) {
+        this.senhaSisinfoWebservice = senhaSisinfoWebservice;
+    }
+
+    public String getCaminhoBancoSisinfo() {
+        return this.caminhoBancoSisinfo;
+    }
+
+    public void setCaminhoBancoSisinfo(String caminhoBancoSisinfo) {
+        this.caminhoBancoSisinfo = caminhoBancoSisinfo;
+    }
+
+    public Integer getPortaBancoSisinfo() {
+        return this.portaBancoSisinfo;
+    }
+
+    public void setPortaBancoSisinfo(Integer portaBancoSisinfo) {
+        this.portaBancoSisinfo = portaBancoSisinfo;
+    }
+
+    public Character getModoConexaoWebservice() {
+        return this.modoConexaoWebservice;
+    }
+
+    public void setModoConexaoWebservice(Character modoConexaoWebservice) {
+        this.modoConexaoWebservice = modoConexaoWebservice;
     }
 
 }

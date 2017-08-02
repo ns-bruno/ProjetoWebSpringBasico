@@ -7,11 +7,9 @@ package br.com.sisinfoweb.service;
 
 import br.com.sisinfoweb.funcoes.FuncoesPersonalizadas;
 import br.com.sisinfoweb.repository.BaseMyRepository;
+import java.io.Serializable;
 import java.util.List;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.Assert;
 
 /**
  *
@@ -59,5 +57,9 @@ public class BaseMyService<R extends BaseMyRepository, E> {
             }
         }
         return baseMyRepository.findCustomNativeQuery(sqlQuery);
+    }
+    
+    public Serializable saveCustomNativeQuery(String queryInsert){
+        return baseMyRepository.saveCustomNativeQuery(queryInsert);
     }
 }

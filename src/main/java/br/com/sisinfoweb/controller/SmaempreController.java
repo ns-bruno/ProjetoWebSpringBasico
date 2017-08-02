@@ -36,7 +36,7 @@ public class SmaempreController extends BaseMyController {
     @Autowired
     private SmaempreService smaempreService;
 
-    @RequestMapping(value = {"/Empresa", "/CadastroEmpresa", "/Smpempre"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/Empresa", "/CadastroEmpresa"}, method = RequestMethod.GET)
     public ModelAndView init(Model model, @RequestHeader() HttpHeaders httpHeaders) {
 
         ModelAndView modelAndView = new ModelAndView("smpempre");
@@ -111,7 +111,7 @@ public class SmaempreController extends BaseMyController {
     }
 
 
-    
+    /**
     @RequestMapping(value = {"/Smaempre/One"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String initOneJson( Model model, 
@@ -158,5 +158,5 @@ public class SmaempreController extends BaseMyController {
             
             return new Gson().toJson(retornoWebService);
         }
-    }
+    } */
 }

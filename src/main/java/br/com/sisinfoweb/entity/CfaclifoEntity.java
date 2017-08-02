@@ -3,20 +3,16 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "CFACLIFO")
-public class CfaclifoEntity implements Serializable {
+public class CfaclifoEntity {
 
     @Column(name = "ID_CFACLIFO", table = "CFACLIFO", nullable = false)
     @Id
@@ -144,13 +140,11 @@ public class CfaclifoEntity implements Serializable {
 
     @Column(name = "DT_CAD", table = "CFACLIFO")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCad;
+    private String dtCad;
 
     @Column(name = "DT_ALT", table = "CFACLIFO")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "CT_INTEG", table = "CFACLIFO")
     @Basic
@@ -178,8 +172,7 @@ public class CfaclifoEntity implements Serializable {
 
     @Column(name = "DT_NASCIMENTO", table = "CFACLIFO")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtNascimento;
+    private String dtNascimento;
 
     @Column(name = "CODIGO_CLI", table = "CFACLIFO")
     @Basic
@@ -308,8 +301,7 @@ public class CfaclifoEntity implements Serializable {
 
     @Column(name = "DT_ADMISSAO", table = "CFACLIFO")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtAdmissao;
+    private String dtAdmissao;
 
     @Column(name = "NUM_REG_HABILIT", table = "CFACLIFO", length = 18)
     @Basic
@@ -317,17 +309,15 @@ public class CfaclifoEntity implements Serializable {
 
     @Column(name = "DT_VENCT_HABILIT", table = "CFACLIFO")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtVenctHabilit;
+    private String dtVenctHabilit;
 
     @Column(name = "FUMANTE", table = "CFACLIFO")
     @Basic
     private Character fumante;
 
     @Column(name = "OBS", table = "CFACLIFO")
-    @Lob
     @Basic
-    private byte[] obs;
+    private String obs;
 
     @Column(name = "MORADIA", table = "CFACLIFO")
     @Basic
@@ -335,8 +325,7 @@ public class CfaclifoEntity implements Serializable {
 
     @Column(name = "MORA_DESDE", table = "CFACLIFO")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date moraDesde;
+    private String moraDesde;
 
     @Column(name = "PESSOA", table = "CFACLIFO")
     @Basic
@@ -356,8 +345,7 @@ public class CfaclifoEntity implements Serializable {
 
     @Column(name = "DT_NASC_CONJ", table = "CFACLIFO")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtNascConj;
+    private String dtNascConj;
 
     @Column(name = "PAI", table = "CFACLIFO", length = 60)
     @Basic
@@ -369,8 +357,7 @@ public class CfaclifoEntity implements Serializable {
 
     @Column(name = "DT_NASC_PAI", table = "CFACLIFO")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtNascPai;
+    private String dtNascPai;
 
     @Column(name = "MAE", table = "CFACLIFO", length = 60)
     @Basic
@@ -382,8 +369,7 @@ public class CfaclifoEntity implements Serializable {
 
     @Column(name = "DT_NASC_MAE", table = "CFACLIFO")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtNascMae;
+    private String dtNascMae;
 
     @Column(name = "ESCOLARIDADE", table = "CFACLIFO")
     @Basic
@@ -440,8 +426,7 @@ public class CfaclifoEntity implements Serializable {
 
     @Column(name = "ADMISSAO_CONJUGE", table = "CFACLIFO")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date admissaoConjuge;
+    private String admissaoConjuge;
 
     @Column(name = "RENDA_CONJUGE", table = "CFACLIFO", nullable = false)
     @Basic(optional = false)
@@ -469,13 +454,11 @@ public class CfaclifoEntity implements Serializable {
 
     @Column(name = "DT_ABERTURA_CT_CONJ", table = "CFACLIFO")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtAberturaCtConj;
+    private String dtAberturaCtConj;
 
     @Column(name = "VALIDADE_CT_CONJ", table = "CFACLIFO")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date validadeCtConj;
+    private String validadeCtConj;
 
     @Column(name = "CT_ESPECIAL_CONJ", table = "CFACLIFO")
     @Basic
@@ -503,13 +486,11 @@ public class CfaclifoEntity implements Serializable {
 
     @Column(name = "VALIDADE_CARTAO", table = "CFACLIFO")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date validadeCartao;
+    private String validadeCartao;
 
     @Column(name = "DT_ABERTURA_CONTA", table = "CFACLIFO")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtAberturaConta;
+    private String dtAberturaConta;
 
     @Column(name = "CONTA_ESPECIAL", table = "CFACLIFO")
     @Basic
@@ -573,13 +554,11 @@ public class CfaclifoEntity implements Serializable {
 
     @Column(name = "DT_ULT_COMPRA", table = "CFACLIFO")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtUltCompra;
+    private String dtUltCompra;
 
     @Column(name = "DT_RENOVACAO", table = "CFACLIFO")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtRenovacao;
+    private String dtRenovacao;
 
     @Column(name = "IS_DIZIMISTA", table = "CFACLIFO")
     @Basic
@@ -647,13 +626,11 @@ public class CfaclifoEntity implements Serializable {
 
     @Column(name = "PADRE_DT_EXPEDICAO", table = "CFACLIFO")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date padreDtExpedicao;
+    private String padreDtExpedicao;
 
     @Column(name = "PADRE_DT_VALIDADE", table = "CFACLIFO")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date padreDtValidade;
+    private String padreDtValidade;
 
     @Column(name = "PADRE_LIVRO_PROCURACAO", table = "CFACLIFO")
     @Basic
@@ -669,23 +646,19 @@ public class CfaclifoEntity implements Serializable {
 
     @Column(name = "PADRE_DT_CHEGADA_DIOCESE", table = "CFACLIFO")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date padreDtChegadaDiocese;
+    private String padreDtChegadaDiocese;
 
     @Column(name = "PADRE_DT_ORDENACAO", table = "CFACLIFO")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date padreDtOrdenacao;
+    private String padreDtOrdenacao;
 
     @Column(name = "PADRE_DT_PRESBITERAL", table = "CFACLIFO")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date padreDtPresbiteral;
+    private String padreDtPresbiteral;
 
     @Column(name = "PADRE_DT_EPISCOPAL", table = "CFACLIFO")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date padreDtEpiscopal;
+    private String padreDtEpiscopal;
 
     @Column(name = "PADRE_DIOCESE_ORDENACAO", table = "CFACLIFO", length = 60)
     @Basic
@@ -714,23 +687,19 @@ public class CfaclifoEntity implements Serializable {
 
     @Column(name = "CAT_JA_FOI_DT_INICIO", table = "CFACLIFO")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date catJaFoiDtInicio;
+    private String catJaFoiDtInicio;
 
     @Column(name = "CAT_JA_FOI_DT_FINAL", table = "CFACLIFO")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date catJaFoiDtFinal;
+    private String catJaFoiDtFinal;
 
     @Column(name = "CAT_ATUAL_DT_INICIO", table = "CFACLIFO")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date catAtualDtInicio;
+    private String catAtualDtInicio;
 
     @Column(name = "CAT_ATUAL_DT_FINAL", table = "CFACLIFO")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date catAtualDtFinal;
+    private String catAtualDtFinal;
 
     @Column(name = "CAT_ATUAL_N_MATRICULAS", table = "CFACLIFO")
     @Basic
@@ -746,8 +715,7 @@ public class CfaclifoEntity implements Serializable {
 
     @Column(name = "DT_CASAMENTO", table = "CFACLIFO")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtCasamento;
+    private String dtCasamento;
 
     @Column(name = "TIPO_SANGUINEO", table = "CFACLIFO")
     @Basic
@@ -759,8 +727,7 @@ public class CfaclifoEntity implements Serializable {
 
     @Column(name = "IE_RG_DT_EXPEDICAO", table = "CFACLIFO")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date ieRgDtExpedicao;
+    private String ieRgDtExpedicao;
 
     @Column(name = "TEMPO_CONTRIBUICAO", table = "CFACLIFO", length = 40)
     @Basic
@@ -801,13 +768,11 @@ public class CfaclifoEntity implements Serializable {
 
     @Column(name = "DT_BATIZADO", table = "CFACLIFO")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtBatizado;
+    private String dtBatizado;
 
     @Column(name = "DT_EUCARISTIA", table = "CFACLIFO")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtEucaristia;
+    private String dtEucaristia;
 
     @Column(name = "PAROQ_BATIZADO", table = "CFACLIFO", length = 60)
     @Basic
@@ -847,8 +812,7 @@ public class CfaclifoEntity implements Serializable {
 
     @Column(name = "DT_VALIDADE_SUFRAMA", table = "CFACLIFO")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtValidadeSuframa;
+    private String dtValidadeSuframa;
 
     public Integer getIdCfaclifo() {
         return this.idCfaclifo;
@@ -1098,19 +1062,19 @@ public class CfaclifoEntity implements Serializable {
         this.usCad = usCad;
     }
 
-    public Date getDtCad() {
+    public String getDtCad() {
         return this.dtCad;
     }
 
-    public void setDtCad(Date dtCad) {
+    public void setDtCad(String dtCad) {
         this.dtCad = dtCad;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 
@@ -1162,11 +1126,11 @@ public class CfaclifoEntity implements Serializable {
         this.nomeRazao = nomeRazao;
     }
 
-    public Date getDtNascimento() {
+    public String getDtNascimento() {
         return this.dtNascimento;
     }
 
-    public void setDtNascimento(Date dtNascimento) {
+    public void setDtNascimento(String dtNascimento) {
         this.dtNascimento = dtNascimento;
     }
 
@@ -1418,11 +1382,11 @@ public class CfaclifoEntity implements Serializable {
         this.numCartHabilit = numCartHabilit;
     }
 
-    public Date getDtAdmissao() {
+    public String getDtAdmissao() {
         return this.dtAdmissao;
     }
 
-    public void setDtAdmissao(Date dtAdmissao) {
+    public void setDtAdmissao(String dtAdmissao) {
         this.dtAdmissao = dtAdmissao;
     }
 
@@ -1434,11 +1398,11 @@ public class CfaclifoEntity implements Serializable {
         this.numRegHabilit = numRegHabilit;
     }
 
-    public Date getDtVenctHabilit() {
+    public String getDtVenctHabilit() {
         return this.dtVenctHabilit;
     }
 
-    public void setDtVenctHabilit(Date dtVenctHabilit) {
+    public void setDtVenctHabilit(String dtVenctHabilit) {
         this.dtVenctHabilit = dtVenctHabilit;
     }
 
@@ -1450,11 +1414,11 @@ public class CfaclifoEntity implements Serializable {
         this.fumante = fumante;
     }
 
-    public byte[] getObs() {
+    public String getObs() {
         return this.obs;
     }
 
-    public void setObs(byte[] obs) {
+    public void setObs(String obs) {
         this.obs = obs;
     }
 
@@ -1466,11 +1430,11 @@ public class CfaclifoEntity implements Serializable {
         this.moradia = moradia;
     }
 
-    public Date getMoraDesde() {
+    public String getMoraDesde() {
         return this.moraDesde;
     }
 
-    public void setMoraDesde(Date moraDesde) {
+    public void setMoraDesde(String moraDesde) {
         this.moraDesde = moraDesde;
     }
 
@@ -1506,11 +1470,11 @@ public class CfaclifoEntity implements Serializable {
         this.cpfConjuge = cpfConjuge;
     }
 
-    public Date getDtNascConj() {
+    public String getDtNascConj() {
         return this.dtNascConj;
     }
 
-    public void setDtNascConj(Date dtNascConj) {
+    public void setDtNascConj(String dtNascConj) {
         this.dtNascConj = dtNascConj;
     }
 
@@ -1530,11 +1494,11 @@ public class CfaclifoEntity implements Serializable {
         this.cpfPai = cpfPai;
     }
 
-    public Date getDtNascPai() {
+    public String getDtNascPai() {
         return this.dtNascPai;
     }
 
-    public void setDtNascPai(Date dtNascPai) {
+    public void setDtNascPai(String dtNascPai) {
         this.dtNascPai = dtNascPai;
     }
 
@@ -1554,11 +1518,11 @@ public class CfaclifoEntity implements Serializable {
         this.cpfMae = cpfMae;
     }
 
-    public Date getDtNascMae() {
+    public String getDtNascMae() {
         return this.dtNascMae;
     }
 
-    public void setDtNascMae(Date dtNascMae) {
+    public void setDtNascMae(String dtNascMae) {
         this.dtNascMae = dtNascMae;
     }
 
@@ -1666,11 +1630,11 @@ public class CfaclifoEntity implements Serializable {
         this.empresaConjuge = empresaConjuge;
     }
 
-    public Date getAdmissaoConjuge() {
+    public String getAdmissaoConjuge() {
         return this.admissaoConjuge;
     }
 
-    public void setAdmissaoConjuge(Date admissaoConjuge) {
+    public void setAdmissaoConjuge(String admissaoConjuge) {
         this.admissaoConjuge = admissaoConjuge;
     }
 
@@ -1722,19 +1686,19 @@ public class CfaclifoEntity implements Serializable {
         this.tipoContaConj = tipoContaConj;
     }
 
-    public Date getDtAberturaCtConj() {
+    public String getDtAberturaCtConj() {
         return this.dtAberturaCtConj;
     }
 
-    public void setDtAberturaCtConj(Date dtAberturaCtConj) {
+    public void setDtAberturaCtConj(String dtAberturaCtConj) {
         this.dtAberturaCtConj = dtAberturaCtConj;
     }
 
-    public Date getValidadeCtConj() {
+    public String getValidadeCtConj() {
         return this.validadeCtConj;
     }
 
-    public void setValidadeCtConj(Date validadeCtConj) {
+    public void setValidadeCtConj(String validadeCtConj) {
         this.validadeCtConj = validadeCtConj;
     }
 
@@ -1786,19 +1750,19 @@ public class CfaclifoEntity implements Serializable {
         this.tipoCt = tipoCt;
     }
 
-    public Date getValidadeCartao() {
+    public String getValidadeCartao() {
         return this.validadeCartao;
     }
 
-    public void setValidadeCartao(Date validadeCartao) {
+    public void setValidadeCartao(String validadeCartao) {
         this.validadeCartao = validadeCartao;
     }
 
-    public Date getDtAberturaConta() {
+    public String getDtAberturaConta() {
         return this.dtAberturaConta;
     }
 
-    public void setDtAberturaConta(Date dtAberturaConta) {
+    public void setDtAberturaConta(String dtAberturaConta) {
         this.dtAberturaConta = dtAberturaConta;
     }
 
@@ -1922,19 +1886,19 @@ public class CfaclifoEntity implements Serializable {
         this.conjPodeComprar = conjPodeComprar;
     }
 
-    public Date getDtUltCompra() {
+    public String getDtUltCompra() {
         return this.dtUltCompra;
     }
 
-    public void setDtUltCompra(Date dtUltCompra) {
+    public void setDtUltCompra(String dtUltCompra) {
         this.dtUltCompra = dtUltCompra;
     }
 
-    public Date getDtRenovacao() {
+    public String getDtRenovacao() {
         return this.dtRenovacao;
     }
 
-    public void setDtRenovacao(Date dtRenovacao) {
+    public void setDtRenovacao(String dtRenovacao) {
         this.dtRenovacao = dtRenovacao;
     }
 
@@ -2066,19 +2030,19 @@ public class CfaclifoEntity implements Serializable {
         this.padreTemProcuracao = padreTemProcuracao;
     }
 
-    public Date getPadreDtExpedicao() {
+    public String getPadreDtExpedicao() {
         return this.padreDtExpedicao;
     }
 
-    public void setPadreDtExpedicao(Date padreDtExpedicao) {
+    public void setPadreDtExpedicao(String padreDtExpedicao) {
         this.padreDtExpedicao = padreDtExpedicao;
     }
 
-    public Date getPadreDtValidade() {
+    public String getPadreDtValidade() {
         return this.padreDtValidade;
     }
 
-    public void setPadreDtValidade(Date padreDtValidade) {
+    public void setPadreDtValidade(String padreDtValidade) {
         this.padreDtValidade = padreDtValidade;
     }
 
@@ -2106,35 +2070,35 @@ public class CfaclifoEntity implements Serializable {
         this.padreVinculacaoDr = padreVinculacaoDr;
     }
 
-    public Date getPadreDtChegadaDiocese() {
+    public String getPadreDtChegadaDiocese() {
         return this.padreDtChegadaDiocese;
     }
 
-    public void setPadreDtChegadaDiocese(Date padreDtChegadaDiocese) {
+    public void setPadreDtChegadaDiocese(String padreDtChegadaDiocese) {
         this.padreDtChegadaDiocese = padreDtChegadaDiocese;
     }
 
-    public Date getPadreDtOrdenacao() {
+    public String getPadreDtOrdenacao() {
         return this.padreDtOrdenacao;
     }
 
-    public void setPadreDtOrdenacao(Date padreDtOrdenacao) {
+    public void setPadreDtOrdenacao(String padreDtOrdenacao) {
         this.padreDtOrdenacao = padreDtOrdenacao;
     }
 
-    public Date getPadreDtPresbiteral() {
+    public String getPadreDtPresbiteral() {
         return this.padreDtPresbiteral;
     }
 
-    public void setPadreDtPresbiteral(Date padreDtPresbiteral) {
+    public void setPadreDtPresbiteral(String padreDtPresbiteral) {
         this.padreDtPresbiteral = padreDtPresbiteral;
     }
 
-    public Date getPadreDtEpiscopal() {
+    public String getPadreDtEpiscopal() {
         return this.padreDtEpiscopal;
     }
 
-    public void setPadreDtEpiscopal(Date padreDtEpiscopal) {
+    public void setPadreDtEpiscopal(String padreDtEpiscopal) {
         this.padreDtEpiscopal = padreDtEpiscopal;
     }
 
@@ -2186,35 +2150,35 @@ public class CfaclifoEntity implements Serializable {
         this.catJaFoiOnde = catJaFoiOnde;
     }
 
-    public Date getCatJaFoiDtInicio() {
+    public String getCatJaFoiDtInicio() {
         return this.catJaFoiDtInicio;
     }
 
-    public void setCatJaFoiDtInicio(Date catJaFoiDtInicio) {
+    public void setCatJaFoiDtInicio(String catJaFoiDtInicio) {
         this.catJaFoiDtInicio = catJaFoiDtInicio;
     }
 
-    public Date getCatJaFoiDtFinal() {
+    public String getCatJaFoiDtFinal() {
         return this.catJaFoiDtFinal;
     }
 
-    public void setCatJaFoiDtFinal(Date catJaFoiDtFinal) {
+    public void setCatJaFoiDtFinal(String catJaFoiDtFinal) {
         this.catJaFoiDtFinal = catJaFoiDtFinal;
     }
 
-    public Date getCatAtualDtInicio() {
+    public String getCatAtualDtInicio() {
         return this.catAtualDtInicio;
     }
 
-    public void setCatAtualDtInicio(Date catAtualDtInicio) {
+    public void setCatAtualDtInicio(String catAtualDtInicio) {
         this.catAtualDtInicio = catAtualDtInicio;
     }
 
-    public Date getCatAtualDtFinal() {
+    public String getCatAtualDtFinal() {
         return this.catAtualDtFinal;
     }
 
-    public void setCatAtualDtFinal(Date catAtualDtFinal) {
+    public void setCatAtualDtFinal(String catAtualDtFinal) {
         this.catAtualDtFinal = catAtualDtFinal;
     }
 
@@ -2242,11 +2206,11 @@ public class CfaclifoEntity implements Serializable {
         this.catAtualUsaAgenda = catAtualUsaAgenda;
     }
 
-    public Date getDtCasamento() {
+    public String getDtCasamento() {
         return this.dtCasamento;
     }
 
-    public void setDtCasamento(Date dtCasamento) {
+    public void setDtCasamento(String dtCasamento) {
         this.dtCasamento = dtCasamento;
     }
 
@@ -2266,11 +2230,11 @@ public class CfaclifoEntity implements Serializable {
         this.tipoSangRh = tipoSangRh;
     }
 
-    public Date getIeRgDtExpedicao() {
+    public String getIeRgDtExpedicao() {
         return this.ieRgDtExpedicao;
     }
 
-    public void setIeRgDtExpedicao(Date ieRgDtExpedicao) {
+    public void setIeRgDtExpedicao(String ieRgDtExpedicao) {
         this.ieRgDtExpedicao = ieRgDtExpedicao;
     }
 
@@ -2346,19 +2310,19 @@ public class CfaclifoEntity implements Serializable {
         this.codigo = codigo;
     }
 
-    public Date getDtBatizado() {
+    public String getDtBatizado() {
         return this.dtBatizado;
     }
 
-    public void setDtBatizado(Date dtBatizado) {
+    public void setDtBatizado(String dtBatizado) {
         this.dtBatizado = dtBatizado;
     }
 
-    public Date getDtEucaristia() {
+    public String getDtEucaristia() {
         return this.dtEucaristia;
     }
 
-    public void setDtEucaristia(Date dtEucaristia) {
+    public void setDtEucaristia(String dtEucaristia) {
         this.dtEucaristia = dtEucaristia;
     }
 
@@ -2434,11 +2398,11 @@ public class CfaclifoEntity implements Serializable {
         this.suframaOk = suframaOk;
     }
 
-    public Date getDtValidadeSuframa() {
+    public String getDtValidadeSuframa() {
         return this.dtValidadeSuframa;
     }
 
-    public void setDtValidadeSuframa(Date dtValidadeSuframa) {
+    public void setDtValidadeSuframa(String dtValidadeSuframa) {
         this.dtValidadeSuframa = dtValidadeSuframa;
     }
 

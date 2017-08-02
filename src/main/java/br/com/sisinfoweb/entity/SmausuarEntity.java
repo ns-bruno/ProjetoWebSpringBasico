@@ -3,7 +3,6 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -18,7 +17,7 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Table(name = "SMAUSUAR", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"ID_CFACLIFO"})})
-public class SmausuarEntity implements Serializable {
+public class SmausuarEntity {
 
     @Column(name = "ID_SMAUSUAR", table = "SMAUSUAR", nullable = false)
     @Id

@@ -22,4 +22,6 @@ public interface BaseMyRepository<T, ID extends Serializable> extends JpaReposit
     List<T> findCustomNativeQuery(String sqlQuery);
     
     T findOneByGuid(String guid);
+    
+    Serializable saveCustomNativeQuery(String sqlQuery);
 }
