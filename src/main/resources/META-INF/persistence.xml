@@ -5,4 +5,10 @@
     <properties>
     </properties>
   </persistence-unit>
+  
+  <persistence-unit name="persistenceSisInfoWebClient">
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+    </properties>
+  </persistence-unit>
 </persistence>

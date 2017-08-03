@@ -6,18 +6,16 @@
 package br.com.sisinfoweb.repository;
 
 import java.io.Serializable;
-import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
-import org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -28,6 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 public class BaseMyRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRepository<T, ID> implements BaseMyRepository<T, ID> {
 
+    @PersistenceContext(unitName = "persistenceSisInfoWeb")
     private final EntityManager entityManager;
 
     public BaseMyRepositoryImpl(JpaEntityInformation entityInformation, EntityManager entityManager) {
@@ -39,12 +38,21 @@ public class BaseMyRepositoryImpl<T, ID extends Serializable> extends SimpleJpaR
     @Override
     public List<T> findCustomNativeQuery(String sqlQuery) {
 
-        Object obj = entityManager.getDelegate();
-        String s = obj.toString();
-        Map<String, Object> maps = entityManager.getProperties();
-        EntityManagerFactory emf = entityManager.getEntityManagerFactory();
+        EntityManagerFactory managerFactory = null;
+        Map<String, String> persistenceMap = new HashMap<String, String>();
+
+        persistenceMap.put("javax.persistence.jdbc.url", "jdbc:firebirdsql:172.16.0.251/3050:C:\\SisInfo\\delphi\\SINOVO.FIR");
+        persistenceMap.put("javax.persistence.jdbc.user", "SAVARE");
+        persistenceMap.put("javax.persistence.jdbc.password", "123");
+        persistenceMap.put("javax.persistence.jdbc.driver", "org.firebirdsql.jdbc.FBDriver");
+
+        managerFactory = Persistence.createEntityManagerFactory("persistenceSisInfoWebClient", persistenceMap);
+        EntityManager manager = managerFactory.createEntityManager();
+
+        List<T> lista = manager.createNativeQuery(sqlQuery, this.getDomainClass()).getResultList();
         
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        
+        /**DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.firebirdsql.jdbc.FBDriver");
         dataSource.setUrl("jdbc:firebirdsql:172.16.0.251/3050:C:\\SisInfo\\delphi\\SINOVO.FIR");
         dataSource.setUsername("SAVARE");
@@ -63,6 +71,7 @@ public class BaseMyRepositoryImpl<T, ID extends Serializable> extends SimpleJpaR
         entityManagerFactory.setLoadTimeWeaver(loadTimeWeaver);
         
         List<T> lista = entityManagerFactory.getObject().createEntityManager().createNativeQuery(sqlQuery, this.getDomainClass()).getResultList();
+        **/
         
         int i = lista.size();
         
