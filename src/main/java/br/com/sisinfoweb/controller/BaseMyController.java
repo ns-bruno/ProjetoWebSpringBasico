@@ -5,9 +5,12 @@
  */
 package br.com.sisinfoweb.controller;
 
+import br.com.sisinfoweb.entity.SmadispoEntity;
+import com.google.gson.Gson;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpHeaders;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -30,4 +33,6 @@ public abstract class BaseMyController {
                                         @RequestParam(name = "where", required = false) String where,
                                         @RequestParam(name = "resume", required = false, defaultValue = "false") Boolean resume,
                                         @RequestParam(name = "sqlQuery", required = false) String sqlQuery);
+    //@ModelAttribute("dispositivo")
+    //public abstract void getDataConnection(@RequestParam(name = "dispositivo", required = true) String dispositivo);
 }

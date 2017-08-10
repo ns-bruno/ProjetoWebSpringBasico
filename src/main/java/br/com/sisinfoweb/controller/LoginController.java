@@ -54,7 +54,7 @@ public class LoginController extends BaseMyController {
         
         if((smausuarEntity != null) && (smausuarEntity.getNome() != null) && (smausuarEntity.getNome().length() > 0)){
             
-            if (smausuarEntity.getSenha().equals(senha)) {
+            if (smausuarEntity.getSenha().equalsIgnoreCase(senha)) {
                 session.setAttribute(AutorizadorInterceptor.KEY_DISPOSITIVO, smausuarEntity);
                 
                 modelAndView.setViewName("dashboard");

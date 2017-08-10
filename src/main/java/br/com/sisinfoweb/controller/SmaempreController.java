@@ -7,6 +7,7 @@ package br.com.sisinfoweb.controller;
 
 import br.com.sisinfoweb.banco.beans.RetornoWebServiceBeans;
 import br.com.sisinfoweb.banco.beans.StatusRetornoWebServiceBeans;
+import br.com.sisinfoweb.entity.SmadispoEntity;
 import br.com.sisinfoweb.entity.SmaempreEntity;
 import br.com.sisinfoweb.service.SmaempreService;
 import com.google.gson.Gson;
@@ -19,6 +20,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -110,7 +112,11 @@ public class SmaempreController extends BaseMyController {
         }
     }
 
-
+    @ModelAttribute("dispositivo")
+    public void getDataConnection(@RequestParam(name = "dispositivo", required = true) String dispositivo){
+        SmadispoEntity smadispoEntity = new Gson().fromJson(dispositivo, SmadispoEntity.class);
+        smaempreService.setSmadispoEntity(smadispoEntity);
+    }
     /**
     @RequestMapping(value = {"/Smaempre/One"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody

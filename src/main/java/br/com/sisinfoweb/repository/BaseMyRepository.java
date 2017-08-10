@@ -5,8 +5,12 @@
  */
 package br.com.sisinfoweb.repository;
 
+import br.com.sisinfoweb.entity.SmadispoEntity;
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.EntityManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 
@@ -19,9 +23,15 @@ import org.springframework.data.repository.NoRepositoryBean;
 @NoRepositoryBean
 public interface BaseMyRepository<T, ID extends Serializable> extends JpaRepository<T, ID>{
     
+    final static Logger logger = LoggerFactory.getLogger(Object.class);
+    
     List<T> findCustomNativeQuery(String sqlQuery);
     
     T findOneByGuid(String guid);
     
     Serializable saveCustomNativeQuery(String sqlQuery);
+    
+    EntityManager getConnectionEntityManager(T entity);
+    
+    public void closeEntityManager();
 }

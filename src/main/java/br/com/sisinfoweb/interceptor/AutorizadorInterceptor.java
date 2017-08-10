@@ -64,11 +64,13 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
                 // Checa se pegou o dispositivo
                 if ( (smadispoEntity != null) && (smadispoEntity.getGuidClifo() != null) && (!smadispoEntity.getGuidClifo().isEmpty()) ){
                     // Pega os dados do clifo
-                    CfaclifoEntity cfaclifoEntity = cfaclifoService.findCustomNativeQuery(Boolean.FALSE, null, null, "(GUID = '"+smadispoEntity.getGuidClifo() + "')").get(0);
+                    CfaclifoEntity cfaclifoEntity = cfaclifoService.findCustomNativeQuery(Boolean.FALSE, null, null, "(GUID = '"+smadispoEntity.getGuidClifo() + "') AND (FUNCIONARIO = '1')").get(0);
                     
                     // Checa se retornou o usuario e se ele esta ativo
                     if((cfaclifoEntity != null) && (cfaclifoEntity.getAtivo().equals('1'))){
                         return true;
+                    } else {
+                        return false;
                     }
                 }
             }

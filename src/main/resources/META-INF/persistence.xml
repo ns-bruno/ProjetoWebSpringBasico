@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-  <persistence-unit name="persistenceSisInfoWeb">
+  <persistence-unit name="persistenceSisInfoWeb" transaction-type="RESOURCE_LOCAL">
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
     </properties>
   </persistence-unit>
-  
-  <persistence-unit name="persistenceSisInfoWebClient">
-    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+  <persistence-unit name="persistenceSisInfoWebClient" transaction-type="RESOURCE_LOCAL">
+    <class>br.com.sisinfoweb.entity.SmaempreEntity</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
     </properties>
   </persistence-unit>

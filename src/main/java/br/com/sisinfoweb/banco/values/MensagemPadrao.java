@@ -13,4 +13,6 @@ public interface MensagemPadrao {
     String INSERT_ERROR = "Não conseguimos inserir no Host (Servidor SisInfo da empresa).";
     String INSERT_SUCCESS = "Inserido com sucesso no Host (Servidor SisInfo da empresa).";
     String UPDATE_ERROR = "Não conseguimos atualizar o registro no banco de dados do Host (Servidor SisInfo da empresa).";
+    String ERROR_FIND = "Não conseguimos realizar a pesquisa/find. ";
+    String ERROR_SAVE = "Erro ao tentar salvar. ";
 }

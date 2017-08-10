@@ -5,6 +5,8 @@
  */
 package br.com.sisinfoweb.repository;
 
+import br.com.sisinfoweb.entity.SmadispoEntity;
+import br.com.sisinfoweb.entity.SmaempreEntity;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
@@ -16,7 +18,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -27,58 +28,19 @@ import org.springframework.transaction.annotation.Transactional;
 public class BaseMyRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRepository<T, ID> implements BaseMyRepository<T, ID> {
 
     @PersistenceContext(unitName = "persistenceSisInfoWeb")
-    private final EntityManager entityManager;
+    private EntityManager entityManager;
 
     public BaseMyRepositoryImpl(JpaEntityInformation entityInformation, EntityManager entityManager) {
         super(entityInformation, entityManager);
         this.entityManager = entityManager;
     }
 
-    @Transactional
     @Override
     public List<T> findCustomNativeQuery(String sqlQuery) {
 
-        EntityManagerFactory managerFactory = null;
-        Map<String, String> persistenceMap = new HashMap<String, String>();
-
-        persistenceMap.put("javax.persistence.jdbc.url", "jdbc:firebirdsql:172.16.0.251/3050:C:\\SisInfo\\delphi\\SINOVO.FIR");
-        persistenceMap.put("javax.persistence.jdbc.user", "SAVARE");
-        persistenceMap.put("javax.persistence.jdbc.password", "123");
-        persistenceMap.put("javax.persistence.jdbc.driver", "org.firebirdsql.jdbc.FBDriver");
-
-        managerFactory = Persistence.createEntityManagerFactory("persistenceSisInfoWebClient", persistenceMap);
-        EntityManager manager = managerFactory.createEntityManager();
-
-        List<T> lista = manager.createNativeQuery(sqlQuery, this.getDomainClass()).getResultList();
-        
-        
-        /**DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("org.firebirdsql.jdbc.FBDriver");
-        dataSource.setUrl("jdbc:firebirdsql:172.16.0.251/3050:C:\\SisInfo\\delphi\\SINOVO.FIR");
-        dataSource.setUsername("SAVARE");
-        dataSource.setPassword("123");
-        
-        LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
-        entityManagerFactory.setDataSource(dataSource);
-        
-        HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        vendorAdapter.setShowSql(true);
-        vendorAdapter.setDatabasePlatform("org.hibernate.dialect.FirebirdDialect");
-        vendorAdapter.setGenerateDdl(true);
-        
-        entityManagerFactory.setJpaVendorAdapter(vendorAdapter);
-        InstrumentationLoadTimeWeaver loadTimeWeaver = new InstrumentationLoadTimeWeaver();
-        entityManagerFactory.setLoadTimeWeaver(loadTimeWeaver);
-        
-        List<T> lista = entityManagerFactory.getObject().createEntityManager().createNativeQuery(sqlQuery, this.getDomainClass()).getResultList();
-        **/
-        
-        int i = lista.size();
-        
         return entityManager.createNativeQuery(sqlQuery, this.getDomainClass()).getResultList();
     }
 
-    @Transactional
     @Override
     public T findOneByGuid(String guid) {
         String consultaJpql = "SELECT A FROM " + this.getDomainClass().getSimpleName().toUpperCase().replace("ENTITY", "").replace("CUSTOM", "") + " A WHERE A.GUID = :GUID";
@@ -88,12 +50,47 @@ public class BaseMyRepositoryImpl<T, ID extends Serializable> extends SimpleJpaR
         return (T) query.getSingleResult();
     }
 
-    @Transactional
     @Override
     public Integer saveCustomNativeQuery(String sqlQuery) {
         return entityManager.createNativeQuery(sqlQuery).executeUpdate();
     }
+    
 
+    @Override
+    public EntityManager getConnectionEntityManager(T smadispoEntity){
+        try {
+            String consultaJpql = "SELECT * FROM SMAEMPRE "
+                                + "WHERE SMAEMPRE.ID_SMAEMPRE = (SELECT CFACLIFO.ID_SMAEMPRE FROM CFACLIFO WHERE CFACLIFO.GUID = '" + ((SmadispoEntity) smadispoEntity).getGuidClifo() + "')";
+            Query query = entityManager.createNativeQuery(consultaJpql, this.getDomainClass());
+            
+            List<SmaempreEntity> smaempreEntity = query.getResultList();
+            
+            // Checa se retornou alguma coisa do banco
+            if ((smaempreEntity != null) && (smaempreEntity.size() > 0)) {
+                Map properties = new HashMap();
+                properties.put("hibernate.connection.driver_class", "org.firebirdsql.jdbc.FBDriver");
+                properties.put("hibernate.connection.url", "jdbc:firebirdsql:" + smaempreEntity.get(0).getIpServidorSisinfo() + "/" + smaempreEntity.get(0).getPortaBancoSisinfo() + ":" + smaempreEntity.get(0).getCaminhoBancoSisinfo() +"");
+                properties.put("hibernate.connection.username", smaempreEntity.get(0).getUsuSisinfoWebservice());
+                properties.put("hibernate.connection.password", smaempreEntity.get(0).getSenhaSisinfoWebservice());
+                properties.put("hibernate.dialect", "org.hibernate.dialect.FirebirdDialect");
+                properties.put("hibernate.show-sql", "false");
+                properties.put("hibernate.temp.use_jdbc_metadata_defaults", "false");
+                properties.put("hibernate.ejb.entitymanager_factory_name", "persistenceSisInfoWebClient");
+
+                EntityManagerFactory emf = Persistence.createEntityManagerFactory("persistenceSisInfoWebClient",properties);
+                entityManager = (EntityManager) emf.createEntityManager();
+            }
+            return entityManager;
+        } catch (Exception e) {
+            logger.error("Erro ao pegar os dados da conecxão com o banco de dados. " + e.getMessage());
+            return entityManager;
+        }
+    }
     
-    
+    @Override
+    public void closeEntityManager(){
+        if(entityManager != null){
+            entityManager.close();
+        }
+    }
 }
