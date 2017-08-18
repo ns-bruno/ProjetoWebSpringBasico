@@ -16,7 +16,13 @@ public class SmadispoEntity {
     @Column(name = "ID_SMADISPO", table = "SMADISPO", nullable = false)
     @Id
     private Integer idSmadispo;
-
+    
+    @Column(name = "ID_CFACLIFO", table = "SMADISPO")
+    private Integer idCfaclifo;
+    
+    @Column(name = "ID_CFACLIFO_FUN", table = "SMADISPO")
+    private Integer idCfaclifoFun;
+    
     @Column(name = "GUID", table = "SMADISPO", nullable = false, length = 16)
     @Basic(optional = false)
     private String guid;
@@ -53,20 +59,28 @@ public class SmadispoEntity {
     @Basic
     private Character ativo;
 
-    @Column(name = "GUID_CLIFO", table = "SMADISPO", length = 20)
-    @Basic
-    private String guidClifo;
-
-    @Column(name = "PLATAFORMA", table = "SMADISPO", length = 40)
-    @Basic
-    private String plataforma;
-
     public Integer getIdSmadispo() {
         return this.idSmadispo;
     }
 
     public void setIdSmadispo(Integer idSmadispo) {
         this.idSmadispo = idSmadispo;
+    }
+
+    public Integer getIdCfaclifo() {
+        return idCfaclifo;
+    }
+
+    public void setIdCfaclifo(Integer idCfaclifo) {
+        this.idCfaclifo = idCfaclifo;
+    }
+
+    public Integer getIdCfaclifoFun() {
+        return idCfaclifoFun;
+    }
+
+    public void setIdCfaclifoFun(Integer idCfaclifoFun) {
+        this.idCfaclifoFun = idCfaclifoFun;
     }
 
     public String getGuid() {
@@ -139,22 +153,6 @@ public class SmadispoEntity {
 
     public void setAtivo(Character ativo) {
         this.ativo = ativo;
-    }
-
-    public String getGuidClifo() {
-        return this.guidClifo;
-    }
-
-    public void setGuidClifo(String guidClifo) {
-        this.guidClifo = guidClifo;
-    }
-
-    public String getPlataforma() {
-        return this.plataforma;
-    }
-
-    public void setPlataforma(String plataforma) {
-        this.plataforma = plataforma;
     }
 
 }

@@ -7,6 +7,8 @@
   </persistence-unit>
   <persistence-unit name="persistenceSisInfoWebClient" transaction-type="RESOURCE_LOCAL">
     <class>br.com.sisinfoweb.entity.SmaempreEntity</class>
+    <class>br.com.sisinfoweb.entity.CfaclifoEntity</class>
+    <class>br.com.sisinfoweb.entity.SmadispoEntity</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
     </properties>

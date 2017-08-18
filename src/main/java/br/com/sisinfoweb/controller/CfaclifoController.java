@@ -8,6 +8,7 @@ package br.com.sisinfoweb.controller;
 import br.com.sisinfoweb.banco.beans.RetornoWebServiceBeans;
 import br.com.sisinfoweb.banco.beans.StatusRetornoWebServiceBeans;
 import br.com.sisinfoweb.entity.CfaclifoEntity;
+import br.com.sisinfoweb.entity.SmadispoEntity;
 import br.com.sisinfoweb.service.CfaclifoService;
 import com.google.gson.Gson;
 import java.net.HttpURLConnection;
@@ -39,6 +40,62 @@ public class CfaclifoController extends BaseMyController{
     @ResponseBody
     @Override
     public String initJson( Model model, 
+                            @RequestHeader() HttpHeaders httpHeaders, 
+                            HttpServletResponse response, 
+                            @RequestParam(name = "dispositivo", required = true) String dispositivo,
+                            @RequestParam(name = "columnSelected", required = false) String columnSelected,
+                            @RequestParam(name = "where", required = false) String where,
+                            @RequestParam(name = "resume", required = false, defaultValue = "false") Boolean resume,
+                            @RequestParam(name = "sqlQuery", required = false) String sqlQuery) {
+        
+        StatusRetornoWebServiceBeans statusRetorno = new StatusRetornoWebServiceBeans();
+        RetornoWebServiceBeans retornoWebService = new RetornoWebServiceBeans();
+        try{
+            // Coverte o dispositivo passado no formato json em uma entidade
+            SmadispoEntity smadispoEntity = new Gson().fromJson(dispositivo, SmadispoEntity.class);
+            cfaclifoService.setSmadispoEntity(smadispoEntity);
+            
+            List<CfaclifoEntity> lista;
+            // Checa se foi passado alqum parametro para filtrar
+            if ( ((sqlQuery != null) && (!sqlQuery.isEmpty())) || 
+                    ((columnSelected != null) && (!columnSelected.isEmpty())) || 
+                    ((where != null) && (!where.isEmpty())) ){
+                // Pesquisa de acordo com o sql passado
+                lista = cfaclifoService.findCustomNativeQuery(resume, sqlQuery, columnSelected, where);
+            
+            } else {
+                lista = cfaclifoService.findAll();
+            }
+            // Cria uma vareavel para retorna o status
+            statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_OK);
+            statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.OK));
+            
+            // Adiciona o status
+            retornoWebService.statusRetorno = statusRetorno;
+            // Adiciona os dados que eh pra ser retornado
+            retornoWebService.object = lista;
+            cfaclifoService.findCustomNativeQuery(Boolean.FALSE, null, null, where);
+            
+            return new Gson().toJson(retornoWebService);
+        } catch(Exception e){
+            // Cria uma vareavel para retorna o status
+            statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_INTERNAL_ERROR);
+            statusRetorno.setMensagemRetorno(String.valueOf(e.getMessage()));
+            statusRetorno.setExtra(e.getLocalizedMessage());
+            
+            // Adiciona o status
+            retornoWebService.statusRetorno = statusRetorno;
+            
+            return new Gson().toJson(retornoWebService);
+        } finally{
+            cfaclifoService.closeEntityManager();
+        }
+    }
+
+    
+    @RequestMapping(value = {"/Cfaclifo/Admin"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String initJsonAdmin( Model model, 
                             @RequestHeader() HttpHeaders httpHeaders, 
                             HttpServletResponse response, 
                             @RequestParam(name = "dispositivo", required = true) String dispositivo,
@@ -82,9 +139,10 @@ public class CfaclifoController extends BaseMyController{
             retornoWebService.statusRetorno = statusRetorno;
             
             return new Gson().toJson(retornoWebService);
+        } finally{
+            cfaclifoService.closeEntityManager();
         }
     }
-
     
     
     @RequestMapping(value = {"/Cfaclifo/One"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

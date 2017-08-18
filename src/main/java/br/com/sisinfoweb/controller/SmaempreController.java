@@ -78,6 +78,10 @@ public class SmaempreController extends BaseMyController {
         StatusRetornoWebServiceBeans statusRetorno = new StatusRetornoWebServiceBeans();
         RetornoWebServiceBeans retornoWebService = new RetornoWebServiceBeans();
         try{
+            // Coverte o dispositivo passado no formato json em uma entidade
+            SmadispoEntity smadispoEntity = new Gson().fromJson(dispositivo, SmadispoEntity.class);
+            smaempreService.setSmadispoEntity(smadispoEntity);
+            
             List<SmaempreEntity> lista;
             // Checa se foi passado alqum parametro para filtrar
             if ( ((sqlQuery != null) && (!sqlQuery.isEmpty())) || 
@@ -109,6 +113,8 @@ public class SmaempreController extends BaseMyController {
             retornoWebService.statusRetorno = statusRetorno;
             
             return new Gson().toJson(retornoWebService);
+        } finally{
+            smaempreService.closeEntityManager();
         }
     }
 

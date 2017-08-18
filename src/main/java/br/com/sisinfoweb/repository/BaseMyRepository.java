@@ -31,7 +31,9 @@ public interface BaseMyRepository<T, ID extends Serializable> extends JpaReposit
     
     Serializable saveCustomNativeQuery(String sqlQuery);
     
-    EntityManager getConnectionEntityManager(T entity);
+    EntityManager getConnectionClient(T entity);
     
     public void closeEntityManager();
+    
+    public void getConnectionAdmin();
 }

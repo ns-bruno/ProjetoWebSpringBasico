@@ -813,6 +813,42 @@ public class CfaclifoEntity {
     @Column(name = "DT_VALIDADE_SUFRAMA", table = "CFACLIFO")
     @Basic
     private String dtValidadeSuframa;
+            
+    @Column(name = "QTDE_LICENCA_MOVEL", table = "CFACLIFO", nullable = false)
+    @Basic(optional = false)
+    private double qtdeLicencaMovel;
+    
+    @Column(name = "VERSAO_SAVARE", table = "CFACLIFO")
+    @Basic
+    private Integer versaoSavare;
+    
+    @Column(name = "IP_SERVIDOR_SISINFO", table = "CFACLIFO", length = 128)
+    @Basic
+    private String ipServidorSisinfo;
+
+    @Column(name = "IP_SERVIDOR_WEBSERVICE", table = "CFACLIFO", length = 128)
+    @Basic
+    private String ipServidorWebservice;
+
+    @Column(name = "USU_SISINFO_WEBSERVICE", table = "CFACLIFO", length = 20)
+    @Basic
+    private String usuSisinfoWebservice;
+
+    @Column(name = "SENHA_SISINFO_WEBSERVICE", table = "CFACLIFO", length = 20)
+    @Basic
+    private String senhaSisinfoWebservice;
+
+    @Column(name = "CAMINHO_BANCO_SISINFO", table = "CFACLIFO", length = 128)
+    @Basic
+    private String caminhoBancoSisinfo;
+
+    @Column(name = "PORTA_BANCO_SISINFO", table = "CFACLIFO")
+    @Basic
+    private Integer portaBancoSisinfo;
+
+    @Column(name = "MODO_CONEXAO_WEBSERVICE", table = "CFACLIFO")
+    @Basic
+    private Character modoConexaoWebservice;
 
     public Integer getIdCfaclifo() {
         return this.idCfaclifo;
@@ -2404,6 +2440,78 @@ public class CfaclifoEntity {
 
     public void setDtValidadeSuframa(String dtValidadeSuframa) {
         this.dtValidadeSuframa = dtValidadeSuframa;
+    }
+
+    public double getQtdeLicencaMovel() {
+        return qtdeLicencaMovel;
+    }
+
+    public void setQtdeLicencaMovel(double qtdeLicencaMovel) {
+        this.qtdeLicencaMovel = qtdeLicencaMovel;
+    }
+
+    public Integer getVersaoSavare() {
+        return versaoSavare;
+    }
+
+    public void setVersaoSavare(Integer versaoSavare) {
+        this.versaoSavare = versaoSavare;
+    }
+
+    public String getIpServidorSisinfo() {
+        return ipServidorSisinfo;
+    }
+
+    public void setIpServidorSisinfo(String ipServidorSisinfo) {
+        this.ipServidorSisinfo = ipServidorSisinfo;
+    }
+
+    public String getIpServidorWebservice() {
+        return ipServidorWebservice;
+    }
+
+    public void setIpServidorWebservice(String ipServidorWebservice) {
+        this.ipServidorWebservice = ipServidorWebservice;
+    }
+
+    public String getUsuSisinfoWebservice() {
+        return usuSisinfoWebservice;
+    }
+
+    public void setUsuSisinfoWebservice(String usuSisinfoWebservice) {
+        this.usuSisinfoWebservice = usuSisinfoWebservice;
+    }
+
+    public String getSenhaSisinfoWebservice() {
+        return senhaSisinfoWebservice;
+    }
+
+    public void setSenhaSisinfoWebservice(String senhaSisinfoWebservice) {
+        this.senhaSisinfoWebservice = senhaSisinfoWebservice;
+    }
+
+    public String getCaminhoBancoSisinfo() {
+        return caminhoBancoSisinfo;
+    }
+
+    public void setCaminhoBancoSisinfo(String caminhoBancoSisinfo) {
+        this.caminhoBancoSisinfo = caminhoBancoSisinfo;
+    }
+
+    public Integer getPortaBancoSisinfo() {
+        return portaBancoSisinfo;
+    }
+
+    public void setPortaBancoSisinfo(Integer portaBancoSisinfo) {
+        this.portaBancoSisinfo = portaBancoSisinfo;
+    }
+
+    public Character getModoConexaoWebservice() {
+        return modoConexaoWebservice;
+    }
+
+    public void setModoConexaoWebservice(Character modoConexaoWebservice) {
+        this.modoConexaoWebservice = modoConexaoWebservice;
     }
 
 }

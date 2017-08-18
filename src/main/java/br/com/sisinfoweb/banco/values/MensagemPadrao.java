@@ -13,6 +13,13 @@ public interface MensagemPadrao {
     String INSERT_ERROR = "Não conseguimos inserir no Host (Servidor SisInfo da empresa).";
     String INSERT_SUCCESS = "Inserido com sucesso no Host (Servidor SisInfo da empresa).";
     String UPDATE_ERROR = "Não conseguimos atualizar o registro no banco de dados do Host (Servidor SisInfo da empresa).";
+    String EXISTS = "Já existe no banco de dados";
     String ERROR_FIND = "Não conseguimos realizar a pesquisa/find. ";
     String ERROR_SAVE = "Erro ao tentar salvar. ";
+    String ERROR_NOT_DISPOSITIVO = "Não foi passado o parâmetro com a identificação do dispositivo";
+    String ERROR_DISPOSITIVO_INATIVO = "Dispositivo esta inativo.";
+    String ERROR_DISPOSITIVO_NAO_CADASTRADO = "Dispositivo não encontrado.";
+    String ERROR_DISPOSITIVO_SEM_UUID = "Dispositivo sem o UUID(Chave de identificacao).";
+    String ERROR_EMPRESA_NAO_LICENCIADA = "Não foi encontrado em nosso banco de dados a empresa licenciada para usar o aplicativo.";
+    String ERROR_EMPRESA_INATIVA = "A empresa está inativada. Entre em contato com a sua empresa ou com o suporte.";
 }

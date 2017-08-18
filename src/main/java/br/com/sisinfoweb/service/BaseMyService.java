@@ -15,6 +15,7 @@ import javax.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.datasource.init.ScriptException;
 
 /**
  *
@@ -35,33 +36,39 @@ public class BaseMyService<R extends BaseMyRepository, E> {
         this.baseMyRepository = smaempreRepository;
     }
 
+    /**
+     * Seta os dados do dispositivo que esta fazendo a conexao.
+     * E o webservice se encarrega de fazer uma nova conexão com o 
+     * banco de dados da empresa licenciada.
+     * @param smadispoEntity 
+     */
+    @Transactional
     public void setSmadispoEntity(SmadispoEntity smadispoEntity) {
         this.smadispoEntity = smadispoEntity;
-        this.baseMyRepository.getConnectionEntityManager(smadispoEntity);
+        this.baseMyRepository.getConnectionClient(smadispoEntity);
     }
 
+    @Transactional
     public List<E> findAll() {
         try{
             return baseMyRepository.findAll();
         } catch(Exception e){
             logger.error(MensagemPadrao.ERROR_FIND + e.getMessage());
             return null;
-        } finally{
-            baseMyRepository.closeEntityManager();
         }
     }
     
+    @Transactional
     public E findOneByGuid(String guid){
         try{
             return (E) baseMyRepository.findOneByGuid(guid);
         } catch(Exception e){
-            logger.error(MensagemPadrao.ERROR_FIND + "Neste caso foi a busca por Guid. " + e.getMessage());
+            logger.error(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI A BUSCA POR GUID. " + e.getMessage());
             return null;
-        } finally{
-            baseMyRepository.closeEntityManager();
         }
     }
 
+    @Transactional
     public List<E> findCustomNativeQuery(Boolean resume, String sqlCustomParam, String columns, String where) {
         try{
             // Cria um sql nativo se nao for passado um sqlCustom por parametro
@@ -81,22 +88,37 @@ public class BaseMyService<R extends BaseMyRepository, E> {
                 }
             }
             return baseMyRepository.findCustomNativeQuery(sqlQuery);
-        } catch(Exception e){
-            logger.error(MensagemPadrao.ERROR_FIND + "Neste caso foi uma Query nativa. " +e.getMessage());
+        } catch(ScriptException e){
+            logger.error(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI UMA QUERY NATIVA DO SERVICE. " +e.getMessage());
             return null;
-        } finally {
-            baseMyRepository.closeEntityManager();
+        
+        } catch(Exception e){
+            logger.error(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI UMA QUERY NATIVA DO SERVICE. " +e.getMessage());
+            return null;
         }
     }
     
+    @Transactional
     public Serializable saveCustomNativeQuery(String queryInsert){
         try {
             return baseMyRepository.saveCustomNativeQuery(queryInsert);
-        } catch (Exception e){
+        } catch (ScriptException e){
             logger.error(MensagemPadrao.ERROR_SAVE + e.getMessage());
             return -1;
-        } finally {
-            baseMyRepository.closeEntityManager();
+        
+        } catch(Exception e){
+            logger.error(MensagemPadrao.ERROR_FIND + e.getMessage());
+            return -1;
+        
         }
+    }
+    
+    @Transactional
+    public void closeEntityManager(){
+        baseMyRepository.closeEntityManager();
+    }
+    
+    public void getConnectionAdmin(){
+        baseMyRepository.getConnectionAdmin();
     }
 }

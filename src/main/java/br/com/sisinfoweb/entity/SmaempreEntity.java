@@ -977,34 +977,6 @@ public class SmaempreEntity {
     @Basic
     private Integer versaoSavare;
 
-    @Column(name = "IP_SERVIDOR_SISINFO", table = "SMAEMPRE", length = 128)
-    @Basic
-    private String ipServidorSisinfo;
-
-    @Column(name = "IP_SERVIDOR_WEBSERVICE", table = "SMAEMPRE", length = 128)
-    @Basic
-    private String ipServidorWebservice;
-
-    @Column(name = "USU_SISINFO_WEBSERVICE", table = "SMAEMPRE", length = 20)
-    @Basic
-    private String usuSisinfoWebservice;
-
-    @Column(name = "SENHA_SISINFO_WEBSERVICE", table = "SMAEMPRE", length = 20)
-    @Basic
-    private String senhaSisinfoWebservice;
-
-    @Column(name = "CAMINHO_BANCO_SISINFO", table = "SMAEMPRE", length = 128)
-    @Basic
-    private String caminhoBancoSisinfo;
-
-    @Column(name = "PORTA_BANCO_SISINFO", table = "SMAEMPRE")
-    @Basic
-    private Integer portaBancoSisinfo;
-
-    @Column(name = "MODO_CONEXAO_WEBSERVICE", table = "SMAEMPRE")
-    @Basic
-    private Character modoConexaoWebservice;
-
     public Integer getIdSmaempre() {
         return this.idSmaempre;
     }
@@ -2923,62 +2895,6 @@ public class SmaempreEntity {
 
     public void setVersaoSavare(Integer versaoSavare) {
         this.versaoSavare = versaoSavare;
-    }
-
-    public String getIpServidorSisinfo() {
-        return this.ipServidorSisinfo;
-    }
-
-    public void setIpServidorSisinfo(String ipServidorSisinfo) {
-        this.ipServidorSisinfo = ipServidorSisinfo;
-    }
-
-    public String getIpServidorWebservice() {
-        return this.ipServidorWebservice;
-    }
-
-    public void setIpServidorWebservice(String ipServidorWebservice) {
-        this.ipServidorWebservice = ipServidorWebservice;
-    }
-
-    public String getUsuSisinfoWebservice() {
-        return this.usuSisinfoWebservice;
-    }
-
-    public void setUsuSisinfoWebservice(String usuSisinfoWebservice) {
-        this.usuSisinfoWebservice = usuSisinfoWebservice;
-    }
-
-    public String getSenhaSisinfoWebservice() {
-        return this.senhaSisinfoWebservice;
-    }
-
-    public void setSenhaSisinfoWebservice(String senhaSisinfoWebservice) {
-        this.senhaSisinfoWebservice = senhaSisinfoWebservice;
-    }
-
-    public String getCaminhoBancoSisinfo() {
-        return this.caminhoBancoSisinfo;
-    }
-
-    public void setCaminhoBancoSisinfo(String caminhoBancoSisinfo) {
-        this.caminhoBancoSisinfo = caminhoBancoSisinfo;
-    }
-
-    public Integer getPortaBancoSisinfo() {
-        return this.portaBancoSisinfo;
-    }
-
-    public void setPortaBancoSisinfo(Integer portaBancoSisinfo) {
-        this.portaBancoSisinfo = portaBancoSisinfo;
-    }
-
-    public Character getModoConexaoWebservice() {
-        return this.modoConexaoWebservice;
-    }
-
-    public void setModoConexaoWebservice(Character modoConexaoWebservice) {
-        this.modoConexaoWebservice = modoConexaoWebservice;
     }
 
 }
