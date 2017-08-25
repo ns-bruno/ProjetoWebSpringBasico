@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -49,13 +49,11 @@ public class AearomanEntity {
 
     @Column(name = "DT_CAD", table = "AEAROMAN")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCad;
+    private String dtCad;
 
     @Column(name = "DT_ALT", table = "AEAROMAN")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "CT_INTEG", table = "AEAROMAN")
     @Basic
@@ -67,23 +65,19 @@ public class AearomanEntity {
 
     @Column(name = "DT_ROMANEIO", table = "AEAROMAN", nullable = false)
     @Basic(optional = false)
-    @Temporal(TemporalType.DATE)
-    private Date dtRomaneio;
+        private String dtRomaneio;
 
     @Column(name = "DT_EMISSAO", table = "AEAROMAN")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtEmissao;
+        private String dtEmissao;
 
     @Column(name = "DT_SAIDA", table = "AEAROMAN")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtSaida;
+        private String dtSaida;
 
     @Column(name = "DT_FECHAMENTO", table = "AEAROMAN")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtFechamento;
+        private String dtFechamento;
 
     @Column(name = "VALOR", table = "AEAROMAN", nullable = false)
     @Basic(optional = false)
@@ -154,19 +148,19 @@ public class AearomanEntity {
         this.usCad = usCad;
     }
 
-    public Date getDtCad() {
+    public String getDtCad() {
         return this.dtCad;
     }
 
-    public void setDtCad(Date dtCad) {
+    public void setDtCad(String dtCad) {
         this.dtCad = dtCad;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 
@@ -186,35 +180,35 @@ public class AearomanEntity {
         this.numero = numero;
     }
 
-    public Date getDtRomaneio() {
+    public String getDtRomaneio() {
         return this.dtRomaneio;
     }
 
-    public void setDtRomaneio(Date dtRomaneio) {
+    public void setDtRomaneio(String dtRomaneio) {
         this.dtRomaneio = dtRomaneio;
     }
 
-    public Date getDtEmissao() {
+    public String getDtEmissao() {
         return this.dtEmissao;
     }
 
-    public void setDtEmissao(Date dtEmissao) {
+    public void setDtEmissao(String dtEmissao) {
         this.dtEmissao = dtEmissao;
     }
 
-    public Date getDtSaida() {
+    public String getDtSaida() {
         return this.dtSaida;
     }
 
-    public void setDtSaida(Date dtSaida) {
+    public void setDtSaida(String dtSaida) {
         this.dtSaida = dtSaida;
     }
 
-    public Date getDtFechamento() {
+    public String getDtFechamento() {
         return this.dtFechamento;
     }
 
-    public void setDtFechamento(Date dtFechamento) {
+    public void setDtFechamento(String dtFechamento) {
         this.dtFechamento = dtFechamento;
     }
 

@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -57,13 +57,11 @@ public class AeapedidEntity {
 
     @Column(name = "DT_CAD", table = "AEAPEDID")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCad;
+    private String dtCad;
 
     @Column(name = "DT_ALT", table = "AEAPEDID")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "CT_INTEG", table = "AEAPEDID")
     @Basic
@@ -79,33 +77,27 @@ public class AeapedidEntity {
 
     @Column(name = "DT_PEDIDO", table = "AEAPEDID", nullable = false)
     @Basic(optional = false)
-    @Temporal(TemporalType.DATE)
-    private Date dtPedido;
+        private String dtPedido;
 
     @Column(name = "DT_ENVIADO", table = "AEAPEDID")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtEnviado;
+        private String dtEnviado;
 
     @Column(name = "DT_PREVISAO", table = "AEAPEDID")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtPrevisao;
+        private String dtPrevisao;
 
     @Column(name = "DT_CONFIRMACAO", table = "AEAPEDID")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtConfirmacao;
+        private String dtConfirmacao;
 
     @Column(name = "DT_ATENDIDO", table = "AEAPEDID")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtAtendido;
+        private String dtAtendido;
 
     @Column(name = "DT_CANCELADO", table = "AEAPEDID")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtCancelado;
+        private String dtCancelado;
 
     @Column(name = "FORMA_PAGAMENTO", table = "AEAPEDID")
     @Basic
@@ -244,19 +236,19 @@ public class AeapedidEntity {
         this.usCad = usCad;
     }
 
-    public Date getDtCad() {
+    public String getDtCad() {
         return this.dtCad;
     }
 
-    public void setDtCad(Date dtCad) {
+    public void setDtCad(String dtCad) {
         this.dtCad = dtCad;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 
@@ -284,51 +276,51 @@ public class AeapedidEntity {
         this.numPedidoFor = numPedidoFor;
     }
 
-    public Date getDtPedido() {
+    public String getDtPedido() {
         return this.dtPedido;
     }
 
-    public void setDtPedido(Date dtPedido) {
+    public void setDtPedido(String dtPedido) {
         this.dtPedido = dtPedido;
     }
 
-    public Date getDtEnviado() {
+    public String getDtEnviado() {
         return this.dtEnviado;
     }
 
-    public void setDtEnviado(Date dtEnviado) {
+    public void setDtEnviado(String dtEnviado) {
         this.dtEnviado = dtEnviado;
     }
 
-    public Date getDtPrevisao() {
+    public String getDtPrevisao() {
         return this.dtPrevisao;
     }
 
-    public void setDtPrevisao(Date dtPrevisao) {
+    public void setDtPrevisao(String dtPrevisao) {
         this.dtPrevisao = dtPrevisao;
     }
 
-    public Date getDtConfirmacao() {
+    public String getDtConfirmacao() {
         return this.dtConfirmacao;
     }
 
-    public void setDtConfirmacao(Date dtConfirmacao) {
+    public void setDtConfirmacao(String dtConfirmacao) {
         this.dtConfirmacao = dtConfirmacao;
     }
 
-    public Date getDtAtendido() {
+    public String getDtAtendido() {
         return this.dtAtendido;
     }
 
-    public void setDtAtendido(Date dtAtendido) {
+    public void setDtAtendido(String dtAtendido) {
         this.dtAtendido = dtAtendido;
     }
 
-    public Date getDtCancelado() {
+    public String getDtCancelado() {
         return this.dtCancelado;
     }
 
-    public void setDtCancelado(Date dtCancelado) {
+    public void setDtCancelado(String dtCancelado) {
         this.dtCancelado = dtCancelado;
     }
 

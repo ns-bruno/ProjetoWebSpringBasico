@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -43,13 +43,11 @@ public class SmalogmvEntity {
 
     @Column(name = "DT_ULT_ALT_ARQUIVO", table = "SMALOGMV")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtUltAltArquivo;
+    private String dtUltAltArquivo;
 
     @Column(name = "DT_ALT", table = "SMALOGMV")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "TIPO", table = "SMALOGMV")
     @Basic
@@ -108,19 +106,19 @@ public class SmalogmvEntity {
         this.ctInteg = ctInteg;
     }
 
-    public Date getDtUltAltArquivo() {
+    public String getDtUltAltArquivo() {
         return this.dtUltAltArquivo;
     }
 
-    public void setDtUltAltArquivo(Date dtUltAltArquivo) {
+    public void setDtUltAltArquivo(String dtUltAltArquivo) {
         this.dtUltAltArquivo = dtUltAltArquivo;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 

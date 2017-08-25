@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -38,13 +38,11 @@ public class AeaprindEntity {
 
     @Column(name = "DT_CAD", table = "AEAPRIND")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCad;
+    private String dtCad;
 
     @Column(name = "DT_ALT", table = "AEAPRIND")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "CT_INTEG", table = "AEAPRIND")
     @Basic
@@ -56,8 +54,7 @@ public class AeaprindEntity {
 
     @Column(name = "DT_ALOCADO", table = "AEAPRIND")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtAlocado;
+        private String dtAlocado;
 
     @Column(name = "QTDE_UM_ITEM", table = "AEAPRIND", nullable = false)
     @Basic(optional = false)
@@ -119,19 +116,19 @@ public class AeaprindEntity {
         this.usCad = usCad;
     }
 
-    public Date getDtCad() {
+    public String getDtCad() {
         return this.dtCad;
     }
 
-    public void setDtCad(Date dtCad) {
+    public void setDtCad(String dtCad) {
         this.dtCad = dtCad;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 
@@ -151,11 +148,11 @@ public class AeaprindEntity {
         this.guid = guid;
     }
 
-    public Date getDtAlocado() {
+    public String getDtAlocado() {
         return this.dtAlocado;
     }
 
-    public void setDtAlocado(Date dtAlocado) {
+    public void setDtAlocado(String dtAlocado) {
         this.dtAlocado = dtAlocado;
     }
 

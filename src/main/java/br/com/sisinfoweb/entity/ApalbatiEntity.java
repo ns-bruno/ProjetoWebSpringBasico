@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -45,13 +45,11 @@ public class ApalbatiEntity {
 
     @Column(name = "DT_CAD", table = "APALBATI", nullable = false)
     @Basic(optional = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCad;
+    private String dtCad;
 
     @Column(name = "DT_ALT", table = "APALBATI", nullable = false)
     @Basic(optional = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "CT_INTEG", table = "APALBATI")
     @Basic
@@ -79,8 +77,7 @@ public class ApalbatiEntity {
 
     @Column(name = "DT_EMISSAO", table = "APALBATI")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtEmissao;
+        private String dtEmissao;
 
     @Column(name = "NOME", table = "APALBATI", length = 60)
     @Basic
@@ -92,8 +89,7 @@ public class ApalbatiEntity {
 
     @Column(name = "DT_NASCIMENTO", table = "APALBATI")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtNascimento;
+        private String dtNascimento;
 
     @Column(name = "PAI_NOME", table = "APALBATI", length = 60)
     @Basic
@@ -117,8 +113,7 @@ public class ApalbatiEntity {
 
     @Column(name = "DT_CASAMENTO", table = "APALBATI")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtCasamento;
+        private String dtCasamento;
 
     @Column(name = "PADRINHO_NOME", table = "APALBATI", length = 60)
     @Basic
@@ -197,19 +192,19 @@ public class ApalbatiEntity {
         this.usCad = usCad;
     }
 
-    public Date getDtCad() {
+    public String getDtCad() {
         return this.dtCad;
     }
 
-    public void setDtCad(Date dtCad) {
+    public void setDtCad(String dtCad) {
         this.dtCad = dtCad;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 
@@ -261,11 +256,11 @@ public class ApalbatiEntity {
         this.celebrante = celebrante;
     }
 
-    public Date getDtEmissao() {
+    public String getDtEmissao() {
         return this.dtEmissao;
     }
 
-    public void setDtEmissao(Date dtEmissao) {
+    public void setDtEmissao(String dtEmissao) {
         this.dtEmissao = dtEmissao;
     }
 
@@ -285,11 +280,11 @@ public class ApalbatiEntity {
         this.localNascimento = localNascimento;
     }
 
-    public Date getDtNascimento() {
+    public String getDtNascimento() {
         return this.dtNascimento;
     }
 
-    public void setDtNascimento(Date dtNascimento) {
+    public void setDtNascimento(String dtNascimento) {
         this.dtNascimento = dtNascimento;
     }
 
@@ -333,11 +328,11 @@ public class ApalbatiEntity {
         this.casadoLocal = casadoLocal;
     }
 
-    public Date getDtCasamento() {
+    public String getDtCasamento() {
         return this.dtCasamento;
     }
 
-    public void setDtCasamento(Date dtCasamento) {
+    public void setDtCasamento(String dtCasamento) {
         this.dtCasamento = dtCasamento;
     }
 

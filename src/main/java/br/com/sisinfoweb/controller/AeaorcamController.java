@@ -9,6 +9,7 @@ import br.com.sisinfoweb.banco.beans.RetornoWebServiceBeans;
 import br.com.sisinfoweb.banco.beans.StatusRetornoWebServiceBeans;
 import br.com.sisinfoweb.banco.values.MensagemPadrao;
 import br.com.sisinfoweb.entity.AeaorcamEntity;
+import br.com.sisinfoweb.entity.SmadispoEntity;
 import br.com.sisinfoweb.service.AeaorcamService;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -42,7 +43,7 @@ public class AeaorcamController extends BaseMyController{
     @Autowired
     private AeaorcamService aeaorcamService;
     
-    @RequestMapping(value = {"/Aeaorcam"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = {"/Aeaorcam"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     @Override
     public String initJson( Model model, 
@@ -57,6 +58,10 @@ public class AeaorcamController extends BaseMyController{
         StatusRetornoWebServiceBeans statusRetorno = new StatusRetornoWebServiceBeans();
         RetornoWebServiceBeans retornoWebService = new RetornoWebServiceBeans();
         try{
+            // Coverte o dispositivo passado no formato json em uma entidade
+            SmadispoEntity smadispoEntity = new Gson().fromJson(dispositivo, SmadispoEntity.class);
+            aeaorcamService.setSmadispoEntity(smadispoEntity);
+            
             List<AeaorcamEntity> lista;
             // Checa se foi passado alqum parametro para filtrar
             if ( ((sqlQuery != null) && (!sqlQuery.isEmpty())) || 
@@ -78,7 +83,9 @@ public class AeaorcamController extends BaseMyController{
             retornoWebService.object = lista;
             
             return new Gson().toJson(retornoWebService);
-        } catch(Exception e){
+        } catch(JsonSyntaxException e){
+            logger.error(getClass().getSimpleName() + " - " + e.getMessage());
+            
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_INTERNAL_ERROR);
             statusRetorno.setMensagemRetorno(String.valueOf(e.getMessage()));
@@ -88,10 +95,24 @@ public class AeaorcamController extends BaseMyController{
             retornoWebService.statusRetorno = statusRetorno;
             
             return new Gson().toJson(retornoWebService);
+        } catch(Exception e){
+            logger.error(getClass().getSimpleName() + " - " + e.getMessage());
+            
+            // Cria uma vareavel para retorna o status
+            statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_INTERNAL_ERROR);
+            statusRetorno.setMensagemRetorno(String.valueOf(e.getMessage()));
+            statusRetorno.setExtra(e.getLocalizedMessage());
+            
+            // Adiciona o status
+            retornoWebService.statusRetorno = statusRetorno;
+            
+            return new Gson().toJson(retornoWebService);
+        } finally{
+            aeaorcamService.closeEntityManager();
         }
     }
     
-    @RequestMapping(value = {"/Aeaorcam"}, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = {"/Aeaorcam"}, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     public String postJson( Model model, 
                             @RequestHeader() HttpHeaders httpHeaders, 

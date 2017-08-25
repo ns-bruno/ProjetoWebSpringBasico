@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,8 +26,7 @@ public class SmaregexEntity {
 
     @Column(name = "DT_ALT", table = "SMAREGEX")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "ARQUIVO", table = "SMAREGEX", nullable = false, length = 12)
     @Basic(optional = false)
@@ -57,11 +56,11 @@ public class SmaregexEntity {
         this.usCad = usCad;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 

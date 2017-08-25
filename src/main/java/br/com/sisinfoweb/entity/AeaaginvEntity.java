@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,13 +30,11 @@ public class AeaaginvEntity {
 
     @Column(name = "DT_CAD", table = "AEAAGINV")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCad;
+    private String dtCad;
 
     @Column(name = "DT_ALT", table = "AEAAGINV")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "CT_INTEG", table = "AEAAGINV")
     @Basic
@@ -56,8 +54,7 @@ public class AeaaginvEntity {
 
     @Column(name = "DT_MOVIMENTO", table = "AEAAGINV")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtMovimento;
+        private String dtMovimento;
 
     @Column(name = "ABERTO", table = "AEAAGINV", nullable = false)
     @Basic(optional = false)
@@ -87,19 +84,19 @@ public class AeaaginvEntity {
         this.usCad = usCad;
     }
 
-    public Date getDtCad() {
+    public String getDtCad() {
         return this.dtCad;
     }
 
-    public void setDtCad(Date dtCad) {
+    public void setDtCad(String dtCad) {
         this.dtCad = dtCad;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 
@@ -135,11 +132,11 @@ public class AeaaginvEntity {
         this.descricao = descricao;
     }
 
-    public Date getDtMovimento() {
+    public String getDtMovimento() {
         return this.dtMovimento;
     }
 
-    public void setDtMovimento(Date dtMovimento) {
+    public void setDtMovimento(String dtMovimento) {
         this.dtMovimento = dtMovimento;
     }
 

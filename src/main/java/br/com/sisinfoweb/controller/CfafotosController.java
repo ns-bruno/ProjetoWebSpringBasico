@@ -7,9 +7,12 @@ package br.com.sisinfoweb.controller;
 
 import br.com.sisinfoweb.banco.beans.RetornoWebServiceBeans;
 import br.com.sisinfoweb.banco.beans.StatusRetornoWebServiceBeans;
+import static br.com.sisinfoweb.controller.BaseMyController.logger;
 import br.com.sisinfoweb.entity.CfafotosEntity;
+import br.com.sisinfoweb.entity.SmadispoEntity;
 import br.com.sisinfoweb.service.CfafotosService;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import java.net.HttpURLConnection;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
@@ -35,7 +38,7 @@ public class CfafotosController extends BaseMyController{
     @Autowired
     private CfafotosService cfafotosService;
     
-    @RequestMapping(value = {"/Cfafotos"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = {"/Cfafotos"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     @Override
     public String initJson( Model model, 
@@ -50,6 +53,10 @@ public class CfafotosController extends BaseMyController{
         StatusRetornoWebServiceBeans statusRetorno = new StatusRetornoWebServiceBeans();
         RetornoWebServiceBeans retornoWebService = new RetornoWebServiceBeans();
         try{
+            // Coverte o dispositivo passado no formato json em uma entidade
+            SmadispoEntity smadispoEntity = new Gson().fromJson(dispositivo, SmadispoEntity.class);
+            cfafotosService.setSmadispoEntity(smadispoEntity);
+            
             List<CfafotosEntity> lista;
             // Checa se foi passado alqum parametro para filtrar
             if ( ((sqlQuery != null) && (!sqlQuery.isEmpty())) || 
@@ -71,7 +78,9 @@ public class CfafotosController extends BaseMyController{
             retornoWebService.object = lista;
             
             return new Gson().toJson(retornoWebService);
-        } catch(Exception e){
+        } catch(JsonSyntaxException e){
+            logger.error(getClass().getSimpleName() + " - " + e.getMessage());
+            
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_INTERNAL_ERROR);
             statusRetorno.setMensagemRetorno(String.valueOf(e.getMessage()));
@@ -81,6 +90,20 @@ public class CfafotosController extends BaseMyController{
             retornoWebService.statusRetorno = statusRetorno;
             
             return new Gson().toJson(retornoWebService);
+        } catch(Exception e){
+            logger.error(getClass().getSimpleName() + " - " + e.getMessage());
+            
+            // Cria uma vareavel para retorna o status
+            statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_INTERNAL_ERROR);
+            statusRetorno.setMensagemRetorno(String.valueOf(e.getMessage()));
+            statusRetorno.setExtra(e.getLocalizedMessage());
+            
+            // Adiciona o status
+            retornoWebService.statusRetorno = statusRetorno;
+            
+            return new Gson().toJson(retornoWebService);
+        } finally{
+            cfafotosService.closeEntityManager();
         }
     }
         

@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -45,13 +45,11 @@ public class ApalcrisEntity {
 
     @Column(name = "DT_CAD", table = "APALCRIS", nullable = false)
     @Basic(optional = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCad;
+    private String dtCad;
 
     @Column(name = "DT_ALT", table = "APALCRIS", nullable = false)
     @Basic(optional = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "CT_INTEG", table = "APALCRIS")
     @Basic
@@ -75,8 +73,7 @@ public class ApalcrisEntity {
 
     @Column(name = "DT_CRISMA", table = "APALCRIS")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtCrisma;
+        private String dtCrisma;
 
     @Column(name = "CELEBRANTE", table = "APALCRIS", length = 60)
     @Basic
@@ -159,19 +156,19 @@ public class ApalcrisEntity {
         this.usCad = usCad;
     }
 
-    public Date getDtCad() {
+    public String getDtCad() {
         return this.dtCad;
     }
 
-    public void setDtCad(Date dtCad) {
+    public void setDtCad(String dtCad) {
         this.dtCad = dtCad;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 
@@ -215,11 +212,11 @@ public class ApalcrisEntity {
         this.termo = termo;
     }
 
-    public Date getDtCrisma() {
+    public String getDtCrisma() {
         return this.dtCrisma;
     }
 
-    public void setDtCrisma(Date dtCrisma) {
+    public void setDtCrisma(String dtCrisma) {
         this.dtCrisma = dtCrisma;
     }
 

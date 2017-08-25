@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -42,13 +42,11 @@ public class CcacandiEntity {
 
     @Column(name = "DT_CAD", table = "CCACANDI")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCad;
+    private String dtCad;
 
     @Column(name = "DT_ALT", table = "CCACANDI")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "CT_INTEG", table = "CCACANDI")
     @Basic
@@ -80,8 +78,7 @@ public class CcacandiEntity {
 
     @Column(name = "DATANASCIMENTO", table = "CCACANDI")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date datanascimento;
+        private String datanascimento;
 
     @Column(name = "ESTADOCIVIL", table = "CCACANDI")
     @Basic
@@ -169,8 +166,7 @@ public class CcacandiEntity {
 
     @Column(name = "DATA_PGTO", table = "CCACANDI")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dataPgto;
+        private String dataPgto;
 
     public Integer getIdCcacandi() {
         return this.idCcacandi;
@@ -220,19 +216,19 @@ public class CcacandiEntity {
         this.usCad = usCad;
     }
 
-    public Date getDtCad() {
+    public String getDtCad() {
         return this.dtCad;
     }
 
-    public void setDtCad(Date dtCad) {
+    public void setDtCad(String dtCad) {
         this.dtCad = dtCad;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 
@@ -292,11 +288,11 @@ public class CcacandiEntity {
         this.sexo = sexo;
     }
 
-    public Date getDatanascimento() {
+    public String getDatanascimento() {
         return this.datanascimento;
     }
 
-    public void setDatanascimento(Date datanascimento) {
+    public void setDatanascimento(String datanascimento) {
         this.datanascimento = datanascimento;
     }
 
@@ -468,11 +464,11 @@ public class CcacandiEntity {
         this.vlInscricao = vlInscricao;
     }
 
-    public Date getDataPgto() {
+    public String getDataPgto() {
         return this.dataPgto;
     }
 
-    public void setDataPgto(Date dataPgto) {
+    public void setDataPgto(String dataPgto) {
         this.dataPgto = dataPgto;
     }
 

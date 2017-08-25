@@ -5,12 +5,11 @@
  */
 package br.com.sisinfoweb.controller;
 
-import br.com.sisinfoweb.entity.SmadispoEntity;
-import com.google.gson.Gson;
 import javax.servlet.http.HttpServletResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -24,6 +23,8 @@ public abstract class BaseMyController {
     public static final String COLUMN_SELECTED_JSON = "columnSelectedJson";
     public static final String WHERE_JSON = "whereJson";
     public static final String SQL_JSON = "sqlJson";
+    
+    final static Logger logger = LoggerFactory.getLogger(Object.class);
     
     public abstract String initJson(    Model model, 
                                         @RequestHeader() HttpHeaders httpHeaders, 

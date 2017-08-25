@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -58,13 +58,11 @@ public class ApaprmatEntity {
 
     @Column(name = "DT_CAD", table = "APAPRMAT")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCad;
+    private String dtCad;
 
     @Column(name = "DT_ALT", table = "APAPRMAT")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "CT_INTEG", table = "APAPRMAT")
     @Basic
@@ -92,8 +90,7 @@ public class ApaprmatEntity {
 
     @Column(name = "NOIVO_DT_NASCIMENTO", table = "APAPRMAT")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date noivoDtNascimento;
+        private String noivoDtNascimento;
 
     @Column(name = "NOIVO_NATURAL", table = "APAPRMAT", length = 40)
     @Basic
@@ -141,8 +138,7 @@ public class ApaprmatEntity {
 
     @Column(name = "NOIVA_DT_NASCIMENTO", table = "APAPRMAT")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date noivaDtNascimento;
+        private String noivaDtNascimento;
 
     @Column(name = "NOIVA_NATURAL", table = "APAPRMAT", length = 40)
     @Basic
@@ -230,8 +226,7 @@ public class ApaprmatEntity {
 
     @Column(name = "DT_DIALOGO", table = "APAPRMAT")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtDialogo;
+        private String dtDialogo;
 
     @Column(name = "COMUNIDADE_MORAR", table = "APAPRMAT", length = 40)
     @Basic
@@ -247,8 +242,7 @@ public class ApaprmatEntity {
 
     @Column(name = "DT_HR_CASAMENTO", table = "APAPRMAT")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtHrCasamento;
+    private String dtHrCasamento;
 
     @Column(name = "SITUACAO", table = "APAPRMAT")
     @Basic
@@ -342,19 +336,19 @@ public class ApaprmatEntity {
         this.usCad = usCad;
     }
 
-    public Date getDtCad() {
+    public String getDtCad() {
         return this.dtCad;
     }
 
-    public void setDtCad(Date dtCad) {
+    public void setDtCad(String dtCad) {
         this.dtCad = dtCad;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 
@@ -406,11 +400,11 @@ public class ApaprmatEntity {
         this.noivoMae = noivoMae;
     }
 
-    public Date getNoivoDtNascimento() {
+    public String getNoivoDtNascimento() {
         return this.noivoDtNascimento;
     }
 
-    public void setNoivoDtNascimento(Date noivoDtNascimento) {
+    public void setNoivoDtNascimento(String noivoDtNascimento) {
         this.noivoDtNascimento = noivoDtNascimento;
     }
 
@@ -502,11 +496,11 @@ public class ApaprmatEntity {
         this.noivaMae = noivaMae;
     }
 
-    public Date getNoivaDtNascimento() {
+    public String getNoivaDtNascimento() {
         return this.noivaDtNascimento;
     }
 
-    public void setNoivaDtNascimento(Date noivaDtNascimento) {
+    public void setNoivaDtNascimento(String noivaDtNascimento) {
         this.noivaDtNascimento = noivaDtNascimento;
     }
 
@@ -678,11 +672,11 @@ public class ApaprmatEntity {
         this.noivaBatizTermo = noivaBatizTermo;
     }
 
-    public Date getDtDialogo() {
+    public String getDtDialogo() {
         return this.dtDialogo;
     }
 
-    public void setDtDialogo(Date dtDialogo) {
+    public void setDtDialogo(String dtDialogo) {
         this.dtDialogo = dtDialogo;
     }
 
@@ -710,11 +704,11 @@ public class ApaprmatEntity {
         this.bispoNome = bispoNome;
     }
 
-    public Date getDtHrCasamento() {
+    public String getDtHrCasamento() {
         return this.dtHrCasamento;
     }
 
-    public void setDtHrCasamento(Date dtHrCasamento) {
+    public void setDtHrCasamento(String dtHrCasamento) {
         this.dtHrCasamento = dtHrCasamento;
     }
 

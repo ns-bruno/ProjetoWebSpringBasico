@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -41,13 +41,11 @@ public class AeaosindEntity {
 
     @Column(name = "DT_CAD", table = "AEAOSIND")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCad;
+    private String dtCad;
 
     @Column(name = "DT_ALT", table = "AEAOSIND")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "CT_INTEG", table = "AEAOSIND")
     @Basic
@@ -59,13 +57,11 @@ public class AeaosindEntity {
 
     @Column(name = "DT_ABERTURA", table = "AEAOSIND", nullable = false)
     @Basic(optional = false)
-    @Temporal(TemporalType.DATE)
-    private Date dtAbertura;
+        private String dtAbertura;
 
     @Column(name = "DT_FECHAMENTO", table = "AEAOSIND")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtFechamento;
+        private String dtFechamento;
 
     @Column(name = "OBS", table = "AEAOSIND")
     @Lob
@@ -116,19 +112,19 @@ public class AeaosindEntity {
         this.usCad = usCad;
     }
 
-    public Date getDtCad() {
+    public String getDtCad() {
         return this.dtCad;
     }
 
-    public void setDtCad(Date dtCad) {
+    public void setDtCad(String dtCad) {
         this.dtCad = dtCad;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 
@@ -148,19 +144,19 @@ public class AeaosindEntity {
         this.numero = numero;
     }
 
-    public Date getDtAbertura() {
+    public String getDtAbertura() {
         return this.dtAbertura;
     }
 
-    public void setDtAbertura(Date dtAbertura) {
+    public void setDtAbertura(String dtAbertura) {
         this.dtAbertura = dtAbertura;
     }
 
-    public Date getDtFechamento() {
+    public String getDtFechamento() {
         return this.dtFechamento;
     }
 
-    public void setDtFechamento(Date dtFechamento) {
+    public void setDtFechamento(String dtFechamento) {
         this.dtFechamento = dtFechamento;
     }
 

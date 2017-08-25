@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -34,13 +34,11 @@ public class AeanfdesEntity {
 
     @Column(name = "DT_CAD", table = "AEANFDES")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCad;
+    private String dtCad;
 
     @Column(name = "DT_ALT", table = "AEANFDES")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "CT_INTEG", table = "AEANFDES")
     @Basic
@@ -68,8 +66,7 @@ public class AeanfdesEntity {
 
     @Column(name = "DEMI", table = "AEANFDES")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date demi;
+        private String demi;
 
     @Column(name = "TPNF", table = "AEANFDES")
     @Basic
@@ -85,8 +82,7 @@ public class AeanfdesEntity {
 
     @Column(name = "DHRECBTO", table = "AEANFDES")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dhrecbto;
+    private String dhrecbto;
 
     @Column(name = "CSITNFE", table = "AEANFDES")
     @Basic
@@ -140,19 +136,19 @@ public class AeanfdesEntity {
         this.usCad = usCad;
     }
 
-    public Date getDtCad() {
+    public String getDtCad() {
         return this.dtCad;
     }
 
-    public void setDtCad(Date dtCad) {
+    public void setDtCad(String dtCad) {
         this.dtCad = dtCad;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 
@@ -204,11 +200,11 @@ public class AeanfdesEntity {
         this.ie = ie;
     }
 
-    public Date getDemi() {
+    public String getDemi() {
         return this.demi;
     }
 
-    public void setDemi(Date demi) {
+    public void setDemi(String demi) {
         this.demi = demi;
     }
 
@@ -236,11 +232,11 @@ public class AeanfdesEntity {
         this.digval = digval;
     }
 
-    public Date getDhrecbto() {
+    public String getDhrecbto() {
         return this.dhrecbto;
     }
 
-    public void setDhrecbto(Date dhrecbto) {
+    public void setDhrecbto(String dhrecbto) {
         this.dhrecbto = dhrecbto;
     }
 

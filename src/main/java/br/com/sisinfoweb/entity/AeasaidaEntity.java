@@ -3,15 +3,12 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
 @Entity
@@ -81,13 +78,11 @@ public class AeasaidaEntity {
 
     @Column(name = "DT_CAD", table = "AEASAIDA")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCad;
+    private String dtCad;
 
     @Column(name = "DT_ALT", table = "AEASAIDA")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "CT_INTEG", table = "AEASAIDA")
     @Basic
@@ -99,28 +94,23 @@ public class AeasaidaEntity {
 
     @Column(name = "DT_VENDA", table = "AEASAIDA", nullable = false)
     @Basic(optional = false)
-    @Temporal(TemporalType.DATE)
-    private Date dtVenda;
+    private String dtVenda;
 
     @Column(name = "DT_EMISSAO", table = "AEASAIDA")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtEmissao;
+    private String dtEmissao;
 
     @Column(name = "DT_SAIDA", table = "AEASAIDA")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtSaida;
+    private String dtSaida;
 
     @Column(name = "DT_CANCEL", table = "AEASAIDA")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtCancel;
+    private String dtCancel;
 
     @Column(name = "DT_CRIACAO_PALM", table = "AEASAIDA")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCriacaoPalm;
+    private String dtCriacaoPalm;
 
     @Column(name = "COMISSAO", table = "AEASAIDA", nullable = false)
     @Basic(optional = false)
@@ -443,19 +433,19 @@ public class AeasaidaEntity {
         this.usCad = usCad;
     }
 
-    public Date getDtCad() {
+    public String getDtCad() {
         return this.dtCad;
     }
 
-    public void setDtCad(Date dtCad) {
+    public void setDtCad(String dtCad) {
         this.dtCad = dtCad;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 
@@ -475,43 +465,43 @@ public class AeasaidaEntity {
         this.numero = numero;
     }
 
-    public Date getDtVenda() {
+    public String getDtVenda() {
         return this.dtVenda;
     }
 
-    public void setDtVenda(Date dtVenda) {
+    public void setDtVenda(String dtVenda) {
         this.dtVenda = dtVenda;
     }
 
-    public Date getDtEmissao() {
+    public String getDtEmissao() {
         return this.dtEmissao;
     }
 
-    public void setDtEmissao(Date dtEmissao) {
+    public void setDtEmissao(String dtEmissao) {
         this.dtEmissao = dtEmissao;
     }
 
-    public Date getDtSaida() {
+    public String getDtSaida() {
         return this.dtSaida;
     }
 
-    public void setDtSaida(Date dtSaida) {
+    public void setDtSaida(String dtSaida) {
         this.dtSaida = dtSaida;
     }
 
-    public Date getDtCancel() {
+    public String getDtCancel() {
         return this.dtCancel;
     }
 
-    public void setDtCancel(Date dtCancel) {
+    public void setDtCancel(String dtCancel) {
         this.dtCancel = dtCancel;
     }
 
-    public Date getDtCriacaoPalm() {
+    public String getDtCriacaoPalm() {
         return this.dtCriacaoPalm;
     }
 
-    public void setDtCriacaoPalm(Date dtCriacaoPalm) {
+    public void setDtCriacaoPalm(String dtCriacaoPalm) {
         this.dtCriacaoPalm = dtCriacaoPalm;
     }
 

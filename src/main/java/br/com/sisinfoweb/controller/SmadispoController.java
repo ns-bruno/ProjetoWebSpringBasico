@@ -37,7 +37,7 @@ public class SmadispoController extends BaseMyController{
     @Autowired
     private SmadispoService smadispoService;
     
-    @RequestMapping(value = {"/Smadispo"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = {"/Smadispo"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     @Override
     public String initJson( Model model, 
@@ -86,7 +86,7 @@ public class SmadispoController extends BaseMyController{
         }
     }
     
-    @RequestMapping(value = {"/Smadispo"}, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = {"/Smadispo"}, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     public String postJson( Model model, 
                             @RequestHeader() HttpHeaders httpHeaders, 
@@ -117,8 +117,8 @@ public class SmadispoController extends BaseMyController{
                 if (qtdInsertDispoLicenca > 0){
                     insertDispositivo = 
                             "INSERT INTO SMADISPO(DESCRICAO, IDENTIFICACAO) VALUES "
-                          + "(" + smadispoEntity.getDescricao() + ", "
-                          + smadispoEntity.getIdentificacao()
+                          + "('" + smadispoEntity.getDescricao() + "', "
+                          + "'" + smadispoEntity.getIdentificacao() + "'"
                           + " );";
                     smadispoService.setSmadispoEntity(smadispoEntity);
                     
@@ -158,8 +158,8 @@ public class SmadispoController extends BaseMyController{
                 if (smadispoService.findCustomNativeQuery(false, null, null, "IDENTIFICACAO = '" + smadispoEntity.getIdentificacao() + "'").size() < 1) {
                     String insertDispositivo = 
                             "INSERT INTO SMADISPO(DESCRICAO, IDENTIFICACAO) VALUES "
-                          + "(" + smadispoEntity.getDescricao() + ", "
-                          + smadispoEntity.getIdentificacao()
+                          + "('" + smadispoEntity.getDescricao() + "', "
+                          + "'" + smadispoEntity.getIdentificacao() + "'"
                           + " );";
                     
                     Integer qtdInsertDispo = (Integer)smadispoService.saveCustomNativeQuery(insertDispositivo);

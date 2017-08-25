@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,13 +35,11 @@ public class AeamapafEntity {
 
     @Column(name = "DT_CAD", table = "AEAMAPAF")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCad;
+    private String dtCad;
 
     @Column(name = "DT_ALT", table = "AEAMAPAF")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "CT_INTEG", table = "AEAMAPAF")
     @Basic
@@ -53,8 +51,7 @@ public class AeamapafEntity {
 
     @Column(name = "DATA_MAPA", table = "AEAMAPAF")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dataMapa;
+        private String dataMapa;
 
     @Column(name = "VL_MOVIMENTO_DIA", table = "AEAMAPAF", nullable = false)
     @Basic(optional = false)
@@ -165,19 +162,19 @@ public class AeamapafEntity {
         this.usCad = usCad;
     }
 
-    public Date getDtCad() {
+    public String getDtCad() {
         return this.dtCad;
     }
 
-    public void setDtCad(Date dtCad) {
+    public void setDtCad(String dtCad) {
         this.dtCad = dtCad;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 
@@ -197,11 +194,11 @@ public class AeamapafEntity {
         this.numeroMapa = numeroMapa;
     }
 
-    public Date getDataMapa() {
+    public String getDataMapa() {
         return this.dataMapa;
     }
 
-    public void setDataMapa(Date dataMapa) {
+    public void setDataMapa(String dataMapa) {
         this.dataMapa = dataMapa;
     }
 

@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -69,13 +69,11 @@ public class RpafaturEntity {
 
     @Column(name = "DT_CAD", table = "RPAFATUR")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCad;
+    private String dtCad;
 
     @Column(name = "DT_ALT", table = "RPAFATUR")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "CT_INTEG", table = "RPAFATUR")
     @Basic
@@ -103,33 +101,27 @@ public class RpafaturEntity {
 
     @Column(name = "DT_IMPORTACAO", table = "RPAFATUR")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtImportacao;
+        private String dtImportacao;
 
     @Column(name = "DT_ABERTURA", table = "RPAFATUR", nullable = false)
     @Basic(optional = false)
-    @Temporal(TemporalType.DATE)
-    private Date dtAbertura;
+        private String dtAbertura;
 
     @Column(name = "DT_EMISSAO", table = "RPAFATUR")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtEmissao;
+        private String dtEmissao;
 
     @Column(name = "DT_BAIXA", table = "RPAFATUR")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtBaixa;
+        private String dtBaixa;
 
     @Column(name = "DT_PAGAMENTO", table = "RPAFATUR")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtPagamento;
+        private String dtPagamento;
 
     @Column(name = "DT_CANCEL", table = "RPAFATUR")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtCancel;
+        private String dtCancel;
 
     @Column(name = "SITUACAO", table = "RPAFATUR", nullable = false)
     @Basic(optional = false)
@@ -300,19 +292,19 @@ public class RpafaturEntity {
         this.usCad = usCad;
     }
 
-    public Date getDtCad() {
+    public String getDtCad() {
         return this.dtCad;
     }
 
-    public void setDtCad(Date dtCad) {
+    public void setDtCad(String dtCad) {
         this.dtCad = dtCad;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 
@@ -364,51 +356,51 @@ public class RpafaturEntity {
         this.numero = numero;
     }
 
-    public Date getDtImportacao() {
+    public String getDtImportacao() {
         return this.dtImportacao;
     }
 
-    public void setDtImportacao(Date dtImportacao) {
+    public void setDtImportacao(String dtImportacao) {
         this.dtImportacao = dtImportacao;
     }
 
-    public Date getDtAbertura() {
+    public String getDtAbertura() {
         return this.dtAbertura;
     }
 
-    public void setDtAbertura(Date dtAbertura) {
+    public void setDtAbertura(String dtAbertura) {
         this.dtAbertura = dtAbertura;
     }
 
-    public Date getDtEmissao() {
+    public String getDtEmissao() {
         return this.dtEmissao;
     }
 
-    public void setDtEmissao(Date dtEmissao) {
+    public void setDtEmissao(String dtEmissao) {
         this.dtEmissao = dtEmissao;
     }
 
-    public Date getDtBaixa() {
+    public String getDtBaixa() {
         return this.dtBaixa;
     }
 
-    public void setDtBaixa(Date dtBaixa) {
+    public void setDtBaixa(String dtBaixa) {
         this.dtBaixa = dtBaixa;
     }
 
-    public Date getDtPagamento() {
+    public String getDtPagamento() {
         return this.dtPagamento;
     }
 
-    public void setDtPagamento(Date dtPagamento) {
+    public void setDtPagamento(String dtPagamento) {
         this.dtPagamento = dtPagamento;
     }
 
-    public Date getDtCancel() {
+    public String getDtCancel() {
         return this.dtCancel;
     }
 
-    public void setDtCancel(Date dtCancel) {
+    public void setDtCancel(String dtCancel) {
         this.dtCancel = dtCancel;
     }
 

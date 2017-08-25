@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,13 +35,11 @@ public class GcaitvigEntity {
 
     @Column(name = "DT_CAD", table = "GCAITVIG")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCad;
+    private String dtCad;
 
     @Column(name = "DT_ALT", table = "GCAITVIG")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "CT_INTEG", table = "GCAITVIG")
     @Basic
@@ -53,8 +51,7 @@ public class GcaitvigEntity {
 
     @Column(name = "DATA_BAIXA", table = "GCAITVIG")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dataBaixa;
+        private String dataBaixa;
 
     @Column(name = "PRECO", table = "GCAITVIG", nullable = false)
     @Basic(optional = false)
@@ -117,19 +114,19 @@ public class GcaitvigEntity {
         this.usCad = usCad;
     }
 
-    public Date getDtCad() {
+    public String getDtCad() {
         return this.dtCad;
     }
 
-    public void setDtCad(Date dtCad) {
+    public void setDtCad(String dtCad) {
         this.dtCad = dtCad;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 
@@ -149,11 +146,11 @@ public class GcaitvigEntity {
         this.guid = guid;
     }
 
-    public Date getDataBaixa() {
+    public String getDataBaixa() {
         return this.dataBaixa;
     }
 
-    public void setDataBaixa(Date dataBaixa) {
+    public void setDataBaixa(String dataBaixa) {
         this.dataBaixa = dataBaixa;
     }
 

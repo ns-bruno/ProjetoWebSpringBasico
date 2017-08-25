@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -34,13 +34,11 @@ public class ApanegatEntity {
 
     @Column(name = "DT_CAD", table = "APANEGAT")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCad;
+    private String dtCad;
 
     @Column(name = "DT_ALT", table = "APANEGAT")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "CT_INTEG", table = "APANEGAT")
     @Basic
@@ -64,8 +62,7 @@ public class ApanegatEntity {
 
     @Column(name = "DT_NASCIMENTO", table = "APANEGAT")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtNascimento;
+        private String dtNascimento;
 
     @Column(name = "PAI", table = "APANEGAT", length = 60)
     @Basic
@@ -77,8 +74,7 @@ public class ApanegatEntity {
 
     @Column(name = "EMISSAO", table = "APANEGAT")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date emissao;
+        private String emissao;
 
     @Column(name = "SECRETARIA", table = "APANEGAT", length = 60)
     @Basic
@@ -140,19 +136,19 @@ public class ApanegatEntity {
         this.usCad = usCad;
     }
 
-    public Date getDtCad() {
+    public String getDtCad() {
         return this.dtCad;
     }
 
-    public void setDtCad(Date dtCad) {
+    public void setDtCad(String dtCad) {
         this.dtCad = dtCad;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 
@@ -196,11 +192,11 @@ public class ApanegatEntity {
         this.anofim = anofim;
     }
 
-    public Date getDtNascimento() {
+    public String getDtNascimento() {
         return this.dtNascimento;
     }
 
-    public void setDtNascimento(Date dtNascimento) {
+    public void setDtNascimento(String dtNascimento) {
         this.dtNascimento = dtNascimento;
     }
 
@@ -220,11 +216,11 @@ public class ApanegatEntity {
         this.mae = mae;
     }
 
-    public Date getEmissao() {
+    public String getEmissao() {
         return this.emissao;
     }
 
-    public void setEmissao(Date emissao) {
+    public void setEmissao(String emissao) {
         this.emissao = emissao;
     }
 

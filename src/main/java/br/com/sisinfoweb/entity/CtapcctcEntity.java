@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -38,13 +38,11 @@ public class CtapcctcEntity {
 
     @Column(name = "DT_CAD", table = "CTAPCCTC")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCad;
+    private String dtCad;
 
     @Column(name = "DT_ALT", table = "CTAPCCTC")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "CT_INTEG", table = "CTAPCCTC")
     @Basic
@@ -52,8 +50,7 @@ public class CtapcctcEntity {
 
     @Column(name = "DATA", table = "CTAPCCTC")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date data;
+        private String data;
 
     @Column(name = "SALDO_ANT_CRE", table = "CTAPCCTC", nullable = false)
     @Basic(optional = false)
@@ -111,19 +108,19 @@ public class CtapcctcEntity {
         this.usCad = usCad;
     }
 
-    public Date getDtCad() {
+    public String getDtCad() {
         return this.dtCad;
     }
 
-    public void setDtCad(Date dtCad) {
+    public void setDtCad(String dtCad) {
         this.dtCad = dtCad;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 
@@ -135,11 +132,11 @@ public class CtapcctcEntity {
         this.ctInteg = ctInteg;
     }
 
-    public Date getData() {
+    public String getData() {
         return this.data;
     }
 
-    public void setData(Date data) {
+    public void setData(String data) {
         this.data = data;
     }
 

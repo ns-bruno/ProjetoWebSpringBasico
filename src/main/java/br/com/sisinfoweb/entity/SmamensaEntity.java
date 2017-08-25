@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -43,13 +43,11 @@ public class SmamensaEntity {
 
     @Column(name = "DT_CAD", table = "SMAMENSA")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCad;
+    private String dtCad;
 
     @Column(name = "DT_ALT", table = "SMAMENSA")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "CT_INTEG", table = "SMAMENSA")
     @Basic
@@ -57,18 +55,15 @@ public class SmamensaEntity {
 
     @Column(name = "DATA_GERADO", table = "SMAMENSA")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dataGerado;
+    private String dataGerado;
 
     @Column(name = "DATA_ENVIO", table = "SMAMENSA")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dataEnvio;
+    private String dataEnvio;
 
     @Column(name = "DATA_LEITURA", table = "SMAMENSA")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dataLeitura;
+    private String dataLeitura;
 
     @Column(name = "ARQUIVO", table = "SMAMENSA", length = 13)
     @Basic
@@ -151,19 +146,19 @@ public class SmamensaEntity {
         this.usCad = usCad;
     }
 
-    public Date getDtCad() {
+    public String getDtCad() {
         return this.dtCad;
     }
 
-    public void setDtCad(Date dtCad) {
+    public void setDtCad(String dtCad) {
         this.dtCad = dtCad;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 
@@ -175,27 +170,27 @@ public class SmamensaEntity {
         this.ctInteg = ctInteg;
     }
 
-    public Date getDataGerado() {
+    public String getDataGerado() {
         return this.dataGerado;
     }
 
-    public void setDataGerado(Date dataGerado) {
+    public void setDataGerado(String dataGerado) {
         this.dataGerado = dataGerado;
     }
 
-    public Date getDataEnvio() {
+    public String getDataEnvio() {
         return this.dataEnvio;
     }
 
-    public void setDataEnvio(Date dataEnvio) {
+    public void setDataEnvio(String dataEnvio) {
         this.dataEnvio = dataEnvio;
     }
 
-    public Date getDataLeitura() {
+    public String getDataLeitura() {
         return this.dataLeitura;
     }
 
-    public void setDataLeitura(Date dataLeitura) {
+    public void setDataLeitura(String dataLeitura) {
         this.dataLeitura = dataLeitura;
     }
 

@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -50,13 +50,11 @@ public class AeaitindEntity {
 
     @Column(name = "DT_CAD", table = "AEAITIND")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCad;
+    private String dtCad;
 
     @Column(name = "DT_ALT", table = "AEAITIND")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "CT_INTEG", table = "AEAITIND")
     @Basic
@@ -68,18 +66,15 @@ public class AeaitindEntity {
 
     @Column(name = "DT_INCLUIDO", table = "AEAITIND", nullable = false)
     @Basic(optional = false)
-    @Temporal(TemporalType.DATE)
-    private Date dtIncluido;
+        private String dtIncluido;
 
     @Column(name = "DT_ALOCADO", table = "AEAITIND")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtAlocado;
+        private String dtAlocado;
 
     @Column(name = "DT_CONCLUIDO", table = "AEAITIND")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtConcluido;
+        private String dtConcluido;
 
     @Column(name = "QTDE_PREVISTA", table = "AEAITIND", nullable = false)
     @Basic(optional = false)
@@ -153,19 +148,19 @@ public class AeaitindEntity {
         this.usCad = usCad;
     }
 
-    public Date getDtCad() {
+    public String getDtCad() {
         return this.dtCad;
     }
 
-    public void setDtCad(Date dtCad) {
+    public void setDtCad(String dtCad) {
         this.dtCad = dtCad;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 
@@ -185,27 +180,27 @@ public class AeaitindEntity {
         this.guid = guid;
     }
 
-    public Date getDtIncluido() {
+    public String getDtIncluido() {
         return this.dtIncluido;
     }
 
-    public void setDtIncluido(Date dtIncluido) {
+    public void setDtIncluido(String dtIncluido) {
         this.dtIncluido = dtIncluido;
     }
 
-    public Date getDtAlocado() {
+    public String getDtAlocado() {
         return this.dtAlocado;
     }
 
-    public void setDtAlocado(Date dtAlocado) {
+    public void setDtAlocado(String dtAlocado) {
         this.dtAlocado = dtAlocado;
     }
 
-    public Date getDtConcluido() {
+    public String getDtConcluido() {
         return this.dtConcluido;
     }
 
-    public void setDtConcluido(Date dtConcluido) {
+    public void setDtConcluido(String dtConcluido) {
         this.dtConcluido = dtConcluido;
     }
 

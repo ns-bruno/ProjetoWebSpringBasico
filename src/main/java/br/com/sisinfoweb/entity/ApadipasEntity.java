@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -38,13 +38,11 @@ public class ApadipasEntity {
 
     @Column(name = "DT_CAD", table = "APADIPAS")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCad;
+    private String dtCad;
 
     @Column(name = "DT_ALT", table = "APADIPAS")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "CT_INTEG", table = "APADIPAS")
     @Basic
@@ -56,13 +54,11 @@ public class ApadipasEntity {
 
     @Column(name = "DT_INICIAL", table = "APADIPAS")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtInicial;
+        private String dtInicial;
 
     @Column(name = "DT_FINAL", table = "APADIPAS")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtFinal;
+        private String dtFinal;
 
     @Column(name = "TIPO_PG", table = "APADIPAS")
     @Basic
@@ -108,19 +104,19 @@ public class ApadipasEntity {
         this.usCad = usCad;
     }
 
-    public Date getDtCad() {
+    public String getDtCad() {
         return this.dtCad;
     }
 
-    public void setDtCad(Date dtCad) {
+    public void setDtCad(String dtCad) {
         this.dtCad = dtCad;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 
@@ -140,19 +136,19 @@ public class ApadipasEntity {
         this.guid = guid;
     }
 
-    public Date getDtInicial() {
+    public String getDtInicial() {
         return this.dtInicial;
     }
 
-    public void setDtInicial(Date dtInicial) {
+    public void setDtInicial(String dtInicial) {
         this.dtInicial = dtInicial;
     }
 
-    public Date getDtFinal() {
+    public String getDtFinal() {
         return this.dtFinal;
     }
 
-    public void setDtFinal(Date dtFinal) {
+    public void setDtFinal(String dtFinal) {
         this.dtFinal = dtFinal;
     }
 

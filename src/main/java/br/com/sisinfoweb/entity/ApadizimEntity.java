@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -59,13 +59,11 @@ public class ApadizimEntity {
 
     @Column(name = "DT_CAD", table = "APADIZIM")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCad;
+    private String dtCad;
 
     @Column(name = "DT_ALT", table = "APADIZIM")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "CT_INTEG", table = "APADIZIM")
     @Basic
@@ -102,8 +100,7 @@ public class ApadizimEntity {
 
     @Column(name = "DT_NASCIMENTO", table = "APADIZIM")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtNascimento;
+        private String dtNascimento;
 
     @Column(name = "TEMPO_CONTRIBUICAO", table = "APADIZIM", length = 40)
     @Basic
@@ -119,13 +116,11 @@ public class ApadizimEntity {
 
     @Column(name = "DT_NASC_CONJUGE", table = "APADIZIM")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtNascConjuge;
+        private String dtNascConjuge;
 
     @Column(name = "DT_CASAMENTO", table = "APADIZIM")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtCasamento;
+        private String dtCasamento;
 
     @Column(name = "PARTICIPA_PASTORAL", table = "APADIZIM")
     @Basic
@@ -189,8 +184,7 @@ public class ApadizimEntity {
 
     @Column(name = "RG_DT_EXPEDICAO", table = "APADIZIM")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date rgDtExpedicao;
+        private String rgDtExpedicao;
 
     @Column(name = "SEXO", table = "APADIZIM")
     @Basic
@@ -234,13 +228,11 @@ public class ApadizimEntity {
 
     @Column(name = "PADRE_DT_EXPEDICAO", table = "APADIZIM")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date padreDtExpedicao;
+        private String padreDtExpedicao;
 
     @Column(name = "PADRE_DT_VALIDADE", table = "APADIZIM")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date padreDtValidade;
+        private String padreDtValidade;
 
     @Column(name = "PADRE_LIVRO_PROCURACAO", table = "APADIZIM")
     @Basic
@@ -252,23 +244,19 @@ public class ApadizimEntity {
 
     @Column(name = "PADRE_DT_CHEGADA_DIOCESE", table = "APADIZIM")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date padreDtChegadaDiocese;
+        private String padreDtChegadaDiocese;
 
     @Column(name = "PADRE_DT_ORDENACAO", table = "APADIZIM")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date padreDtOrdenacao;
+        private String padreDtOrdenacao;
 
     @Column(name = "PADRE_DT_PRESBITERAL", table = "APADIZIM")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date padreDtPresbiteral;
+        private String padreDtPresbiteral;
 
     @Column(name = "PADRE_DT_EPISCOPAL", table = "APADIZIM")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date padreDtEpiscopal;
+        private String padreDtEpiscopal;
 
     @Column(name = "PADRE_DIOCESE_ORDENACAO", table = "APADIZIM", length = 60)
     @Basic
@@ -301,8 +289,7 @@ public class ApadizimEntity {
 
     @Column(name = "CAT_JA_FOI_DT_INICIO", table = "APADIZIM")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date catJaFoiDtInicio;
+        private String catJaFoiDtInicio;
 
     @Column(name = "CAT_JA_FOI_DT_FINAL", table = "APADIZIM", length = 18)
     @Basic
@@ -310,13 +297,11 @@ public class ApadizimEntity {
 
     @Column(name = "CAT_ATUAL_DT_INICIO", table = "APADIZIM")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date catAtualDtInicio;
+        private String catAtualDtInicio;
 
     @Column(name = "CAT_ATUAL_DT_FINAL", table = "APADIZIM")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date catAtualDtFinal;
+        private String catAtualDtFinal;
 
     @Column(name = "CAT_ATUAL_N_MATRICULAS", table = "APADIZIM")
     @Basic
@@ -451,19 +436,19 @@ public class ApadizimEntity {
         this.usCad = usCad;
     }
 
-    public Date getDtCad() {
+    public String getDtCad() {
         return this.dtCad;
     }
 
-    public void setDtCad(Date dtCad) {
+    public void setDtCad(String dtCad) {
         this.dtCad = dtCad;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 
@@ -531,11 +516,11 @@ public class ApadizimEntity {
         this.email = email;
     }
 
-    public Date getDtNascimento() {
+    public String getDtNascimento() {
         return this.dtNascimento;
     }
 
-    public void setDtNascimento(Date dtNascimento) {
+    public void setDtNascimento(String dtNascimento) {
         this.dtNascimento = dtNascimento;
     }
 
@@ -563,19 +548,19 @@ public class ApadizimEntity {
         this.conjuge = conjuge;
     }
 
-    public Date getDtNascConjuge() {
+    public String getDtNascConjuge() {
         return this.dtNascConjuge;
     }
 
-    public void setDtNascConjuge(Date dtNascConjuge) {
+    public void setDtNascConjuge(String dtNascConjuge) {
         this.dtNascConjuge = dtNascConjuge;
     }
 
-    public Date getDtCasamento() {
+    public String getDtCasamento() {
         return this.dtCasamento;
     }
 
-    public void setDtCasamento(Date dtCasamento) {
+    public void setDtCasamento(String dtCasamento) {
         this.dtCasamento = dtCasamento;
     }
 
@@ -699,11 +684,11 @@ public class ApadizimEntity {
         this.rgOrgao = rgOrgao;
     }
 
-    public Date getRgDtExpedicao() {
+    public String getRgDtExpedicao() {
         return this.rgDtExpedicao;
     }
 
-    public void setRgDtExpedicao(Date rgDtExpedicao) {
+    public void setRgDtExpedicao(String rgDtExpedicao) {
         this.rgDtExpedicao = rgDtExpedicao;
     }
 
@@ -787,19 +772,19 @@ public class ApadizimEntity {
         this.padreTemProcuracao = padreTemProcuracao;
     }
 
-    public Date getPadreDtExpedicao() {
+    public String getPadreDtExpedicao() {
         return this.padreDtExpedicao;
     }
 
-    public void setPadreDtExpedicao(Date padreDtExpedicao) {
+    public void setPadreDtExpedicao(String padreDtExpedicao) {
         this.padreDtExpedicao = padreDtExpedicao;
     }
 
-    public Date getPadreDtValidade() {
+    public String getPadreDtValidade() {
         return this.padreDtValidade;
     }
 
-    public void setPadreDtValidade(Date padreDtValidade) {
+    public void setPadreDtValidade(String padreDtValidade) {
         this.padreDtValidade = padreDtValidade;
     }
 
@@ -819,35 +804,35 @@ public class ApadizimEntity {
         this.padreFolhaProcuracao = padreFolhaProcuracao;
     }
 
-    public Date getPadreDtChegadaDiocese() {
+    public String getPadreDtChegadaDiocese() {
         return this.padreDtChegadaDiocese;
     }
 
-    public void setPadreDtChegadaDiocese(Date padreDtChegadaDiocese) {
+    public void setPadreDtChegadaDiocese(String padreDtChegadaDiocese) {
         this.padreDtChegadaDiocese = padreDtChegadaDiocese;
     }
 
-    public Date getPadreDtOrdenacao() {
+    public String getPadreDtOrdenacao() {
         return this.padreDtOrdenacao;
     }
 
-    public void setPadreDtOrdenacao(Date padreDtOrdenacao) {
+    public void setPadreDtOrdenacao(String padreDtOrdenacao) {
         this.padreDtOrdenacao = padreDtOrdenacao;
     }
 
-    public Date getPadreDtPresbiteral() {
+    public String getPadreDtPresbiteral() {
         return this.padreDtPresbiteral;
     }
 
-    public void setPadreDtPresbiteral(Date padreDtPresbiteral) {
+    public void setPadreDtPresbiteral(String padreDtPresbiteral) {
         this.padreDtPresbiteral = padreDtPresbiteral;
     }
 
-    public Date getPadreDtEpiscopal() {
+    public String getPadreDtEpiscopal() {
         return this.padreDtEpiscopal;
     }
 
-    public void setPadreDtEpiscopal(Date padreDtEpiscopal) {
+    public void setPadreDtEpiscopal(String padreDtEpiscopal) {
         this.padreDtEpiscopal = padreDtEpiscopal;
     }
 
@@ -907,11 +892,11 @@ public class ApadizimEntity {
         this.catJaFoiOnde = catJaFoiOnde;
     }
 
-    public Date getCatJaFoiDtInicio() {
+    public String getCatJaFoiDtInicio() {
         return this.catJaFoiDtInicio;
     }
 
-    public void setCatJaFoiDtInicio(Date catJaFoiDtInicio) {
+    public void setCatJaFoiDtInicio(String catJaFoiDtInicio) {
         this.catJaFoiDtInicio = catJaFoiDtInicio;
     }
 
@@ -923,19 +908,19 @@ public class ApadizimEntity {
         this.catJaFoiDtFinal = catJaFoiDtFinal;
     }
 
-    public Date getCatAtualDtInicio() {
+    public String getCatAtualDtInicio() {
         return this.catAtualDtInicio;
     }
 
-    public void setCatAtualDtInicio(Date catAtualDtInicio) {
+    public void setCatAtualDtInicio(String catAtualDtInicio) {
         this.catAtualDtInicio = catAtualDtInicio;
     }
 
-    public Date getCatAtualDtFinal() {
+    public String getCatAtualDtFinal() {
         return this.catAtualDtFinal;
     }
 
-    public void setCatAtualDtFinal(Date catAtualDtFinal) {
+    public void setCatAtualDtFinal(String catAtualDtFinal) {
         this.catAtualDtFinal = catAtualDtFinal;
     }
 

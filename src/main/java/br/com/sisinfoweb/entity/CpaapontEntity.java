@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -79,13 +79,11 @@ public class CpaapontEntity {
 
     @Column(name = "DT_CAD", table = "CPAAPONT")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCad;
+    private String dtCad;
 
     @Column(name = "DT_ALT", table = "CPAAPONT")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "CT_INTEG", table = "CPAAPONT")
     @Basic
@@ -101,13 +99,11 @@ public class CpaapontEntity {
 
     @Column(name = "DT_PROTOCOLO", table = "CPAAPONT")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtProtocolo;
+        private String dtProtocolo;
 
     @Column(name = "DT_PREV_PROT", table = "CPAAPONT")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtPrevProt;
+        private String dtPrevProt;
 
     @Column(name = "APR_NOME", table = "CPAAPONT", length = 60)
     @Basic
@@ -191,13 +187,11 @@ public class CpaapontEntity {
 
     @Column(name = "DT_EMISSAO", table = "CPAAPONT")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtEmissao;
+        private String dtEmissao;
 
     @Column(name = "DT_VENCIMENTO", table = "CPAAPONT")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtVencimento;
+        private String dtVencimento;
 
     @Column(name = "VL_TITULO", table = "CPAAPONT", nullable = false)
     @Basic(optional = false)
@@ -226,8 +220,7 @@ public class CpaapontEntity {
 
     @Column(name = "DT_OCORRENCIA", table = "CPAAPONT")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtOcorrencia;
+        private String dtOcorrencia;
 
     @Column(name = "HR_OCORRENCIA", table = "CPAAPONT", length = 18)
     @Basic
@@ -271,8 +264,7 @@ public class CpaapontEntity {
 
     @Column(name = "CANC_DATA", table = "CPAAPONT")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date cancData;
+        private String cancData;
 
     @Column(name = "CANC_EMOL", table = "CPAAPONT", nullable = false)
     @Basic(optional = false)
@@ -345,8 +337,7 @@ public class CpaapontEntity {
 
     @Column(name = "DT_DEV_CH", table = "CPAAPONT")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtDevCh;
+        private String dtDevCh;
 
     @Column(name = "OBS_DEV_CH", table = "CPAAPONT")
     @Lob
@@ -489,19 +480,19 @@ public class CpaapontEntity {
         this.usCad = usCad;
     }
 
-    public Date getDtCad() {
+    public String getDtCad() {
         return this.dtCad;
     }
 
-    public void setDtCad(Date dtCad) {
+    public void setDtCad(String dtCad) {
         this.dtCad = dtCad;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 
@@ -529,19 +520,19 @@ public class CpaapontEntity {
         this.protocolo = protocolo;
     }
 
-    public Date getDtProtocolo() {
+    public String getDtProtocolo() {
         return this.dtProtocolo;
     }
 
-    public void setDtProtocolo(Date dtProtocolo) {
+    public void setDtProtocolo(String dtProtocolo) {
         this.dtProtocolo = dtProtocolo;
     }
 
-    public Date getDtPrevProt() {
+    public String getDtPrevProt() {
         return this.dtPrevProt;
     }
 
-    public void setDtPrevProt(Date dtPrevProt) {
+    public void setDtPrevProt(String dtPrevProt) {
         this.dtPrevProt = dtPrevProt;
     }
 
@@ -705,19 +696,19 @@ public class CpaapontEntity {
         this.titulo = titulo;
     }
 
-    public Date getDtEmissao() {
+    public String getDtEmissao() {
         return this.dtEmissao;
     }
 
-    public void setDtEmissao(Date dtEmissao) {
+    public void setDtEmissao(String dtEmissao) {
         this.dtEmissao = dtEmissao;
     }
 
-    public Date getDtVencimento() {
+    public String getDtVencimento() {
         return this.dtVencimento;
     }
 
-    public void setDtVencimento(Date dtVencimento) {
+    public void setDtVencimento(String dtVencimento) {
         this.dtVencimento = dtVencimento;
     }
 
@@ -769,11 +760,11 @@ public class CpaapontEntity {
         this.obs = obs;
     }
 
-    public Date getDtOcorrencia() {
+    public String getDtOcorrencia() {
         return this.dtOcorrencia;
     }
 
-    public void setDtOcorrencia(Date dtOcorrencia) {
+    public void setDtOcorrencia(String dtOcorrencia) {
         this.dtOcorrencia = dtOcorrencia;
     }
 
@@ -857,11 +848,11 @@ public class CpaapontEntity {
         this.cancTermo = cancTermo;
     }
 
-    public Date getCancData() {
+    public String getCancData() {
         return this.cancData;
     }
 
-    public void setCancData(Date cancData) {
+    public void setCancData(String cancData) {
         this.cancData = cancData;
     }
 
@@ -1001,11 +992,11 @@ public class CpaapontEntity {
         this.chCh = chCh;
     }
 
-    public Date getDtDevCh() {
+    public String getDtDevCh() {
         return this.dtDevCh;
     }
 
-    public void setDtDevCh(Date dtDevCh) {
+    public void setDtDevCh(String dtDevCh) {
         this.dtDevCh = dtDevCh;
     }
 

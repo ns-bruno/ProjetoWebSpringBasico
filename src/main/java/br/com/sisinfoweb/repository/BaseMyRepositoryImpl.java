@@ -97,7 +97,7 @@ public class BaseMyRepositoryImpl<T, ID extends Serializable> extends SimpleJpaR
     //@Transactional
     public EntityManager getConnectionClient(T smadispoEntity) {
         try {
-            logger.info("Pegando os dados do banco de dados que tem os dados da empresa licenciada.");
+            logger.info("PEGANDO OS DADOS DO BANCO DE DADOS QUE TEM OS DADOS DA EMPRESA LICENCIADA. Identificacao: " + ((SmadispoEntity) smadispoEntity).getIdentificacao());
 
             if ((entityManager == null) || (!entityManager.isOpen())
                     || ((entityManager.getProperties() != null) && (entityManager.getProperties().containsKey("hibernate.ejb.persistenceUnitName"))
@@ -138,11 +138,11 @@ public class BaseMyRepositoryImpl<T, ID extends Serializable> extends SimpleJpaR
 
     @Override
     public void getConnectionAdmin() {
-        logger.info("CONECTANTO COM O BANCO DE DADOS ADMINISTRADOR.");
+        logger.debug("CONECTANTO COM O BANCO DE DADOS ADMINISTRADOR.");
 
         if ((entityManager == null) || (!entityManager.isOpen())
-                || ((entityManager.getProperties() != null) && (entityManager.getProperties().containsKey("hibernate.ejb.persistenceUnitName"))
-                && (!entityManager.getProperties().get("hibernate.ejb.persistenceUnitName").toString().equalsIgnoreCase("persistenceSisInfoWeb")))) {
+                || ( (entityManager.getProperties() != null) && (entityManager.getProperties().containsKey("hibernate.ejb.persistenceUnitName"))
+                && (!entityManager.getProperties().get("hibernate.ejb.persistenceUnitName").toString().equalsIgnoreCase("persistenceSisInfoWeb")) ) ) {
 
             logger.info("CRIANDO ENTITY MANAGER FACTORY COM PERSISTENCESISINFOWEB");
 

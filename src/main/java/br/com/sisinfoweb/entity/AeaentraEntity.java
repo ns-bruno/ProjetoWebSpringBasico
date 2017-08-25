@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -57,13 +57,11 @@ public class AeaentraEntity {
 
     @Column(name = "DT_CAD", table = "AEAENTRA")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCad;
+    private String dtCad;
 
     @Column(name = "DT_ALT", table = "AEAENTRA")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "CT_INTEG", table = "AEAENTRA")
     @Basic
@@ -83,23 +81,19 @@ public class AeaentraEntity {
 
     @Column(name = "DT_EMISSAO", table = "AEAENTRA", nullable = false)
     @Basic(optional = false)
-    @Temporal(TemporalType.DATE)
-    private Date dtEmissao;
+        private String dtEmissao;
 
     @Column(name = "DT_SAIDA", table = "AEAENTRA", nullable = false)
     @Basic(optional = false)
-    @Temporal(TemporalType.DATE)
-    private Date dtSaida;
+        private String dtSaida;
 
     @Column(name = "DT_ENTRADA", table = "AEAENTRA", nullable = false)
     @Basic(optional = false)
-    @Temporal(TemporalType.DATE)
-    private Date dtEntrada;
+        private String dtEntrada;
 
     @Column(name = "DT_ESTORNO", table = "AEAENTRA")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtEstorno;
+        private String dtEstorno;
 
     @Column(name = "VL_MERCADORIA", table = "AEAENTRA", nullable = false)
     @Basic(optional = false)
@@ -456,8 +450,7 @@ public class AeaentraEntity {
 
     @Column(name = "DHNPROT", table = "AEAENTRA")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dhnprot;
+    private String dhnprot;
 
     @Column(name = "TIPO_EMISSAO", table = "AEAENTRA")
     @Basic
@@ -547,19 +540,19 @@ public class AeaentraEntity {
         this.usCad = usCad;
     }
 
-    public Date getDtCad() {
+    public String getDtCad() {
         return this.dtCad;
     }
 
-    public void setDtCad(Date dtCad) {
+    public void setDtCad(String dtCad) {
         this.dtCad = dtCad;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 
@@ -595,35 +588,35 @@ public class AeaentraEntity {
         this.numero = numero;
     }
 
-    public Date getDtEmissao() {
+    public String getDtEmissao() {
         return this.dtEmissao;
     }
 
-    public void setDtEmissao(Date dtEmissao) {
+    public void setDtEmissao(String dtEmissao) {
         this.dtEmissao = dtEmissao;
     }
 
-    public Date getDtSaida() {
+    public String getDtSaida() {
         return this.dtSaida;
     }
 
-    public void setDtSaida(Date dtSaida) {
+    public void setDtSaida(String dtSaida) {
         this.dtSaida = dtSaida;
     }
 
-    public Date getDtEntrada() {
+    public String getDtEntrada() {
         return this.dtEntrada;
     }
 
-    public void setDtEntrada(Date dtEntrada) {
+    public void setDtEntrada(String dtEntrada) {
         this.dtEntrada = dtEntrada;
     }
 
-    public Date getDtEstorno() {
+    public String getDtEstorno() {
         return this.dtEstorno;
     }
 
-    public void setDtEstorno(Date dtEstorno) {
+    public void setDtEstorno(String dtEstorno) {
         this.dtEstorno = dtEstorno;
     }
 
@@ -1331,11 +1324,11 @@ public class AeaentraEntity {
         this.numprot = numprot;
     }
 
-    public Date getDhnprot() {
+    public String getDhnprot() {
         return this.dhnprot;
     }
 
-    public void setDhnprot(Date dhnprot) {
+    public void setDhnprot(String dhnprot) {
         this.dhnprot = dhnprot;
     }
 

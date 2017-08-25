@@ -103,7 +103,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
                                     // Checa se o dispositivo esta cadastrado no Admin
                                     if ((listaDispositivo != null) && (listaDispositivo.size() > 0)) {
                                         // Checa se o dispositivo esta ativo
-                                        if (listaDispositivo.get(0).getAtivo().equals('1')) {
+                                        if ( (listaDispositivo.get(0).getAtivo() != null) && (listaDispositivo.get(0).getAtivo().equals('1')) ) {
 
                                             return true;
                                         } else {
@@ -121,7 +121,8 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
                                             mensagem.setMensagemRetorno(MensagemPadrao.ERROR_DISPOSITIVO_INATIVO);
                                             // Adiciona os dados que eh pra ser retornado
                                             retornoWebService.object = mensagem;
-
+                                            
+                                            response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
                                             response.getWriter().write(new Gson().toJson(retornoWebService));
                                             return false;
                                         }
@@ -141,6 +142,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
                                         // Adiciona os dados que eh pra ser retornado
                                         retornoWebService.object = mensagem;
 
+                                        response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
                                         response.getWriter().write(new Gson().toJson(retornoWebService));
                                         return false;
                                     }
@@ -159,6 +161,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
                                     // Adiciona os dados que eh pra ser retornado
                                     retornoWebService.object = mensagem;
 
+                                    response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
                                     response.getWriter().write(new Gson().toJson(retornoWebService));
                                     return false;
                                 }
@@ -175,7 +178,8 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
                                 mensagem.setMensagemRetorno(MensagemPadrao.ERROR_EMPRESA_NAO_LICENCIADA);
                                 // Adiciona os dados que eh pra ser retornado
                                 retornoWebService.object = mensagem;
-
+                                
+                                response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
                                 response.getWriter().write(new Gson().toJson(retornoWebService));
                                 return false;
                             }
@@ -196,6 +200,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
                             // Adiciona os dados que eh pra ser retornado
                             retornoWebService.object = mensagem;
 
+                            response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
                             response.getWriter().write(new Gson().toJson(retornoWebService));
                             return false;
                         }
@@ -213,6 +218,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
                         // Adiciona os dados que eh pra ser retornado
                         retornoWebService.object = mensagem;
 
+                        response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
                         response.getWriter().write(new Gson().toJson(retornoWebService));
                         return false;
                     }

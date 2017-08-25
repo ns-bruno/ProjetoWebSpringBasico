@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,13 +26,11 @@ public class CpaeditaEntity {
 
     @Column(name = "DT_CAD", table = "CPAEDITA")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCad;
+    private String dtCad;
 
     @Column(name = "DT_ALT", table = "CPAEDITA")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "CT_INTEG", table = "CPAEDITA")
     @Basic
@@ -48,13 +46,11 @@ public class CpaeditaEntity {
 
     @Column(name = "DT_EDITAL", table = "CPAEDITA")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtEdital;
+        private String dtEdital;
 
     @Column(name = "DT_PREV_PROT", table = "CPAEDITA")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtPrevProt;
+        private String dtPrevProt;
 
     public Integer getIdCpaedita() {
         return this.idCpaedita;
@@ -72,19 +68,19 @@ public class CpaeditaEntity {
         this.usCad = usCad;
     }
 
-    public Date getDtCad() {
+    public String getDtCad() {
         return this.dtCad;
     }
 
-    public void setDtCad(Date dtCad) {
+    public void setDtCad(String dtCad) {
         this.dtCad = dtCad;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 
@@ -112,19 +108,19 @@ public class CpaeditaEntity {
         this.codigo = codigo;
     }
 
-    public Date getDtEdital() {
+    public String getDtEdital() {
         return this.dtEdital;
     }
 
-    public void setDtEdital(Date dtEdital) {
+    public void setDtEdital(String dtEdital) {
         this.dtEdital = dtEdital;
     }
 
-    public Date getDtPrevProt() {
+    public String getDtPrevProt() {
         return this.dtPrevProt;
     }
 
-    public void setDtPrevProt(Date dtPrevProt) {
+    public void setDtPrevProt(String dtPrevProt) {
         this.dtPrevProt = dtPrevProt;
     }
 

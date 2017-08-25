@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -42,13 +42,11 @@ public class AeaprforEntity {
 
     @Column(name = "DT_CAD", table = "AEAPRFOR")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCad;
+    private String dtCad;
 
     @Column(name = "DT_ALT", table = "AEAPRFOR")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "CT_INTEG", table = "AEAPRFOR")
     @Basic
@@ -56,8 +54,7 @@ public class AeaprforEntity {
 
     @Column(name = "DT_ULT_COMPRA", table = "AEAPRFOR")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtUltCompra;
+        private String dtUltCompra;
 
     @Column(name = "NUM_COMPRAS", table = "AEAPRFOR", nullable = false)
     @Basic(optional = false)
@@ -143,19 +140,19 @@ public class AeaprforEntity {
         this.usCad = usCad;
     }
 
-    public Date getDtCad() {
+    public String getDtCad() {
         return this.dtCad;
     }
 
-    public void setDtCad(Date dtCad) {
+    public void setDtCad(String dtCad) {
         this.dtCad = dtCad;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 
@@ -167,11 +164,11 @@ public class AeaprforEntity {
         this.ctInteg = ctInteg;
     }
 
-    public Date getDtUltCompra() {
+    public String getDtUltCompra() {
         return this.dtUltCompra;
     }
 
-    public void setDtUltCompra(Date dtUltCompra) {
+    public void setDtUltCompra(String dtUltCompra) {
         this.dtUltCompra = dtUltCompra;
     }
 

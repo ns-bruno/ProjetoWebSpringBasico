@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,13 +37,11 @@ public class RpaproroEntity {
 
     @Column(name = "DT_CAD", table = "RPAPRORO")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCad;
+    private String dtCad;
 
     @Column(name = "DT_ALT", table = "RPAPRORO")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "CT_INTEG", table = "RPAPRORO")
     @Basic
@@ -51,18 +49,15 @@ public class RpaproroEntity {
 
     @Column(name = "DT_MOVIMENTO", table = "RPAPRORO", nullable = false)
     @Basic(optional = false)
-    @Temporal(TemporalType.DATE)
-    private Date dtMovimento;
+        private String dtMovimento;
 
     @Column(name = "DT_VENCIMENTO", table = "RPAPRORO", nullable = false)
     @Basic(optional = false)
-    @Temporal(TemporalType.DATE)
-    private Date dtVencimento;
+        private String dtVencimento;
 
     @Column(name = "DT_VENCIMENTO_ANT", table = "RPAPRORO", nullable = false)
     @Basic(optional = false)
-    @Temporal(TemporalType.DATE)
-    private Date dtVencimentoAnt;
+        private String dtVencimentoAnt;
 
     @Column(name = "VL_JUROS", table = "RPAPRORO", nullable = false)
     @Basic(optional = false)
@@ -105,19 +100,19 @@ public class RpaproroEntity {
         this.usCad = usCad;
     }
 
-    public Date getDtCad() {
+    public String getDtCad() {
         return this.dtCad;
     }
 
-    public void setDtCad(Date dtCad) {
+    public void setDtCad(String dtCad) {
         this.dtCad = dtCad;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 
@@ -129,27 +124,27 @@ public class RpaproroEntity {
         this.ctInteg = ctInteg;
     }
 
-    public Date getDtMovimento() {
+    public String getDtMovimento() {
         return this.dtMovimento;
     }
 
-    public void setDtMovimento(Date dtMovimento) {
+    public void setDtMovimento(String dtMovimento) {
         this.dtMovimento = dtMovimento;
     }
 
-    public Date getDtVencimento() {
+    public String getDtVencimento() {
         return this.dtVencimento;
     }
 
-    public void setDtVencimento(Date dtVencimento) {
+    public void setDtVencimento(String dtVencimento) {
         this.dtVencimento = dtVencimento;
     }
 
-    public Date getDtVencimentoAnt() {
+    public String getDtVencimentoAnt() {
         return this.dtVencimentoAnt;
     }
 
-    public void setDtVencimentoAnt(Date dtVencimentoAnt) {
+    public void setDtVencimentoAnt(String dtVencimentoAnt) {
         this.dtVencimentoAnt = dtVencimentoAnt;
     }
 

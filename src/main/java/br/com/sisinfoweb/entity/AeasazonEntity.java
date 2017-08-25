@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,13 +32,11 @@ public class AeasazonEntity {
 
     @Column(name = "DT_CAD", table = "AEASAZON")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCad;
+    private String dtCad;
 
     @Column(name = "DT_ALT", table = "AEASAZON")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "CT_INTEG", table = "AEASAZON")
     @Basic
@@ -50,33 +48,27 @@ public class AeasazonEntity {
 
     @Column(name = "DT_INICIO1", table = "AEASAZON")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtInicio1;
+        private String dtInicio1;
 
     @Column(name = "DT_INICIO2", table = "AEASAZON")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtInicio2;
+        private String dtInicio2;
 
     @Column(name = "DT_INICIO3", table = "AEASAZON")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtInicio3;
+        private String dtInicio3;
 
     @Column(name = "DT_FIM1", table = "AEASAZON")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtFim1;
+        private String dtFim1;
 
     @Column(name = "DT_FIM2", table = "AEASAZON")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtFim2;
+        private String dtFim2;
 
     @Column(name = "DT_FIM3", table = "AEASAZON")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtFim3;
+        private String dtFim3;
 
     public Integer getIdAeasazon() {
         return this.idAeasazon;
@@ -102,19 +94,19 @@ public class AeasazonEntity {
         this.usCad = usCad;
     }
 
-    public Date getDtCad() {
+    public String getDtCad() {
         return this.dtCad;
     }
 
-    public void setDtCad(Date dtCad) {
+    public void setDtCad(String dtCad) {
         this.dtCad = dtCad;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 
@@ -134,51 +126,51 @@ public class AeasazonEntity {
         this.descricao = descricao;
     }
 
-    public Date getDtInicio1() {
+    public String getDtInicio1() {
         return this.dtInicio1;
     }
 
-    public void setDtInicio1(Date dtInicio1) {
+    public void setDtInicio1(String dtInicio1) {
         this.dtInicio1 = dtInicio1;
     }
 
-    public Date getDtInicio2() {
+    public String getDtInicio2() {
         return this.dtInicio2;
     }
 
-    public void setDtInicio2(Date dtInicio2) {
+    public void setDtInicio2(String dtInicio2) {
         this.dtInicio2 = dtInicio2;
     }
 
-    public Date getDtInicio3() {
+    public String getDtInicio3() {
         return this.dtInicio3;
     }
 
-    public void setDtInicio3(Date dtInicio3) {
+    public void setDtInicio3(String dtInicio3) {
         this.dtInicio3 = dtInicio3;
     }
 
-    public Date getDtFim1() {
+    public String getDtFim1() {
         return this.dtFim1;
     }
 
-    public void setDtFim1(Date dtFim1) {
+    public void setDtFim1(String dtFim1) {
         this.dtFim1 = dtFim1;
     }
 
-    public Date getDtFim2() {
+    public String getDtFim2() {
         return this.dtFim2;
     }
 
-    public void setDtFim2(Date dtFim2) {
+    public void setDtFim2(String dtFim2) {
         this.dtFim2 = dtFim2;
     }
 
-    public Date getDtFim3() {
+    public String getDtFim3() {
         return this.dtFim3;
     }
 
-    public void setDtFim3(Date dtFim3) {
+    public void setDtFim3(String dtFim3) {
         this.dtFim3 = dtFim3;
     }
 

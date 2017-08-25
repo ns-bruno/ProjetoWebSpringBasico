@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,8 +26,7 @@ public class CpacertiEntity {
 
     @Column(name = "ID_CFAESTAD", table = "CPACERTI")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date idCfaestad;
+    private String idCfaestad;
 
     @Column(name = "US_CAD", table = "CPACERTI", length = 20)
     @Basic
@@ -35,13 +34,11 @@ public class CpacertiEntity {
 
     @Column(name = "DT_CAD", table = "CPACERTI")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCad;
+    private String dtCad;
 
     @Column(name = "DT_ALT", table = "CPACERTI")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "CT_INTEG", table = "CPACERTI")
     @Basic
@@ -61,8 +58,7 @@ public class CpacertiEntity {
 
     @Column(name = "DT_CERTIDAO", table = "CPACERTI")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtCertidao;
+        private String dtCertidao;
 
     @Column(name = "CPF_CGC", table = "CPACERTI", length = 18)
     @Basic
@@ -148,11 +144,11 @@ public class CpacertiEntity {
         this.idCpapesoa = idCpapesoa;
     }
 
-    public Date getIdCfaestad() {
+    public String getIdCfaestad() {
         return this.idCfaestad;
     }
 
-    public void setIdCfaestad(Date idCfaestad) {
+    public void setIdCfaestad(String idCfaestad) {
         this.idCfaestad = idCfaestad;
     }
 
@@ -164,19 +160,19 @@ public class CpacertiEntity {
         this.usCad = usCad;
     }
 
-    public Date getDtCad() {
+    public String getDtCad() {
         return this.dtCad;
     }
 
-    public void setDtCad(Date dtCad) {
+    public void setDtCad(String dtCad) {
         this.dtCad = dtCad;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 
@@ -212,11 +208,11 @@ public class CpacertiEntity {
         this.tipo = tipo;
     }
 
-    public Date getDtCertidao() {
+    public String getDtCertidao() {
         return this.dtCertidao;
     }
 
-    public void setDtCertidao(Date dtCertidao) {
+    public void setDtCertidao(String dtCertidao) {
         this.dtCertidao = dtCertidao;
     }
 

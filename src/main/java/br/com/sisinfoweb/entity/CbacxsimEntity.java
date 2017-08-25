@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -46,13 +46,11 @@ public class CbacxsimEntity {
 
     @Column(name = "DT_CAD", table = "CBACXSIM")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCad;
+    private String dtCad;
 
     @Column(name = "DT_ALT", table = "CBACXSIM")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "CT_INTEG", table = "CBACXSIM")
     @Basic
@@ -64,8 +62,7 @@ public class CbacxsimEntity {
 
     @Column(name = "DT_LANCAMENTO", table = "CBACXSIM")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtLancamento;
+        private String dtLancamento;
 
     @Column(name = "VL_LANCAMENTO", table = "CBACXSIM", nullable = false)
     @Basic(optional = false)
@@ -131,19 +128,19 @@ public class CbacxsimEntity {
         this.usCad = usCad;
     }
 
-    public Date getDtCad() {
+    public String getDtCad() {
         return this.dtCad;
     }
 
-    public void setDtCad(Date dtCad) {
+    public void setDtCad(String dtCad) {
         this.dtCad = dtCad;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 
@@ -163,11 +160,11 @@ public class CbacxsimEntity {
         this.dC = dC;
     }
 
-    public Date getDtLancamento() {
+    public String getDtLancamento() {
         return this.dtLancamento;
     }
 
-    public void setDtLancamento(Date dtLancamento) {
+    public void setDtLancamento(String dtLancamento) {
         this.dtLancamento = dtLancamento;
     }
 

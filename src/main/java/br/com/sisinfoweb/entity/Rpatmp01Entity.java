@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -44,8 +44,7 @@ public class Rpatmp01Entity {
 
     @Column(name = "DATA", table = "RPATMP01")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date data;
+        private String data;
 
     @Column(name = "VALOR1", table = "RPATMP01", nullable = false)
     @Basic(optional = false)
@@ -111,11 +110,11 @@ public class Rpatmp01Entity {
         this.valor = valor;
     }
 
-    public Date getData() {
+    public String getData() {
         return this.data;
     }
 
-    public void setData(Date data) {
+    public void setData(String data) {
         this.data = data;
     }
 

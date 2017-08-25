@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -51,13 +51,11 @@ public class ApapsaudEntity {
 
     @Column(name = "DT_CAD", table = "APAPSAUD")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCad;
+    private String dtCad;
 
     @Column(name = "DT_ALT", table = "APAPSAUD")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "CT_INTEG", table = "APAPSAUD")
     @Basic
@@ -81,8 +79,7 @@ public class ApapsaudEntity {
 
     @Column(name = "DATA_NASCIMENTO", table = "APAPSAUD")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dataNascimento;
+        private String dataNascimento;
 
     @Column(name = "ESTADO_CIVIL", table = "APAPSAUD")
     @Basic
@@ -185,19 +182,19 @@ public class ApapsaudEntity {
         this.usCad = usCad;
     }
 
-    public Date getDtCad() {
+    public String getDtCad() {
         return this.dtCad;
     }
 
-    public void setDtCad(Date dtCad) {
+    public void setDtCad(String dtCad) {
         this.dtCad = dtCad;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 
@@ -241,11 +238,11 @@ public class ApapsaudEntity {
         this.sexo = sexo;
     }
 
-    public Date getDataNascimento() {
+    public String getDataNascimento() {
         return this.dataNascimento;
     }
 
-    public void setDataNascimento(Date dataNascimento) {
+    public void setDataNascimento(String dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 

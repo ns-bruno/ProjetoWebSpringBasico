@@ -7,9 +7,12 @@ package br.com.sisinfoweb.controller;
 
 import br.com.sisinfoweb.banco.beans.RetornoWebServiceBeans;
 import br.com.sisinfoweb.banco.beans.StatusRetornoWebServiceBeans;
+import static br.com.sisinfoweb.controller.BaseMyController.logger;
 import br.com.sisinfoweb.entity.AeacodstEntity;
+import br.com.sisinfoweb.entity.SmadispoEntity;
 import br.com.sisinfoweb.service.AeacodstService;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import java.net.HttpURLConnection;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
@@ -33,9 +36,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class AeacodstController extends BaseMyController{
     
     @Autowired
-    private AeacodstService cfacodstService;
+    private AeacodstService aeacodstService;
     
-    @RequestMapping(value = {"/Aeacodst"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = {"/Aeacodst"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     @Override
     public String initJson( Model model, 
@@ -50,16 +53,20 @@ public class AeacodstController extends BaseMyController{
         StatusRetornoWebServiceBeans statusRetorno = new StatusRetornoWebServiceBeans();
         RetornoWebServiceBeans retornoWebService = new RetornoWebServiceBeans();
         try{
+            // Coverte o dispositivo passado no formato json em uma entidade
+            SmadispoEntity smadispoEntity = new Gson().fromJson(dispositivo, SmadispoEntity.class);
+            aeacodstService.setSmadispoEntity(smadispoEntity);
+            
             List<AeacodstEntity> lista;
             // Checa se foi passado alqum parametro para filtrar
             if ( ((sqlQuery != null) && (!sqlQuery.isEmpty())) || 
                     ((columnSelected != null) && (!columnSelected.isEmpty())) || 
                     ((where != null) && (!where.isEmpty())) ){
                 // Pesquisa de acordo com o sql passado
-                lista = cfacodstService.findCustomNativeQuery(resume, sqlQuery, columnSelected, where);
+                lista = aeacodstService.findCustomNativeQuery(resume, sqlQuery, columnSelected, where);
             
             } else {
-                lista = cfacodstService.findAll();
+                lista = aeacodstService.findAll();
             }
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_OK);
@@ -71,7 +78,9 @@ public class AeacodstController extends BaseMyController{
             retornoWebService.object = lista;
             
             return new Gson().toJson(retornoWebService);
-        } catch(Exception e){
+        } catch(JsonSyntaxException e){
+            logger.error(getClass().getSimpleName() + " - " + e.getMessage());
+            
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_INTERNAL_ERROR);
             statusRetorno.setMensagemRetorno(String.valueOf(e.getMessage()));
@@ -81,6 +90,20 @@ public class AeacodstController extends BaseMyController{
             retornoWebService.statusRetorno = statusRetorno;
             
             return new Gson().toJson(retornoWebService);
+        } catch(Exception e){
+            logger.error(getClass().getSimpleName() + " - " + e.getMessage());
+            
+            // Cria uma vareavel para retorna o status
+            statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_INTERNAL_ERROR);
+            statusRetorno.setMensagemRetorno(String.valueOf(e.getMessage()));
+            statusRetorno.setExtra(e.getLocalizedMessage());
+            
+            // Adiciona o status
+            retornoWebService.statusRetorno = statusRetorno;
+            
+            return new Gson().toJson(retornoWebService);
+        }finally{
+            aeacodstService.closeEntityManager();
         }
     }
 }

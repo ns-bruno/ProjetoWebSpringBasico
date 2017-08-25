@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,8 +26,7 @@ public class SmaitlacEntity {
 
     @Column(name = "DT_ALT", table = "SMAITLAC")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "ID_ARQUIVO", table = "SMAITLAC")
     @Basic
@@ -61,11 +60,11 @@ public class SmaitlacEntity {
         this.idSmalogac = idSmalogac;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 

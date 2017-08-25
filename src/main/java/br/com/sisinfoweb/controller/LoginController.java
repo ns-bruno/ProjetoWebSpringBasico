@@ -74,7 +74,7 @@ public class LoginController extends BaseMyController {
         return "redirect:Login";
     }
 
-    @RequestMapping(value = {"/Login"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = {"/Login"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     @Override
     public String initJson( Model model, 

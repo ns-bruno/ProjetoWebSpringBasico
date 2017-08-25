@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -81,13 +81,11 @@ public class AeanfsaiEntity {
 
     @Column(name = "DT_CAD", table = "AEANFSAI")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCad;
+    private String dtCad;
 
     @Column(name = "DT_ALT", table = "AEANFSAI")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "CT_INTEG", table = "AEANFSAI")
     @Basic
@@ -95,18 +93,15 @@ public class AeanfsaiEntity {
 
     @Column(name = "DT_NF", table = "AEANFSAI", nullable = false)
     @Basic(optional = false)
-    @Temporal(TemporalType.DATE)
-    private Date dtNf;
+        private String dtNf;
 
     @Column(name = "DT_EMISSAO", table = "AEANFSAI")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtEmissao;
+        private String dtEmissao;
 
     @Column(name = "DT_SAIDA", table = "AEANFSAI")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtSaida;
+        private String dtSaida;
 
     @Column(name = "DT_SAIDA_VAZIO", table = "AEANFSAI")
     @Basic
@@ -114,8 +109,7 @@ public class AeanfsaiEntity {
 
     @Column(name = "DT_CANCEL", table = "AEANFSAI")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtCancel;
+        private String dtCancel;
 
     @Column(name = "NUMERO_NF", table = "AEANFSAI")
     @Basic
@@ -376,8 +370,7 @@ public class AeanfsaiEntity {
 
     @Column(name = "DHNPROT", table = "AEANFSAI")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dhnprot;
+    private String dhnprot;
 
     @Column(name = "FINALIDADE", table = "AEANFSAI")
     @Basic
@@ -523,19 +516,19 @@ public class AeanfsaiEntity {
         this.usCad = usCad;
     }
 
-    public Date getDtCad() {
+    public String getDtCad() {
         return this.dtCad;
     }
 
-    public void setDtCad(Date dtCad) {
+    public void setDtCad(String dtCad) {
         this.dtCad = dtCad;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 
@@ -547,27 +540,27 @@ public class AeanfsaiEntity {
         this.ctInteg = ctInteg;
     }
 
-    public Date getDtNf() {
+    public String getDtNf() {
         return this.dtNf;
     }
 
-    public void setDtNf(Date dtNf) {
+    public void setDtNf(String dtNf) {
         this.dtNf = dtNf;
     }
 
-    public Date getDtEmissao() {
+    public String getDtEmissao() {
         return this.dtEmissao;
     }
 
-    public void setDtEmissao(Date dtEmissao) {
+    public void setDtEmissao(String dtEmissao) {
         this.dtEmissao = dtEmissao;
     }
 
-    public Date getDtSaida() {
+    public String getDtSaida() {
         return this.dtSaida;
     }
 
-    public void setDtSaida(Date dtSaida) {
+    public void setDtSaida(String dtSaida) {
         this.dtSaida = dtSaida;
     }
 
@@ -579,11 +572,11 @@ public class AeanfsaiEntity {
         this.dtSaidaVazio = dtSaidaVazio;
     }
 
-    public Date getDtCancel() {
+    public String getDtCancel() {
         return this.dtCancel;
     }
 
-    public void setDtCancel(Date dtCancel) {
+    public void setDtCancel(String dtCancel) {
         this.dtCancel = dtCancel;
     }
 
@@ -1099,11 +1092,11 @@ public class AeanfsaiEntity {
         this.numprot = numprot;
     }
 
-    public Date getDhnprot() {
+    public String getDhnprot() {
         return this.dhnprot;
     }
 
-    public void setDhnprot(Date dhnprot) {
+    public void setDhnprot(String dhnprot) {
         this.dhnprot = dhnprot;
     }
 

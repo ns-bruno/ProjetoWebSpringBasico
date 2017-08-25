@@ -20,6 +20,6 @@ public interface MensagemPadrao {
     String ERROR_DISPOSITIVO_INATIVO = "Dispositivo esta inativo.";
     String ERROR_DISPOSITIVO_NAO_CADASTRADO = "Dispositivo não encontrado.";
     String ERROR_DISPOSITIVO_SEM_UUID = "Dispositivo sem o UUID(Chave de identificacao).";
-    String ERROR_EMPRESA_NAO_LICENCIADA = "Não foi encontrado em nosso banco de dados a empresa licenciada para usar o aplicativo.";
+    String ERROR_EMPRESA_NAO_LICENCIADA = "Não foi encontrado em nosso banco de dados a empresa licenciada para usar o aplicativo. Ou a identificação do dispositivo não esta cadastrada em nosso banco de dados.";
     String ERROR_EMPRESA_INATIVA = "A empresa está inativada. Entre em contato com a sua empresa ou com o suporte.";
 }

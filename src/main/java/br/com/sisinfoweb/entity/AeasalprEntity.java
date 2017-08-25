@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -44,13 +44,11 @@ public class AeasalprEntity {
 
     @Column(name = "DT_CAD", table = "AEASALPR")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCad;
+    private String dtCad;
 
     @Column(name = "DT_ALT", table = "AEASALPR")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "CT_INTEG", table = "AEASALPR")
     @Basic
@@ -58,13 +56,11 @@ public class AeasalprEntity {
 
     @Column(name = "DT_MOVIMENTO", table = "AEASALPR", nullable = false)
     @Basic(optional = false)
-    @Temporal(TemporalType.DATE)
-    private Date dtMovimento;
+        private String dtMovimento;
 
     @Column(name = "DT_INVENTARIO", table = "AEASALPR")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtInventario;
+        private String dtInventario;
 
     @Column(name = "ENTRADA_C", table = "AEASALPR", nullable = false)
     @Basic(optional = false)
@@ -154,19 +150,19 @@ public class AeasalprEntity {
         this.usCad = usCad;
     }
 
-    public Date getDtCad() {
+    public String getDtCad() {
         return this.dtCad;
     }
 
-    public void setDtCad(Date dtCad) {
+    public void setDtCad(String dtCad) {
         this.dtCad = dtCad;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 
@@ -178,19 +174,19 @@ public class AeasalprEntity {
         this.ctInteg = ctInteg;
     }
 
-    public Date getDtMovimento() {
+    public String getDtMovimento() {
         return this.dtMovimento;
     }
 
-    public void setDtMovimento(Date dtMovimento) {
+    public void setDtMovimento(String dtMovimento) {
         this.dtMovimento = dtMovimento;
     }
 
-    public Date getDtInventario() {
+    public String getDtInventario() {
         return this.dtInventario;
     }
 
-    public void setDtInventario(Date dtInventario) {
+    public void setDtInventario(String dtInventario) {
         this.dtInventario = dtInventario;
     }
 

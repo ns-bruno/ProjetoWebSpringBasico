@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -50,13 +50,11 @@ public class AeacfrefEntity {
 
     @Column(name = "DT_CAD", table = "AEACFREF")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCad;
+    private String dtCad;
 
     @Column(name = "DT_ALT", table = "AEACFREF")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "CT_INTEG", table = "AEACFREF")
     @Basic
@@ -84,8 +82,7 @@ public class AeacfrefEntity {
 
     @Column(name = "DT_DOC", table = "AEACFREF")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtDoc;
+        private String dtDoc;
 
     @Column(name = "CNPJ_EMIT", table = "AEACFREF", length = 18)
     @Basic
@@ -163,19 +160,19 @@ public class AeacfrefEntity {
         this.usCad = usCad;
     }
 
-    public Date getDtCad() {
+    public String getDtCad() {
         return this.dtCad;
     }
 
-    public void setDtCad(Date dtCad) {
+    public void setDtCad(String dtCad) {
         this.dtCad = dtCad;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 
@@ -227,11 +224,11 @@ public class AeacfrefEntity {
         this.anoMes = anoMes;
     }
 
-    public Date getDtDoc() {
+    public String getDtDoc() {
         return this.dtDoc;
     }
 
-    public void setDtDoc(Date dtDoc) {
+    public void setDtDoc(String dtDoc) {
         this.dtDoc = dtDoc;
     }
 

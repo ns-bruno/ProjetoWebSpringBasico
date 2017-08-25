@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -43,13 +43,11 @@ public class CbapartiEntity {
 
     @Column(name = "DT_CAD", table = "CBAPARTI")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCad;
+    private String dtCad;
 
     @Column(name = "DT_ALT", table = "CBAPARTI")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "CT_INTEG", table = "CBAPARTI")
     @Basic
@@ -77,18 +75,15 @@ public class CbapartiEntity {
 
     @Column(name = "DT_MOVIMENTO", table = "CBAPARTI")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtMovimento;
+        private String dtMovimento;
 
     @Column(name = "DT_CONCILIACAO", table = "CBAPARTI")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtConciliacao;
+        private String dtConciliacao;
 
     @Column(name = "DT_PREDATADO", table = "CBAPARTI")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtPredatado;
+        private String dtPredatado;
 
     @Column(name = "SERIE", table = "CBAPARTI", length = 6)
     @Basic
@@ -167,19 +162,19 @@ public class CbapartiEntity {
         this.usCad = usCad;
     }
 
-    public Date getDtCad() {
+    public String getDtCad() {
         return this.dtCad;
     }
 
-    public void setDtCad(Date dtCad) {
+    public void setDtCad(String dtCad) {
         this.dtCad = dtCad;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 
@@ -231,27 +226,27 @@ public class CbapartiEntity {
         this.dC = dC;
     }
 
-    public Date getDtMovimento() {
+    public String getDtMovimento() {
         return this.dtMovimento;
     }
 
-    public void setDtMovimento(Date dtMovimento) {
+    public void setDtMovimento(String dtMovimento) {
         this.dtMovimento = dtMovimento;
     }
 
-    public Date getDtConciliacao() {
+    public String getDtConciliacao() {
         return this.dtConciliacao;
     }
 
-    public void setDtConciliacao(Date dtConciliacao) {
+    public void setDtConciliacao(String dtConciliacao) {
         this.dtConciliacao = dtConciliacao;
     }
 
-    public Date getDtPredatado() {
+    public String getDtPredatado() {
         return this.dtPredatado;
     }
 
-    public void setDtPredatado(Date dtPredatado) {
+    public void setDtPredatado(String dtPredatado) {
         this.dtPredatado = dtPredatado;
     }
 

@@ -7,10 +7,9 @@ package br.com.sisinfoweb.controller;
 
 import br.com.sisinfoweb.banco.beans.RetornoWebServiceBeans;
 import br.com.sisinfoweb.banco.beans.StatusRetornoWebServiceBeans;
-import static br.com.sisinfoweb.controller.BaseMyController.logger;
-import br.com.sisinfoweb.entity.CfaareasEntity;
+import br.com.sisinfoweb.entity.AeasaidaEntity;
 import br.com.sisinfoweb.entity.SmadispoEntity;
-import br.com.sisinfoweb.service.CfaareasService;
+import br.com.sisinfoweb.service.AeasaidaService;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import java.net.HttpURLConnection;
@@ -33,12 +32,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author Bruno
  */
 @Controller
-public class CfaareasController extends BaseMyController{
+public class AeasaidaController extends BaseMyController{
     
     @Autowired
-    private CfaareasService cfaareasService;
+    private AeasaidaService aeasaidaService;
     
-    @RequestMapping(value = {"/Cfaareas"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = {"/Aeasaida"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     @Override
     public String initJson( Model model, 
@@ -55,18 +54,18 @@ public class CfaareasController extends BaseMyController{
         try{
             // Coverte o dispositivo passado no formato json em uma entidade
             SmadispoEntity smadispoEntity = new Gson().fromJson(dispositivo, SmadispoEntity.class);
-            cfaareasService.setSmadispoEntity(smadispoEntity);
+            aeasaidaService.setSmadispoEntity(smadispoEntity);
             
-            List<CfaareasEntity> lista;
+            List<AeasaidaEntity> lista;
             // Checa se foi passado alqum parametro para filtrar
             if ( ((sqlQuery != null) && (!sqlQuery.isEmpty())) || 
                     ((columnSelected != null) && (!columnSelected.isEmpty())) || 
                     ((where != null) && (!where.isEmpty())) ){
                 // Pesquisa de acordo com o sql passado
-                lista = cfaareasService.findCustomNativeQuery(resume, sqlQuery, columnSelected, where);
+                lista = aeasaidaService.findCustomNativeQuery(resume, sqlQuery, columnSelected, where);
             
             } else {
-                lista = cfaareasService.findAll();
+                lista = aeasaidaService.findAll();
             }
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_OK);
@@ -103,8 +102,7 @@ public class CfaareasController extends BaseMyController{
             
             return new Gson().toJson(retornoWebService);
         } finally{
-            cfaareasService.closeEntityManager();
+            aeasaidaService.closeEntityManager();
         }
     }
-    
 }

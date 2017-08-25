@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -42,13 +42,11 @@ public class SmaparamEntity {
 
     @Column(name = "DT_CAD", table = "SMAPARAM")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCad;
+    private String dtCad;
 
     @Column(name = "DT_ALT", table = "SMAPARAM")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "CT_INTEG", table = "SMAPARAM")
     @Basic
@@ -100,13 +98,11 @@ public class SmaparamEntity {
 
     @Column(name = "DATA_ULT_TRANSF", table = "SMAPARAM")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dataUltTransf;
+    private String dataUltTransf;
 
     @Column(name = "DATA_ENTROU_AR", table = "SMAPARAM")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dataEntrouAr;
+    private String dataEntrouAr;
 
     @Column(name = "ANOS_LOCK", table = "SMAPARAM", nullable = false)
     @Basic(optional = false)
@@ -208,19 +204,19 @@ public class SmaparamEntity {
         this.usCad = usCad;
     }
 
-    public Date getDtCad() {
+    public String getDtCad() {
         return this.dtCad;
     }
 
-    public void setDtCad(Date dtCad) {
+    public void setDtCad(String dtCad) {
         this.dtCad = dtCad;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 
@@ -320,19 +316,19 @@ public class SmaparamEntity {
         this.fonteRelatSize = fonteRelatSize;
     }
 
-    public Date getDataUltTransf() {
+    public String getDataUltTransf() {
         return this.dataUltTransf;
     }
 
-    public void setDataUltTransf(Date dataUltTransf) {
+    public void setDataUltTransf(String dataUltTransf) {
         this.dataUltTransf = dataUltTransf;
     }
 
-    public Date getDataEntrouAr() {
+    public String getDataEntrouAr() {
         return this.dataEntrouAr;
     }
 
-    public void setDataEntrouAr(Date dataEntrouAr) {
+    public void setDataEntrouAr(String dataEntrouAr) {
         this.dataEntrouAr = dataEntrouAr;
     }
 

@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -38,13 +38,11 @@ public class ApacontrEntity {
 
     @Column(name = "DT_CAD", table = "APACONTR")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCad;
+    private String dtCad;
 
     @Column(name = "DT_ALT", table = "APACONTR")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "CT_INTEG", table = "APACONTR")
     @Basic
@@ -56,8 +54,7 @@ public class ApacontrEntity {
 
     @Column(name = "DT_CONTRIBUICAO", table = "APACONTR", nullable = false)
     @Basic(optional = false)
-    @Temporal(TemporalType.DATE)
-    private Date dtContribuicao;
+        private String dtContribuicao;
 
     @Column(name = "ANO", table = "APACONTR", nullable = false)
     @Basic(optional = false)
@@ -73,8 +70,7 @@ public class ApacontrEntity {
 
     @Column(name = "DT_PREVISAO", table = "APACONTR")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtPrevisao;
+        private String dtPrevisao;
 
     @Column(name = "PERIODO", table = "APACONTR")
     @Basic
@@ -120,19 +116,19 @@ public class ApacontrEntity {
         this.usCad = usCad;
     }
 
-    public Date getDtCad() {
+    public String getDtCad() {
         return this.dtCad;
     }
 
-    public void setDtCad(Date dtCad) {
+    public void setDtCad(String dtCad) {
         this.dtCad = dtCad;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 
@@ -152,11 +148,11 @@ public class ApacontrEntity {
         this.guid = guid;
     }
 
-    public Date getDtContribuicao() {
+    public String getDtContribuicao() {
         return this.dtContribuicao;
     }
 
-    public void setDtContribuicao(Date dtContribuicao) {
+    public void setDtContribuicao(String dtContribuicao) {
         this.dtContribuicao = dtContribuicao;
     }
 
@@ -184,11 +180,11 @@ public class ApacontrEntity {
         this.valor = valor;
     }
 
-    public Date getDtPrevisao() {
+    public String getDtPrevisao() {
         return this.dtPrevisao;
     }
 
-    public void setDtPrevisao(Date dtPrevisao) {
+    public void setDtPrevisao(String dtPrevisao) {
         this.dtPrevisao = dtPrevisao;
     }
 

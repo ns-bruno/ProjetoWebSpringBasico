@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -46,13 +46,11 @@ public class AeaittraEntity {
 
     @Column(name = "DT_CAD", table = "AEAITTRA")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCad;
+    private String dtCad;
 
     @Column(name = "DT_ALT", table = "AEAITTRA")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "CT_INTEG", table = "AEAITTRA")
     @Basic
@@ -60,8 +58,7 @@ public class AeaittraEntity {
 
     @Column(name = "DT_TRANSF", table = "AEAITTRA")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtTransf;
+        private String dtTransf;
 
     @Column(name = "QUANTIDADE", table = "AEAITTRA", nullable = false)
     @Basic(optional = false)
@@ -135,19 +132,19 @@ public class AeaittraEntity {
         this.usCad = usCad;
     }
 
-    public Date getDtCad() {
+    public String getDtCad() {
         return this.dtCad;
     }
 
-    public void setDtCad(Date dtCad) {
+    public void setDtCad(String dtCad) {
         this.dtCad = dtCad;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 
@@ -159,11 +156,11 @@ public class AeaittraEntity {
         this.ctInteg = ctInteg;
     }
 
-    public Date getDtTransf() {
+    public String getDtTransf() {
         return this.dtTransf;
     }
 
-    public void setDtTransf(Date dtTransf) {
+    public void setDtTransf(String dtTransf) {
         this.dtTransf = dtTransf;
     }
 

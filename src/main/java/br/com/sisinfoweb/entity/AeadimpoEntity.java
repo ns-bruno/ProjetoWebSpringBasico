@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -44,13 +44,11 @@ public class AeadimpoEntity {
 
     @Column(name = "DT_CAD", table = "AEADIMPO")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCad;
+    private String dtCad;
 
     @Column(name = "DT_ALT", table = "AEADIMPO")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "CT_INTEG", table = "AEADIMPO")
     @Basic
@@ -62,13 +60,11 @@ public class AeadimpoEntity {
 
     @Column(name = "DT_DI", table = "AEADIMPO")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtDi;
+        private String dtDi;
 
     @Column(name = "DT_DESEMBARACO", table = "AEADIMPO")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtDesembaraco;
+        private String dtDesembaraco;
 
     @Column(name = "LOCAL_DESEMBARACO", table = "AEADIMPO", length = 60)
     @Basic
@@ -126,19 +122,19 @@ public class AeadimpoEntity {
         this.usCad = usCad;
     }
 
-    public Date getDtCad() {
+    public String getDtCad() {
         return this.dtCad;
     }
 
-    public void setDtCad(Date dtCad) {
+    public void setDtCad(String dtCad) {
         this.dtCad = dtCad;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 
@@ -158,19 +154,19 @@ public class AeadimpoEntity {
         this.numeroDi = numeroDi;
     }
 
-    public Date getDtDi() {
+    public String getDtDi() {
         return this.dtDi;
     }
 
-    public void setDtDi(Date dtDi) {
+    public void setDtDi(String dtDi) {
         this.dtDi = dtDi;
     }
 
-    public Date getDtDesembaraco() {
+    public String getDtDesembaraco() {
         return this.dtDesembaraco;
     }
 
-    public void setDtDesembaraco(Date dtDesembaraco) {
+    public void setDtDesembaraco(String dtDesembaraco) {
         this.dtDesembaraco = dtDesembaraco;
     }
 

@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,8 +22,7 @@ public class SmalogacEntity {
 
     @Column(name = "DT_ALT", table = "SMALOGAC")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "US_CAD", table = "SMALOGAC", nullable = false, length = 20)
     @Basic(optional = false)
@@ -39,8 +38,7 @@ public class SmalogacEntity {
 
     @Column(name = "DT_SAIU", table = "SMALOGAC")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtSaiu;
+    private String dtSaiu;
 
     public Integer getIdSmalogac() {
         return this.idSmalogac;
@@ -50,11 +48,11 @@ public class SmalogacEntity {
         this.idSmalogac = idSmalogac;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 
@@ -82,11 +80,11 @@ public class SmalogacEntity {
         this.tela = tela;
     }
 
-    public Date getDtSaiu() {
+    public String getDtSaiu() {
         return this.dtSaiu;
     }
 
-    public void setDtSaiu(Date dtSaiu) {
+    public void setDtSaiu(String dtSaiu) {
         this.dtSaiu = dtSaiu;
     }
 

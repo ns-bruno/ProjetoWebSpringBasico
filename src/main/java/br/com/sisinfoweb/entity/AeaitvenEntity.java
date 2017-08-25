@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -50,13 +50,11 @@ public class AeaitvenEntity {
 
     @Column(name = "DT_CAD", table = "AEAITVEN")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCad;
+    private String dtCad;
 
     @Column(name = "DT_ALT", table = "AEAITVEN")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "CT_INTEG", table = "AEAITVEN")
     @Basic
@@ -68,13 +66,11 @@ public class AeaitvenEntity {
 
     @Column(name = "DT_INICIO", table = "AEAITVEN")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtInicio;
+    private String dtInicio;
 
     @Column(name = "DT_FIM", table = "AEAITVEN")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtFim;
+    private String dtFim;
 
     @Column(name = "PERCENTUAL", table = "AEAITVEN", nullable = false)
     @Basic(optional = false)
@@ -148,19 +144,19 @@ public class AeaitvenEntity {
         this.usCad = usCad;
     }
 
-    public Date getDtCad() {
+    public String getDtCad() {
         return this.dtCad;
     }
 
-    public void setDtCad(Date dtCad) {
+    public void setDtCad(String dtCad) {
         this.dtCad = dtCad;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 
@@ -180,19 +176,19 @@ public class AeaitvenEntity {
         this.sequencia = sequencia;
     }
 
-    public Date getDtInicio() {
+    public String getDtInicio() {
         return this.dtInicio;
     }
 
-    public void setDtInicio(Date dtInicio) {
+    public void setDtInicio(String dtInicio) {
         this.dtInicio = dtInicio;
     }
 
-    public Date getDtFim() {
+    public String getDtFim() {
         return this.dtFim;
     }
 
-    public void setDtFim(Date dtFim) {
+    public void setDtFim(String dtFim) {
         this.dtFim = dtFim;
     }
 

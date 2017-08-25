@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -40,13 +40,11 @@ public class AeagrdplEntity {
 
     @Column(name = "DT_CAD", table = "AEAGRDPL")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCad;
+    private String dtCad;
 
     @Column(name = "DT_ALT", table = "AEAGRDPL")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "CT_INTEG", table = "AEAGRDPL")
     @Basic
@@ -70,58 +68,47 @@ public class AeagrdplEntity {
 
     @Column(name = "DT_VENDA_VARE_D", table = "AEAGRDPL")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtVendaVareD;
+        private String dtVendaVareD;
 
     @Column(name = "DT_VENDA_ATAC_D", table = "AEAGRDPL")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtVendaAtacD;
+        private String dtVendaAtacD;
 
     @Column(name = "DT_COMPRA", table = "AEAGRDPL")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtCompra;
+        private String dtCompra;
 
     @Column(name = "DT_VENDA_VARE_N", table = "AEAGRDPL")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtVendaVareN;
+        private String dtVendaVareN;
 
     @Column(name = "DT_VENDA_ATAC_N", table = "AEAGRDPL")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtVendaAtacN;
+        private String dtVendaAtacN;
 
     @Column(name = "DT_VENDA_PROMO_VARE_D", table = "AEAGRDPL")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtVendaPromoVareD;
+        private String dtVendaPromoVareD;
 
     @Column(name = "DT_VENDA_PROMO_ATAC_D", table = "AEAGRDPL")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtVendaPromoAtacD;
+        private String dtVendaPromoAtacD;
 
     @Column(name = "DT_VENDA_PROMO_VARE_N", table = "AEAGRDPL")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtVendaPromoVareN;
+        private String dtVendaPromoVareN;
 
     @Column(name = "DT_VENDA_PROMO_ATAC_N", table = "AEAGRDPL")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtVendaPromoAtacN;
+        private String dtVendaPromoAtacN;
 
     @Column(name = "DT_ENTRADA_D", table = "AEAGRDPL")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtEntradaD;
+        private String dtEntradaD;
 
     @Column(name = "DT_ENTRADA_N", table = "AEAGRDPL")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtEntradaN;
+        private String dtEntradaN;
 
     @Column(name = "MINIMO", table = "AEAGRDPL", nullable = false)
     @Basic(optional = false)
@@ -187,19 +174,19 @@ public class AeagrdplEntity {
         this.usCad = usCad;
     }
 
-    public Date getDtCad() {
+    public String getDtCad() {
         return this.dtCad;
     }
 
-    public void setDtCad(Date dtCad) {
+    public void setDtCad(String dtCad) {
         this.dtCad = dtCad;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 
@@ -243,91 +230,91 @@ public class AeagrdplEntity {
         this.retido = retido;
     }
 
-    public Date getDtVendaVareD() {
+    public String getDtVendaVareD() {
         return this.dtVendaVareD;
     }
 
-    public void setDtVendaVareD(Date dtVendaVareD) {
+    public void setDtVendaVareD(String dtVendaVareD) {
         this.dtVendaVareD = dtVendaVareD;
     }
 
-    public Date getDtVendaAtacD() {
+    public String getDtVendaAtacD() {
         return this.dtVendaAtacD;
     }
 
-    public void setDtVendaAtacD(Date dtVendaAtacD) {
+    public void setDtVendaAtacD(String dtVendaAtacD) {
         this.dtVendaAtacD = dtVendaAtacD;
     }
 
-    public Date getDtCompra() {
+    public String getDtCompra() {
         return this.dtCompra;
     }
 
-    public void setDtCompra(Date dtCompra) {
+    public void setDtCompra(String dtCompra) {
         this.dtCompra = dtCompra;
     }
 
-    public Date getDtVendaVareN() {
+    public String getDtVendaVareN() {
         return this.dtVendaVareN;
     }
 
-    public void setDtVendaVareN(Date dtVendaVareN) {
+    public void setDtVendaVareN(String dtVendaVareN) {
         this.dtVendaVareN = dtVendaVareN;
     }
 
-    public Date getDtVendaAtacN() {
+    public String getDtVendaAtacN() {
         return this.dtVendaAtacN;
     }
 
-    public void setDtVendaAtacN(Date dtVendaAtacN) {
+    public void setDtVendaAtacN(String dtVendaAtacN) {
         this.dtVendaAtacN = dtVendaAtacN;
     }
 
-    public Date getDtVendaPromoVareD() {
+    public String getDtVendaPromoVareD() {
         return this.dtVendaPromoVareD;
     }
 
-    public void setDtVendaPromoVareD(Date dtVendaPromoVareD) {
+    public void setDtVendaPromoVareD(String dtVendaPromoVareD) {
         this.dtVendaPromoVareD = dtVendaPromoVareD;
     }
 
-    public Date getDtVendaPromoAtacD() {
+    public String getDtVendaPromoAtacD() {
         return this.dtVendaPromoAtacD;
     }
 
-    public void setDtVendaPromoAtacD(Date dtVendaPromoAtacD) {
+    public void setDtVendaPromoAtacD(String dtVendaPromoAtacD) {
         this.dtVendaPromoAtacD = dtVendaPromoAtacD;
     }
 
-    public Date getDtVendaPromoVareN() {
+    public String getDtVendaPromoVareN() {
         return this.dtVendaPromoVareN;
     }
 
-    public void setDtVendaPromoVareN(Date dtVendaPromoVareN) {
+    public void setDtVendaPromoVareN(String dtVendaPromoVareN) {
         this.dtVendaPromoVareN = dtVendaPromoVareN;
     }
 
-    public Date getDtVendaPromoAtacN() {
+    public String getDtVendaPromoAtacN() {
         return this.dtVendaPromoAtacN;
     }
 
-    public void setDtVendaPromoAtacN(Date dtVendaPromoAtacN) {
+    public void setDtVendaPromoAtacN(String dtVendaPromoAtacN) {
         this.dtVendaPromoAtacN = dtVendaPromoAtacN;
     }
 
-    public Date getDtEntradaD() {
+    public String getDtEntradaD() {
         return this.dtEntradaD;
     }
 
-    public void setDtEntradaD(Date dtEntradaD) {
+    public void setDtEntradaD(String dtEntradaD) {
         this.dtEntradaD = dtEntradaD;
     }
 
-    public Date getDtEntradaN() {
+    public String getDtEntradaN() {
         return this.dtEntradaN;
     }
 
-    public void setDtEntradaN(Date dtEntradaN) {
+    public void setDtEntradaN(String dtEntradaN) {
         this.dtEntradaN = dtEntradaN;
     }
 

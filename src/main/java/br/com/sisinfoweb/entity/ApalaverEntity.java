@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,13 +35,11 @@ public class ApalaverEntity {
 
     @Column(name = "DT_CAD", table = "APALAVER")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCad;
+    private String dtCad;
 
     @Column(name = "DT_ALT", table = "APALAVER")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "CT_INTEG", table = "APALAVER")
     @Basic
@@ -53,18 +51,15 @@ public class ApalaverEntity {
 
     @Column(name = "DT_AVERBACAO", table = "APALAVER")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtAverbacao;
+        private String dtAverbacao;
 
     @Column(name = "DT_APELACAO", table = "APALAVER")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtApelacao;
+        private String dtApelacao;
 
     @Column(name = "DT_CASAMENTO", table = "APALAVER")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtCasamento;
+        private String dtCasamento;
 
     @Column(name = "NOIVA", table = "APALAVER", length = 60)
     @Basic
@@ -151,19 +146,19 @@ public class ApalaverEntity {
         this.usCad = usCad;
     }
 
-    public Date getDtCad() {
+    public String getDtCad() {
         return this.dtCad;
     }
 
-    public void setDtCad(Date dtCad) {
+    public void setDtCad(String dtCad) {
         this.dtCad = dtCad;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 
@@ -183,27 +178,27 @@ public class ApalaverEntity {
         this.guid = guid;
     }
 
-    public Date getDtAverbacao() {
+    public String getDtAverbacao() {
         return this.dtAverbacao;
     }
 
-    public void setDtAverbacao(Date dtAverbacao) {
+    public void setDtAverbacao(String dtAverbacao) {
         this.dtAverbacao = dtAverbacao;
     }
 
-    public Date getDtApelacao() {
+    public String getDtApelacao() {
         return this.dtApelacao;
     }
 
-    public void setDtApelacao(Date dtApelacao) {
+    public void setDtApelacao(String dtApelacao) {
         this.dtApelacao = dtApelacao;
     }
 
-    public Date getDtCasamento() {
+    public String getDtCasamento() {
         return this.dtCasamento;
     }
 
-    public void setDtCasamento(Date dtCasamento) {
+    public void setDtCasamento(String dtCasamento) {
         this.dtCasamento = dtCasamento;
     }
 

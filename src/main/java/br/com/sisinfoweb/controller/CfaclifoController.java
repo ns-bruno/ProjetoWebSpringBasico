@@ -7,10 +7,12 @@ package br.com.sisinfoweb.controller;
 
 import br.com.sisinfoweb.banco.beans.RetornoWebServiceBeans;
 import br.com.sisinfoweb.banco.beans.StatusRetornoWebServiceBeans;
+import static br.com.sisinfoweb.controller.BaseMyController.logger;
 import br.com.sisinfoweb.entity.CfaclifoEntity;
 import br.com.sisinfoweb.entity.SmadispoEntity;
 import br.com.sisinfoweb.service.CfaclifoService;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import java.net.HttpURLConnection;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
@@ -36,7 +38,7 @@ public class CfaclifoController extends BaseMyController{
     @Autowired
     private CfaclifoService cfaclifoService;
     
-    @RequestMapping(value = {"/Cfaclifo"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = {"/Cfaclifo"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     @Override
     public String initJson( Model model, 
@@ -77,7 +79,21 @@ public class CfaclifoController extends BaseMyController{
             cfaclifoService.findCustomNativeQuery(Boolean.FALSE, null, null, where);
             
             return new Gson().toJson(retornoWebService);
+        } catch(JsonSyntaxException e){
+            logger.error(getClass().getSimpleName() + " - " + e.getMessage());
+            
+            // Cria uma vareavel para retorna o status
+            statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_INTERNAL_ERROR);
+            statusRetorno.setMensagemRetorno(String.valueOf(e.getMessage()));
+            statusRetorno.setExtra(e.getLocalizedMessage());
+            
+            // Adiciona o status
+            retornoWebService.statusRetorno = statusRetorno;
+            
+            return new Gson().toJson(retornoWebService);
         } catch(Exception e){
+            logger.error(getClass().getSimpleName() + " - " + e.getMessage());
+            
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_INTERNAL_ERROR);
             statusRetorno.setMensagemRetorno(String.valueOf(e.getMessage()));
@@ -93,7 +109,7 @@ public class CfaclifoController extends BaseMyController{
     }
 
     
-    @RequestMapping(value = {"/Cfaclifo/Admin"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = {"/Cfaclifo/Admin"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     public String initJsonAdmin( Model model, 
                             @RequestHeader() HttpHeaders httpHeaders, 
@@ -145,7 +161,7 @@ public class CfaclifoController extends BaseMyController{
     }
     
     
-    @RequestMapping(value = {"/Cfaclifo/One"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = {"/Cfaclifo/One"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     public String initOneJson(  Model model, 
                                 @RequestHeader() HttpHeaders httpHeaders, 

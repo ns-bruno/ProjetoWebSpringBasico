@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -38,13 +38,11 @@ public class CfamotnvEntity {
 
     @Column(name = "DT_CAD", table = "CFAMOTNV")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCad;
+    private String dtCad;
 
     @Column(name = "DT_ALT", table = "CFAMOTNV")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "CT_INTEG", table = "CFAMOTNV")
     @Basic
@@ -52,8 +50,7 @@ public class CfamotnvEntity {
 
     @Column(name = "DT_VISITA", table = "CFAMOTNV", nullable = false)
     @Basic(optional = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtVisita;
+    private String dtVisita;
 
     public Integer getIdCfamotnv() {
         return this.idCfamotnv;
@@ -95,19 +92,19 @@ public class CfamotnvEntity {
         this.usCad = usCad;
     }
 
-    public Date getDtCad() {
+    public String getDtCad() {
         return this.dtCad;
     }
 
-    public void setDtCad(Date dtCad) {
+    public void setDtCad(String dtCad) {
         this.dtCad = dtCad;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 
@@ -119,11 +116,11 @@ public class CfamotnvEntity {
         this.ctInteg = ctInteg;
     }
 
-    public Date getDtVisita() {
+    public String getDtVisita() {
         return this.dtVisita;
     }
 
-    public void setDtVisita(Date dtVisita) {
+    public void setDtVisita(String dtVisita) {
         this.dtVisita = dtVisita;
     }
 

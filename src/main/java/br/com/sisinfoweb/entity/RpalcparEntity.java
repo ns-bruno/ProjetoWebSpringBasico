@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -49,13 +49,11 @@ public class RpalcparEntity {
 
     @Column(name = "DT_CAD", table = "RPALCPAR")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCad;
+    private String dtCad;
 
     @Column(name = "DT_ALT", table = "RPALCPAR")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "CT_INTEG", table = "RPALCPAR")
     @Basic
@@ -67,13 +65,11 @@ public class RpalcparEntity {
 
     @Column(name = "DT_IMPORTACAO", table = "RPALCPAR")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtImportacao;
+        private String dtImportacao;
 
     @Column(name = "DT_MOVIMENTO", table = "RPALCPAR")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtMovimento;
+        private String dtMovimento;
 
     @Column(name = "SEQUENCIA", table = "RPALCPAR", nullable = false)
     @Basic(optional = false)
@@ -164,19 +160,19 @@ public class RpalcparEntity {
         this.usCad = usCad;
     }
 
-    public Date getDtCad() {
+    public String getDtCad() {
         return this.dtCad;
     }
 
-    public void setDtCad(Date dtCad) {
+    public void setDtCad(String dtCad) {
         this.dtCad = dtCad;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 
@@ -196,19 +192,19 @@ public class RpalcparEntity {
         this.tipo = tipo;
     }
 
-    public Date getDtImportacao() {
+    public String getDtImportacao() {
         return this.dtImportacao;
     }
 
-    public void setDtImportacao(Date dtImportacao) {
+    public void setDtImportacao(String dtImportacao) {
         this.dtImportacao = dtImportacao;
     }
 
-    public Date getDtMovimento() {
+    public String getDtMovimento() {
         return this.dtMovimento;
     }
 
-    public void setDtMovimento(Date dtMovimento) {
+    public void setDtMovimento(String dtMovimento) {
         this.dtMovimento = dtMovimento;
     }
 

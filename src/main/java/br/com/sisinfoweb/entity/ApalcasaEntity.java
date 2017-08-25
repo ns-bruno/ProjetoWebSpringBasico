@@ -3,7 +3,7 @@
  */
 package br.com.sisinfoweb.entity;
 
-import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -95,13 +95,11 @@ public class ApalcasaEntity {
 
     @Column(name = "DT_CAD", table = "APALCASA", nullable = false)
     @Basic(optional = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCad;
+    private String dtCad;
 
     @Column(name = "DT_ALT", table = "APALCASA", nullable = false)
     @Basic(optional = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtAlt;
+    private String dtAlt;
 
     @Column(name = "CT_INTEG", table = "APALCASA")
     @Basic
@@ -113,8 +111,7 @@ public class ApalcasaEntity {
 
     @Column(name = "DT_HR_CASAMENTO", table = "APALCASA")
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtHrCasamento;
+    private String dtHrCasamento;
 
     @Column(name = "LIVRO", table = "APALCASA")
     @Basic
@@ -230,8 +227,7 @@ public class ApalcasaEntity {
 
     @Column(name = "NOIVA_DT_BATISMO", table = "APALCASA")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date noivaDtBatismo;
+        private String noivaDtBatismo;
 
     @Column(name = "NOIVA_BATIZ_PAROQ", table = "APALCASA", length = 40)
     @Basic
@@ -263,8 +259,7 @@ public class ApalcasaEntity {
 
     @Column(name = "NOIVO_DT_NASCIMENTO", table = "APALCASA")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date noivoDtNascimento;
+        private String noivoDtNascimento;
 
     @Column(name = "NOIVO_NATURAL", table = "APALCASA", length = 40)
     @Basic
@@ -364,8 +359,7 @@ public class ApalcasaEntity {
 
     @Column(name = "NOIVO_DT_BATIZMO", table = "APALCASA")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date noivoDtBatizmo;
+        private String noivoDtBatizmo;
 
     @Column(name = "NOIVO_BATIZ_PAROQ", table = "APALCASA", length = 40)
     @Basic
@@ -414,8 +408,7 @@ public class ApalcasaEntity {
 
     @Column(name = "DT_DIALOGO", table = "APALCASA")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date dtDialogo;
+        private String dtDialogo;
 
     @Column(name = "COMUNIDADE_FREQ", table = "APALCASA", length = 40)
     @Basic
@@ -444,13 +437,11 @@ public class ApalcasaEntity {
 
     @Column(name = "CIVIL_DT_HABILITA", table = "APALCASA")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date civilDtHabilita;
+        private String civilDtHabilita;
 
     @Column(name = "CIVIL_DT_CASAMENTO", table = "APALCASA")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date civilDtCasamento;
+        private String civilDtCasamento;
 
     @Column(name = "CIVIL_NOME_JUIZ", table = "APALCASA", length = 60)
     @Basic
@@ -523,8 +514,7 @@ public class ApalcasaEntity {
 
     @Column(name = "NOIVA_DT_NASCIMENTO", table = "APALCASA")
     @Basic
-    @Temporal(TemporalType.DATE)
-    private Date noivaDtNascimento;
+        private String noivaDtNascimento;
 
     @Column(name = "DIOCESE_TRANSFERIDA", table = "APALCASA", length = 40)
     @Basic
@@ -755,19 +745,19 @@ public class ApalcasaEntity {
         this.usCad = usCad;
     }
 
-    public Date getDtCad() {
+    public String getDtCad() {
         return this.dtCad;
     }
 
-    public void setDtCad(Date dtCad) {
+    public void setDtCad(String dtCad) {
         this.dtCad = dtCad;
     }
 
-    public Date getDtAlt() {
+    public String getDtAlt() {
         return this.dtAlt;
     }
 
-    public void setDtAlt(Date dtAlt) {
+    public void setDtAlt(String dtAlt) {
         this.dtAlt = dtAlt;
     }
 
@@ -787,11 +777,11 @@ public class ApalcasaEntity {
         this.guid = guid;
     }
 
-    public Date getDtHrCasamento() {
+    public String getDtHrCasamento() {
         return this.dtHrCasamento;
     }
 
-    public void setDtHrCasamento(Date dtHrCasamento) {
+    public void setDtHrCasamento(String dtHrCasamento) {
         this.dtHrCasamento = dtHrCasamento;
     }
 
@@ -1019,11 +1009,11 @@ public class ApalcasaEntity {
         this.noivaEstCivil = noivaEstCivil;
     }
 
-    public Date getNoivaDtBatismo() {
+    public String getNoivaDtBatismo() {
         return this.noivaDtBatismo;
     }
 
-    public void setNoivaDtBatismo(Date noivaDtBatismo) {
+    public void setNoivaDtBatismo(String noivaDtBatismo) {
         this.noivaDtBatismo = noivaDtBatismo;
     }
 
@@ -1083,11 +1073,11 @@ public class ApalcasaEntity {
         this.noivoNome = noivoNome;
     }
 
-    public Date getNoivoDtNascimento() {
+    public String getNoivoDtNascimento() {
         return this.noivoDtNascimento;
     }
 
-    public void setNoivoDtNascimento(Date noivoDtNascimento) {
+    public void setNoivoDtNascimento(String noivoDtNascimento) {
         this.noivoDtNascimento = noivoDtNascimento;
     }
 
@@ -1283,11 +1273,11 @@ public class ApalcasaEntity {
         this.noivoEstadCivil = noivoEstadCivil;
     }
 
-    public Date getNoivoDtBatizmo() {
+    public String getNoivoDtBatizmo() {
         return this.noivoDtBatizmo;
     }
 
-    public void setNoivoDtBatizmo(Date noivoDtBatizmo) {
+    public void setNoivoDtBatizmo(String noivoDtBatizmo) {
         this.noivoDtBatizmo = noivoDtBatizmo;
     }
 
@@ -1379,11 +1369,11 @@ public class ApalcasaEntity {
         this.impressoes = impressoes;
     }
 
-    public Date getDtDialogo() {
+    public String getDtDialogo() {
         return this.dtDialogo;
     }
 
-    public void setDtDialogo(Date dtDialogo) {
+    public void setDtDialogo(String dtDialogo) {
         this.dtDialogo = dtDialogo;
     }
 
@@ -1435,19 +1425,19 @@ public class ApalcasaEntity {
         this.civilCartorNome = civilCartorNome;
     }
 
-    public Date getCivilDtHabilita() {
+    public String getCivilDtHabilita() {
         return this.civilDtHabilita;
     }
 
-    public void setCivilDtHabilita(Date civilDtHabilita) {
+    public void setCivilDtHabilita(String civilDtHabilita) {
         this.civilDtHabilita = civilDtHabilita;
     }
 
-    public Date getCivilDtCasamento() {
+    public String getCivilDtCasamento() {
         return this.civilDtCasamento;
     }
 
-    public void setCivilDtCasamento(Date civilDtCasamento) {
+    public void setCivilDtCasamento(String civilDtCasamento) {
         this.civilDtCasamento = civilDtCasamento;
     }
 
@@ -1587,11 +1577,11 @@ public class ApalcasaEntity {
         this.dispensaMotivo = dispensaMotivo;
     }
 
-    public Date getNoivaDtNascimento() {
+    public String getNoivaDtNascimento() {
         return this.noivaDtNascimento;
     }
 
-    public void setNoivaDtNascimento(Date noivaDtNascimento) {
+    public void setNoivaDtNascimento(String noivaDtNascimento) {
         this.noivaDtNascimento = noivaDtNascimento;
     }
 
