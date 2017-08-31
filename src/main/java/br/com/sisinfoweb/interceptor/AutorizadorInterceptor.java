@@ -110,7 +110,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
                                             logger.warn(MensagemPadrao.ERROR_DISPOSITIVO_INATIVO + " - " + smadispoEntity.getIdentificacao());
 
                                             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_UNAUTHORIZED);
-                                            statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.OK));
+                                            statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.UNAUTHORIZED));
                                             //statusRetorno.setExtra(e.getLocalizedMessage());
 
                                             // Adiciona o status
@@ -130,7 +130,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
                                         logger.warn(MensagemPadrao.ERROR_DISPOSITIVO_NAO_CADASTRADO + " - " + smadispoEntity.getIdentificacao());
 
                                         statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_UNAUTHORIZED);
-                                        statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.OK));
+                                        statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.UNAUTHORIZED));
                                         //statusRetorno.setExtra(e.getLocalizedMessage());
 
                                         // Adiciona o status
@@ -149,7 +149,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 
                                 } else {
                                     statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_UNAUTHORIZED);
-                                    statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.OK));
+                                    statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.UNAUTHORIZED));
                                     //statusRetorno.setExtra(e.getLocalizedMessage());
 
                                     // Adiciona o status
@@ -167,7 +167,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
                                 }
                             } else {
                                 statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_UNAUTHORIZED);
-                                statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.OK));
+                                statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.UNAUTHORIZED));
                                 //statusRetorno.setExtra(e.getLocalizedMessage());
 
                                 // Adiciona o status
@@ -188,7 +188,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
                             logger.warn(MensagemPadrao.ERROR_NOT_DISPOSITIVO);
 
                             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_UNAUTHORIZED);
-                            statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.OK));
+                            statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.UNAUTHORIZED));
                             //statusRetorno.setExtra(e.getLocalizedMessage());
 
                             // Adiciona o status
@@ -206,7 +206,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
                         }
                     } else {
                         statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_UNAUTHORIZED);
-                        statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.OK));
+                        statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.UNAUTHORIZED));
                         //statusRetorno.setExtra(e.getLocalizedMessage());
 
                         // Adiciona o status
