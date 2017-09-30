@@ -63,10 +63,10 @@ public class CfatpcliController extends BaseMyController{
                     ((columnSelected != null) && (!columnSelected.isEmpty())) || 
                     ((where != null) && (!where.isEmpty())) ){
                 // Pesquisa de acordo com o sql passado
-                lista = cfatpcliService.findCustomNativeQuery(resume, sqlQuery, columnSelected, where);
+                lista = cfatpcliService.findCustomNativeQueryClient(resume, sqlQuery, columnSelected, where);
             
             } else {
-                lista = cfatpcliService.findAll();
+                lista = cfatpcliService.findAllClient();
             }
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_OK);

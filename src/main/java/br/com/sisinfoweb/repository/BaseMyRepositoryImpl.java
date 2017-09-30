@@ -5,16 +5,17 @@
  */
 package br.com.sisinfoweb.repository;
 
+import br.com.sisinfoweb.banco.values.MensagemPadrao;
 import br.com.sisinfoweb.entity.CfaclifoEntity;
 import br.com.sisinfoweb.entity.SmadispoEntity;
 import java.io.Serializable;
-import java.util.HashMap;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 import org.hibernate.exception.ConstraintViolationException;
@@ -22,6 +23,7 @@ import org.hibernate.exception.GenericJDBCException;
 import org.hibernate.exception.JDBCConnectionException;
 import org.hibernate.exception.LockAcquisitionException;
 import org.hibernate.exception.SQLGrammarException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 
@@ -33,8 +35,12 @@ import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
  */
 public class BaseMyRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRepository<T, ID> implements BaseMyRepository<T, ID> {
 
-    @PersistenceContext(unitName = "persistenceSisInfoWeb")
-    private EntityManager entityManager;
+    private Connection connection;
+    private static final String DRIVE_FIREBIRD = "org.firebirdsql.jdbc.FBDriver";
+    private SmadispoEntity smadispoEntity = null;
+
+    @Autowired
+    private final EntityManager entityManager;
 
     public BaseMyRepositoryImpl(JpaEntityInformation entityInformation, EntityManager entityManager) {
         super(entityInformation, entityManager);
@@ -42,7 +48,12 @@ public class BaseMyRepositoryImpl<T, ID extends Serializable> extends SimpleJpaR
     }
 
     @Override
-    //@Transactional
+    public void setSmadispoEntity(SmadispoEntity smadispoEntity) {
+        this.smadispoEntity = smadispoEntity;
+    }
+
+    @Override
+    @Transactional
     public List<T> findCustomNativeQuery(String sqlQuery) {
         try {
             return entityManager.createNativeQuery(sqlQuery, this.getDomainClass()).getResultList();
@@ -58,7 +69,23 @@ public class BaseMyRepositoryImpl<T, ID extends Serializable> extends SimpleJpaR
     }
 
     @Override
-    //@Transactional
+    @Transactional
+    public List<T> findAll(String sqlQuery) {
+        try {
+            return entityManager.createNativeQuery(sqlQuery, this.getDomainClass()).getResultList();
+
+        } catch (JDBCConnectionException | SQLGrammarException | ConstraintViolationException
+                | LockAcquisitionException | GenericJDBCException e) {
+            logger.error("ERRO AO EXECUTAR O SELECT FINDALL. | " + e.getMessage());
+            return null;
+        } catch (Exception e) {
+            logger.error("ERRO AO EXECUTAR O SELECT FINDALL. | " + e.getMessage());
+            return null;
+        }
+    }
+
+    @Override
+    @Transactional
     public T findOneByGuid(String guid) {
         try {
             String consultaJpql = "SELECT A FROM " + this.getDomainClass().getSimpleName().toUpperCase().replace("ENTITY", "").replace("CUSTOM", "") + " A WHERE A.GUID = :GUID";
@@ -76,11 +103,19 @@ public class BaseMyRepositoryImpl<T, ID extends Serializable> extends SimpleJpaR
         }
     }
 
+    /**
+     * Retorna a quatidade de registros alterados ou inseridos.
+     *
+     * @param sqlQuery
+     * @return
+     */
     @Override
     @Transactional
     public Integer saveCustomNativeQuery(String sqlQuery) {
         try {
+            //entityManager.getTransaction().begin();
             Integer qtdInsert = entityManager.createNativeQuery(sqlQuery).executeUpdate();
+            //entityManager.getTransaction().commit();
             return qtdInsert;
 
         } catch (JDBCConnectionException | SQLGrammarException | ConstraintViolationException
@@ -94,77 +129,131 @@ public class BaseMyRepositoryImpl<T, ID extends Serializable> extends SimpleJpaR
     }
 
     @Override
-    //@Transactional
-    public EntityManager getConnectionClient(T smadispoEntity) {
+    @Transactional
+    public <S extends T> S save(S entity) {
         try {
-            logger.info("PEGANDO OS DADOS DO BANCO DE DADOS QUE TEM OS DADOS DA EMPRESA LICENCIADA. Identificacao: " + ((SmadispoEntity) smadispoEntity).getIdentificacao());
+            //entityManager.getTransaction().begin();
 
-            if ((entityManager == null) || (!entityManager.isOpen())
-                    || ((entityManager.getProperties() != null) && (entityManager.getProperties().containsKey("hibernate.ejb.persistenceUnitName"))
-                    && (!entityManager.getProperties().get("hibernate.ejb.persistenceUnitName").toString().equalsIgnoreCase("persistenceSisInfoWebClient")))) {
-                
+            if (!entityManager.contains(entity)) {
+                T en = entityManager.merge(entity);
+                String s = en.toString();
+            } else {
+                return entityManager.merge(entity);
+            }
+            //entityManager.getTransaction().commit();
+            return entity;
+
+        } catch (JDBCConnectionException | SQLGrammarException | ConstraintViolationException
+                | LockAcquisitionException | GenericJDBCException e) {
+            logger.error("ERRO AO SALVAR DADOS. | " + e.getMessage());
+            return null;
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return null;
+        }
+    }
+
+
+    @Override
+    @Transactional
+    public void closeEntityManager() {
+        if (entityManager != null) {
+            entityManager.close();
+        }
+    }
+
+    public Connection conectaBanco() {
+        try {
+            // Checa se foi passado os dados do dispositivo
+            if (smadispoEntity != null) {
+                logger.info("PEGANDO OS DADOS DE CONEXAO DA EMPRESA LICENCIADA. Identificacao: " + smadispoEntity.getIdentificacao());
+
                 String sqlSelect = "SELECT * FROM CFACLIFO "
-                        + "WHERE CFACLIFO.ID_CFACLIFO = (SELECT SMADISPO.ID_CFACLIFO FROM SMADISPO WHERE SMADISPO.IDENTIFICACAO = '" + ((SmadispoEntity) smadispoEntity).getIdentificacao() + "');";
-                Query query = entityManager.createNativeQuery(sqlSelect, CfaclifoEntity.class);
+                        + "WHERE CFACLIFO.ID_CFACLIFO = (SELECT SMADISPO.ID_CFACLIFO FROM SMADISPO WHERE SMADISPO.IDENTIFICACAO = '" + smadispoEntity.getIdentificacao() + "');";
 
+                // Pega os dados de conexao da empresa licenciada
+                Query query = entityManager.createNativeQuery(sqlSelect, CfaclifoEntity.class);
                 List<CfaclifoEntity> cfaclifoEntity = query.getResultList();
 
                 // Checa se retornou alguma coisa do banco
                 if ((cfaclifoEntity != null) && (cfaclifoEntity.size() > 0)) {
-                    Map properties = new HashMap();
-                    properties.put("hibernate.connection.driver_class", "org.firebirdsql.jdbc.FBDriver");
-                    properties.put("hibernate.connection.url", "jdbc:firebirdsql:" + cfaclifoEntity.get(0).getIpServidorSisinfo() + "/" + cfaclifoEntity.get(0).getPortaBancoSisinfo() + ":" + cfaclifoEntity.get(0).getCaminhoBancoSisinfo() + "");
-                    properties.put("hibernate.connection.username", cfaclifoEntity.get(0).getUsuSisinfoWebservice());
-                    properties.put("hibernate.connection.password", cfaclifoEntity.get(0).getSenhaSisinfoWebservice());
-                    properties.put("hibernate.dialect", "org.hibernate.dialect.FirebirdDialect");
-                    properties.put("hibernate.show-sql", "false");
-                    properties.put("hibernate.temp.use_jdbc_metadata_defaults", "false");
-                    properties.put("hibernate.ejb.entitymanager_factory_name", "persistenceSisInfoWebClient");
 
-                    EntityManagerFactory emf = Persistence.createEntityManagerFactory("persistenceSisInfoWebClient", properties);
-                    entityManager = (EntityManager) emf.createEntityManager();
+                    Class.forName(DRIVE_FIREBIRD);
+                    connection = DriverManager.getConnection(
+                            "jdbc:firebirdsql:" + cfaclifoEntity.get(0).getIpServidorSisinfo() + "/" + cfaclifoEntity.get(0).getPortaBancoSisinfo() + ":" + cfaclifoEntity.get(0).getCaminhoBancoSisinfo() + "?rewriteBatchedStatements=true",
+                            cfaclifoEntity.get(0).getUsuSisinfoWebservice(),
+                            cfaclifoEntity.get(0).getSenhaSisinfoWebservice());
+                } else {
+                    logger.error(MensagemPadrao.ERROR_EMPRESA_NAO_LICENCIADA);
+                }
+            } else {
+                logger.error(MensagemPadrao.ERROR_CONECT_DATABASE + " | " + MensagemPadrao.ERROR_NOT_DISPOSITIVO);
+            }
+            return connection;
+        } catch (ClassNotFoundException | SQLException erroSQL) {
+            logger.error(MensagemPadrao.ERROR_CONECT_DATABASE + " | " + erroSQL.getMessage());
+            return null;
+
+        }
+        // Faz tratamento de erro
+
+    }
+
+    @Override
+    @Transactional
+    public ResultSet executarSQL(String instrucaoSQL) {
+        try {
+            conectaBanco();
+            if ((connection != null) && (!connection.isClosed())) {
+                //statement = iniciaConexao.createStatement();
+                //return statement.executeQuery(instrucaoSQL);
+                return connection.createStatement().executeQuery(instrucaoSQL);
+            }
+        } catch (SQLException ex) {
+            logger.error(MensagemPadrao.ERROR_SQL_EXCEPTION + " | " + ex.getMessage());
+        }
+        return null;
+    }
+
+    @Override
+    @Transactional
+    public Serializable executeInsertUpdateDelete(String instrucaoSQL) {
+        Integer qtd = -1;
+        try {
+            conectaBanco();
+            if ((connection != null) && (!connection.isClosed())) {
+                //Statement statement = connection.createStatement();
+                PreparedStatement preparedStatement = connection.prepareStatement(instrucaoSQL);
+                
+                if ((preparedStatement != null) && (!preparedStatement.isClosed())) {
+                    preparedStatement.getConnection().setAutoCommit(false);
+                    
+                    ResultSet rs = preparedStatement.executeQuery();
+                    
+                    if ((rs != null) && (rs.next())){
+                        qtd = rs.getInt(1);
+                        preparedStatement.getConnection().commit();
+                        logger.info(MensagemPadrao.INSERT_SUCCESS);
+                    } else {
+                        preparedStatement.getConnection().rollback();
+                    }
                 }
             }
-            return entityManager;
-        } catch (JDBCConnectionException | SQLGrammarException | ConstraintViolationException
-                | LockAcquisitionException | GenericJDBCException e) {
-            logger.error("Erro ao pegar os dados da conecxão com o banco de dados. | " + e.getMessage());
-            return entityManager;
-        } catch (Exception e) {
-            logger.error("Erro ao pegar os dados da conecxão com o banco de dados. | " + e.getMessage());
-            return entityManager;
+        } catch (SQLException ex) {
+            logger.error(MensagemPadrao.ERROR_SQL_EXCEPTION + " | " + ex.getMessage());
         }
+        return qtd;
     }
 
     @Override
-    public void getConnectionAdmin() {
-        logger.debug("CONECTANTO COM O BANCO DE DADOS ADMINISTRADOR.");
-
-        if ((entityManager == null) || (!entityManager.isOpen())
-                || ( (entityManager.getProperties() != null) && (entityManager.getProperties().containsKey("hibernate.ejb.persistenceUnitName"))
-                && (!entityManager.getProperties().get("hibernate.ejb.persistenceUnitName").toString().equalsIgnoreCase("persistenceSisInfoWeb")) ) ) {
-
-            logger.info("CRIANDO ENTITY MANAGER FACTORY COM PERSISTENCESISINFOWEB");
-
-            Map properties = new HashMap();
-            properties.put("hibernate.connection.driver_class", "org.firebirdsql.jdbc.FBDriver");
-            properties.put("hibernate.connection.url", "jdbc:firebirdsql:172.16.0.251/3050:C:\\SisInfo\\delphi\\SINOVO.FIR");
-            properties.put("hibernate.connection.username", "SYSDBA");
-            properties.put("hibernate.connection.password", "1");
-            properties.put("hibernate.dialect", "org.hibernate.dialect.FirebirdDialect");
-            properties.put("hibernate.show-sql", "false");
-            properties.put("hibernate.temp.use_jdbc_metadata_defaults", "false");
-            properties.put("hibernate.ejb.entitymanager_factory_name", "persistenceSisInfoWeb");
-
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("persistenceSisInfoWeb", properties);
-            entityManager = (EntityManager) emf.createEntityManager();
-        }
-    }
-
-    @Override
-    public void closeEntityManager() {
-        if (entityManager != null) {
-            entityManager.close();
+    @Transactional
+    public void closeDatabase() {
+        try {
+            if ((connection != null)) {
+                connection.close();
+            }
+        } catch (SQLException ex) {
+            logger.error(MensagemPadrao.ERROR_CLOSE_DATABASE + " | " + ex.getMessage());
         }
     }
 

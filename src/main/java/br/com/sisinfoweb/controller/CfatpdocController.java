@@ -63,10 +63,10 @@ public class CfatpdocController extends BaseMyController{
                     ((columnSelected != null) && (!columnSelected.isEmpty())) || 
                     ((where != null) && (!where.isEmpty())) ){
                 // Pesquisa de acordo com o sql passado
-                lista = cfatpdocService.findCustomNativeQuery(resume, sqlQuery, columnSelected, where);
+                lista = cfatpdocService.findCustomNativeQueryClient(resume, sqlQuery, columnSelected, where);
             
             } else {
-                lista = cfatpdocService.findAll();
+                lista = cfatpdocService.findAllClient();
             }
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_OK);

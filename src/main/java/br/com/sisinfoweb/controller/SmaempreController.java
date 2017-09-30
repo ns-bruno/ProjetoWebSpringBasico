@@ -45,7 +45,7 @@ public class SmaempreController extends BaseMyController {
 
         ModelAndView modelAndView = new ModelAndView("smpempre");
         try {
-            List<SmaempreEntity> lista = smaempreService.findAll();
+            List<SmaempreEntity> lista = smaempreService.findAllClient();
             model.addAttribute("lista", lista);
             
         } catch (Exception e) {
@@ -90,10 +90,10 @@ public class SmaempreController extends BaseMyController {
                     ((columnSelected != null) && (!columnSelected.isEmpty())) || 
                     ((where != null) && (!where.isEmpty())) ){
                 // Pesquisa de acordo com o sql passado
-                lista = smaempreService.findCustomNativeQuery(resume, sqlQuery, columnSelected, where);
+                lista = smaempreService.findCustomNativeQueryClient(resume, sqlQuery, columnSelected, where);
             
             } else {
-                lista = smaempreService.findAll();
+                lista = smaempreService.findAllClient();
             }
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_OK);

@@ -63,10 +63,10 @@ public class CfafotosController extends BaseMyController{
                     ((columnSelected != null) && (!columnSelected.isEmpty())) || 
                     ((where != null) && (!where.isEmpty())) ){
                 // Pesquisa de acordo com o sql passado
-                lista = cfafotosService.findCustomNativeQuery(resume, sqlQuery, columnSelected, where);
+                lista = cfafotosService.findCustomNativeQueryClient(resume, sqlQuery, columnSelected, where);
             
             } else {
-                lista = cfafotosService.findAll();
+                lista = cfafotosService.findAllClient();
             }
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_OK);

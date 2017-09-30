@@ -63,10 +63,10 @@ public class CfaprofiController extends BaseMyController{
                     ((columnSelected != null) && (!columnSelected.isEmpty())) || 
                     ((where != null) && (!where.isEmpty())) ){
                 // Pesquisa de acordo com o sql passado
-                lista = cfaprofiService.findCustomNativeQuery(resume, sqlQuery, columnSelected, where);
+                lista = cfaprofiService.findCustomNativeQueryClient(resume, sqlQuery, columnSelected, where);
             
             } else {
-                lista = cfaprofiService.findAll();
+                lista = cfaprofiService.findAllClient();
             }
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_OK);

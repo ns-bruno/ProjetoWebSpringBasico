@@ -64,10 +64,10 @@ public class CfaportaController extends BaseMyController{
                     ((columnSelected != null) && (!columnSelected.isEmpty())) || 
                     ((where != null) && (!where.isEmpty())) ){
                 // Pesquisa de acordo com o sql passado
-                lista = cfaportaService.findCustomNativeQuery(resume, sqlQuery, columnSelected, where);
+                lista = cfaportaService.findCustomNativeQueryClient(resume, sqlQuery, columnSelected, where);
             
             } else {
-                lista = cfaportaService.findAll();
+                lista = cfaportaService.findAllClient();
             }
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_OK);

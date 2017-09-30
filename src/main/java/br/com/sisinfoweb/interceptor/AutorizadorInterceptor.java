@@ -69,7 +69,6 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
             RetornoWebServiceBeans retornoWebService = new RetornoWebServiceBeans();
 
             if (request.getParameterMap() != null) {
-                cfaclifoService.getConnectionAdmin();
                 
                 if ((request.getParameter(KEY_CNPJ_URL) != null) && (request.getMethod().equalsIgnoreCase("POST"))) {
                     String where = "(CFACLIFO.CPF_CGC = '" + request.getParameter(KEY_CNPJ_URL) + "') ";
@@ -94,7 +93,6 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
                                 // Checa se a empresa esta ativa
                                 if (listaClifo.get(0).getAtivo().equals('1')) {
                                     // Pega a conexao com o banco de dados 
-                                    smadispoService.getConnectionAdmin();
                                     
                                     String whereDispo = "(IDENTIFICACAO = '" + smadispoEntity.getIdentificacao() + "') ";
 

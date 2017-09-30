@@ -1,14 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="persistenceSisInfoWeb" transaction-type="RESOURCE_LOCAL">
-    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>br.com.sisinfoweb.entity.CfaclifoEntity</class>
+    <class>br.com.sisinfoweb.entity.CfaareasEntity</class>
+    <class>br.com.sisinfoweb.entity.AeaclaseEntity</class>
+    <class>br.com.sisinfoweb.entity.AeacodstEntity</class>
+    <class>br.com.sisinfoweb.entity.AeaembalEntity</class>
+    <class>br.com.sisinfoweb.entity.AeaestoqEntity</class>
+    <class>br.com.sisinfoweb.entity.AeafatorEntity</class>
+    <class>br.com.sisinfoweb.entity.AeagradeEntity</class>
+    <class>br.com.sisinfoweb.entity.AealocesEntity</class>
+    <class>br.com.sisinfoweb.entity.AeamarcaEntity</class>
+    <class>br.com.sisinfoweb.entity.AeaorcamEntity</class>
+    <class>br.com.sisinfoweb.entity.AeaperceEntity</class>
+    <class>br.com.sisinfoweb.entity.AeaplojaEntity</class>
+    <class>br.com.sisinfoweb.entity.AeaplpgtEntity</class>
+    <class>br.com.sisinfoweb.entity.AeaprecoEntity</class>
+    <class>br.com.sisinfoweb.entity.AeaproduEntity</class>
+    <class>br.com.sisinfoweb.entity.AeasaidaEntity</class>
+    <class>br.com.sisinfoweb.entity.AeaunvenEntity</class>
+    <class>br.com.sisinfoweb.entity.CfaativiEntity</class>
+    <class>br.com.sisinfoweb.entity.CfaccredEntity</class>
+    <class>br.com.sisinfoweb.entity.CfacidadEntity</class>
+    <class>br.com.sisinfoweb.entity.CfaenderEntity</class>
+    <class>br.com.sisinfoweb.entity.CfaenderCustomEntity</class>
+    <class>br.com.sisinfoweb.entity.CfaestadEntity</class>
+    <class>br.com.sisinfoweb.entity.CfafotosEntity</class>
+    <class>br.com.sisinfoweb.entity.CfaparamEntity</class>
+    <class>br.com.sisinfoweb.entity.CfaportaEntity</class>
+    <class>br.com.sisinfoweb.entity.CfaprofiEntity</class>
+    <class>br.com.sisinfoweb.entity.CfastatuEntity</class>
+    <class>br.com.sisinfoweb.entity.CfatpcliEntity</class>
+    <class>br.com.sisinfoweb.entity.CfatpcobEntity</class>
+    <class>br.com.sisinfoweb.entity.CfatpdocEntity</class>
+    <class>br.com.sisinfoweb.entity.RpaparceEntity</class>
+    <class>br.com.sisinfoweb.entity.SmadispoEntity</class>
+    <class>br.com.sisinfoweb.entity.SmaempreEntity</class>
+    <class>br.com.sisinfoweb.entity.SmausuarEntity</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+    <validation-mode>NONE</validation-mode>
     <properties>
     </properties>
   </persistence-unit>
-  <persistence-unit name="persistenceSisInfoWebClient" transaction-type="RESOURCE_LOCAL">
-    <class>br.com.sisinfoweb.entity.SmaempreEntity</class>
+  <persistence-unit name="persistenceSisInfoWebClient">
     <class>br.com.sisinfoweb.entity.CfaclifoEntity</class>
+    <class>br.com.sisinfoweb.entity.CfaareasEntity</class>
+    <class>br.com.sisinfoweb.entity.AeaclaseEntity</class>
+    <class>br.com.sisinfoweb.entity.AeacodstEntity</class>
+    <class>br.com.sisinfoweb.entity.AeaembalEntity</class>
+    <class>br.com.sisinfoweb.entity.AeaestoqEntity</class>
+    <class>br.com.sisinfoweb.entity.AeafatorEntity</class>
+    <class>br.com.sisinfoweb.entity.AeagradeEntity</class>
+    <class>br.com.sisinfoweb.entity.AealocesEntity</class>
+    <class>br.com.sisinfoweb.entity.AeamarcaEntity</class>
+    <class>br.com.sisinfoweb.entity.AeaorcamEntity</class>
+    <class>br.com.sisinfoweb.entity.AeaperceEntity</class>
+    <class>br.com.sisinfoweb.entity.AeaplojaEntity</class>
+    <class>br.com.sisinfoweb.entity.AeaplpgtEntity</class>
+    <class>br.com.sisinfoweb.entity.AeaprecoEntity</class>
+    <class>br.com.sisinfoweb.entity.AeaproduEntity</class>
+    <class>br.com.sisinfoweb.entity.AeasaidaEntity</class>
+    <class>br.com.sisinfoweb.entity.AeaunvenEntity</class>
+    <class>br.com.sisinfoweb.entity.CfaativiEntity</class>
+    <class>br.com.sisinfoweb.entity.CfaccredEntity</class>
+    <class>br.com.sisinfoweb.entity.CfacidadEntity</class>
+    <class>br.com.sisinfoweb.entity.CfaenderEntity</class>
+    <class>br.com.sisinfoweb.entity.CfaenderCustomEntity</class>
+    <class>br.com.sisinfoweb.entity.CfaestadEntity</class>
+    <class>br.com.sisinfoweb.entity.CfafotosEntity</class>
+    <class>br.com.sisinfoweb.entity.CfaparamEntity</class>
+    <class>br.com.sisinfoweb.entity.CfaportaEntity</class>
+    <class>br.com.sisinfoweb.entity.CfaprofiEntity</class>
+    <class>br.com.sisinfoweb.entity.CfastatuEntity</class>
+    <class>br.com.sisinfoweb.entity.CfatpcliEntity</class>
+    <class>br.com.sisinfoweb.entity.CfatpcobEntity</class>
+    <class>br.com.sisinfoweb.entity.CfatpdocEntity</class>
+    <class>br.com.sisinfoweb.entity.RpaparceEntity</class>
     <class>br.com.sisinfoweb.entity.SmadispoEntity</class>
+    <class>br.com.sisinfoweb.entity.SmaempreEntity</class>
+    <class>br.com.sisinfoweb.entity.SmausuarEntity</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
     </properties>

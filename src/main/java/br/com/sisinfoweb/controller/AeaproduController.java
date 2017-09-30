@@ -63,10 +63,10 @@ public class AeaproduController extends BaseMyController{
                     ((columnSelected != null) && (!columnSelected.isEmpty())) || 
                     ((where != null) && (!where.isEmpty())) ){
                 // Pesquisa de acordo com o sql passado
-                lista = aeaproduService.findCustomNativeQuery(resume, sqlQuery, columnSelected, where);
+                lista = aeaproduService.findCustomNativeQueryClient(resume, sqlQuery, columnSelected, where);
             
             } else {
-                lista = aeaproduService.findAll();
+                lista = aeaproduService.findAllClient();
             }
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_OK);

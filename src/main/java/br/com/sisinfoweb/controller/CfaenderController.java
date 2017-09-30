@@ -68,10 +68,10 @@ public class CfaenderController extends BaseMyController{
                     ((columnSelected != null) && (!columnSelected.isEmpty())) || 
                     ((where != null) && (!where.isEmpty())) ){
                 // Pesquisa de acordo com o sql passado
-                lista = cfaenderService.findCustomNativeQuery(resume, sqlQuery, columnSelected, where);
+                lista = cfaenderService.findCustomNativeQueryClient(resume, sqlQuery, columnSelected, where);
             
             } else {
-                lista = cfaenderService.findAll();
+                lista = cfaenderService.findAllClient();
             }
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_OK);
@@ -143,7 +143,7 @@ public class CfaenderController extends BaseMyController{
                 sqlQuery += " WHERE ( " + where.replace("+", " ") +" )";
                 
                 // Pesquisa de acordo com o sql passado
-                lista = cfaenderCustomService.findCustomNativeQuery(resume, sqlQuery, columnSelected, null);
+                lista = cfaenderCustomService.findCustomNativeQueryClient(resume, sqlQuery, columnSelected, null);
             
             } else {
                 lista = cfaenderCustomService.findCustomNativeQuery(false, sqlQuery, null, null);

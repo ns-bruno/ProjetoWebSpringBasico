@@ -63,10 +63,10 @@ public class AeaembalController extends BaseMyController{
                     ((columnSelected != null) && (!columnSelected.isEmpty())) || 
                     ((where != null) && (!where.isEmpty())) ){
                 // Pesquisa de acordo com o sql passado
-                lista = aeaembalService.findCustomNativeQuery(resume, sqlQuery, columnSelected, where);
+                lista = aeaembalService.findCustomNativeQueryClient(resume, sqlQuery, columnSelected, where);
             
             } else {
-                lista = aeaembalService.findAll();
+                lista = aeaembalService.findAllClient();
             }
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_OK);

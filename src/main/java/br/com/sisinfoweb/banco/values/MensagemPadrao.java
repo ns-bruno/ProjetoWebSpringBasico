@@ -22,4 +22,9 @@ public interface MensagemPadrao {
     String ERROR_DISPOSITIVO_SEM_UUID = "Dispositivo sem o UUID(Chave de identificacao).";
     String ERROR_EMPRESA_NAO_LICENCIADA = "Não foi encontrado em nosso banco de dados a empresa licenciada para usar o aplicativo. Ou a identificação do dispositivo não esta cadastrada em nosso banco de dados.";
     String ERROR_EMPRESA_INATIVA = "A empresa está inativada. Entre em contato com a sua empresa ou com o suporte.";
+    String ERROR_CONECT_DATABASE = "Erro ao tentar conectar com o banco de dados.";
+    String ERROR_CLOSE_DATABASE = "Erro ao fechar o banco de dados.";
+    String ERROR_MAPEAR_RESULTSET = "Erro ao converter o result ResultSet em uma classe Entity.";
+    String ERROR_SQL_EXCEPTION = "Erro ao executar o sql.";
+    String ERROR_CONSTRUCT_SQL = "Erro ao construir o sql.";
 }

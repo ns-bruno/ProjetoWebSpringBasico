@@ -15,4 +15,16 @@
     <root level="INFO">
         <appender-ref ref="STDOUT" />
     </root>
+    
+    <!--    <include resource="org/springframework/boot/logging/logback/base.xml" />-->
+    <!-- <logger name="org.springframework" level="INFO"/>
+    <logger name="log4j.category.org.hibernate" level="DEBUG"/>
+    <logger name="log4j.category.org.springframework.web" level="INFO"/>
+    <logger name="br.com.sisinfoweb" level="INFO"/>
+    <logger name="org.firebirdsql" level="DEBUG"/>
+    <logger name="org.hibernate" level="DEBUG"/>
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT" />
+    </root> -->
+
 </configuration>

@@ -63,10 +63,10 @@ public class AeagradeController extends BaseMyController{
                     ((columnSelected != null) && (!columnSelected.isEmpty())) || 
                     ((where != null) && (!where.isEmpty())) ){
                 // Pesquisa de acordo com o sql passado
-                lista = aeagradeService.findCustomNativeQuery(resume, sqlQuery, columnSelected, where);
+                lista = aeagradeService.findCustomNativeQueryClient(resume, sqlQuery, columnSelected, where);
             
             } else {
-                lista = aeagradeService.findAll();
+                lista = aeagradeService.findAllClient();
             }
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_OK);

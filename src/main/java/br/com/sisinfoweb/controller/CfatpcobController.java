@@ -63,10 +63,10 @@ public class CfatpcobController extends BaseMyController{
                     ((columnSelected != null) && (!columnSelected.isEmpty())) || 
                     ((where != null) && (!where.isEmpty())) ){
                 // Pesquisa de acordo com o sql passado
-                lista = cfatpcobService.findCustomNativeQuery(resume, sqlQuery, columnSelected, where);
+                lista = cfatpcobService.findCustomNativeQueryClient(resume, sqlQuery, columnSelected, where);
             
             } else {
-                lista = cfatpcobService.findAll();
+                lista = cfatpcobService.findAllClient();
             }
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_OK);

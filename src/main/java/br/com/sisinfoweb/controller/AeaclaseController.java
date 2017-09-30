@@ -10,6 +10,7 @@ import br.com.sisinfoweb.banco.beans.StatusRetornoWebServiceBeans;
 import static br.com.sisinfoweb.controller.BaseMyController.logger;
 import br.com.sisinfoweb.entity.AeaclaseEntity;
 import br.com.sisinfoweb.entity.SmadispoEntity;
+import br.com.sisinfoweb.funcoes.FuncoesPersonalizadas;
 import br.com.sisinfoweb.service.AeaclaseService;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
@@ -63,10 +64,10 @@ public class AeaclaseController extends BaseMyController{
                     ((columnSelected != null) && (!columnSelected.isEmpty())) || 
                     ((where != null) && (!where.isEmpty())) ){
                 // Pesquisa de acordo com o sql passado
-                lista = aeaclaseService.findCustomNativeQuery(resume, sqlQuery, columnSelected, where);
+                lista = aeaclaseService.findCustomNativeQueryClient(resume, sqlQuery, columnSelected, where);
             
             } else {
-                lista = aeaclaseService.findAll();
+                lista = aeaclaseService.findAllClient();
             }
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_OK);
@@ -103,7 +104,7 @@ public class AeaclaseController extends BaseMyController{
             
             return new Gson().toJson(retornoWebService);
         } finally{
-            aeaclaseService.closeEntityManager();
+            aeaclaseService.closeDatabase();
         }
     }
 }

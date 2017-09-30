@@ -68,10 +68,10 @@ public class AeaorcamController extends BaseMyController{
                     ((columnSelected != null) && (!columnSelected.isEmpty())) || 
                     ((where != null) && (!where.isEmpty())) ){
                 // Pesquisa de acordo com o sql passado
-                lista = aeaorcamService.findCustomNativeQuery(resume, sqlQuery, columnSelected, where);
+                lista = aeaorcamService.findCustomNativeQueryClient(resume, sqlQuery, columnSelected, where);
                 
             } else {
-                lista = aeaorcamService.findAll();
+                lista = aeaorcamService.findAllClient();
             }
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_OK);

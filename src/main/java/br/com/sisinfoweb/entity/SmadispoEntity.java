@@ -6,6 +6,8 @@ package br.com.sisinfoweb.entity;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -15,6 +17,7 @@ public class SmadispoEntity {
 
     @Column(name = "ID_SMADISPO", table = "SMADISPO", nullable = false)
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer idSmadispo;
     
     @Column(name = "ID_CFACLIFO", table = "SMADISPO")

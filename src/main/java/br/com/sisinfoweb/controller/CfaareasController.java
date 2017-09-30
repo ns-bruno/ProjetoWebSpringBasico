@@ -63,10 +63,10 @@ public class CfaareasController extends BaseMyController{
                     ((columnSelected != null) && (!columnSelected.isEmpty())) || 
                     ((where != null) && (!where.isEmpty())) ){
                 // Pesquisa de acordo com o sql passado
-                lista = cfaareasService.findCustomNativeQuery(resume, sqlQuery, columnSelected, where);
+                lista = cfaareasService.findCustomNativeQueryClient(resume, sqlQuery, columnSelected, where);
             
             } else {
-                lista = cfaareasService.findAll();
+                lista = cfaareasService.findAllClient();
             }
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_OK);

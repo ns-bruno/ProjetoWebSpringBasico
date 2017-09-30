@@ -63,10 +63,10 @@ public class RpaparceController extends BaseMyController{
                     ((columnSelected != null) && (!columnSelected.isEmpty())) || 
                     ((where != null) && (!where.isEmpty())) ){
                 // Pesquisa de acordo com o sql passado
-                lista = rpaparceService.findCustomNativeQuery(resume, sqlQuery, columnSelected, where);
+                lista = rpaparceService.findCustomNativeQueryClient(resume, sqlQuery, columnSelected, where);
             
             } else {
-                lista = rpaparceService.findAll();
+                lista = rpaparceService.findAllClient();
             }
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_OK);

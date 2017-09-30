@@ -63,10 +63,10 @@ public class CfastatuController extends BaseMyController{
                     ((columnSelected != null) && (!columnSelected.isEmpty())) || 
                     ((where != null) && (!where.isEmpty())) ){
                 // Pesquisa de acordo com o sql passado
-                lista = cfastatuService.findCustomNativeQuery(resume, sqlQuery, columnSelected, where);
+                lista = cfastatuService.findCustomNativeQueryClient(resume, sqlQuery, columnSelected, where);
             
             } else {
-                lista = cfastatuService.findAll();
+                lista = cfastatuService.findAllClient();
             }
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_OK);

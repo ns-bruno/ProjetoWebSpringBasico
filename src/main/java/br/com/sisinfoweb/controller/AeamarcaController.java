@@ -63,10 +63,10 @@ public class AeamarcaController extends BaseMyController{
                     ((columnSelected != null) && (!columnSelected.isEmpty())) || 
                     ((where != null) && (!where.isEmpty())) ){
                 // Pesquisa de acordo com o sql passado
-                lista = aeamarcaService.findCustomNativeQuery(resume, sqlQuery, columnSelected, where);
+                lista = aeamarcaService.findCustomNativeQueryClient(resume, sqlQuery, columnSelected, where);
             
             } else {
-                lista = aeamarcaService.findAll();
+                lista = aeamarcaService.findAllClient();
             }
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_OK);

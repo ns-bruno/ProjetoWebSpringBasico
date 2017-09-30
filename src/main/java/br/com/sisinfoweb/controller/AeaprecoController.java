@@ -63,10 +63,10 @@ public class AeaprecoController extends BaseMyController{
                     ((columnSelected != null) && (!columnSelected.isEmpty())) || 
                     ((where != null) && (!where.isEmpty())) ){
                 // Pesquisa de acordo com o sql passado
-                lista = aeaprecoService.findCustomNativeQuery(resume, sqlQuery, columnSelected, where);
+                lista = aeaprecoService.findCustomNativeQueryClient(resume, sqlQuery, columnSelected, where);
             
             } else {
-                lista = aeaprecoService.findAll();
+                lista = aeaprecoService.findAllClient();
             }
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_OK);

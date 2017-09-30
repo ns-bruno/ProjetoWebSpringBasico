@@ -63,10 +63,10 @@ public class CfaccredController extends BaseMyController{
                     ((columnSelected != null) && (!columnSelected.isEmpty())) || 
                     ((where != null) && (!where.isEmpty())) ){
                 // Pesquisa de acordo com o sql passado
-                lista = cfaccredService.findCustomNativeQuery(resume, sqlQuery, columnSelected, where);
+                lista = cfaccredService.findCustomNativeQueryClient(resume, sqlQuery, columnSelected, where);
             
             } else {
-                lista = cfaccredService.findAll();
+                lista = cfaccredService.findAllClient();
             }
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_OK);

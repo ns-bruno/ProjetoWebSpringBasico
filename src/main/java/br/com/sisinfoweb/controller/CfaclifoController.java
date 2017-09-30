@@ -63,10 +63,10 @@ public class CfaclifoController extends BaseMyController{
                     ((columnSelected != null) && (!columnSelected.isEmpty())) || 
                     ((where != null) && (!where.isEmpty())) ){
                 // Pesquisa de acordo com o sql passado
-                lista = cfaclifoService.findCustomNativeQuery(resume, sqlQuery, columnSelected, where);
+                lista = cfaclifoService.findCustomNativeQueryClient(resume, sqlQuery, columnSelected, where);
             
             } else {
-                lista = cfaclifoService.findAll();
+                lista = cfaclifoService.findAllClient();
             }
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_OK);
@@ -129,10 +129,10 @@ public class CfaclifoController extends BaseMyController{
                     ((columnSelected != null) && (!columnSelected.isEmpty())) || 
                     ((where != null) && (!where.isEmpty())) ){
                 // Pesquisa de acordo com o sql passado
-                lista = cfaclifoService.findCustomNativeQuery(resume, sqlQuery, columnSelected, where);
+                lista = cfaclifoService.findCustomNativeQueryClient(resume, sqlQuery, columnSelected, where);
             
             } else {
-                lista = cfaclifoService.findAll();
+                lista = cfaclifoService.findAllClient();
             }
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_OK);
@@ -180,10 +180,10 @@ public class CfaclifoController extends BaseMyController{
                     ((columnSelected != null) && (!columnSelected.isEmpty())) || 
                     ((where != null) && (!where.isEmpty())) ){
                 // Pesquisa de acordo com o sql passado
-                retornoWebService.object = cfaclifoService.findCustomNativeQuery(resume, sqlQuery, columnSelected, where).get(0);
+                retornoWebService.object = cfaclifoService.findCustomNativeQueryClient(resume, sqlQuery, columnSelected, where).get(0);
             
             } else {
-                retornoWebService.object = cfaclifoService.findAll();
+                retornoWebService.object = cfaclifoService.findAllClient();
             }
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_OK);

@@ -63,10 +63,10 @@ public class SmadispoController extends BaseMyController {
                     || ((columnSelected != null) && (!columnSelected.isEmpty()))
                     || ((where != null) && (!where.isEmpty()))) {
                 // Pesquisa de acordo com o sql passado
-                lista = smadispoService.findCustomNativeQuery(resume, sqlQuery, columnSelected, where);
+                lista = smadispoService.findCustomNativeQueryClient(resume, sqlQuery, columnSelected, where);
 
             } else {
-                lista = smadispoService.findAll();
+                lista = smadispoService.findAllClient();
             }
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_OK);
@@ -108,9 +108,12 @@ public class SmadispoController extends BaseMyController {
         try {
             // Coverte o dispositivo passado no formato json em uma entidade
             SmadispoEntity smadispoEntity = new Gson().fromJson(dispositivo, SmadispoEntity.class);
-
+            // Pega a conexao com o banco de dados admin
+            //smadispoService.getConnectionAdmin();
+            
+            // Checa se o dispositivo ja tem cadastro no banco de dados administrador
             if (smadispoService.findCustomNativeQuery(false, null, null, "IDENTIFICACAO = '" + smadispoEntity.getIdentificacao() + "'").size() < 1) {
-
+                // Pega os dados da empresa cliente licenciada
                 CfaclifoEntity cfaclifoEntity = cfaclifoService.findCustomNativeQuery(false, null, null, "(CPF_CGC = '" + cnpjUrl + "')").get(0);
 
                 if (cfaclifoEntity != null) {
@@ -118,6 +121,7 @@ public class SmadispoController extends BaseMyController {
 
                     List<SmadispoEntity> listaDispositivo = smadispoService.findCustomNativeQuery(false, null, null, whereChecaQtdLicenca);
 
+                    // Checa se tem quantidade de licencas disponivel
                     if ((listaDispositivo != null) && (listaDispositivo.size() < cfaclifoEntity.getQtdeLicencaMovel())) {
 
                         String insertDispositivo
@@ -129,15 +133,12 @@ public class SmadispoController extends BaseMyController {
                         Integer qtdInsertDispoLicenca = (Integer) smadispoService.saveCustomNativeQuery(insertDispositivo);
                         // Checa se foi inserido com sucesso no banco de dados administrativo
                         if (qtdInsertDispoLicenca > 0) {
-                            insertDispositivo
-                                    = "INSERT INTO SMADISPO(DESCRICAO, IDENTIFICACAO) VALUES "
-                                    + "('" + smadispoEntity.getDescricao() + "', "
-                                    + "'" + smadispoEntity.getIdentificacao() + "'"
-                                    + " );";
+                            //insertDispositivo = "INSERT INTO SMADISPO(DESCRICAO, IDENTIFICACAO) VALUES ('" + smadispoEntity.getDescricao() + "', '" + smadispoEntity.getIdentificacao() + "' );";
                             smadispoService.setSmadispoEntity(smadispoEntity);
 
-                            Integer qtdInsertDispo = (Integer) smadispoService.saveCustomNativeQuery(insertDispositivo);
+                            Integer qtdInsertDispo = (Integer) smadispoService.saveClient(smadispoEntity);
 
+                            // Checa se foi inserido com sucesso no banco do cliente
                             if (qtdInsertDispo > 0) {
                                 // Cria uma vareavel para retorna o status
                                 statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_OK);
@@ -186,18 +187,21 @@ public class SmadispoController extends BaseMyController {
                     return new Gson().toJson(retornoWebService);
                 }
             } else {
+                //Fecha o banco de dados administrador
+                //smadispoService.closeEntityManager();
                 // Pega o banco de dados do cliente
                 smadispoService.setSmadispoEntity(smadispoEntity);
 
-                if (smadispoService.findCustomNativeQuery(false, null, null, "IDENTIFICACAO = '" + smadispoEntity.getIdentificacao() + "'").size() < 1) {
-                    String insertDispositivo
-                            = "INSERT INTO SMADISPO(DESCRICAO, IDENTIFICACAO) VALUES "
-                            + "('" + smadispoEntity.getDescricao() + "', "
-                            + "'" + smadispoEntity.getIdentificacao() + "'"
-                            + " );";
-
-                    Integer qtdInsertDispo = (Integer) smadispoService.saveCustomNativeQuery(insertDispositivo);
-
+                if (smadispoService.findCustomNativeQueryClient(false, null, null, "IDENTIFICACAO = '" + smadispoEntity.getIdentificacao() + "'").size() < 1) {
+                    //String insertDispositivo = "INSERT INTO SMADISPO(DESCRICAO, IDENTIFICACAO) VALUES ('" + smadispoEntity.getDescricao() + "', '" + smadispoEntity.getIdentificacao() + "' );";
+                    
+                    /**SmadispoEntity dispoEntity = smadispoService.save(smadispoEntity);
+                    
+                    if ( (dispoEntity != null) && (dispoEntity.getIdSmadispo()!= null) && (dispoEntity.getIdSmadispo() > 0) ){
+                        Integer i = dispoEntity.getIdSmadispo();
+                    } */
+                    Integer qtdInsertDispo = (Integer) smadispoService.saveClient(smadispoEntity);
+                    // Checa se foi inserido com sucesso no banco do cliente
                     if (qtdInsertDispo > 0) {
                         // Cria uma vareavel para retorna o status
                         statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_OK);
@@ -207,13 +211,15 @@ public class SmadispoController extends BaseMyController {
                         retornoWebService.statusRetorno = statusRetorno;
                         // Adiciona os dados que eh pra ser retornado
                         retornoWebService.object = qtdInsertDispo;
+                        return new Gson().toJson(retornoWebService);
                     } else {
                         // Cria uma vareavel para retorna o status
                         statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_INTERNAL_ERROR);
-                        statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR) + " - Não inseriu no banco de dados do cliente.\n" + MensagemPadrao.INSERT_ERROR);
+                        statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR) + " - Não inseriu o dispositivo no banco de dados do cliente.\n" + MensagemPadrao.INSERT_ERROR);
 
                         // Adiciona o status
                         retornoWebService.statusRetorno = statusRetorno;
+                        return new Gson().toJson(retornoWebService);
                     }
                 }
                 // Cria uma vareavel para retorna o status
