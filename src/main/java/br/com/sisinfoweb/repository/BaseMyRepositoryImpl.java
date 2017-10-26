@@ -5,9 +5,11 @@
  */
 package br.com.sisinfoweb.repository;
 
+import br.com.sisinfoweb.banco.beans.RetornoWebServiceBeans;
 import br.com.sisinfoweb.banco.values.MensagemPadrao;
 import br.com.sisinfoweb.entity.CfaclifoEntity;
 import br.com.sisinfoweb.entity.SmadispoEntity;
+import br.com.sisinfoweb.exception.CustomException;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -24,6 +26,7 @@ import org.hibernate.exception.JDBCConnectionException;
 import org.hibernate.exception.LockAcquisitionException;
 import org.hibernate.exception.SQLGrammarException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 
@@ -56,15 +59,18 @@ public class BaseMyRepositoryImpl<T, ID extends Serializable> extends SimpleJpaR
     @Transactional
     public List<T> findCustomNativeQuery(String sqlQuery) {
         try {
+            logger.debug(MensagemPadrao.LOGGER_EXECUTE_FIND + " | findCustomNativeQuery | " + sqlQuery);
             return entityManager.createNativeQuery(sqlQuery, this.getDomainClass()).getResultList();
 
         } catch (JDBCConnectionException | SQLGrammarException | ConstraintViolationException
                 | LockAcquisitionException | GenericJDBCException e) {
             logger.error("ERRO AO EXECUTAR O SELECT CUSTOMNATIVEQUERY. | " + e.getMessage());
-            return null;
+            
+            throw new CustomException(e);
         } catch (Exception e) {
             logger.error("ERRO AO EXECUTAR O SELECT CUSTOMNATIVEQUERY. | " + e.getMessage());
-            return null;
+            
+            throw new CustomException(e);
         }
     }
 
@@ -72,15 +78,18 @@ public class BaseMyRepositoryImpl<T, ID extends Serializable> extends SimpleJpaR
     @Transactional
     public List<T> findAll(String sqlQuery) {
         try {
+            logger.debug(MensagemPadrao.LOGGER_EXECUTE_FIND + " | findAll | " + sqlQuery);
             return entityManager.createNativeQuery(sqlQuery, this.getDomainClass()).getResultList();
 
         } catch (JDBCConnectionException | SQLGrammarException | ConstraintViolationException
                 | LockAcquisitionException | GenericJDBCException e) {
             logger.error("ERRO AO EXECUTAR O SELECT FINDALL. | " + e.getMessage());
-            return null;
+            throw new CustomException(e);
+            
         } catch (Exception e) {
             logger.error("ERRO AO EXECUTAR O SELECT FINDALL. | " + e.getMessage());
-            return null;
+            
+            throw new CustomException(e);
         }
     }
 
@@ -89,6 +98,9 @@ public class BaseMyRepositoryImpl<T, ID extends Serializable> extends SimpleJpaR
     public T findOneByGuid(String guid) {
         try {
             String consultaJpql = "SELECT A FROM " + this.getDomainClass().getSimpleName().toUpperCase().replace("ENTITY", "").replace("CUSTOM", "") + " A WHERE A.GUID = :GUID";
+
+            logger.debug(MensagemPadrao.LOGGER_EXECUTE_FIND + " | findOneByGuid | " + consultaJpql);
+
             Query query = entityManager.createQuery(consultaJpql, this.getDomainClass());
             query.setParameter("GUID", guid);
 
@@ -96,10 +108,12 @@ public class BaseMyRepositoryImpl<T, ID extends Serializable> extends SimpleJpaR
         } catch (JDBCConnectionException | SQLGrammarException | ConstraintViolationException
                 | LockAcquisitionException | GenericJDBCException e) {
             logger.error("ERRO AO EXECUTAR SELECT POR GUID. | " + e.getMessage());
-            return null;
+            
+            throw new CustomException(e);
         } catch (Exception e) {
             logger.error("ERRO AO EXECUTAR SELECT POR GUID. | " + e.getMessage());
-            return null;
+            
+            throw new CustomException(e);
         }
     }
 
@@ -114,6 +128,9 @@ public class BaseMyRepositoryImpl<T, ID extends Serializable> extends SimpleJpaR
     public Integer saveCustomNativeQuery(String sqlQuery) {
         try {
             //entityManager.getTransaction().begin();
+
+            logger.debug(MensagemPadrao.LOGGER_EXECUTE_FIND + " | saveCustomNativeQuery | " + sqlQuery);
+
             Integer qtdInsert = entityManager.createNativeQuery(sqlQuery).executeUpdate();
             //entityManager.getTransaction().commit();
             return qtdInsert;
@@ -121,10 +138,12 @@ public class BaseMyRepositoryImpl<T, ID extends Serializable> extends SimpleJpaR
         } catch (JDBCConnectionException | SQLGrammarException | ConstraintViolationException
                 | LockAcquisitionException | GenericJDBCException e) {
             logger.error("ERRO AO SALVAR DADOS. | " + e.getMessage());
-            return -1;
+
+            throw new CustomException(e);
         } catch (Exception e) {
             logger.error(e.getMessage());
-            return -1;
+
+            throw new CustomException(e);
         }
     }
 
@@ -134,9 +153,11 @@ public class BaseMyRepositoryImpl<T, ID extends Serializable> extends SimpleJpaR
         try {
             //entityManager.getTransaction().begin();
 
+            logger.debug(MensagemPadrao.LOGGER_EXECUTE_FIND + " | save | ", entity);
+
             if (!entityManager.contains(entity)) {
                 T en = entityManager.merge(entity);
-                String s = en.toString();
+                //String s = en.toString();
             } else {
                 return entityManager.merge(entity);
             }
@@ -146,13 +167,14 @@ public class BaseMyRepositoryImpl<T, ID extends Serializable> extends SimpleJpaR
         } catch (JDBCConnectionException | SQLGrammarException | ConstraintViolationException
                 | LockAcquisitionException | GenericJDBCException e) {
             logger.error("ERRO AO SALVAR DADOS. | " + e.getMessage());
-            return null;
+            
+            throw new CustomException(e);
         } catch (Exception e) {
             logger.error(e.getMessage());
-            return null;
+            
+            throw new CustomException(e);
         }
     }
-
 
     @Override
     @Transactional
@@ -185,17 +207,46 @@ public class BaseMyRepositoryImpl<T, ID extends Serializable> extends SimpleJpaR
                             cfaclifoEntity.get(0).getSenhaSisinfoWebservice());
                 } else {
                     logger.error(MensagemPadrao.ERROR_EMPRESA_NAO_LICENCIADA);
+
+                    Exception e = new Exception(MensagemPadrao.ERROR_EMPRESA_NAO_LICENCIADA);
+                
+                    throw new CustomException(e);
+                    /**RetornoWebServiceBeans retornoWebService = new RetornoWebServiceBeans();
+
+                    StatusRetornoWebServiceBeans statusRetorno = new StatusRetornoWebServiceBeans();
+                    statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_INTERNAL_ERROR);
+                    statusRetorno.setMensagemRetorno(MensagemPadrao.ERROR_EMPRESA_NAO_LICENCIADA);
+
+                    // Adiciona o status
+                    retornoWebService.statusRetorno = statusRetorno;
+
+                    throw new CustomException(retornoWebService);*/
                 }
             } else {
-                logger.error(MensagemPadrao.ERROR_CONECT_DATABASE + " | " + MensagemPadrao.ERROR_NOT_DISPOSITIVO);
+                logger.error(MensagemPadrao.ERROR_CONECT_DATABASE + " | conectaBanco() | " + MensagemPadrao.ERROR_NOT_DISPOSITIVO);
+
+                Exception e = new Exception(MensagemPadrao.ERROR_CONECT_DATABASE + " | " + MensagemPadrao.ERROR_NOT_DISPOSITIVO);
+                
+                throw new CustomException(e);
+                /**RetornoWebServiceBeans retornoWebService = new RetornoWebServiceBeans();
+
+                StatusRetornoWebServiceBeans statusRetorno = new StatusRetornoWebServiceBeans();
+                statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_INTERNAL_ERROR);
+                statusRetorno.setMensagemRetorno(MensagemPadrao.ERROR_CONECT_DATABASE + " | " + MensagemPadrao.ERROR_NOT_DISPOSITIVO);
+
+                // Adiciona o status
+                retornoWebService.statusRetorno = statusRetorno;
+
+                throw new CustomException(retornoWebService);*/
             }
             return connection;
         } catch (ClassNotFoundException | SQLException erroSQL) {
             logger.error(MensagemPadrao.ERROR_CONECT_DATABASE + " | " + erroSQL.getMessage());
-            return null;
+            connection = null;
+
+            throw new CustomException(erroSQL);
 
         }
-        // Faz tratamento de erro
 
     }
 
@@ -207,10 +258,18 @@ public class BaseMyRepositoryImpl<T, ID extends Serializable> extends SimpleJpaR
             if ((connection != null) && (!connection.isClosed())) {
                 //statement = iniciaConexao.createStatement();
                 //return statement.executeQuery(instrucaoSQL);
+
+                logger.debug(MensagemPadrao.LOGGER_EXECUTE_FIND + " | executarSQL | " + instrucaoSQL);
+
                 return connection.createStatement().executeQuery(instrucaoSQL);
+            } else {
+                RetornoWebServiceBeans retornoWebService = new RetornoWebServiceBeans();
+
             }
         } catch (SQLException ex) {
             logger.error(MensagemPadrao.ERROR_SQL_EXCEPTION + " | " + ex.getMessage());
+
+            throw new CustomException(ex);
         }
         return null;
     }
@@ -224,13 +283,15 @@ public class BaseMyRepositoryImpl<T, ID extends Serializable> extends SimpleJpaR
             if ((connection != null) && (!connection.isClosed())) {
                 //Statement statement = connection.createStatement();
                 PreparedStatement preparedStatement = connection.prepareStatement(instrucaoSQL);
-                
+
                 if ((preparedStatement != null) && (!preparedStatement.isClosed())) {
                     preparedStatement.getConnection().setAutoCommit(false);
-                    
+
+                    logger.debug(MensagemPadrao.LOGGER_EXECUTE_FIND + " | executeInsertUpdateDelete | " + instrucaoSQL);
+
                     ResultSet rs = preparedStatement.executeQuery();
-                    
-                    if ((rs != null) && (rs.next())){
+
+                    if ((rs != null) && (rs.next())) {
                         qtd = rs.getInt(1);
                         preparedStatement.getConnection().commit();
                         logger.info(MensagemPadrao.INSERT_SUCCESS);
@@ -241,6 +302,8 @@ public class BaseMyRepositoryImpl<T, ID extends Serializable> extends SimpleJpaR
             }
         } catch (SQLException ex) {
             logger.error(MensagemPadrao.ERROR_SQL_EXCEPTION + " | " + ex.getMessage());
+
+            throw new CustomException(ex);
         }
         return qtd;
     }
@@ -250,10 +313,15 @@ public class BaseMyRepositoryImpl<T, ID extends Serializable> extends SimpleJpaR
     public void closeDatabase() {
         try {
             if ((connection != null)) {
+
+                logger.debug(MensagemPadrao.LOGGER_CLOSE_DATABASE);
+
                 connection.close();
             }
         } catch (SQLException ex) {
             logger.error(MensagemPadrao.ERROR_CLOSE_DATABASE + " | " + ex.getMessage());
+
+            throw new CustomException(ex);
         }
     }
 

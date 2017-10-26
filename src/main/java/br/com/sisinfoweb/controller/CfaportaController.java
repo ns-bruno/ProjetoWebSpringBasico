@@ -2,6 +2,7 @@ package br.com.sisinfoweb.controller;
 
 import br.com.sisinfoweb.banco.beans.RetornoWebServiceBeans;
 import br.com.sisinfoweb.banco.beans.StatusRetornoWebServiceBeans;
+import br.com.sisinfoweb.banco.values.MensagemPadrao;
 import static br.com.sisinfoweb.controller.BaseMyController.logger;
 import br.com.sisinfoweb.entity.CfaportaEntity;
 import br.com.sisinfoweb.entity.SmadispoEntity;
@@ -84,8 +85,8 @@ public class CfaportaController extends BaseMyController{
             
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_INTERNAL_ERROR);
-            statusRetorno.setMensagemRetorno(String.valueOf(e.getMessage()));
-            statusRetorno.setExtra(e.getLocalizedMessage());
+            statusRetorno.setMensagemRetorno(MensagemPadrao.ERROR_STRUCT_JSON + " | " + e.getMessage());
+            statusRetorno.setExtra(e.toString());
             
             // Adiciona o status
             retornoWebService.statusRetorno = statusRetorno;
@@ -96,8 +97,8 @@ public class CfaportaController extends BaseMyController{
             
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_INTERNAL_ERROR);
-            statusRetorno.setMensagemRetorno(String.valueOf(e.getMessage()));
-            statusRetorno.setExtra(e.getLocalizedMessage());
+            statusRetorno.setMensagemRetorno(MensagemPadrao.ERROR_FIND + " | " + e.getMessage());
+            statusRetorno.setExtra(e.toString());
             
             // Adiciona o status
             retornoWebService.statusRetorno = statusRetorno;

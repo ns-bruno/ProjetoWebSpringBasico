@@ -73,6 +73,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
                 if ((request.getParameter(KEY_CNPJ_URL) != null) && (request.getMethod().equalsIgnoreCase("POST"))) {
                     String where = "(CFACLIFO.CPF_CGC = '" + request.getParameter(KEY_CNPJ_URL) + "') ";
                     if (cfaclifoService.findCustomNativeQuery(Boolean.FALSE, null, null, where).size() > 0) {
+                        logger.info(MensagemPadrao.LOGGER_NEW_CAD_DISPOSITIVO);
                         return true;
                     }
 

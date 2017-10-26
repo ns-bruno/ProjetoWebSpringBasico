@@ -81,8 +81,8 @@ public class SmadispoController extends BaseMyController {
         } catch (Exception e) {
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_INTERNAL_ERROR);
-            statusRetorno.setMensagemRetorno(String.valueOf(e.getMessage()));
-            statusRetorno.setExtra(e.getLocalizedMessage());
+            statusRetorno.setMensagemRetorno(MensagemPadrao.ERROR_FIND + " | " + e.getMessage());
+            statusRetorno.setExtra(e.toString());
 
             // Adiciona o status
             retornoWebService.statusRetorno = statusRetorno;
@@ -110,7 +110,7 @@ public class SmadispoController extends BaseMyController {
             SmadispoEntity smadispoEntity = new Gson().fromJson(dispositivo, SmadispoEntity.class);
             // Pega a conexao com o banco de dados admin
             //smadispoService.getConnectionAdmin();
-            
+
             // Checa se o dispositivo ja tem cadastro no banco de dados administrador
             if (smadispoService.findCustomNativeQuery(false, null, null, "IDENTIFICACAO = '" + smadispoEntity.getIdentificacao() + "'").size() < 1) {
                 // Pega os dados da empresa cliente licenciada
@@ -194,12 +194,16 @@ public class SmadispoController extends BaseMyController {
 
                 if (smadispoService.findCustomNativeQueryClient(false, null, null, "IDENTIFICACAO = '" + smadispoEntity.getIdentificacao() + "'").size() < 1) {
                     //String insertDispositivo = "INSERT INTO SMADISPO(DESCRICAO, IDENTIFICACAO) VALUES ('" + smadispoEntity.getDescricao() + "', '" + smadispoEntity.getIdentificacao() + "' );";
-                    
-                    /**SmadispoEntity dispoEntity = smadispoService.save(smadispoEntity);
-                    
-                    if ( (dispoEntity != null) && (dispoEntity.getIdSmadispo()!= null) && (dispoEntity.getIdSmadispo() > 0) ){
-                        Integer i = dispoEntity.getIdSmadispo();
-                    } */
+
+                    /**
+                     * SmadispoEntity dispoEntity =
+                     * smadispoService.save(smadispoEntity);
+                     *
+                     * if ( (dispoEntity != null) &&
+                     * (dispoEntity.getIdSmadispo()!= null) &&
+                     * (dispoEntity.getIdSmadispo() > 0) ){ Integer i =
+                     * dispoEntity.getIdSmadispo(); }
+                     */
                     Integer qtdInsertDispo = (Integer) smadispoService.saveClient(smadispoEntity);
                     // Checa se foi inserido com sucesso no banco do cliente
                     if (qtdInsertDispo > 0) {
@@ -221,10 +225,11 @@ public class SmadispoController extends BaseMyController {
                         retornoWebService.statusRetorno = statusRetorno;
                         return new Gson().toJson(retornoWebService);
                     }
+                } else {
+                    // Cria uma vareavel para retorna o status
+                    statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_OK);
+                    statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.OK) + "\n" + MensagemPadrao.EXISTS);
                 }
-                // Cria uma vareavel para retorna o status
-                statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_OK);
-                statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.OK) + "\n" + MensagemPadrao.EXISTS);
             }
             // Adiciona o status
             retornoWebService.statusRetorno = statusRetorno;
@@ -233,8 +238,8 @@ public class SmadispoController extends BaseMyController {
         } catch (JsonSyntaxException e) {
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_INTERNAL_ERROR);
-            statusRetorno.setMensagemRetorno(String.valueOf(e.getMessage()));
-            statusRetorno.setExtra(e.getLocalizedMessage());
+            statusRetorno.setMensagemRetorno(MensagemPadrao.ERROR_STRUCT_JSON + " | " + e.getMessage());
+            statusRetorno.setExtra(e.toString());
 
             // Adiciona o status
             retornoWebService.statusRetorno = statusRetorno;
@@ -243,8 +248,8 @@ public class SmadispoController extends BaseMyController {
         } catch (Exception e) {
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_INTERNAL_ERROR);
-            statusRetorno.setMensagemRetorno(String.valueOf(e.getMessage()));
-            statusRetorno.setExtra(e.getLocalizedMessage());
+            statusRetorno.setMensagemRetorno(MensagemPadrao.ERROR_FIND + " | " + e.getMessage());
+            statusRetorno.setExtra(e.toString());
 
             // Adiciona o status
             retornoWebService.statusRetorno = statusRetorno;

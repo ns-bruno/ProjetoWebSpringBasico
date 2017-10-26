@@ -7,6 +7,7 @@ package br.com.sisinfoweb.controller;
 
 import br.com.sisinfoweb.banco.beans.RetornoWebServiceBeans;
 import br.com.sisinfoweb.banco.beans.StatusRetornoWebServiceBeans;
+import br.com.sisinfoweb.banco.values.MensagemPadrao;
 import br.com.sisinfoweb.entity.AeasaidaEntity;
 import br.com.sisinfoweb.entity.SmadispoEntity;
 import br.com.sisinfoweb.service.AeasaidaService;
@@ -82,8 +83,8 @@ public class AeasaidaController extends BaseMyController{
             
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_INTERNAL_ERROR);
-            statusRetorno.setMensagemRetorno(String.valueOf(e.getMessage()));
-            statusRetorno.setExtra(e.getLocalizedMessage());
+            statusRetorno.setMensagemRetorno(MensagemPadrao.ERROR_STRUCT_JSON + " | " + e.getMessage());
+            statusRetorno.setExtra(e.toString());
             
             // Adiciona o status
             retornoWebService.statusRetorno = statusRetorno;
@@ -94,8 +95,8 @@ public class AeasaidaController extends BaseMyController{
             
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_INTERNAL_ERROR);
-            statusRetorno.setMensagemRetorno(String.valueOf(e.getMessage()));
-            statusRetorno.setExtra(e.getLocalizedMessage());
+            statusRetorno.setMensagemRetorno(MensagemPadrao.ERROR_FIND + " | " + e.getMessage());
+            statusRetorno.setExtra(e.toString());
             
             // Adiciona o status
             retornoWebService.statusRetorno = statusRetorno;

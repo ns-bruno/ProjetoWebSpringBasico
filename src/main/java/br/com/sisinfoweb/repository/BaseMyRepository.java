@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 /**
  *
@@ -21,7 +22,7 @@ import org.springframework.data.repository.NoRepositoryBean;
  * @param <ID>
  */
 @NoRepositoryBean
-public interface BaseMyRepository<T, ID extends Serializable> extends JpaRepository<T, ID>{
+public interface BaseMyRepository<T, ID extends Serializable> extends PagingAndSortingRepository<T, ID>{
     
     final static Logger logger = LoggerFactory.getLogger(Object.class);
     
@@ -35,11 +36,7 @@ public interface BaseMyRepository<T, ID extends Serializable> extends JpaReposit
     
     Serializable saveCustomNativeQuery(String sqlQuery);
     
-    //EntityManager getConnectionClient(T entity);
-    
     public void closeEntityManager();
-    
-   // public void getConnectionAdmin();
     
     public ResultSet executarSQL(String instrucaoSQL);
     

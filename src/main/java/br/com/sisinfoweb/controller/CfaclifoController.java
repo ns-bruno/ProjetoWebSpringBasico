@@ -7,6 +7,7 @@ package br.com.sisinfoweb.controller;
 
 import br.com.sisinfoweb.banco.beans.RetornoWebServiceBeans;
 import br.com.sisinfoweb.banco.beans.StatusRetornoWebServiceBeans;
+import br.com.sisinfoweb.banco.values.MensagemPadrao;
 import static br.com.sisinfoweb.controller.BaseMyController.logger;
 import br.com.sisinfoweb.entity.CfaclifoEntity;
 import br.com.sisinfoweb.entity.SmadispoEntity;
@@ -76,7 +77,6 @@ public class CfaclifoController extends BaseMyController{
             retornoWebService.statusRetorno = statusRetorno;
             // Adiciona os dados que eh pra ser retornado
             retornoWebService.object = lista;
-            cfaclifoService.findCustomNativeQuery(Boolean.FALSE, null, null, where);
             
             return new Gson().toJson(retornoWebService);
         } catch(JsonSyntaxException e){
@@ -84,8 +84,8 @@ public class CfaclifoController extends BaseMyController{
             
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_INTERNAL_ERROR);
-            statusRetorno.setMensagemRetorno(String.valueOf(e.getMessage()));
-            statusRetorno.setExtra(e.getLocalizedMessage());
+            statusRetorno.setMensagemRetorno(MensagemPadrao.ERROR_STRUCT_JSON + " | " + e.getMessage());
+            statusRetorno.setExtra(e.toString());
             
             // Adiciona o status
             retornoWebService.statusRetorno = statusRetorno;
@@ -96,8 +96,8 @@ public class CfaclifoController extends BaseMyController{
             
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_INTERNAL_ERROR);
-            statusRetorno.setMensagemRetorno(String.valueOf(e.getMessage()));
-            statusRetorno.setExtra(e.getLocalizedMessage());
+            statusRetorno.setMensagemRetorno(MensagemPadrao.ERROR_FIND + " | " + e.getMessage());
+            statusRetorno.setExtra(e.toString());
             
             // Adiciona o status
             retornoWebService.statusRetorno = statusRetorno;

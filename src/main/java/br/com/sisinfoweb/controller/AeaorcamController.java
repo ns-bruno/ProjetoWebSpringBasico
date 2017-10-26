@@ -129,6 +129,10 @@ public class AeaorcamController extends BaseMyController{
             JsonParser jsonParser = new JsonParser();
             JsonObject orcamento = (JsonObject) jsonParser.parse(orcamentoJson);
             
+            // Coverte o dispositivo passado no formato json em uma entidade
+            SmadispoEntity smadispoEntity = new Gson().fromJson(dispositivo, SmadispoEntity.class);
+            aeaorcamService.setSmadispoEntity(smadispoEntity);
+            
             String insertOrcamento =  "UPDATE OR INSERT INTO AEAORCAM(GUID, ID_CFACLIFO_VENDEDOR_INI, ID_SMAEMPRE, ID_CFACLIFO, ID_CFAESTAD, \n"
                                     + "ID_CFACIDAD, ID_CFATPDOC, ID_AEASERIE, DT_ORCAMENTO, \n"
                                     //+ "VL_MERC_CUSTO, VL_MERC_BRUTO, VL_MERC_DESCONTO, \n"
@@ -161,7 +165,7 @@ public class AeaorcamController extends BaseMyController{
                                     + ( ( (orcamento.has("observacao")) && (orcamento.get("observacao") != null) && (!orcamento.get("observacao").getAsString().isEmpty()) ) ? "'"+orcamento.get("observacao").getAsString() + "', " : "null, ")
                                     + "'X') MATCHING (GUID);";
             
-            Integer qtdInsert = (Integer) aeaorcamService.saveCustomNativeQuery(insertOrcamento);
+            Integer qtdInsert = (Integer) aeaorcamService.saveCustomNativeQueryClient(insertOrcamento);
             
             if(qtdInsert > 0){
                 
@@ -196,14 +200,14 @@ public class AeaorcamController extends BaseMyController{
                                         + "'" +(((itemOrcamento.has("tipoProduto")) && (!itemOrcamento.get("tipoProduto").getAsString().isEmpty())) ? itemOrcamento.get("tipoProduto").getAsString() : "null" )+ "',"
                                         + "'" +(((itemOrcamento.has("complemento")) && (!itemOrcamento.get("complemento").getAsString().isEmpty())) ?  itemOrcamento.get("complemento").getAsString() : "null" )+ "') MATCHING (GUID)";
                     
-                    if (((Integer)aeaorcamService.saveCustomNativeQuery(insertItem)) <= 0){
+                    if (((Integer)aeaorcamService.saveCustomNativeQueryClient(insertItem)) <= 0){
                         itensInseridoSucesso = false;
                     }
                 }
                 if (itensInseridoSucesso){
                     String updateOrcamento = "UPDATE AEAORCAM SET AEAORCAM.ANDAMENTO = '1' WHERE (AEAORCAM.GUID = '" + orcamento.get("guid").getAsString() + "')";
                     
-                    if(((Integer)aeaorcamService.saveCustomNativeQuery(updateOrcamento)) > 0){
+                    if(((Integer)aeaorcamService.saveCustomNativeQueryClient(updateOrcamento)) > 0){
                         // Cria uma vareavel para retorna o status
                         statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_OK);
                         statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.OK) + "\n" + MensagemPadrao.INSERT_SUCCESS);
@@ -246,8 +250,8 @@ public class AeaorcamController extends BaseMyController{
         } catch (JsonSyntaxException e) {
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_INTERNAL_ERROR);
-            statusRetorno.setMensagemRetorno(String.valueOf(e.getMessage()));
-            statusRetorno.setExtra(e.getLocalizedMessage());
+            statusRetorno.setMensagemRetorno(MensagemPadrao.INSERT_ERROR + " | " + e.getMessage());
+            statusRetorno.setExtra(e.toString());
             
             // Adiciona o status
             retornoWebService.statusRetorno = statusRetorno;
@@ -256,8 +260,8 @@ public class AeaorcamController extends BaseMyController{
         }  catch (Exception e) {
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_INTERNAL_ERROR);
-            statusRetorno.setMensagemRetorno(String.valueOf(e.getMessage()));
-            statusRetorno.setExtra(e.getLocalizedMessage());
+            statusRetorno.setMensagemRetorno(MensagemPadrao.INSERT_ERROR + " | " + e.getMessage());
+            statusRetorno.setExtra(e.toString());
             
             // Adiciona o status
             retornoWebService.statusRetorno = statusRetorno;

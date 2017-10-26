@@ -27,4 +27,9 @@ public interface MensagemPadrao {
     String ERROR_MAPEAR_RESULTSET = "Erro ao converter o result ResultSet em uma classe Entity.";
     String ERROR_SQL_EXCEPTION = "Erro ao executar o sql.";
     String ERROR_CONSTRUCT_SQL = "Erro ao construir o sql.";
+    String ERROR_STRUCT_JSON = "Erro na estrutura do JSON";
+    String LOGGER_NEW_CAD_DISPOSITIVO = "CADASTRAR UM NOVO DISPOSITIVO";
+    String LOGGER_EXECUTE_FIND = "EXECUTANDO SELECT NO BANCO DE DADOS";
+    String LOGGER_EXECUTE_SALVE = "EXECUTANDO INSERT/UPDATE NO BANCO DE DADOS";
+    String LOGGER_CLOSE_DATABASE = "FECHANDO BANCO DE DADOS";
 }

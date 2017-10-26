@@ -7,6 +7,7 @@ package br.com.sisinfoweb.service;
 
 import br.com.sisinfoweb.banco.values.MensagemPadrao;
 import br.com.sisinfoweb.entity.SmadispoEntity;
+import br.com.sisinfoweb.exception.CustomException;
 import br.com.sisinfoweb.funcoes.FuncoesPersonalizadas;
 import br.com.sisinfoweb.repository.BaseMyRepository;
 import java.io.Serializable;
@@ -65,7 +66,8 @@ public class BaseMyService<R extends BaseMyRepository, E> {
             return baseMyRepository.findAll(sqlQuery);
         } catch (Exception e) {
             logger.error(MensagemPadrao.ERROR_FIND + e.getMessage());
-            return null;
+            
+            throw new CustomException(e);
         }
     }
 
@@ -84,11 +86,13 @@ public class BaseMyService<R extends BaseMyRepository, E> {
             return mapResultSetToObject(resultado, Class.forName("br.com.sisinfoweb.entity." + this.getClass().getSimpleName().replace("Service", "") + "Entity"));
         } catch (ScriptException e) {
             logger.error(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI FINDALLCLIENT. " + e.getMessage());
-            return null;
+            
+            throw new CustomException(e);
 
         } catch (ClassNotFoundException e) {
             logger.error(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI FINDALLCLIENT. " + e.getMessage());
-            return null;
+            
+            throw new CustomException(e);
         }
     }
 
@@ -98,7 +102,8 @@ public class BaseMyService<R extends BaseMyRepository, E> {
             return (E) baseMyRepository.findOneByGuid(guid);
         } catch (Exception e) {
             logger.error(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI A BUSCA POR GUID. " + e.getMessage());
-            return null;
+            
+            throw new CustomException(e);
         }
     }
 
@@ -107,7 +112,7 @@ public class BaseMyService<R extends BaseMyRepository, E> {
         try {
             // Cria um sql nativo se nao for passado um sqlCustom por parametro
             String sqlQuery;
-
+            logger.debug(where);
             if ((sqlCustomParam != null) && (!sqlCustomParam.isEmpty())) {
                 sqlQuery = sqlCustomParam;
 
@@ -124,11 +129,13 @@ public class BaseMyService<R extends BaseMyRepository, E> {
             return baseMyRepository.findCustomNativeQuery(sqlQuery);
         } catch (ScriptException e) {
             logger.error(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI UMA QUERY NATIVA DO SERVICE. " + e.getMessage());
-            return null;
+            
+            throw new CustomException(e);
 
         } catch (Exception e) {
             logger.error(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI UMA QUERY NATIVA DO SERVICE. " + e.getMessage());
-            return null;
+            
+            throw new CustomException(e);
         }
     }
 
@@ -158,25 +165,31 @@ public class BaseMyService<R extends BaseMyRepository, E> {
             return mapResultSetToObject(resultado, Class.forName("br.com.sisinfoweb.entity." + this.getClass().getSimpleName().replace("Service", "") + "Entity"));
         } catch (ScriptException e) {
             logger.error(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI FINDCUSTOMNATIVEQUERYCLIENT. " + e.getMessage());
-            return null;
+            //return null;
+            throw new CustomException(e);
 
         } catch (ClassNotFoundException e) {
             logger.error(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI FINDCUSTOMNATIVEQUERYCLIENTE. " + e.getMessage());
-            return null;
+            //return null;
+            throw new CustomException(e);
         }
     }
 
+    
+    
     @Transactional
     public Serializable saveCustomNativeQuery(String queryInsert) {
         try {
             return baseMyRepository.saveCustomNativeQuery(queryInsert);
         } catch (ScriptException e) {
             logger.error(MensagemPadrao.ERROR_SAVE + e.getMessage());
-            return -1;
+            
+            throw new CustomException(e);
 
         } catch (Exception e) {
             logger.error(MensagemPadrao.ERROR_SAVE + e.getMessage());
-            return -1;
+            
+            throw new CustomException(e);
 
         }
     }
@@ -190,12 +203,13 @@ public class BaseMyService<R extends BaseMyRepository, E> {
             return baseMyRepository.executeInsertUpdateDelete(queryInsert);
         } catch (ScriptException e) {
             logger.error(MensagemPadrao.ERROR_SAVE + e.getMessage());
-            return -1;
+            
+            throw new CustomException(e);
 
         } catch (Exception e) {
             logger.error(MensagemPadrao.ERROR_SAVE + e.getMessage());
-            return -1;
-
+            
+            throw new CustomException(e);
         }
     }
 
@@ -205,11 +219,13 @@ public class BaseMyService<R extends BaseMyRepository, E> {
             return (E) baseMyRepository.save(entity);
         } catch (ScriptException e) {
             logger.error(MensagemPadrao.ERROR_SAVE + e.getMessage());
-            return null;
+            
+            throw new CustomException(e);
 
         } catch (Exception e) {
             logger.error(MensagemPadrao.ERROR_SAVE + e.getMessage());
-            return null;
+            
+            throw new CustomException(e);
 
         }
     }
@@ -224,11 +240,13 @@ public class BaseMyService<R extends BaseMyRepository, E> {
 
         } catch (ScriptException e) {
             logger.error(MensagemPadrao.ERROR_SAVE + e.getMessage());
-            return null;
+            
+            throw new CustomException(e);
 
         } catch (Exception e) {
             logger.error(MensagemPadrao.ERROR_SAVE + e.getMessage());
-            return null;
+            
+            throw new CustomException(e);
 
         }
     }
@@ -259,7 +277,7 @@ public class BaseMyService<R extends BaseMyRepository, E> {
                         E bean = (E) outputClass.newInstance();
                         for (int _iterator = 0; _iterator < rsmd.getColumnCount(); _iterator++) {
                             // getting the SQL column name
-                            String columnName = rsmd.getColumnName(_iterator + 1);
+                            String columnName = rsmd.getColumnLabel(_iterator + 1);
                             // reading the value of the SQL column
                             Object columnValue = rs.getObject(_iterator + 1);
                             // iterating over outputClass attributes to check if any attribute has 'Column' annotation with matching 'name' value
@@ -290,8 +308,12 @@ public class BaseMyService<R extends BaseMyRepository, E> {
             }
         } catch (IllegalAccessException | SQLException | InstantiationException e) {
             logger.error(MensagemPadrao.ERROR_MAPEAR_RESULTSET + e.getMessage());
+            
+            throw new CustomException(e);
         } catch (Exception e) {
             logger.error(MensagemPadrao.ERROR_MAPEAR_RESULTSET + e.getMessage());
+            
+            throw new CustomException(e);
         }
         return outputList;
     }

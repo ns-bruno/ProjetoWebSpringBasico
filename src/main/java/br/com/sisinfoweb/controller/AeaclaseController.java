@@ -7,10 +7,10 @@ package br.com.sisinfoweb.controller;
 
 import br.com.sisinfoweb.banco.beans.RetornoWebServiceBeans;
 import br.com.sisinfoweb.banco.beans.StatusRetornoWebServiceBeans;
+import br.com.sisinfoweb.banco.values.MensagemPadrao;
 import static br.com.sisinfoweb.controller.BaseMyController.logger;
 import br.com.sisinfoweb.entity.AeaclaseEntity;
 import br.com.sisinfoweb.entity.SmadispoEntity;
-import br.com.sisinfoweb.funcoes.FuncoesPersonalizadas;
 import br.com.sisinfoweb.service.AeaclaseService;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
@@ -57,7 +57,6 @@ public class AeaclaseController extends BaseMyController{
             // Coverte o dispositivo passado no formato json em uma entidade
             SmadispoEntity smadispoEntity = new Gson().fromJson(dispositivo, SmadispoEntity.class);
             aeaclaseService.setSmadispoEntity(smadispoEntity);
-            
             List<AeaclaseEntity> lista;
             // Checa se foi passado alqum parametro para filtrar
             if ( ((sqlQuery != null) && (!sqlQuery.isEmpty())) || 
@@ -77,15 +76,15 @@ public class AeaclaseController extends BaseMyController{
             retornoWebService.statusRetorno = statusRetorno;
             // Adiciona os dados que eh pra ser retornado
             retornoWebService.object = lista;
-            
+
             return new Gson().toJson(retornoWebService);
         } catch(JsonSyntaxException e){
             logger.error(getClass().getSimpleName() + " - " + e.getMessage());
             
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_INTERNAL_ERROR);
-            statusRetorno.setMensagemRetorno(String.valueOf(e.getMessage()));
-            statusRetorno.setExtra(e.getLocalizedMessage());
+            statusRetorno.setMensagemRetorno(MensagemPadrao.ERROR_STRUCT_JSON + " | " + e.getMessage());
+            statusRetorno.setExtra(e.toString());
             
             // Adiciona o status
             retornoWebService.statusRetorno = statusRetorno;
@@ -96,8 +95,8 @@ public class AeaclaseController extends BaseMyController{
             
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_INTERNAL_ERROR);
-            statusRetorno.setMensagemRetorno(String.valueOf(e.getMessage()));
-            statusRetorno.setExtra(e.getLocalizedMessage());
+            statusRetorno.setMensagemRetorno(MensagemPadrao.ERROR_FIND + " | " + e.getMessage());
+            statusRetorno.setExtra(e.toString());
             
             // Adiciona o status
             retornoWebService.statusRetorno = statusRetorno;
