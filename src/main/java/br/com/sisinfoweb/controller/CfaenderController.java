@@ -5,6 +5,8 @@
  */
 package br.com.sisinfoweb.controller;
 
+import br.com.sisinfoweb.banco.beans.PageBeans;
+import br.com.sisinfoweb.banco.beans.PageableBeans;
 import br.com.sisinfoweb.banco.beans.RetornoWebServiceBeans;
 import br.com.sisinfoweb.banco.beans.StatusRetornoWebServiceBeans;
 import br.com.sisinfoweb.banco.values.MensagemPadrao;
@@ -17,7 +19,6 @@ import br.com.sisinfoweb.service.CfaenderService;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import java.net.HttpURLConnection;
-import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -53,8 +54,11 @@ public class CfaenderController extends BaseMyController{
                             @RequestParam(name = "dispositivo", required = true) String dispositivo,
                             @RequestParam(name = "columnSelected", required = false) String columnSelected,
                             @RequestParam(name = "where", required = false) String where,
+                            @RequestParam(name = "sort", required = false) String sort,
                             @RequestParam(name = "resume", required = false, defaultValue = "false") Boolean resume,
-                            @RequestParam(name = "sqlQuery", required = false) String sqlQuery) {
+                            @RequestParam(name = "sqlQuery", required = false) String sqlQuery,
+                            @RequestParam(name = "size", required = false) Integer size,
+                            @RequestParam(name = "pageNumber", required = false) Integer pageNumber) {
         
         StatusRetornoWebServiceBeans statusRetorno = new StatusRetornoWebServiceBeans();
         RetornoWebServiceBeans retornoWebService = new RetornoWebServiceBeans();
@@ -63,16 +67,22 @@ public class CfaenderController extends BaseMyController{
             SmadispoEntity smadispoEntity = new Gson().fromJson(dispositivo, SmadispoEntity.class);
             cfaenderService.setSmadispoEntity(smadispoEntity);
             
-            List<CfaenderEntity> lista;
+            PageableBeans pageable = new PageableBeans( ((pageNumber != null && pageNumber > 0) ? pageNumber : 0), 
+                                                        ((size != null && size > 0) ? size : 0)
+                                                      );
+            
+            PageBeans<CfaenderEntity> listaPage;
+            
             // Checa se foi passado alqum parametro para filtrar
             if ( ((sqlQuery != null) && (!sqlQuery.isEmpty())) || 
                     ((columnSelected != null) && (!columnSelected.isEmpty())) || 
-                    ((where != null) && (!where.isEmpty())) ){
+                    ((where != null) && (!where.isEmpty())) ||
+                    ((sort != null) && (!sort.isEmpty())) ){
                 // Pesquisa de acordo com o sql passado
-                lista = cfaenderService.findCustomNativeQueryClient(resume, sqlQuery, columnSelected, where);
+                listaPage = cfaenderService.findCustomNativeQueryClient(resume, sqlQuery, columnSelected, where, sort, pageable);
             
             } else {
-                lista = cfaenderService.findAllClient();
+                listaPage = cfaenderService.findAllClient(sort, pageable);
             }
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_OK);
@@ -81,7 +91,8 @@ public class CfaenderController extends BaseMyController{
             // Adiciona o status
             retornoWebService.statusRetorno = statusRetorno;
             // Adiciona os dados que eh pra ser retornado
-            retornoWebService.object = lista;
+            retornoWebService.object = listaPage.getContent();
+            retornoWebService.page = listaPage.getPageable();
             
             return new Gson().toJson(retornoWebService);
         } catch(JsonSyntaxException e){
@@ -122,8 +133,11 @@ public class CfaenderController extends BaseMyController{
                             @RequestParam(name = "dispositivo", required = true) String dispositivo,
                             @RequestParam(name = "columnSelected", required = false) String columnSelected,
                             @RequestParam(name = "where", required = false) String where,
+                            @RequestParam(name = "sort", required = false) String sort,
                             @RequestParam(name = "resume", required = false, defaultValue = "false") Boolean resume,
-                            @RequestParam(name = "sqlQuery", required = false) String sqlQuery) {
+                            @RequestParam(name = "sqlQuery", required = false) String sqlQuery,
+                            @RequestParam(name = "size", required = false) Integer size,
+                            @RequestParam(name = "pageNumber", required = false) Integer pageNumber) {
         
         StatusRetornoWebServiceBeans statusRetorno = new StatusRetornoWebServiceBeans();
         RetornoWebServiceBeans retornoWebService = new RetornoWebServiceBeans();
@@ -132,8 +146,13 @@ public class CfaenderController extends BaseMyController{
             SmadispoEntity smadispoEntity = new Gson().fromJson(dispositivo, SmadispoEntity.class);
             cfaenderCustomService.setSmadispoEntity(smadispoEntity);
             
-            List<CfaenderCustomEntity> lista;
-            sqlQuery =  "SELECT CFAENDER.id_cfaender, CFAENDER.ID_CFAESTAD, CFAENDER.ID_CFACIDAD, \n" +
+            PageableBeans pageable = new PageableBeans( ((pageNumber != null && pageNumber > 0) ? pageNumber : 0), 
+                                                        ((size != null && size > 0) ? size : 0)
+                                                      );
+            
+            PageBeans<CfaenderCustomEntity> listaPage;
+            
+            sqlQuery =  "SELECT CFAENDER.ID_CFAENDER, CFAENDER.ID_CFAESTAD, CFAENDER.ID_CFACIDAD, \n" +
                         "CFAENDER.ID_SMAEMPRE, CFAENDER.ID_CFACLIFO, CFAENDER.DT_CAD, CFAENDER.DT_ALT, CFAENDER.TIPO, \n" +
                         "CFAENDER.GUID, CFAENDER.US_CAD, CFAENDER.CT_INTEG, \n" +
                         "CFALOGRA.CEP, CFABAIRO.DESCRICAO AS BAIRRO, CFATPLOG.SIGLA || ' ' || CFALOGRA.DESCRICAO AS LOGRADOURO, CFAENDER.NUMERO, \n" +
@@ -147,11 +166,14 @@ public class CfaenderController extends BaseMyController{
                 // Adiciona o where na estrutora do select
                 sqlQuery += " WHERE ( " + where.replace("+", " ") +" )";
                 
+                if ( (sort != null) && (!sort.isEmpty()) ){
+                    sqlQuery += " ORDER BY " + sort.replace("+", " ") +" ";
+                }
                 // Pesquisa de acordo com o sql passado
-                lista = cfaenderCustomService.findCustomNativeQueryClient(resume, sqlQuery, columnSelected, null);
+                listaPage = cfaenderCustomService.findCustomNativeQueryClient(resume, sqlQuery, columnSelected, null, sort, pageable);
             
             } else {
-                lista = cfaenderCustomService.findCustomNativeQuery(false, sqlQuery, null, null);
+                listaPage = cfaenderCustomService.findCustomNativeQueryClient(false, sqlQuery, null, null, sort, pageable);
             }
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_OK);
@@ -160,7 +182,8 @@ public class CfaenderController extends BaseMyController{
             // Adiciona o status
             retornoWebService.statusRetorno = statusRetorno;
             // Adiciona os dados que eh pra ser retornado
-            retornoWebService.object = lista;
+            retornoWebService.object = listaPage.getContent();
+            retornoWebService.page = listaPage.getPageable();
             
             return new Gson().toJson(retornoWebService);
         } catch(Exception e){

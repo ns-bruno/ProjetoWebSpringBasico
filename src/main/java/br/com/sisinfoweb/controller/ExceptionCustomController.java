@@ -25,7 +25,6 @@ public class ExceptionCustomController extends ResponseEntityExceptionHandler{
     
     @ExceptionHandler({CustomException.class, Exception.class, ClassNotFoundException.class, SQLException.class})
     public ResponseEntity<RetornoWebServiceBeans> handleException(Exception retorno){
-        
 
         RetornoWebServiceBeans retornoWebServiceBeans = new RetornoWebServiceBeans();
         retornoWebServiceBeans.object = retorno.getMessage();

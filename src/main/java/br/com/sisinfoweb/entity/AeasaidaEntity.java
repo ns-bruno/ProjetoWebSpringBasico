@@ -7,7 +7,6 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -229,9 +228,8 @@ public class AeasaidaEntity {
     private short situacao;
 
     @Column(name = "OBS", table = "AEASAIDA")
-    @Lob
     @Basic
-    private byte[] obs;
+    private String obs;
 
     @Column(name = "PESSOA_CLIENTE", table = "AEASAIDA")
     @Basic
@@ -737,11 +735,11 @@ public class AeasaidaEntity {
         this.situacao = situacao;
     }
 
-    public byte[] getObs() {
+    public String getObs() {
         return this.obs;
     }
 
-    public void setObs(byte[] obs) {
+    public void setObs(String obs) {
         this.obs = obs;
     }
 

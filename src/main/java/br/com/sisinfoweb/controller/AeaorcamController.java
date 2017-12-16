@@ -5,6 +5,8 @@
  */
 package br.com.sisinfoweb.controller;
 
+import br.com.sisinfoweb.banco.beans.PageBeans;
+import br.com.sisinfoweb.banco.beans.PageableBeans;
 import br.com.sisinfoweb.banco.beans.RetornoWebServiceBeans;
 import br.com.sisinfoweb.banco.beans.StatusRetornoWebServiceBeans;
 import br.com.sisinfoweb.banco.values.MensagemPadrao;
@@ -18,7 +20,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 import java.net.HttpURLConnection;
-import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -52,8 +53,11 @@ public class AeaorcamController extends BaseMyController{
                             @RequestParam(name = "dispositivo", required = true) String dispositivo,
                             @RequestParam(name = "columnSelected", required = false) String columnSelected,
                             @RequestParam(name = "where", required = false) String where,
+                            @RequestParam(name = "sort", required = false) String sort,
                             @RequestParam(name = "resume", required = false, defaultValue = "false") Boolean resume,
-                            @RequestParam(name = "sqlQuery", required = false) String sqlQuery) {
+                            @RequestParam(name = "sqlQuery", required = false) String sqlQuery,
+                            @RequestParam(name = "size", required = false) Integer size,
+                            @RequestParam(name = "pageNumber", required = false) Integer pageNumber) {
         
         StatusRetornoWebServiceBeans statusRetorno = new StatusRetornoWebServiceBeans();
         RetornoWebServiceBeans retornoWebService = new RetornoWebServiceBeans();
@@ -62,16 +66,22 @@ public class AeaorcamController extends BaseMyController{
             SmadispoEntity smadispoEntity = new Gson().fromJson(dispositivo, SmadispoEntity.class);
             aeaorcamService.setSmadispoEntity(smadispoEntity);
             
-            List<AeaorcamEntity> lista;
+            PageableBeans pageable = new PageableBeans( ((pageNumber != null && pageNumber > 0) ? pageNumber : 0), 
+                                                        ((size != null && size > 0) ? size : 0)
+                                                      );
+            
+            PageBeans<AeaorcamEntity> listaPage;
+            
             // Checa se foi passado alqum parametro para filtrar
             if ( ((sqlQuery != null) && (!sqlQuery.isEmpty())) || 
                     ((columnSelected != null) && (!columnSelected.isEmpty())) || 
-                    ((where != null) && (!where.isEmpty())) ){
+                    ((where != null) && (!where.isEmpty())) ||
+                    ((sort != null) && (!sort.isEmpty())) ){
                 // Pesquisa de acordo com o sql passado
-                lista = aeaorcamService.findCustomNativeQueryClient(resume, sqlQuery, columnSelected, where);
+                listaPage = aeaorcamService.findCustomNativeQueryClient(resume, sqlQuery, columnSelected, where, sort, pageable);
                 
             } else {
-                lista = aeaorcamService.findAllClient();
+                listaPage = aeaorcamService.findAllClient(sort, pageable);
             }
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_OK);
@@ -80,7 +90,8 @@ public class AeaorcamController extends BaseMyController{
             // Adiciona o status
             retornoWebService.statusRetorno = statusRetorno;
             // Adiciona os dados que eh pra ser retornado
-            retornoWebService.object = lista;
+            retornoWebService.object = listaPage.getContent();
+            retornoWebService.page = listaPage.getPageable();
             
             return new Gson().toJson(retornoWebService);
         } catch(JsonSyntaxException e){
@@ -141,11 +152,11 @@ public class AeaorcamController extends BaseMyController{
                                     + "ENDERECO_CLIENTE, BAIRRO_CLIENTE, CEP_CLIENTE, OBS, ANDAMENTO) \n VALUES ("
                                     + "'"+orcamento.get("guid").getAsString() + "',"
                                     + "(SELECT CFACLIFO.ID_CFACLIFO FROM CFACLIFO WHERE CFACLIFO.CODIGO_FUN = " + orcamento.get("idPessoaVendedor").getAsInt() + "),"
-                                    + orcamento.get("idEmpresa").getAsInt() + ","
-                                    + orcamento.get("idPessoa").getAsInt() + ","
-                                    + orcamento.get("idEstado").getAsInt() + ","
-                                    + orcamento.get("idCidade").getAsInt() + ","
-                                    + orcamento.get("idTipoDocumento").getAsInt() + ","
+                                    + ((orcamento.get("idEmpresa").getAsInt() > 0) ? orcamento.get("idEmpresa").getAsInt() : "null") + ","
+                                    + ((orcamento.get("idPessoa").getAsInt() > 0) ? orcamento.get("idPessoa").getAsInt() : "null") + ","
+                                    + ((orcamento.get("idEstado").getAsInt() > 0) ? orcamento.get("idEstado").getAsInt() : "null") + ","
+                                    + ((orcamento.get("idCidade").getAsInt() > 0) ? orcamento.get("idCidade").getAsInt() : "null") + ","
+                                    + ((orcamento.get("idTipoDocumento").getAsInt() > 0) ? orcamento.get("idTipoDocumento").getAsInt() : "null") + ","
                                     + "(SELECT ID_AEASERIE_ORC_PALM FROM SMAEMPRE WHERE SMAEMPRE.ID_SMAEMPRE = " + orcamento.get("idEmpresa").getAsInt() + "), "
                                     + "'"+orcamento.get("dataCadastro").getAsString().replace("/", ".").substring(0, orcamento.get("dataCadastro").getAsString().indexOf(" ")) + "', "
                                     //+ orcamento.getTotalOrcamentoCusto() + ", "
@@ -157,11 +168,11 @@ public class AeaorcamController extends BaseMyController{
                                     + orcamento.get("tipoVenda").getAsString() + ", "
                                     + ""+( ((orcamento.has("pessoaCliente"))&& (!orcamento.get("pessoaCliente").getAsString().equals("null"))) ? ("'" + orcamento.get("pessoaCliente").getAsString() + "'") : "null" )+ ", "
                                     + "'"+orcamento.get("nomeRazao").getAsString() + "', "
-                                    + "'"+( (orcamento.has("rgIe")) ? orcamento.get("rgIe").getAsString() : "")+ "', "
-                                    + "'"+( (orcamento.has("cpfCnpj")) ? orcamento.get("cpfCnpj").getAsString() : "")+ "', "
-                                    + "'"+( (orcamento.has("enderecoCliente")) ? orcamento.get("enderecoCliente").getAsString() : "")+ "', "
-                                    + "'"+( (orcamento.has("bairroCliente")) ? orcamento.get("bairroCliente").getAsString() : "" )+ "', "
-                                    + "'"+( (orcamento.has("cepCliente")) ? orcamento.get("cepCliente").getAsString() : "" )+ "', "
+                                    + ( (orcamento.has("rgIe") && orcamento.get("rgIe") != null && orcamento.get("rgIe").getAsString().length() > 0) ? "'" + orcamento.get("rgIe").getAsString() + "'" : "null")+ ", "
+                                    + ( (orcamento.has("cpfCnpj") && orcamento.get("cpfCnpj") != null && orcamento.get("cpfCnpj").getAsString().length() > 0) ? "'" + orcamento.get("cpfCnpj").getAsString() + "'" : "null")+ ", "
+                                    + ( (orcamento.has("enderecoCliente") && orcamento.get("enderecoCliente") != null && orcamento.get("enderecoCliente").getAsString().length() > 0) ? "'" + orcamento.get("enderecoCliente").getAsString() + "'" : "null")+ ", "
+                                    + ( (orcamento.has("bairroCliente") && orcamento.get("bairroCliente") != null && orcamento.get("bairroCliente").getAsString().length() > 0) ? "'" + orcamento.get("bairroCliente").getAsString() + "'" : "null" )+ ", "
+                                    + ( (orcamento.has("cepCliente") && orcamento.get("cepCliente") != null && orcamento.get("cepCliente").getAsString().length() > 0) ? "'" + orcamento.get("cepCliente").getAsString() + "'" : "null" )+ ", "
                                     + ( ( (orcamento.has("observacao")) && (orcamento.get("observacao") != null) && (!orcamento.get("observacao").getAsString().isEmpty()) ) ? "'"+orcamento.get("observacao").getAsString() + "', " : "null, ")
                                     + "'X') MATCHING (GUID);";
             
@@ -182,7 +193,7 @@ public class AeaorcamController extends BaseMyController{
                     JsonObject pessoaVendedor = itemOrcamento.getAsJsonObject("pessoaVendedor");
                     
                     
-                    String insertItem =   "UPDATE or INSERT INTO AEAITORC(GUID, ID_AEAORCAM, ID_AEAESTOQ, ID_AEAPLPGT, \n"
+                    String insertItem =   "UPDATE OR INSERT INTO AEAITORC(GUID, ID_AEAORCAM, ID_AEAESTOQ, ID_AEAPLPGT, \n"
                                         + "ID_AEAUNVEN, ID_CFACLIFO_VENDEDOR, SEQUENCIA, QUANTIDADE, \n"
                                         + "VL_CUSTO, VL_BRUTO, VL_DESCONTO, PROMOCAO, TIPO_PRODUTO, COMPLEMENTO) \n VALUES ("
                                         + "'" + itemOrcamento.get("guid").getAsString() + "',"
@@ -198,7 +209,7 @@ public class AeaorcamController extends BaseMyController{
                                         + itemOrcamento.get("valorDesconto").getAsDouble() + ","
                                         + "" +(((itemOrcamento.has("promocao")) && (!itemOrcamento.get("promocao").getAsString().isEmpty())) ? itemOrcamento.get("promocao").getAsString() : "'0'" )+ ","
                                         + "'" +(((itemOrcamento.has("tipoProduto")) && (!itemOrcamento.get("tipoProduto").getAsString().isEmpty())) ? itemOrcamento.get("tipoProduto").getAsString() : "null" )+ "',"
-                                        + "'" +(((itemOrcamento.has("complemento")) && (!itemOrcamento.get("complemento").getAsString().isEmpty())) ?  itemOrcamento.get("complemento").getAsString() : "null" )+ "') MATCHING (GUID)";
+                                        + (((itemOrcamento.has("complemento")) && (itemOrcamento.get("complemento") != null) && (itemOrcamento.get("complemento").getAsString().length() > 0)) ?  "'" + itemOrcamento.get("complemento").getAsString() + "'" : "null" )+ ") MATCHING (GUID)";
                     
                     if (((Integer)aeaorcamService.saveCustomNativeQueryClient(insertItem)) <= 0){
                         itensInseridoSucesso = false;
@@ -208,6 +219,9 @@ public class AeaorcamController extends BaseMyController{
                     String updateOrcamento = "UPDATE AEAORCAM SET AEAORCAM.ANDAMENTO = '1' WHERE (AEAORCAM.GUID = '" + orcamento.get("guid").getAsString() + "')";
                     
                     if(((Integer)aeaorcamService.saveCustomNativeQueryClient(updateOrcamento)) > 0){
+                        
+                        AeaorcamEntity dadosOrcamento = aeaorcamService.findOneByGuidClient(orcamento.get("guid").getAsString());
+                        
                         // Cria uma vareavel para retorna o status
                         statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_OK);
                         statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.OK) + "\n" + MensagemPadrao.INSERT_SUCCESS);
@@ -215,7 +229,7 @@ public class AeaorcamController extends BaseMyController{
                         // Adiciona o status
                         retornoWebService.statusRetorno = statusRetorno;
                         // Adiciona os dados que eh pra ser retornado
-                        retornoWebService.object = qtdInsert;
+                        retornoWebService.object = dadosOrcamento;
                     } else {
                         // Cria uma vareavel para retorna o status
                         statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_INTERNAL_ERROR);

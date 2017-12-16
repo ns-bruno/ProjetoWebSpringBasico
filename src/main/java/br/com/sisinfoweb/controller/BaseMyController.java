@@ -32,8 +32,11 @@ public abstract class BaseMyController {
                                         @RequestParam(name = "dispositivo", required = true) String dispositivo,
                                         @RequestParam(name = "columnSelected", required = false) String columnSelected,
                                         @RequestParam(name = "where", required = false) String where,
+                                        @RequestParam(name = "sort", required = false) String sort,
                                         @RequestParam(name = "resume", required = false, defaultValue = "false") Boolean resume,
-                                        @RequestParam(name = "sqlQuery", required = false) String sqlQuery);
+                                        @RequestParam(name = "sqlQuery", required = false) String sqlQuery,
+                                        @RequestParam(name = "size", required = false) Integer size,
+                                        @RequestParam(name = "pageNumber", required = false) Integer pageNumber);
     //@ModelAttribute("dispositivo")
     //public abstract void getDataConnection(@RequestParam(name = "dispositivo", required = true) String dispositivo);
 }

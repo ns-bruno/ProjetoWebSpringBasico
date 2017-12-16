@@ -41,7 +41,7 @@ public class FuncoesPersonalizadas {
         return map;
     }
 
-    public String construirSelectFromParamJson(String table, String columns, String where) {
+    public String construirSelectFromParamJson(String table, String columns, String where, String sort) {
         StringBuilder query = new StringBuilder();
         try {
             if ((table != null) && (!table.isEmpty())) {
@@ -75,6 +75,35 @@ public class FuncoesPersonalizadas {
                     if (object.has(BaseMyController.WHERE_JSON)) {
                         // Adiciona as coluna na query
                     }*/
+                }
+                // Checa se foi passado alguma ordenacao
+                if ((sort != null) && (!sort.isEmpty())){
+                    query.append(" ORDER BY ").append(sort.replace("+", " "));
+                }
+                query.append(";");
+            }
+        } catch (JsonSyntaxException e) {
+            return null;
+        }
+        return query.toString();
+    }
+    
+    public String construirSelectCountFromParamJson(String table, String where, String sort) {
+        StringBuilder query = new StringBuilder();
+        try {
+            if ((table != null) && (!table.isEmpty())) {
+                query.append("SELECT ");
+                query.append(" COUNT(*) ");
+                query.append(" FROM ");
+                query.append(table);
+
+                if ((where != null) && (!where.isEmpty())) {
+
+                    query.append(" WHERE (").append(where.replace("+", " ")).append(")");
+                }
+                // Checa se foi passado alguma ordenacao
+                if ((sort != null) && (!sort.isEmpty())){
+                    query.append(" ORDER BY ").append(sort.replace("+", " "));
                 }
                 query.append(";");
             }

@@ -5,7 +5,6 @@
  */
 package br.com.sisinfoweb.repository;
 
-import br.com.sisinfoweb.banco.beans.RetornoWebServiceBeans;
 import br.com.sisinfoweb.banco.values.MensagemPadrao;
 import br.com.sisinfoweb.entity.CfaclifoEntity;
 import br.com.sisinfoweb.entity.SmadispoEntity;
@@ -26,7 +25,6 @@ import org.hibernate.exception.JDBCConnectionException;
 import org.hibernate.exception.LockAcquisitionException;
 import org.hibernate.exception.SQLGrammarException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 
@@ -262,9 +260,6 @@ public class BaseMyRepositoryImpl<T, ID extends Serializable> extends SimpleJpaR
                 logger.debug(MensagemPadrao.LOGGER_EXECUTE_FIND + " | executarSQL | " + instrucaoSQL);
 
                 return connection.createStatement().executeQuery(instrucaoSQL);
-            } else {
-                RetornoWebServiceBeans retornoWebService = new RetornoWebServiceBeans();
-
             }
         } catch (SQLException ex) {
             logger.error(MensagemPadrao.ERROR_SQL_EXCEPTION + " | " + ex.getMessage());
@@ -273,16 +268,42 @@ public class BaseMyRepositoryImpl<T, ID extends Serializable> extends SimpleJpaR
         }
         return null;
     }
+    
+    
+    @Transactional
+    @Override
+    public Serializable executarInsertOrUpdate(String instrucaoSQL) {
+        try {
+            conectaBanco();
+            if ((connection != null) && (!connection.isClosed())) {
 
+                logger.debug(MensagemPadrao.LOGGER_EXECUTE_FIND + " | executarInsertOrUpdate | " + instrucaoSQL);
+
+                return connection.createStatement().executeUpdate(instrucaoSQL);
+            }
+        } catch (SQLException ex) {
+            logger.error(MensagemPadrao.ERROR_SQL_EXCEPTION + " | " + ex.getMessage());
+
+            throw new CustomException(ex);
+        }
+        return -1;
+    }
+
+    /**
+     *
+     * @param instrucaoSQL
+     * @return
+     */
     @Override
     @Transactional
     public Serializable executeInsertUpdateDelete(String instrucaoSQL) {
+        PreparedStatement preparedStatement = null;
         Integer qtd = -1;
         try {
             conectaBanco();
             if ((connection != null) && (!connection.isClosed())) {
                 //Statement statement = connection.createStatement();
-                PreparedStatement preparedStatement = connection.prepareStatement(instrucaoSQL);
+                preparedStatement = connection.prepareStatement(instrucaoSQL);
 
                 if ((preparedStatement != null) && (!preparedStatement.isClosed())) {
                     preparedStatement.getConnection().setAutoCommit(false);
@@ -301,6 +322,15 @@ public class BaseMyRepositoryImpl<T, ID extends Serializable> extends SimpleJpaR
                 }
             }
         } catch (SQLException ex) {
+            if (preparedStatement != null){
+                try {
+                    preparedStatement.getConnection().rollback();
+                } catch (SQLException ex1) {
+                    logger.error(MensagemPadrao.ERROR_SQL_EXCEPTION + " | " + ex.getMessage());
+
+                    throw new CustomException(ex);
+                }
+            }
             logger.error(MensagemPadrao.ERROR_SQL_EXCEPTION + " | " + ex.getMessage());
 
             throw new CustomException(ex);

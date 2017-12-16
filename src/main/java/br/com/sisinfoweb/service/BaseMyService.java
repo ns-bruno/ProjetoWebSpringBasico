@@ -5,6 +5,8 @@
  */
 package br.com.sisinfoweb.service;
 
+import br.com.sisinfoweb.banco.beans.PageBeans;
+import br.com.sisinfoweb.banco.beans.PageableBeans;
 import br.com.sisinfoweb.banco.values.MensagemPadrao;
 import br.com.sisinfoweb.entity.SmadispoEntity;
 import br.com.sisinfoweb.exception.CustomException;
@@ -16,6 +18,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,6 +40,7 @@ public class BaseMyService<R extends BaseMyRepository, E> {
     public String COLUMNS_RESUME = null;
     private SmadispoEntity smadispoEntity = null;
     final static Logger logger = LoggerFactory.getLogger(Object.class);
+    final static Integer SIZE_BY_PAGE = 1000;
 
     @Autowired
     private final R baseMyRepository;
@@ -61,12 +65,12 @@ public class BaseMyService<R extends BaseMyRepository, E> {
         try {
             FuncoesPersonalizadas funcoes = new FuncoesPersonalizadas();
 
-            String sqlQuery = funcoes.construirSelectFromParamJson(this.getClass().getSimpleName().toUpperCase().replace("SERVICE", ""), null, null);
+            String sqlQuery = funcoes.construirSelectFromParamJson(this.getClass().getSimpleName().toUpperCase().replace("SERVICE", ""), null, null, null);
 
             return baseMyRepository.findAll(sqlQuery);
         } catch (Exception e) {
             logger.error(MensagemPadrao.ERROR_FIND + e.getMessage());
-            
+
             throw new CustomException(e);
         }
     }
@@ -79,19 +83,116 @@ public class BaseMyService<R extends BaseMyRepository, E> {
 
             FuncoesPersonalizadas funcoes = new FuncoesPersonalizadas();
 
-            String sqlQuery = funcoes.construirSelectFromParamJson(this.getClass().getSimpleName().toUpperCase().replace("SERVICE", "").replace("CUSTOM", ""), null, null);
+            String sqlQuery = funcoes.construirSelectFromParamJson(this.getClass().getSimpleName().toUpperCase().replace("SERVICE", "").replace("CUSTOM", ""), null, null, null);
 
             ResultSet resultado = baseMyRepository.executarSQL(sqlQuery);
 
             return mapResultSetToObject(resultado, Class.forName("br.com.sisinfoweb.entity." + this.getClass().getSimpleName().replace("Service", "") + "Entity"));
         } catch (ScriptException e) {
             logger.error(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI FINDALLCLIENT. " + e.getMessage());
-            
+
             throw new CustomException(e);
 
         } catch (ClassNotFoundException e) {
             logger.error(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI FINDALLCLIENT. " + e.getMessage());
-            
+
+            throw new CustomException(e);
+        }
+    }
+
+    
+    @Transactional
+    public PageBeans<E> findAllClient(String sort, PageableBeans pageable) {
+        try {
+            int totalElements = 0;
+            int size = SIZE_BY_PAGE;
+            int totalPages = 0;
+            int numberPage = 0;
+            // Seta os dados do dispositivo
+            baseMyRepository.setSmadispoEntity(smadispoEntity);
+
+            ResultSet resultCount = baseMyRepository.executarSQL(new FuncoesPersonalizadas().construirSelectCountFromParamJson(this.getClass().getSimpleName().toUpperCase().replace("SERVICE", ""), null, sort));
+            // Checa se retornou a quantidade de registro
+            if ((resultCount != null) && (resultCount.next())) {
+                totalElements = resultCount.getInt(1);
+            }
+
+            // Verifica se foi passado as configuracoes da paginacao
+            if (pageable == null) {
+                pageable = new PageableBeans();
+            }
+            if (pageable.getSize() > 0) {
+                size = pageable.getSize();
+            } else {
+                pageable.setSize(size);
+            }
+            // Adiciona o total de elementos/rows
+            pageable.setTotalElements(totalElements);
+
+            // Pega o total de paginas possiveis
+            totalPages = totalElements / size;
+            // Verifica se eh paginas inteiras
+            if ((totalElements % size) != 0) {
+                totalPages++;
+            }
+            //Salva o total de paginas
+            pageable.setTotalPages(totalPages);
+
+            // Verifica se foi passado o numero da pagina
+            if (pageable.getPageNumber() >= 0) {
+                numberPage = pageable.getPageNumber();
+            } else {
+                pageable.setPageNumber(numberPage);
+            }
+            // Verifica se tem algum registro pra buscar
+            if (totalElements > 0) {
+                String sqlQuery = new FuncoesPersonalizadas().construirSelectFromParamJson(this.getClass().getSimpleName().toUpperCase().replace("SERVICE", ""), null, null, sort);
+
+                String sqlQueryPage = "SELECT FIRST " + size + " SKIP " + (numberPage * size) + " " + sqlQuery.substring(6);
+
+                ResultSet resultado = baseMyRepository.executarSQL(sqlQueryPage);
+
+                List<E> listaResultado = mapResultSetToObject(resultado, Class.forName("br.com.sisinfoweb.entity." + this.getClass().getSimpleName().replace("Service", "") + "Entity"));
+
+                return new PageBeans<>(pageable, listaResultado);
+            } else {
+                return new PageBeans<>(pageable, null);
+            }
+
+        } catch (ScriptException e) {
+            logger.error(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI FINDCUSTOMNATIVEQUERYCLIENT. " + e.getMessage());
+            //return null;
+            throw new CustomException(e);
+
+        } catch (ClassNotFoundException | SQLException e) {
+            logger.error(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI FINDCUSTOMNATIVEQUERYCLIENTE. " + e.getMessage());
+            //return null;
+            throw new CustomException(e);
+        }
+    }
+    
+    
+    @Transactional
+    public E findOneByGuidClient(String guid) {
+        try {
+            // Seta os dados do dispositivo
+            baseMyRepository.setSmadispoEntity(smadispoEntity);
+
+            FuncoesPersonalizadas funcoes = new FuncoesPersonalizadas();
+
+            String sqlQuery = funcoes.construirSelectFromParamJson(this.getClass().getSimpleName().toUpperCase().replace("SERVICE", "").replace("CUSTOM", ""), null, "GUID = '" + guid + "'", null);
+
+            ResultSet resultado = baseMyRepository.executarSQL(sqlQuery);
+
+            return mapResultSetToObject(resultado, Class.forName("br.com.sisinfoweb.entity." + this.getClass().getSimpleName().replace("Service", "") + "Entity")).get(0);
+        } catch (ScriptException e) {
+            logger.error(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI findOneByGuidClient. " + e.getMessage());
+
+            throw new CustomException(e);
+
+        } catch (ClassNotFoundException e) {
+            logger.error(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI findOneByGuidClient. " + e.getMessage());
+
             throw new CustomException(e);
         }
     }
@@ -102,13 +203,13 @@ public class BaseMyService<R extends BaseMyRepository, E> {
             return (E) baseMyRepository.findOneByGuid(guid);
         } catch (Exception e) {
             logger.error(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI A BUSCA POR GUID. " + e.getMessage());
-            
+
             throw new CustomException(e);
         }
     }
 
     @Transactional
-    public List<E> findCustomNativeQuery(Boolean resume, String sqlCustomParam, String columns, String where) {
+    public List<E> findCustomNativeQuery(Boolean resume, String sqlCustomParam, String columns, String where, String sort) {
         try {
             // Cria um sql nativo se nao for passado um sqlCustom por parametro
             String sqlQuery;
@@ -119,28 +220,28 @@ public class BaseMyService<R extends BaseMyRepository, E> {
             } else {
                 // Checa se eh uma pesquisa com colunas resumidas
                 if (resume) {
-                    sqlQuery = new FuncoesPersonalizadas().construirSelectFromParamJson(this.getClass().getSimpleName().toUpperCase().replace("SERVICE", ""), COLUMNS_RESUME, where);
+                    sqlQuery = new FuncoesPersonalizadas().construirSelectFromParamJson(this.getClass().getSimpleName().toUpperCase().replace("SERVICE", ""), COLUMNS_RESUME, where, sort);
 
                 } else {
                     FuncoesPersonalizadas funcoes = new FuncoesPersonalizadas();
-                    sqlQuery = funcoes.construirSelectFromParamJson(this.getClass().getSimpleName().toUpperCase().replace("SERVICE", ""), columns, where);
+                    sqlQuery = funcoes.construirSelectFromParamJson(this.getClass().getSimpleName().toUpperCase().replace("SERVICE", ""), columns, where, sort);
                 }
             }
             return baseMyRepository.findCustomNativeQuery(sqlQuery);
         } catch (ScriptException e) {
             logger.error(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI UMA QUERY NATIVA DO SERVICE. " + e.getMessage());
-            
+
             throw new CustomException(e);
 
         } catch (Exception e) {
             logger.error(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI UMA QUERY NATIVA DO SERVICE. " + e.getMessage());
-            
+
             throw new CustomException(e);
         }
     }
 
     @Transactional
-    public List<E> findCustomNativeQueryClient(Boolean resume, String sqlCustomParam, String columns, String where) {
+    public List<E> findCustomNativeQueryClient(Boolean resume, String sqlCustomParam, String columns, String where, String sort) {
         try {
             // Seta os dados do dispositivo
             baseMyRepository.setSmadispoEntity(smadispoEntity);
@@ -153,11 +254,11 @@ public class BaseMyService<R extends BaseMyRepository, E> {
             } else {
                 // Checa se eh uma pesquisa com colunas resumidas
                 if (resume) {
-                    sqlQuery = new FuncoesPersonalizadas().construirSelectFromParamJson(this.getClass().getSimpleName().toUpperCase().replace("SERVICE", ""), COLUMNS_RESUME, where);
+                    sqlQuery = new FuncoesPersonalizadas().construirSelectFromParamJson(this.getClass().getSimpleName().toUpperCase().replace("SERVICE", ""), COLUMNS_RESUME, where, sort);
 
                 } else {
                     FuncoesPersonalizadas funcoes = new FuncoesPersonalizadas();
-                    sqlQuery = funcoes.construirSelectFromParamJson(this.getClass().getSimpleName().toUpperCase().replace("SERVICE", ""), columns, where);
+                    sqlQuery = funcoes.construirSelectFromParamJson(this.getClass().getSimpleName().toUpperCase().replace("SERVICE", ""), columns, where, sort);
                 }
             }
             ResultSet resultado = baseMyRepository.executarSQL(sqlQuery);
@@ -175,20 +276,110 @@ public class BaseMyService<R extends BaseMyRepository, E> {
         }
     }
 
-    
-    
+    @Transactional
+    public PageBeans<E> findCustomNativeQueryClient(Boolean resume, String sqlCustomParam, String columns, String where, String sort, PageableBeans pageable) {
+        try {
+            int totalElements = 0;
+            int size = SIZE_BY_PAGE;
+            int totalPages = 0;
+            int numberPage = 0;
+            // Seta os dados do dispositivo
+            baseMyRepository.setSmadispoEntity(smadispoEntity);
+
+            String sqlQuery;
+            String sqlQueryPage;
+            ResultSet resultCount;
+            // Checo se foi passao um sql personalizado
+            if ((sqlCustomParam != null) && (!sqlCustomParam.isEmpty())) {
+                String sqlQueryCount = sqlCustomParam.replace(
+                                                                sqlCustomParam.substring(sqlCustomParam.indexOf("SELECT") + 6, sqlCustomParam.indexOf("FROM") - 1),
+                                                                " COUNT(*) ");
+                resultCount = baseMyRepository.executarSQL(sqlQueryCount);
+            } else {
+                resultCount = baseMyRepository.executarSQL(new FuncoesPersonalizadas().construirSelectCountFromParamJson(this.getClass().getSimpleName().toUpperCase().replace("SERVICE", "").replace("CUSTOM", ""), where, sort));
+            }
+            // Checa se retornou a quantidade de registro
+            if ((resultCount != null) && (resultCount.next())) {
+                totalElements = resultCount.getInt(1);
+            }
+            if ((sqlCustomParam != null) && (!sqlCustomParam.isEmpty())) {
+                sqlQuery = sqlCustomParam;
+
+            } else {
+                // Checa se eh uma pesquisa com colunas resumidas
+                if (resume) {
+                    sqlQuery = new FuncoesPersonalizadas().construirSelectFromParamJson(this.getClass().getSimpleName().toUpperCase().replace("SERVICE", "").replace("CUSTOM", ""), COLUMNS_RESUME, where, sort);
+
+                } else {
+                    FuncoesPersonalizadas funcoes = new FuncoesPersonalizadas();
+                    sqlQuery = funcoes.construirSelectFromParamJson(this.getClass().getSimpleName().toUpperCase().replace("SERVICE", "").replace("CUSTOM", ""), columns, where, sort);
+                }
+            }
+            // Verifica se foi passado as configuracoes da paginacao
+            if (pageable == null) {
+                pageable = new PageableBeans();
+            }
+            if (pageable.getSize() > 0) {
+                size = pageable.getSize();
+            } else {
+                pageable.setSize(size);
+            }
+            // Adiciona o total de elementos/rows
+            pageable.setTotalElements(totalElements);
+
+            // Pega o total de paginas possiveis
+            totalPages = totalElements / size;
+            // Verifica se eh paginas inteiras
+            if ((totalElements % size) != 0) {
+                totalPages++;
+            }
+            //Salva o total de paginas
+            pageable.setTotalPages(totalPages);
+
+            // Verifica se foi passado o numero da pagina
+            if (pageable.getPageNumber() >= 0) {
+                numberPage = pageable.getPageNumber();
+            } else {
+                pageable.setPageNumber(numberPage);
+            }
+            // Verifica se tem algum registro pra buscar
+            if (totalElements > 0) {
+
+                sqlQueryPage = "SELECT FIRST " + size + " SKIP " + (numberPage * size) + " " + sqlQuery.substring(sqlQuery.indexOf("SELECT") + 6);
+
+                 ResultSet resultado = baseMyRepository.executarSQL(sqlQueryPage);
+
+                List<E> listaResultado = mapResultSetToObject(resultado, Class.forName("br.com.sisinfoweb.entity." + this.getClass().getSimpleName().replace("Service", "") + "Entity"));
+
+                return new PageBeans<>(pageable, listaResultado);
+            } else {
+                return new PageBeans<>(pageable, null);
+            }
+
+        } catch (ScriptException e) {
+            logger.error(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI FINDCUSTOMNATIVEQUERYCLIENT. " + e.getMessage());
+            //return null;
+            throw new CustomException(e);
+
+        } catch (ClassNotFoundException | SQLException e) {
+            logger.error(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI FINDCUSTOMNATIVEQUERYCLIENTE. " + e.getMessage());
+            //return null;
+            throw new CustomException(e);
+        }
+    }
+
     @Transactional
     public Serializable saveCustomNativeQuery(String queryInsert) {
         try {
             return baseMyRepository.saveCustomNativeQuery(queryInsert);
         } catch (ScriptException e) {
             logger.error(MensagemPadrao.ERROR_SAVE + e.getMessage());
-            
+
             throw new CustomException(e);
 
         } catch (Exception e) {
             logger.error(MensagemPadrao.ERROR_SAVE + e.getMessage());
-            
+
             throw new CustomException(e);
 
         }
@@ -200,15 +391,19 @@ public class BaseMyService<R extends BaseMyRepository, E> {
             // Seta os dados do dispositivo
             baseMyRepository.setSmadispoEntity(smadispoEntity);
 
-            return baseMyRepository.executeInsertUpdateDelete(queryInsert);
+            if ( (queryInsert.toUpperCase().contains("UPDATE OR INSERT")) || (queryInsert.toUpperCase().contains("UPDATE")) ){
+                return baseMyRepository.executarInsertOrUpdate(queryInsert);
+            }else {
+                return baseMyRepository.executeInsertUpdateDelete(queryInsert);
+            }
         } catch (ScriptException e) {
             logger.error(MensagemPadrao.ERROR_SAVE + e.getMessage());
-            
+
             throw new CustomException(e);
 
         } catch (Exception e) {
             logger.error(MensagemPadrao.ERROR_SAVE + e.getMessage());
-            
+
             throw new CustomException(e);
         }
     }
@@ -219,12 +414,12 @@ public class BaseMyService<R extends BaseMyRepository, E> {
             return (E) baseMyRepository.save(entity);
         } catch (ScriptException e) {
             logger.error(MensagemPadrao.ERROR_SAVE + e.getMessage());
-            
+
             throw new CustomException(e);
 
         } catch (Exception e) {
             logger.error(MensagemPadrao.ERROR_SAVE + e.getMessage());
-            
+
             throw new CustomException(e);
 
         }
@@ -240,12 +435,12 @@ public class BaseMyService<R extends BaseMyRepository, E> {
 
         } catch (ScriptException e) {
             logger.error(MensagemPadrao.ERROR_SAVE + e.getMessage());
-            
+
             throw new CustomException(e);
 
         } catch (Exception e) {
             logger.error(MensagemPadrao.ERROR_SAVE + e.getMessage());
-            
+
             throw new CustomException(e);
 
         }
@@ -285,7 +480,12 @@ public class BaseMyService<R extends BaseMyRepository, E> {
                                 if (field.isAnnotationPresent(Column.class)) {
                                     Column column = field.getAnnotation(Column.class);
                                     if (column.name().equalsIgnoreCase(columnName) && columnValue != null) {
-                                        BeanUtils.setProperty(bean, field.getName(), columnValue);
+                                        if ( (columnValue instanceof byte[]) && (columnName.equalsIgnoreCase("obs") || columnName.equalsIgnoreCase("observacao")) ){
+                                            BeanUtils.setProperty(bean, field.getName(), new String((byte[])columnValue));
+                                        } else {
+                                            BeanUtils.setProperty(bean, field.getName(), columnValue);
+                                        }
+                                        //BeanUtils.setProperty(bean, field.getName(), columnValue);
                                         break;
                                     }
                                 }
@@ -306,13 +506,13 @@ public class BaseMyService<R extends BaseMyRepository, E> {
             } else {
                 return null;
             }
-        } catch (IllegalAccessException | SQLException | InstantiationException e) {
+        } catch (IllegalAccessException | SQLException | InstantiationException  e) {
             logger.error(MensagemPadrao.ERROR_MAPEAR_RESULTSET + e.getMessage());
-            
+
             throw new CustomException(e);
         } catch (Exception e) {
             logger.error(MensagemPadrao.ERROR_MAPEAR_RESULTSET + e.getMessage());
-            
+
             throw new CustomException(e);
         }
         return outputList;

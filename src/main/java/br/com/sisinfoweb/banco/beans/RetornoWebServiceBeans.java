@@ -16,4 +16,5 @@ public class RetornoWebServiceBeans<T> implements Serializable{
     
     public StatusRetornoWebServiceBeans statusRetorno;
     public T object;
+    public PageableBeans<T> page;
 }

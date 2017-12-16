@@ -5,6 +5,8 @@
  */
 package br.com.sisinfoweb.controller;
 
+import br.com.sisinfoweb.banco.beans.PageBeans;
+import br.com.sisinfoweb.banco.beans.PageableBeans;
 import br.com.sisinfoweb.banco.beans.RetornoWebServiceBeans;
 import br.com.sisinfoweb.banco.beans.StatusRetornoWebServiceBeans;
 import br.com.sisinfoweb.banco.values.MensagemPadrao;
@@ -48,8 +50,11 @@ public class RpaparceController extends BaseMyController{
                             @RequestParam(name = "dispositivo", required = true) String dispositivo,
                             @RequestParam(name = "columnSelected", required = false) String columnSelected,
                             @RequestParam(name = "where", required = false) String where,
+                            @RequestParam(name = "sort", required = false) String sort,
                             @RequestParam(name = "resume", required = false, defaultValue = "false") Boolean resume,
-                            @RequestParam(name = "sqlQuery", required = false) String sqlQuery) {
+                            @RequestParam(name = "sqlQuery", required = false) String sqlQuery,
+                            @RequestParam(name = "size", required = false) Integer size,
+                            @RequestParam(name = "pageNumber", required = false) Integer pageNumber) {
         
         StatusRetornoWebServiceBeans statusRetorno = new StatusRetornoWebServiceBeans();
         RetornoWebServiceBeans retornoWebService = new RetornoWebServiceBeans();
@@ -58,16 +63,21 @@ public class RpaparceController extends BaseMyController{
             SmadispoEntity smadispoEntity = new Gson().fromJson(dispositivo, SmadispoEntity.class);
             rpaparceService.setSmadispoEntity(smadispoEntity);
             
-            List<RpaparceEntity> lista;
+            PageableBeans pageable = new PageableBeans( ((pageNumber != null && pageNumber > 0) ? pageNumber : 0), 
+                                                        ((size != null && size > 0) ? size : 0)
+                                                      );
+            
+            PageBeans<RpaparceEntity> listaPage = null;
+            
             // Checa se foi passado alqum parametro para filtrar
             if ( ((sqlQuery != null) && (!sqlQuery.isEmpty())) || 
                     ((columnSelected != null) && (!columnSelected.isEmpty())) || 
                     ((where != null) && (!where.isEmpty())) ){
                 // Pesquisa de acordo com o sql passado
-                lista = rpaparceService.findCustomNativeQueryClient(resume, sqlQuery, columnSelected, where);
+                listaPage = rpaparceService.findCustomNativeQueryClient(resume, sqlQuery, columnSelected, where, sort, pageable);
             
             } else {
-                lista = rpaparceService.findAllClient();
+                listaPage = rpaparceService.findAllClient(sort, pageable);
             }
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_OK);
@@ -76,7 +86,8 @@ public class RpaparceController extends BaseMyController{
             // Adiciona o status
             retornoWebService.statusRetorno = statusRetorno;
             // Adiciona os dados que eh pra ser retornado
-            retornoWebService.object = lista;
+            retornoWebService.object = listaPage.getContent();
+            retornoWebService.page = listaPage.getPageable();
             
             return new Gson().toJson(retornoWebService);
         } catch(JsonSyntaxException e){
@@ -107,4 +118,5 @@ public class RpaparceController extends BaseMyController{
             rpaparceService.closeEntityManager();
         }
     }    
+
 }

@@ -11,7 +11,6 @@ import java.sql.ResultSet;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
@@ -41,6 +40,8 @@ public interface BaseMyRepository<T, ID extends Serializable> extends PagingAndS
     public ResultSet executarSQL(String instrucaoSQL);
     
     public Serializable executeInsertUpdateDelete(String instrucaoSQL);
+    
+    public Serializable executarInsertOrUpdate(String instrucaoSQL);
     
     public void closeDatabase();
 }

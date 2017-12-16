@@ -50,7 +50,7 @@ public class LoginController extends BaseMyController {
         
         ModelAndView modelAndView = new ModelAndView();
         
-        SmausuarEntity smausuarEntity = smausuarService.findCustomNativeQuery(false, null, null, "(NOME = '" + nomeUsuario + "')").get(0);
+        SmausuarEntity smausuarEntity = smausuarService.findCustomNativeQuery(false, null, null, "(NOME = '" + nomeUsuario + "')", null).get(0);
         
         if((smausuarEntity != null) && (smausuarEntity.getNome() != null) && (smausuarEntity.getNome().length() > 0)){
             
@@ -83,8 +83,11 @@ public class LoginController extends BaseMyController {
                             @RequestParam(name = "dispositivoJson", required = true) String dispositivoJson,
                             @RequestParam(name = "columnSelectedJson", required = false) String columnSelectedJson,
                             @RequestParam(name = "whereJson", required = false) String whereJson,
+                            @RequestParam(name = "sort", required = false) String sort,
                             @RequestParam(name = "resume", required = false, defaultValue = "false") Boolean resume,
-                            @RequestParam(name = "sqlJson", required = false) String sqlJson) {
+                            @RequestParam(name = "sqlJson", required = false) String sqlJson,
+                            @RequestParam(name = "size", required = false) Integer size,
+                            @RequestParam(name = "pageNumber", required = false) Integer pageNumber) {
         return new Gson().toJson("");
     }
 }

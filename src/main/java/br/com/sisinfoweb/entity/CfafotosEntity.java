@@ -9,8 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "CFAFOTOS")
@@ -58,7 +56,6 @@ public class CfafotosEntity {
 
     @Column(name = "FOTO", table = "CFAFOTOS")
     @Lob
-    @Basic
     private byte[] foto;
 
     public Integer getIdCfafotos() {

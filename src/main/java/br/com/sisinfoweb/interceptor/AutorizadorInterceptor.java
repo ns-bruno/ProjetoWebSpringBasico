@@ -72,7 +72,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
                 
                 if ((request.getParameter(KEY_CNPJ_URL) != null) && (request.getMethod().equalsIgnoreCase("POST"))) {
                     String where = "(CFACLIFO.CPF_CGC = '" + request.getParameter(KEY_CNPJ_URL) + "') ";
-                    if (cfaclifoService.findCustomNativeQuery(Boolean.FALSE, null, null, where).size() > 0) {
+                    if (cfaclifoService.findCustomNativeQuery(Boolean.FALSE, null, null, where, null).size() > 0) {
                         logger.info(MensagemPadrao.LOGGER_NEW_CAD_DISPOSITIVO);
                         return true;
                     }
@@ -87,7 +87,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 
                             String whereClifo = "(CFACLIFO.ID_CFACLIFO = (SELECT SMADISPO.ID_CFACLIFO FROM SMADISPO WHERE SMADISPO.IDENTIFICACAO = '" + smadispoEntity.getIdentificacao() + "'))";
 
-                            List<CfaclifoEntity> listaClifo = cfaclifoService.findCustomNativeQuery(Boolean.FALSE, null, null, whereClifo);
+                            List<CfaclifoEntity> listaClifo = cfaclifoService.findCustomNativeQuery(Boolean.FALSE, null, null, whereClifo, null);
 
                             // Checa se a empresa esta cadastrada no banco de dados Admin
                             if ((listaClifo != null) && (listaClifo.size() > 0)) {
@@ -97,7 +97,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
                                     
                                     String whereDispo = "(IDENTIFICACAO = '" + smadispoEntity.getIdentificacao() + "') ";
 
-                                    List<SmadispoEntity> listaDispositivo = smadispoService.findCustomNativeQuery(Boolean.FALSE, null, null, whereDispo);
+                                    List<SmadispoEntity> listaDispositivo = smadispoService.findCustomNativeQuery(Boolean.FALSE, null, null, whereDispo, null);
 
                                     // Checa se o dispositivo esta cadastrado no Admin
                                     if ((listaDispositivo != null) && (listaDispositivo.size() > 0)) {

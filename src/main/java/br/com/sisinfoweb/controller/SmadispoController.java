@@ -5,6 +5,8 @@
  */
 package br.com.sisinfoweb.controller;
 
+import br.com.sisinfoweb.banco.beans.PageBeans;
+import br.com.sisinfoweb.banco.beans.PageableBeans;
 import br.com.sisinfoweb.banco.beans.RetornoWebServiceBeans;
 import br.com.sisinfoweb.banco.beans.StatusRetornoWebServiceBeans;
 import br.com.sisinfoweb.banco.values.MensagemPadrao;
@@ -46,27 +48,37 @@ public class SmadispoController extends BaseMyController {
     @ResponseBody
     @Override
     public String initJson(Model model,
-            @RequestHeader() HttpHeaders httpHeaders,
-            HttpServletResponse response,
-            @RequestParam(name = "dispositivo", required = true) String dispositivo,
-            @RequestParam(name = "columnSelected", required = false) String columnSelected,
-            @RequestParam(name = "where", required = false) String where,
-            @RequestParam(name = "resume", required = false, defaultValue = "false") Boolean resume,
-            @RequestParam(name = "sqlQuery", required = false) String sqlQuery) {
+                            @RequestHeader() HttpHeaders httpHeaders,
+                            HttpServletResponse response,
+                            @RequestParam(name = "dispositivo", required = true) String dispositivo,
+                            @RequestParam(name = "columnSelected", required = false) String columnSelected,
+                            @RequestParam(name = "where", required = false) String where,
+                            @RequestParam(name = "sort", required = false) String sort,
+                            @RequestParam(name = "resume", required = false, defaultValue = "false") Boolean resume,
+                            @RequestParam(name = "sqlQuery", required = false) String sqlQuery,
+                            @RequestParam(name = "size", required = false) Integer size,
+                            @RequestParam(name = "pageNumber", required = false) Integer pageNumber) {
 
         StatusRetornoWebServiceBeans statusRetorno = new StatusRetornoWebServiceBeans();
         RetornoWebServiceBeans retornoWebService = new RetornoWebServiceBeans();
         try {
-            List<SmadispoEntity> lista;
+            
+            PageableBeans pageable = new PageableBeans( ((pageNumber != null && pageNumber > 0) ? pageNumber : 0), 
+                                                        ((size != null && size > 0) ? size : 0)
+                                                      );
+            
+            PageBeans<SmadispoEntity> listaPage;
+            
             // Checa se foi passado alqum parametro para filtrar
             if (((sqlQuery != null) && (!sqlQuery.isEmpty()))
                     || ((columnSelected != null) && (!columnSelected.isEmpty()))
-                    || ((where != null) && (!where.isEmpty()))) {
+                    || ((where != null) && (!where.isEmpty())) ||
+                    ((sort != null) && (!sort.isEmpty())) ) {
                 // Pesquisa de acordo com o sql passado
-                lista = smadispoService.findCustomNativeQueryClient(resume, sqlQuery, columnSelected, where);
+                listaPage = smadispoService.findCustomNativeQueryClient(resume, sqlQuery, columnSelected, where, sort, pageable);
 
             } else {
-                lista = smadispoService.findAllClient();
+                listaPage = smadispoService.findAllClient(sort, pageable);
             }
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_OK);
@@ -75,7 +87,8 @@ public class SmadispoController extends BaseMyController {
             // Adiciona o status
             retornoWebService.statusRetorno = statusRetorno;
             // Adiciona os dados que eh pra ser retornado
-            retornoWebService.object = lista;
+            retornoWebService.object = listaPage.getContent();
+            retornoWebService.page = listaPage.getPageable();
 
             return new Gson().toJson(retornoWebService);
         } catch (Exception e) {
@@ -100,6 +113,7 @@ public class SmadispoController extends BaseMyController {
             @RequestParam(name = "cnpjUrl", required = false) String cnpjUrl,
             @RequestParam(name = "columnSelected", required = false) String columnSelected,
             @RequestParam(name = "where", required = false) String where,
+            @RequestParam(name = "sort", required = false) String sort,
             @RequestParam(name = "resume", required = false, defaultValue = "false") Boolean resume,
             @RequestParam(name = "sqlQuery", required = false) String sqlQuery) {
 
@@ -112,14 +126,14 @@ public class SmadispoController extends BaseMyController {
             //smadispoService.getConnectionAdmin();
 
             // Checa se o dispositivo ja tem cadastro no banco de dados administrador
-            if (smadispoService.findCustomNativeQuery(false, null, null, "IDENTIFICACAO = '" + smadispoEntity.getIdentificacao() + "'").size() < 1) {
+            if (smadispoService.findCustomNativeQuery(false, null, null, "IDENTIFICACAO = '" + smadispoEntity.getIdentificacao() + "'", sort).size() < 1) {
                 // Pega os dados da empresa cliente licenciada
-                CfaclifoEntity cfaclifoEntity = cfaclifoService.findCustomNativeQuery(false, null, null, "(CPF_CGC = '" + cnpjUrl + "')").get(0);
+                CfaclifoEntity cfaclifoEntity = cfaclifoService.findCustomNativeQuery(false, null, null, "(CPF_CGC = '" + cnpjUrl + "')", sort).get(0);
 
                 if (cfaclifoEntity != null) {
                     String whereChecaQtdLicenca = "ID_CFACLIFO = (SELECT CFACLIFO.ID_CFACLIFO FROM CFACLIFO WHERE  (CPF_CGC = '" + cnpjUrl + "'))";
 
-                    List<SmadispoEntity> listaDispositivo = smadispoService.findCustomNativeQuery(false, null, null, whereChecaQtdLicenca);
+                    List<SmadispoEntity> listaDispositivo = smadispoService.findCustomNativeQuery(false, null, null, whereChecaQtdLicenca, sort);
 
                     // Checa se tem quantidade de licencas disponivel
                     if ((listaDispositivo != null) && (listaDispositivo.size() < cfaclifoEntity.getQtdeLicencaMovel())) {
@@ -192,7 +206,7 @@ public class SmadispoController extends BaseMyController {
                 // Pega o banco de dados do cliente
                 smadispoService.setSmadispoEntity(smadispoEntity);
 
-                if (smadispoService.findCustomNativeQueryClient(false, null, null, "IDENTIFICACAO = '" + smadispoEntity.getIdentificacao() + "'").size() < 1) {
+                if (smadispoService.findCustomNativeQueryClient(false, null, null, "IDENTIFICACAO = '" + smadispoEntity.getIdentificacao() + "'", sort).size() < 1) {
                     //String insertDispositivo = "INSERT INTO SMADISPO(DESCRICAO, IDENTIFICACAO) VALUES ('" + smadispoEntity.getDescricao() + "', '" + smadispoEntity.getIdentificacao() + "' );";
 
                     /**
