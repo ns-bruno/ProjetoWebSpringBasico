@@ -131,7 +131,7 @@ public class SmadispoController extends BaseMyController {
                 CfaclifoEntity cfaclifoEntity = cfaclifoService.findCustomNativeQuery(false, null, null, "(CPF_CGC = '" + cnpjUrl + "')", sort).get(0);
 
                 if (cfaclifoEntity != null) {
-                    String whereChecaQtdLicenca = "ID_CFACLIFO = (SELECT CFACLIFO.ID_CFACLIFO FROM CFACLIFO WHERE  (CPF_CGC = '" + cnpjUrl + "'))";
+                    String whereChecaQtdLicenca = "(ID_CFACLIFO = (SELECT CFACLIFO.ID_CFACLIFO FROM CFACLIFO WHERE  (CPF_CGC = '" + cnpjUrl + "')) ) AND (ATIVO = '1')";
 
                     List<SmadispoEntity> listaDispositivo = smadispoService.findCustomNativeQuery(false, null, null, whereChecaQtdLicenca, sort);
 

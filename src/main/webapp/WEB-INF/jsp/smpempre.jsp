@@ -57,7 +57,7 @@
                                     <thead>
                                         <tr>
                                             <th class="dt-body-center sorting_disabled" rowspan="1" colspan="1" aria-label="" style="width: 12px;">
-                                                <input name="select_all" value="1" id="example-select-all" type="checkbox" />
+                                                <input name="select_all" value="1" id="select-all" type="checkbox" />
                                             </th>
                                             <th>Código</th>
                                             <th>Razão Social</th>
@@ -71,7 +71,7 @@
                                     <tbody>
                                         <core:forEach items="${lista}" var="empresas">
                                             <tr>
-                                                <td class=" dt-body-center"><input type="checkbox" name="id[]" value="${empresas.idSmaempre}"></td>
+                                                <td class="dt-body-center"><input type="checkbox" name="id[${empresas.idSmaempre}]" value="${empresas.idSmaempre}"/></td>
                                                 <td><a class="" href="">${empresas.codigo}</a></td>
                                                 <td><a class="" href="">${empresas.nomeRazao}</a></td>
                                                 <td><a class="" href="">${empresas.nomeFantasia}</a></td>

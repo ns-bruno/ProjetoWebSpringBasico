@@ -11,13 +11,12 @@ import br.com.sisinfoweb.banco.beans.RetornoWebServiceBeans;
 import br.com.sisinfoweb.banco.beans.StatusRetornoWebServiceBeans;
 import br.com.sisinfoweb.banco.values.MensagemPadrao;
 import static br.com.sisinfoweb.controller.BaseMyController.logger;
+import br.com.sisinfoweb.entity.AeaextbpEntity;
 import br.com.sisinfoweb.entity.SmadispoEntity;
-import br.com.sisinfoweb.entity.SmaempreEntity;
-import br.com.sisinfoweb.service.SmaempreService;
+import br.com.sisinfoweb.service.AeaextbpService;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import java.net.HttpURLConnection;
-import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -30,44 +29,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
  * @author Bruno
  */
 @Controller
-public class SmaempreController extends BaseMyController {
-
+public class AeaextbpController extends BaseMyController{
+    
     @Autowired
-    private SmaempreService smaempreService;
-
-    @RequestMapping(value = {"/Empresa", "/CadastroEmpresa"}, method = RequestMethod.GET)
-    public ModelAndView init(Model model, @RequestHeader() HttpHeaders httpHeaders) {
-
-        ModelAndView modelAndView = new ModelAndView("smpempre");
-        try {
-            List<SmaempreEntity> lista = smaempreService.findAll();
-            model.addAttribute("lista", lista);
-            
-        } catch (Exception e) {
-            StatusRetornoWebServiceBeans statusRetorno = new StatusRetornoWebServiceBeans();
-            RetornoWebServiceBeans retornoWebService = new RetornoWebServiceBeans();
-            // Cria uma vareavel para retorna o status
-            statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_INTERNAL_ERROR);
-            statusRetorno.setMensagemRetorno(String.valueOf(e.getMessage()));
-            statusRetorno.setExtra(e);
-            
-            // Adiciona o status
-            retornoWebService.statusRetorno = statusRetorno;
-            
-            model.addAttribute(STATUS_RETURN, retornoWebService);
-        }
-        return modelAndView;
-    }
+    AeaextbpService aeaextbpService;
     
-    
-    @RequestMapping(value = {"/Smaempre"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = {"/Aeaextbp"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     @Override
     public String initJson( Model model, 
@@ -87,24 +60,25 @@ public class SmaempreController extends BaseMyController {
         try{
             // Coverte o dispositivo passado no formato json em uma entidade
             SmadispoEntity smadispoEntity = new Gson().fromJson(dispositivo, SmadispoEntity.class);
-            smaempreService.setSmadispoEntity(smadispoEntity);
+            aeaextbpService.setSmadispoEntity(smadispoEntity);
+            
+            PageBeans<AeaextbpEntity> listaPage = null;
+            
             
             PageableBeans pageable = new PageableBeans( ((pageNumber != null && pageNumber > 0) ? pageNumber : 0), 
                                                         ((size != null && size > 0) ? size : 0)
                                                       );
-            
-            PageBeans<SmaempreEntity> listaPage;
             
             // Checa se foi passado alqum parametro para filtrar
             if ( ((sqlQuery != null) && (!sqlQuery.isEmpty())) || 
                     ((columnSelected != null) && (!columnSelected.isEmpty())) || 
                     ((where != null) && (!where.isEmpty())) ||
                     ((sort != null) && (!sort.isEmpty())) ){
-                // Pesquisa de acordo com o sql passado
-                listaPage = smaempreService.findCustomNativeQueryClient(resume, sqlQuery, columnSelected, where, sort, pageable);
+                
+                listaPage = aeaextbpService.findCustomNativeQueryClient(resume, sqlQuery, columnSelected, where, sort, pageable);
             
             } else {
-                listaPage = smaempreService.findAllClient(sort, pageable);
+                listaPage = aeaextbpService.findAllClient(sort, pageable);
             }
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_OK);
@@ -115,7 +89,7 @@ public class SmaempreController extends BaseMyController {
             // Adiciona os dados que eh pra ser retornado
             retornoWebService.object = listaPage.getContent();
             retornoWebService.page = listaPage.getPageable();
-            
+
             return new Gson().toJson(retornoWebService);
         } catch(JsonSyntaxException e){
             logger.error(getClass().getSimpleName() + " - " + e.getMessage());
@@ -142,7 +116,7 @@ public class SmaempreController extends BaseMyController {
             
             return new Gson().toJson(retornoWebService);
         } finally{
-            smaempreService.closeEntityManager();
+            aeaextbpService.closeDatabase();
         }
     }
 }

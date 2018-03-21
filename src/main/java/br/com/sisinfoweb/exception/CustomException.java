@@ -6,8 +6,6 @@
 package br.com.sisinfoweb.exception;
 
 import br.com.sisinfoweb.banco.beans.RetornoWebServiceBeans;
-import com.google.gson.Gson;
-import org.springframework.validation.Errors;
 
 /**
  *

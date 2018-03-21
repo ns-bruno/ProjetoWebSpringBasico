@@ -3,32 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.sisinfoweb.controller;
+package br.com.sisinfoweb.exception;
 
-import br.com.sisinfoweb.banco.beans.RetornoWebServiceBeans;
-import static br.com.sisinfoweb.exception.ControllerException.DEFAULT_ERROR_VIEW;
-import br.com.sisinfoweb.exception.CustomException;
-import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.core.annotation.AnnotationUtils;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 /**
  *
  * @author Bruno
  */
-@EnableWebMvc
 @ControllerAdvice
-public class ExceptionCustomController extends ResponseEntityExceptionHandler{
+public class ControllerException {
     
-    @ExceptionHandler({CustomException.class, Exception.class, ClassNotFoundException.class, SQLException.class})
+    public static final String DEFAULT_ERROR_VIEW = "error";
+
+    @ExceptionHandler(value = Exception.class)
     public ModelAndView defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
         // If the exception is annotated with @ResponseStatus rethrow it and let
         // the framework handle it - like the OrderNotFoundException example
@@ -45,4 +38,5 @@ public class ExceptionCustomController extends ResponseEntityExceptionHandler{
         mav.setViewName(DEFAULT_ERROR_VIEW);
         return mav;
     }
+
 }

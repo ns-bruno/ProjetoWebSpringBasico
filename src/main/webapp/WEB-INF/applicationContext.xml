@@ -45,9 +45,9 @@
     <!-- la source de donnéees DBCP -->
     <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="org.firebirdsql.jdbc.FBDriver" />
-        <property name="url" value="jdbc:firebirdsql:172.16.0.251/3050:C:\SisInfo\delphi\SINOVO.FIR" />
-        <property name="username" value="SYSDBA" />
-        <property name="password" value="1" />
+        <property name="url" value="jdbc:firebirdsql:172.16.0.241/3050:C:\SisInfo\si.fir" />
+        <property name="username" value="WEBSERVICE" />
+        <property name="password" value="WSS#5535" />
     </bean>
     
     <!-- le gestionnaire de transactions -->

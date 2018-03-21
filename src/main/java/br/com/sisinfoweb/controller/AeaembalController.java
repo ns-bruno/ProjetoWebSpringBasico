@@ -17,7 +17,6 @@ import br.com.sisinfoweb.service.AeaembalService;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import java.net.HttpURLConnection;
-import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
