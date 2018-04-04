@@ -38,7 +38,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class AeaextbpController extends BaseMyController{
     
     @Autowired
-    AeaextbpService aeaextbpService;
+    private AeaextbpService aeaextbpService;
     
     @RequestMapping(value = {"/Aeaextbp"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody

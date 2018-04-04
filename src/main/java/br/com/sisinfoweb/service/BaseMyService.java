@@ -18,8 +18,8 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
+import java.util.Map;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.transaction.Transactional;
@@ -291,8 +291,7 @@ public class BaseMyService<R extends BaseMyRepository, E> {
             ResultSet resultCount;
             // Checo se foi passao um sql personalizado
             if ((sqlCustomParam != null) && (!sqlCustomParam.isEmpty())) {
-                String sqlQueryCount = sqlCustomParam.replace(
-                                                                sqlCustomParam.substring(sqlCustomParam.indexOf("SELECT") + 6, sqlCustomParam.indexOf("FROM") - 1),
+                String sqlQueryCount = sqlCustomParam.replace(  sqlCustomParam.substring(sqlCustomParam.indexOf("SELECT") + 6, sqlCustomParam.indexOf("FROM") - 1),
                                                                 " COUNT(*) ");
                 resultCount = baseMyRepository.executarSQL(sqlQueryCount);
             } else {
@@ -445,7 +444,155 @@ public class BaseMyService<R extends BaseMyRepository, E> {
 
         }
     }
+    
+    @Transactional
+    public PageBeans<E> storedProcedureWithSelectClient(String nameProcedure, Map<String, Object> parameter, Boolean resume, String sqlCustomParam, String columns, String where, String sort, PageableBeans pageable) {
+        try {
+            int totalElements = 0;
+            int size = SIZE_BY_PAGE;
+            int totalPages = 0;
+            int numberPage = 0;
+            // Seta os dados do dispositivo
+            baseMyRepository.setSmadispoEntity(smadispoEntity);
 
+            String sqlQuery;
+            String sqlQueryPage;
+            ResultSet resultCount;
+            // Checo se foi passao um sql personalizado
+            if ((sqlCustomParam != null) && (!sqlCustomParam.isEmpty())) {
+                String sqlQueryCount = sqlCustomParam.replace(  sqlCustomParam.substring(sqlCustomParam.indexOf("SELECT") + 6, sqlCustomParam.indexOf("FROM") - 1),
+                                                                " COUNT(*) ");
+                resultCount = baseMyRepository.executarSQL(sqlQueryCount);
+            } else {
+                resultCount = baseMyRepository.executarSQL(new FuncoesPersonalizadas().construirSelectStoredProcedureCountFromParamJson(nameProcedure, parameter, where, sort));
+            }
+            // Checa se retornou a quantidade de registro
+            if ((resultCount != null) && (resultCount.next())) {
+                totalElements = resultCount.getInt(1);
+            }
+            if ((sqlCustomParam != null) && (!sqlCustomParam.isEmpty())) {
+                sqlQuery = sqlCustomParam;
+
+            } else {
+                // Checa se eh uma pesquisa com colunas resumidas
+                if (resume) {
+                    sqlQuery = new FuncoesPersonalizadas().construirSelectStoredProcedureFromParamJson(nameProcedure, parameter, COLUMNS_RESUME, where, sort);
+
+                } else {
+                    FuncoesPersonalizadas funcoes = new FuncoesPersonalizadas();
+                    sqlQuery = funcoes.construirSelectStoredProcedureFromParamJson(nameProcedure, parameter, columns, where, sort);
+                }
+            }
+            // Verifica se foi passado as configuracoes da paginacao
+            if (pageable == null) {
+                pageable = new PageableBeans();
+            }
+            if (pageable.getSize() > 0) {
+                size = pageable.getSize();
+            } else {
+                pageable.setSize(size);
+            }
+            // Adiciona o total de elementos/rows
+            pageable.setTotalElements(totalElements);
+
+            // Pega o total de paginas possiveis
+            totalPages = totalElements / size;
+            // Verifica se eh paginas inteiras
+            if ((totalElements % size) != 0) {
+                totalPages++;
+            }
+            //Salva o total de paginas
+            pageable.setTotalPages(totalPages);
+
+            // Verifica se foi passado o numero da pagina
+            if (pageable.getPageNumber() >= 0) {
+                numberPage = pageable.getPageNumber();
+            } else {
+                pageable.setPageNumber(numberPage);
+            }
+            // Verifica se tem algum registro pra buscar
+            if (totalElements > 0) {
+
+                sqlQueryPage = "SELECT FIRST " + size + " SKIP " + (numberPage * size) + " " + sqlQuery.substring(sqlQuery.indexOf("SELECT") + 6);
+
+                 ResultSet resultado = baseMyRepository.executarSQL(sqlQueryPage);
+
+                List<E> listaResultado = mapResultSetToObject(resultado, Class.forName("br.com.sisinfoweb.entity." + this.getClass().getSimpleName().replace("Service", "") + "Entity"));
+
+                return new PageBeans<>(pageable, listaResultado);
+            } else {
+                return new PageBeans<>(pageable, null);
+            }
+
+        } catch (ScriptException e) {
+            logger.error(MensagemPadrao.ERROR_STORED_PROCEDURE + "NESTE CASO FOI storedProcedureWithSelectClient. " + e.getMessage());
+            //return null;
+            throw new CustomException(e);
+
+        } catch (ClassNotFoundException | SQLException e) {
+            logger.error(MensagemPadrao.ERROR_STORED_PROCEDURE + "NESTE CASO FOI storedProcedureWithSelectClient. " + e.getMessage());
+            //return null;
+            throw new CustomException(e);
+        }
+    }
+    
+    @Transactional
+    public PageBeans<E> storedProcedureExecuteClient(String nameProcedure, Map<String, Object> parameter, PageableBeans pageable) {
+        try {
+            int totalElements = 0;
+            int size = SIZE_BY_PAGE;
+            int totalPages = 0;
+            int numberPage = 0;
+            // Seta os dados do dispositivo
+            baseMyRepository.setSmadispoEntity(smadispoEntity);
+            
+            // Verifica se foi passado as configuracoes da paginacao
+            if (pageable == null) {
+                pageable = new PageableBeans();
+            }
+            if (pageable.getSize() > 0) {
+                size = pageable.getSize();
+            } else {
+                pageable.setSize(size);
+            }
+            Boolean resultado = baseMyRepository.storedProcedureExecute(new FuncoesPersonalizadas().construirExecuteStoredProcedureFromParamJson(nameProcedure, parameter));
+            // Checa se retornou a quantidade de registro
+            if ((resultado != null) && (resultado)) {
+                totalElements = 0;
+                // Adiciona o total de elementos/rows
+                pageable.setTotalElements(totalElements);
+                
+                //listaResultado = mapResultSetToObject(resultado, Class.forName("br.com.sisinfoweb.entity." + this.getClass().getSimpleName().replace("Service", "") + "Entity"));
+            }
+            // Pega o total de paginas possiveis
+            totalPages = totalElements / size;
+            // Verifica se eh paginas inteiras
+            if ((totalElements % size) != 0) {
+                totalPages++;
+            }
+            //Salva o total de paginas
+            pageable.setTotalPages(totalPages);
+
+            // Verifica se foi passado o numero da pagina
+            if (pageable.getPageNumber() >= 0) {
+                numberPage = pageable.getPageNumber();
+            } else {
+                pageable.setPageNumber(numberPage);
+            }
+            return new PageBeans<>(pageable, null);
+
+        } catch (ScriptException e) {
+            logger.error(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI FINDCUSTOMNATIVEQUERYCLIENT. " + e.getMessage());
+            //return null;
+            throw new CustomException(e);
+
+        } catch (Exception e) {
+            logger.error(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI FINDCUSTOMNATIVEQUERYCLIENTE. " + e.getMessage());
+            //return null;
+            throw new CustomException(e);
+        }
+    }
+    
     @Transactional
     public void closeEntityManager() {
         baseMyRepository.closeEntityManager();

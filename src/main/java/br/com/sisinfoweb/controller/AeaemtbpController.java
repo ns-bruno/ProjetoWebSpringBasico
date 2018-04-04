@@ -39,9 +39,9 @@ public class AeaemtbpController extends BaseMyController{
     
     
     @Autowired
-    AeaemtbpService aeaemtbpService;
+    private AeaemtbpService aeaemtbpService;
     
-    @RequestMapping(value = {"/Aeaextbp"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = {"/Aeaemtbp"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     @Override
     public String initJson( Model model, 

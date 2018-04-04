@@ -9,6 +9,7 @@ import br.com.sisinfoweb.entity.SmadispoEntity;
 import java.io.Serializable;
 import java.sql.ResultSet;
 import java.util.List;
+import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.repository.NoRepositoryBean;
@@ -44,4 +45,7 @@ public interface BaseMyRepository<T, ID extends Serializable> extends PagingAndS
     public Serializable executarInsertOrUpdate(String instrucaoSQL);
     
     public void closeDatabase();
+    
+    public Boolean storedProcedureExecute(String instrucaoSQL);
+            
 }

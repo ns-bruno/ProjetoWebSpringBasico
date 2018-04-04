@@ -16,8 +16,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.StoredProcedureQuery;
 import javax.transaction.Transactional;
 import org.hibernate.exception.ConstraintViolationException;
 import org.hibernate.exception.GenericJDBCException;
@@ -355,4 +357,23 @@ public class BaseMyRepositoryImpl<T, ID extends Serializable> extends SimpleJpaR
         }
     }
 
+    @Override
+    @Transactional
+    public Boolean storedProcedureExecute(String instrucaoSQL){
+        try {
+            conectaBanco();
+            if ((connection != null) && (!connection.isClosed())) {
+
+                logger.debug(MensagemPadrao.LOGGER_EXECUTE_STORED_PROCEDURE + " | storedProcedureExecute | " + instrucaoSQL);
+
+                return connection.createStatement().execute(instrucaoSQL);
+            }
+        } catch (JDBCConnectionException | SQLGrammarException | ConstraintViolationException
+                | LockAcquisitionException | GenericJDBCException | SQLException e) {
+            logger.error("ERRO AO EXECUTAR STORED PROCEDURE. | " + e.getMessage());
+            throw new CustomException(e);
+            
+        }
+        return null;
+    }
 }

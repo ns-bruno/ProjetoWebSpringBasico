@@ -83,6 +83,102 @@ public class FuncoesPersonalizadas {
                 query.append(";");
             }
         } catch (JsonSyntaxException e) {
+            logger.error(MensagemPadrao.ERROR_CONSTRUCT_SQL + " | NESTE CASO NAO FOI CONSTRUIDO O construirSelectFromParamJson. " + e.getMessage());
+            return null;
+        }
+        return query.toString();
+    }
+    
+    public String construirSelectStoredProcedureFromParamJson(String nameProcedure, Map<String, Object> parameter, String columns, String where, String sort) {
+        StringBuilder query = new StringBuilder();
+        try {
+            if ((nameProcedure != null) && (!nameProcedure.isEmpty())) {
+                query.append("SELECT ");
+                // Checa se tem algum parametro
+                if ((columns != null) && (!columns.isEmpty())) {
+
+                    query.append(columns.replace("+", " "));
+
+                } else {
+                    query.append(" * ");
+                }
+                query.append(" FROM ");
+                query.append(nameProcedure);
+                query.append("(");
+                
+                if ((parameter != null) && (parameter.size() > 0)){
+                    int i = 0;
+                    for(String key : parameter.keySet()){
+                        Object value = parameter.get(key);
+                        
+                        if ((value != null) && (value.toString().length() > 0)) {
+                            
+                            query.append((i > 0)  ? ", " : "");
+                            
+                            if ( ( (value.getClass().equals(String.class)) || (value.getClass().equals(CharSequence.class)) ) &&
+                                   (! ( ((value.toString().contains("SELECT")) && (value.toString().contains("FROM"))) || 
+                                    ((value.toString().contains("select")) && (value.toString().contains("from"))) ) )
+                                ){
+                                query.append("'").append(value.toString()).append("'");
+                            } else {
+                                query.append(value.toString());
+                            }
+                            i++;
+                        }
+                    }
+                }
+                query.append(")");
+
+                if ((where != null) && (!where.isEmpty())) {
+
+                    query.append(" WHERE (").append(where.replace("+", " ")).append(")");
+                }
+                // Checa se foi passado alguma ordenacao
+                if ((sort != null) && (!sort.isEmpty())){
+                    query.append(" ORDER BY ").append(sort.replace("+", " "));
+                }
+                query.append(";");
+            }
+        } catch (JsonSyntaxException e) {
+            logger.error(MensagemPadrao.ERROR_CONSTRUCT_SQL + " | NESTE CASO NAO FOI CONSTRUIDO O construirSelectFromParamJson. " + e.getMessage());
+            return null;
+        }
+        return query.toString();
+    }
+    
+    public String construirExecuteStoredProcedureFromParamJson(String nameProcedure, Map<String, Object> parameter) {
+        StringBuilder query = new StringBuilder();
+        try {
+            if ((nameProcedure != null) && (!nameProcedure.isEmpty())) {
+                query.append("EXECUTE PROCEDURE ");
+                query.append(nameProcedure);
+                query.append("(");
+                
+                if ((parameter != null) && (parameter.size() > 0)){
+                    int i = 0;
+                    for(String key : parameter.keySet()){
+                        Object value = parameter.get(key);
+                        
+                        if ((value != null) && (value.toString().length() > 0)) {
+                            
+                            query.append((i > 0)  ? ", " : "");
+                            
+                            if ( ( (value.getClass().equals(String.class)) || (value.getClass().equals(CharSequence.class)) ) &&
+                                   (! ( ((value.toString().contains("SELECT")) && (value.toString().contains("FROM"))) || 
+                                    ((value.toString().contains("select")) && (value.toString().contains("from"))) ) )
+                                ){
+                                query.append("'").append(value.toString()).append("'");
+                            } else {
+                                query.append(value.toString());
+                            }
+                            i++;
+                        }
+                    }
+                }
+                query.append(");");
+            }
+        } catch (JsonSyntaxException e) {
+            logger.error(MensagemPadrao.ERROR_CONSTRUCT_SQL + " | NESTE CASO NAO FOI CONSTRUIDO O construirExecuteStoredProcedureFromParamJson. " + e.getMessage());
             return null;
         }
         return query.toString();
@@ -108,6 +204,57 @@ public class FuncoesPersonalizadas {
                 query.append(";");
             }
         } catch (JsonSyntaxException e) {
+            logger.error(MensagemPadrao.ERROR_CONSTRUCT_SQL + " | NESTE CASO NAO FOI CONSTRUIDO O construirSelectCountFromParamJson. " + e.getMessage());
+            return null;
+        }
+        return query.toString();
+    }
+    
+    public String construirSelectStoredProcedureCountFromParamJson(String nameProcedure, Map<String, Object> parameter, String where, String sort) {
+        StringBuilder query = new StringBuilder();
+        try {
+            if ((nameProcedure != null) && (!nameProcedure.isEmpty())) {
+                query.append("SELECT ");
+                query.append(" COUNT(*) ");
+                query.append(" FROM ");
+                query.append(nameProcedure);
+                query.append("(");
+                
+                if ((parameter != null) && (parameter.size() > 0)){
+                    int i = 0;
+                    for(String key : parameter.keySet()){
+                        Object value = parameter.get(key);
+                        
+                        if ((value != null) && (value.toString().length() > 0)) {
+                            
+                            query.append((i > 0)  ? ", " : "");
+                            
+                            if ( ( (value.getClass().equals(String.class)) || (value.getClass().equals(CharSequence.class)) ) &&
+                                   (! ( ((value.toString().contains("SELECT")) && (value.toString().contains("FROM"))) || 
+                                    ((value.toString().contains("select")) && (value.toString().contains("from"))) ) )
+                                ){
+                                query.append("'").append(value.toString()).append("'");
+                            } else {
+                                query.append(value.toString());
+                            }
+                            i++;
+                        }
+                    }
+                }
+                query.append(")");
+
+                if ((where != null) && (!where.isEmpty())) {
+
+                    query.append(" WHERE (").append(where.replace("+", " ")).append(")");
+                }
+                // Checa se foi passado alguma ordenacao
+                if ((sort != null) && (!sort.isEmpty())){
+                    query.append(" ORDER BY ").append(sort.replace("+", " "));
+                }
+                query.append(";");
+            }
+        } catch (JsonSyntaxException e) {
+            logger.error(MensagemPadrao.ERROR_CONSTRUCT_SQL + " | NESTE CASO NAO FOI CONSTRUIDO O construirSelectCountFromParamJson. " + e.getMessage());
             return null;
         }
         return query.toString();
