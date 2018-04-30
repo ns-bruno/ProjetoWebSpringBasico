@@ -41,7 +41,10 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
         "login",
         "Login",
         "home",
-        "index"};
+        "index",
+        "sisinfoweb.ini",
+        "sisinfoweb.properties",
+    };
 
     private static final String[] PAGINA_SEM_FILTRO_CONTEM = {
         "lib"};
@@ -147,6 +150,8 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
                                     }
 
                                 } else {
+                                    logger.warn(MensagemPadrao.ERROR_EMPRESA_INATIVA + " - " + listaClifo.get(0).getCpfCgc());
+                                    
                                     statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_UNAUTHORIZED);
                                     statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.UNAUTHORIZED));
                                     //statusRetorno.setExtra(e.getLocalizedMessage());
@@ -165,6 +170,8 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
                                     return false;
                                 }
                             } else {
+                                logger.warn(MensagemPadrao.ERROR_EMPRESA_NAO_LICENCIADA);
+                                
                                 statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_UNAUTHORIZED);
                                 statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.UNAUTHORIZED));
                                 //statusRetorno.setExtra(e.getLocalizedMessage());
@@ -204,6 +211,8 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
                             return false;
                         }
                     } else {
+                        logger.warn(MensagemPadrao.ERROR_NOT_DISPOSITIVO);
+                        
                         statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_UNAUTHORIZED);
                         statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.UNAUTHORIZED));
                         //statusRetorno.setExtra(e.getLocalizedMessage());

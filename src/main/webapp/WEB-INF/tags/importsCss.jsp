@@ -9,4 +9,4 @@
 <!-- Ionicons (Obrigatorio) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 
-<link href="${pageContext.request.contextPath}/lib/AdminLTE/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/lib/AdminLTE/plugins/datatables/dataTables.bootstrap.css" type="text/css"/>

@@ -1,11 +1,11 @@
 <!-- jQuery 2.2.3 (Obrigatorio) -->
-<script src="${pageContext.request.contextPath}/lib/AdminLTE/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="${pageContext.request.contextPath}/lib/AdminLTE/plugins/jQuery/jquery-3.3.1.min.js"></script>
 <!-- Bootstrap 3.3.7 (Obrigatorio) -->
 <script src="${pageContext.request.contextPath}/lib/bootstrap/js/bootstrap.min.js"></script>
 <!-- iCheck (Obrigatorio) -->
 <script src="${pageContext.request.contextPath}/lib/AdminLTE/plugins/iCheck/icheck.min.js"></script>
 <!-- (Obrigatorio) -->
-<script src="${pageContext.request.contextPath}/lib/AdminLTE/dist/js/app.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/lib/AdminLTE/dist/js/adminlte.min.js" type="text/javascript"></script>
 
 <script src="${pageContext.request.contextPath}/lib/AdminLTE/plugins/datatables/dataTables.bootstrap.min.js" type="text/javascript"></script>
 

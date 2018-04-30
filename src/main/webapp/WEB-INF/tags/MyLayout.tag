@@ -4,13 +4,13 @@
     Author     : Bruno
 --%>
 
-<%@tag description="Classe personalizada para laginas logadas" pageEncoding="UTF-8"%>
+<%@tag description="Classe personalizada para paginas logadas" pageEncoding="UTF-8"%>
 <%@attribute name="mycontent" fragment="true" %>
 <%@attribute name="title" required="true" rtexprvalue="true" %>
 <%@attribute name="descricaoTela" required="false" rtexprvalue="true" %>
 
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" style="height: auto; min-height: 100%;">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <!-- Icone da pagina -->
@@ -20,19 +20,19 @@
         <title>${title}</title>
     </head>
 
-    <body class="sidebar-mini wysihtml5-supported skin-red-light fixed" style="height: auto;">
+    <body class="sidebar-mini fixed skin-red-light layout-boxed" style="height: auto; min-height: 100%;">
 
-        <div class="wrapper" style="height: auto;">
+        <div class="wrapper" style="height: auto; min-height: 100%;">
             <!-- Menu do topo da pagina -->
             <%@include file="menuCabecalho.jsp" %>
             <!-- Barra lateral do lado esquerdo -->
             <%@include file="menuLateralEsquerda.jsp" %>
 
-            <div class="content-wrapper" style="height: 1066px; min-height: 100%">
+            <div class="content-wrapper" style="min-height: 915px;">
 
                 <jsp:invoke fragment="mycontent"></jsp:invoke>
 
-                </div>
+            </div>
 
             <%@include file="rodape.jsp" %>
         </div>

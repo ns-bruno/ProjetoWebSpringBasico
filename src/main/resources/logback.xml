@@ -12,7 +12,7 @@
     <logger name="br.com.sisinfoweb" level="WARN"/>
     <logger name="java.lang.Object" level="DEBUG"/>
     <logger name="org.firebirdsql" level="WARN"/>
-    <logger name="org.hibernate" level="INFO"/>
+    <logger name="org.hibernate" level="WARN"/>
     <root level="INFO">
         <appender-ref ref="STDOUT" />
     </root>

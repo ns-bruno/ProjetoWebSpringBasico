@@ -11,15 +11,17 @@
     <jsp:attribute name="mycontent">
         
         <!-- Conteudo da pagina -->
-        <div class="content-header">
-            <h1>Dashboard<small>Inicio</small></h1>
-        </div>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+            </ol>
+        </nav>
         <div class="content">
              <div class="row">
                 <div class="col-xs-12">
 
                     <div class="box">
-
                         <h1>Dashboard</h1>
                     </div>
                 </div>

@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib tagdir="/WEB-INF/tags/" prefix="mylayout" %>
+<%@taglib tagdir="/WEB-INF/tags/" prefix="mylayout" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="core" %>
 
 <mylayout:MyLayout title="Cadastro de Empresa">
@@ -13,9 +13,12 @@
 
 
         <!-- Conteudo da pagina -->
-        <div class="content-header">
-            <h1>Empresa<small>Lista</small></h1>
-        </div>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Empresa</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Lista</li>
+            </ol>
+        </nav>
         <div class="content">
             <div class="row">
                 <div class="col-xs-12">
