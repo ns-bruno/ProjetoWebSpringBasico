@@ -8,8 +8,10 @@ package br.com.sisinfoweb.interceptor;
 import br.com.sisinfoweb.banco.beans.RetornoWebServiceBeans;
 import br.com.sisinfoweb.banco.beans.StatusRetornoWebServiceBeans;
 import br.com.sisinfoweb.banco.values.MensagemPadrao;
+import br.com.sisinfoweb.controller.BaseMyController;
 import br.com.sisinfoweb.entity.CfaclifoEntity;
 import br.com.sisinfoweb.entity.SmadispoEntity;
+import br.com.sisinfoweb.funcoes.FuncoesPersonalizadas;
 import br.com.sisinfoweb.service.CfaclifoService;
 import br.com.sisinfoweb.service.SmadispoService;
 import com.google.gson.Gson;
@@ -73,6 +75,30 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 
             if (request.getParameterMap() != null) {
                 
+                // Verifica se tem o parametro WHERE
+                if ((request.getParameter(BaseMyController.PARAM_WHERE) != null)){
+                    // Verifica se o parametro WHERE tem algum traço de SQL Injection
+                    if (new FuncoesPersonalizadas().isSqlInjection(request.getParameter(BaseMyController.PARAM_WHERE))){
+                        logger.warn(MensagemPadrao.ERROR_SQL_INJECTION + " - " + request.getParameter(BaseMyController.PARAM_WHERE));
+
+                        statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_UNAUTHORIZED);
+                        statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.UNAUTHORIZED));
+
+                        // Adiciona o status
+                        retornoWebService.statusRetorno = statusRetorno;
+
+                        StatusRetornoWebServiceBeans mensagem = new StatusRetornoWebServiceBeans();
+                        mensagem.setCodigoRetorno(0);
+                        mensagem.setMensagemRetorno(MensagemPadrao.ERROR_SQL_INJECTION + " - " + request.getParameter(BaseMyController.PARAM_WHERE));
+                        // Adiciona os dados que eh pra ser retornado
+                        retornoWebService.object = mensagem;
+
+                        response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+                        response.getWriter().write(new Gson().toJson(retornoWebService));
+                        return false;
+                    }
+                }
+                // Checa se tem o parametro CNPJ_URL que siginifica que eh um cadastro novo
                 if ((request.getParameter(KEY_CNPJ_URL) != null) && (request.getMethod().equalsIgnoreCase("POST"))) {
                     String where = "(CFACLIFO.CPF_CGC = '" + request.getParameter(KEY_CNPJ_URL) + "') ";
                     if (cfaclifoService.findCustomNativeQuery(Boolean.FALSE, null, null, where, null).size() > 0) {

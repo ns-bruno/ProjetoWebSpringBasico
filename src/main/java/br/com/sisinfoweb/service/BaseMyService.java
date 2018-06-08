@@ -627,7 +627,13 @@ public class BaseMyService<R extends BaseMyRepository, E> {
                                 if (field.isAnnotationPresent(Column.class)) {
                                     Column column = field.getAnnotation(Column.class);
                                     if (column.name().equalsIgnoreCase(columnName) && columnValue != null) {
-                                        if ( (columnValue instanceof byte[]) && (columnName.equalsIgnoreCase("obs") || columnName.equalsIgnoreCase("observacao")) ){
+                                        // Verifica se a coluna eh do tibo byte[](blob) e se eh um campo de texto
+                                        if ( (columnValue instanceof byte[]) && 
+                                                (columnName.equalsIgnoreCase("obs") || 
+                                                 columnName.equalsIgnoreCase("observacao") || 
+                                                 columnName.equalsIgnoreCase("descricao_auxiliar") ||
+                                                 columnName.equalsIgnoreCase("descricao") ||
+                                                 columnName.equalsIgnoreCase("complemento") ) ){
                                             BeanUtils.setProperty(bean, field.getName(), new String((byte[])columnValue));
                                         } else {
                                             BeanUtils.setProperty(bean, field.getName(), columnValue);

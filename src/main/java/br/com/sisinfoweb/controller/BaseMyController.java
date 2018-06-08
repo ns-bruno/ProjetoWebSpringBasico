@@ -23,6 +23,14 @@ public abstract class BaseMyController {
     public static final String COLUMN_SELECTED_JSON = "columnSelectedJson";
     public static final String WHERE_JSON = "whereJson";
     public static final String SQL_JSON = "sqlJson";
+    public static final String PARAM_WHERE = "where";
+    public static final String PARAM_DISPOSITIVO = "dispositivo";
+    public static final String PARAM_COLUMN_SELECTED = "columnSelected";
+    public static final String PARAM_SORT = "sort";
+    public static final String PARAM_RESUME = "resume";
+    public static final String PARAM_SQL_QUERY = "sqlQuery";
+    public static final String PARAM_SIZE = "size";
+    public static final String PARAM_PAGE_NUMBER = "pageNumber";
     
     final static Logger logger = LoggerFactory.getLogger(Object.class);
     

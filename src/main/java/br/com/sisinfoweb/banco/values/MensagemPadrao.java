@@ -18,6 +18,7 @@ public interface MensagemPadrao {
     String ERROR_SAVE = "Erro ao tentar salvar. ";
     String ERROR_NOT_DISPOSITIVO = "Não foi passado o parâmetro com a identificação do dispositivo";
     String ERROR_DISPOSITIVO_INATIVO = "Dispositivo esta inativo.";
+    String ERROR_SQL_INJECTION = "O parametro where que foi passado tem algum traço de SQL Injection, por isso não iremos autorizar essa conexão.";
     String ERROR_DISPOSITIVO_NAO_CADASTRADO = "Dispositivo não encontrado.";
     String ERROR_DISPOSITIVO_SEM_UUID = "Dispositivo sem o UUID(Chave de identificacao).";
     String ERROR_EMPRESA_NAO_LICENCIADA = "Não foi encontrado em nosso banco de dados a empresa licenciada para usar o aplicativo. Ou a identificação do dispositivo não esta cadastrada em nosso banco de dados.";

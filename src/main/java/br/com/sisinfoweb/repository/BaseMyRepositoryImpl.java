@@ -16,10 +16,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import javax.persistence.StoredProcedureQuery;
 import javax.transaction.Transactional;
 import org.hibernate.exception.ConstraintViolationException;
 import org.hibernate.exception.GenericJDBCException;
@@ -258,9 +256,12 @@ public class BaseMyRepositoryImpl<T, ID extends Serializable> extends SimpleJpaR
             if ((connection != null) && (!connection.isClosed())) {
                 //statement = iniciaConexao.createStatement();
                 //return statement.executeQuery(instrucaoSQL);
+                PreparedStatement pstmt = connection.prepareStatement( "select * from aeaclase where id_aeaclase > ?" );
+                pstmt.setString( 1, "1");
+                String sqltemp = pstmt.toString();
 
                 logger.debug(MensagemPadrao.LOGGER_EXECUTE_FIND + " | executarSQL | " + instrucaoSQL);
-
+                
                 return connection.createStatement().executeQuery(instrucaoSQL);
             }
         } catch (SQLException ex) {
