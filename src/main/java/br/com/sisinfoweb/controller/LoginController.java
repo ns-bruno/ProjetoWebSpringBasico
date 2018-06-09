@@ -92,11 +92,11 @@ public class LoginController extends BaseMyController {
             @RequestParam(name = "dispositivoJson", required = true) String dispositivoJson,
             @RequestParam(name = "columnSelectedJson", required = false) String columnSelectedJson,
             @RequestParam(name = "whereJson", required = false) String whereJson,
-            @RequestParam(name = "sort", required = false) String sort,
-            @RequestParam(name = "resume", required = false, defaultValue = "false") Boolean resume,
+            @RequestParam(name = PARAM_SORT, required = false) String sort,
+            @RequestParam(name = PARAM_RESUME, required = false, defaultValue = "false") Boolean resume,
             @RequestParam(name = "sqlJson", required = false) String sqlJson,
-            @RequestParam(name = "size", required = false) Integer size,
-            @RequestParam(name = "pageNumber", required = false) Integer pageNumber) {
+            @RequestParam(name = PARAM_SIZE, required = false) Integer size,
+            @RequestParam(name = PARAM_PAGE_NUMBER, required = false) Integer pageNumber) {
         return new Gson().toJson("");
     }
 }

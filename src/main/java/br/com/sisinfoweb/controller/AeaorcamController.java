@@ -50,14 +50,14 @@ public class AeaorcamController extends BaseMyController{
     public String initJson( Model model, 
                             @RequestHeader() HttpHeaders httpHeaders, 
                             HttpServletResponse response, 
-                            @RequestParam(name = "dispositivo", required = true) String dispositivo,
-                            @RequestParam(name = "columnSelected", required = false) String columnSelected,
-                            @RequestParam(name = "where", required = false) String where,
-                            @RequestParam(name = "sort", required = false) String sort,
-                            @RequestParam(name = "resume", required = false, defaultValue = "false") Boolean resume,
-                            @RequestParam(name = "sqlQuery", required = false) String sqlQuery,
-                            @RequestParam(name = "size", required = false) Integer size,
-                            @RequestParam(name = "pageNumber", required = false) Integer pageNumber) {
+                            @RequestParam(name = PARAM_DISPOSITIVO, required = true) String dispositivo,
+                            @RequestParam(name = PARAM_COLUMN_SELECTED, required = false) String columnSelected,
+                            @RequestParam(name = PARAM_WHERE, required = false) String where,
+                            @RequestParam(name = PARAM_SORT, required = false) String sort,
+                            @RequestParam(name = PARAM_RESUME, required = false, defaultValue = "false") Boolean resume,
+                            @RequestParam(name = PARAM_SQL_QUERY, required = false) String sqlQuery,
+                            @RequestParam(name = PARAM_SIZE, required = false) Integer size,
+                            @RequestParam(name = PARAM_PAGE_NUMBER, required = false) Integer pageNumber) {
         
         StatusRetornoWebServiceBeans statusRetorno = new StatusRetornoWebServiceBeans();
         RetornoWebServiceBeans retornoWebService = new RetornoWebServiceBeans();
@@ -129,11 +129,11 @@ public class AeaorcamController extends BaseMyController{
                             @RequestHeader() HttpHeaders httpHeaders, 
                             HttpServletResponse response, 
                             @RequestBody String orcamentoJson,
-                            @RequestParam(name = "dispositivo", required = true) String dispositivo,
-                            @RequestParam(name = "columnSelected", required = false) String columnSelected,
-                            @RequestParam(name = "where", required = false) String where,
-                            @RequestParam(name = "resume", required = false, defaultValue = "false") Boolean resume,
-                            @RequestParam(name = "sqlQuery", required = false) String sqlQuery) {
+                            @RequestParam(name = PARAM_DISPOSITIVO, required = true) String dispositivo,
+                            @RequestParam(name = PARAM_COLUMN_SELECTED, required = false) String columnSelected,
+                            @RequestParam(name = PARAM_WHERE, required = false) String where,
+                            @RequestParam(name = PARAM_RESUME, required = false, defaultValue = "false") Boolean resume,
+                            @RequestParam(name = PARAM_SQL_QUERY, required = false) String sqlQuery) {
         StatusRetornoWebServiceBeans statusRetorno = new StatusRetornoWebServiceBeans();
         RetornoWebServiceBeans retornoWebService = new RetornoWebServiceBeans();
         try {
