@@ -11,7 +11,7 @@ package br.com.sisinfoweb.banco.beans;
  */
 public class StatusRetornoWebServiceBeans {
     
-    private int codigoRetorno;
+    private int codigoRetorno, idConexao;
     private String mensagemRetorno;
     private Object extra;
 
@@ -21,6 +21,14 @@ public class StatusRetornoWebServiceBeans {
 
     public void setCodigoRetorno(int codigoRetorno) {
         this.codigoRetorno = codigoRetorno;
+    }
+
+    public int getIdConexao() {
+        return idConexao;
+    }
+
+    public void setIdConexao(int idConexao) {
+        this.idConexao = idConexao;
     }
 
     public String getMensagemRetorno() {

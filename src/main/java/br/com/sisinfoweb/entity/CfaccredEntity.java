@@ -8,8 +8,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
 @Entity
@@ -24,6 +22,10 @@ public class CfaccredEntity {
     @Column(name = "ID_CBAPLCTA_TAXA", table = "CFACCRED")
     @Basic
     private Integer idCbaplctaTaxa;
+    
+    @Column(name = "ID_CFAPORTA", table = "CFACCRED")
+    @Basic
+    private Integer idCfaporta;
 
     @Column(name = "GUID", table = "CFACCRED", nullable = false, length = 16)
     @Basic(optional = false)
@@ -52,14 +54,54 @@ public class CfaccredEntity {
     @Column(name = "DESCRICAO", table = "CFACCRED", nullable = false, length = 40)
     @Basic(optional = false)
     private String descricao;
-
-    @Column(name = "TAXA", table = "CFACCRED", nullable = false)
+    
+    @Column(name = "PARCELA_FIM1", table = "CFACCRED", nullable = false)
     @Basic(optional = false)
-    private double taxa;
-
-    @Column(name = "DIAS", table = "CFACCRED", nullable = false)
+    private int parcelaFim1;
+    
+    @Column(name = "PARCELA_FIM2", table = "CFACCRED", nullable = false)
     @Basic(optional = false)
-    private int dias;
+    private int parcelaFim2;
+    
+    @Column(name = "PARCELA_FIM3", table = "CFACCRED", nullable = false)
+    @Basic(optional = false)
+    private int parcelaFim3;
+
+    @Column(name = "TAXA1", table = "CFACCRED", nullable = false)
+    @Basic(optional = false)
+    private double taxa1;
+    
+    @Column(name = "TAXA2", table = "CFACCRED", nullable = false)
+    @Basic(optional = false)
+    private double taxa2;
+    
+    @Column(name = "TAXA3", table = "CFACCRED", nullable = false)
+    @Basic(optional = false)
+    private double taxa3;
+    
+    @Column(name = "TAXA_DEB", table = "CFACCRED", nullable = false)
+    @Basic(optional = false)
+    private double taxaDeb;
+
+    @Column(name = "DIAS_DEB", table = "CFACCRED", nullable = false)
+    @Basic(optional = false)
+    private int diasDeb;
+    
+    @Column(name = "DIAS_CRE", table = "CFACCRED", nullable = false)
+    @Basic(optional = false)
+    private int diasCre;
+    
+    @Column(name = "ANTECIPA", table = "CFACCRED")
+    @Basic
+    private String antecipa;
+            
+    @Column(name = "TARIFA_POR_TRANSACAO", table = "CFACCRED", nullable = false)
+    @Basic(optional = false)
+    private double tarifaPorTransacao;
+    
+    @Column(name = "TAXA_INTERMEDIACAO", table = "CFACCRED", nullable = false)
+    @Basic(optional = false)
+    private double taxaIntermediacao;
 
     public Integer getIdCfaccred() {
         return this.idCfaccred;
@@ -133,20 +175,109 @@ public class CfaccredEntity {
         this.descricao = descricao;
     }
 
-    public double getTaxa() {
-        return this.taxa;
+    public double getTaxa1() {
+        return this.taxa1;
     }
 
-    public void setTaxa(double taxa) {
-        this.taxa = taxa;
+    public void setTaxa1(double taxa) {
+        this.taxa1 = taxa;
     }
 
-    public int getDias() {
-        return this.dias;
+    public Integer getIdCfaporta() {
+        return idCfaporta;
     }
 
-    public void setDias(int dias) {
-        this.dias = dias;
+    public void setIdCfaporta(Integer idCfaporta) {
+        this.idCfaporta = idCfaporta;
     }
 
+    public int getParcelaFim1() {
+        return parcelaFim1;
+    }
+
+    public void setParcelaFim1(int parcelaFim1) {
+        this.parcelaFim1 = parcelaFim1;
+    }
+
+    public int getParcelaFim2() {
+        return parcelaFim2;
+    }
+
+    public void setParcelaFim2(int parcelaFim2) {
+        this.parcelaFim2 = parcelaFim2;
+    }
+
+    public int getParcelaFim3() {
+        return parcelaFim3;
+    }
+
+    public void setParcelaFim3(int parcelaFim3) {
+        this.parcelaFim3 = parcelaFim3;
+    }
+
+    public double getTaxa2() {
+        return taxa2;
+    }
+
+    public void setTaxa2(double taxa2) {
+        this.taxa2 = taxa2;
+    }
+
+    public double getTaxa3() {
+        return taxa3;
+    }
+
+    public void setTaxa3(double taxa3) {
+        this.taxa3 = taxa3;
+    }
+
+    public double getTaxaDeb() {
+        return taxaDeb;
+    }
+
+    public void setTaxaDeb(double taxaDeb) {
+        this.taxaDeb = taxaDeb;
+    }
+
+    public int getDiasDeb() {
+        return diasDeb;
+    }
+
+    public void setDiasDeb(int diasDeb) {
+        this.diasDeb = diasDeb;
+    }
+
+    public int getDiasCre() {
+        return diasCre;
+    }
+
+    public void setDiasCre(int diasCre) {
+        this.diasCre = diasCre;
+    }
+
+    public String getAntecipa() {
+        return antecipa;
+    }
+
+    public void setAntecipa(String antecipa) {
+        this.antecipa = antecipa;
+    }
+
+    public double getTarifaPorTransacao() {
+        return tarifaPorTransacao;
+    }
+
+    public void setTarifaPorTransacao(double tarifaPorTransacao) {
+        this.tarifaPorTransacao = tarifaPorTransacao;
+    }
+
+    public double getTaxaIntermediacao() {
+        return taxaIntermediacao;
+    }
+
+    public void setTaxaIntermediacao(double taxaIntermediacao) {
+        this.taxaIntermediacao = taxaIntermediacao;
+    }
+
+    
 }

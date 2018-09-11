@@ -39,6 +39,7 @@
     <class>br.com.sisinfoweb.entity.CfatpcobEntity</class>
     <class>br.com.sisinfoweb.entity.CfatpdocEntity</class>
     <class>br.com.sisinfoweb.entity.RpaparceEntity</class>
+    <class>br.com.sisinfoweb.entity.RpalcparEntity</class>
     <class>br.com.sisinfoweb.entity.SmadispoEntity</class>
     <class>br.com.sisinfoweb.entity.SmaempreEntity</class>
     <class>br.com.sisinfoweb.entity.SmausuarEntity</class>
@@ -88,6 +89,7 @@
     <class>br.com.sisinfoweb.entity.CfatpcobEntity</class>
     <class>br.com.sisinfoweb.entity.CfatpdocEntity</class>
     <class>br.com.sisinfoweb.entity.RpaparceEntity</class>
+    <class>br.com.sisinfoweb.entity.RpalcparEntity</class>
     <class>br.com.sisinfoweb.entity.SmadispoEntity</class>
     <class>br.com.sisinfoweb.entity.SmaempreEntity</class>
     <class>br.com.sisinfoweb.entity.SmausuarEntity</class>

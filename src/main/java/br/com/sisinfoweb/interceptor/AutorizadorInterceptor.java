@@ -59,83 +59,102 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        StatusRetornoWebServiceBeans statusRetorno = new StatusRetornoWebServiceBeans();
+        RetornoWebServiceBeans retornoWebService = new RetornoWebServiceBeans();
+        
+        try{
+            if (isPaginaSemFiltro(request.getRequestURI())) {
+                return true;
+            }
+            // Pega a sessao se existir
+            HttpSession sessao = request.getSession(false);
+            // Checa se que esta fazendo a solicitacao eh para consumir um json
+            if (((request.getHeader(HttpHeaders.ACCEPT) != null) && (request.getHeader(HttpHeaders.ACCEPT).contains(MediaType.APPLICATION_JSON_VALUE)))
+                    || ((request.getHeader(HttpHeaders.CONTENT_TYPE) != null) && (request.getHeader(HttpHeaders.CONTENT_TYPE).contains(MediaType.APPLICATION_JSON_VALUE)))) {
 
-        if (isPaginaSemFiltro(request.getRequestURI())) {
-            return true;
-        }
-        // Pega a sessao se existir
-        HttpSession sessao = request.getSession(false);
+                if (request.getParameterMap() != null) {
 
-        // Checa se que esta fazendo a solicitacao eh para consumir um json
-        if (((request.getHeader(HttpHeaders.ACCEPT) != null) && (request.getHeader(HttpHeaders.ACCEPT).contains(MediaType.APPLICATION_JSON_VALUE)))
-                || ((request.getHeader(HttpHeaders.CONTENT_TYPE) != null) && (request.getHeader(HttpHeaders.CONTENT_TYPE).contains(MediaType.APPLICATION_JSON_VALUE)))) {
+                    // Verifica se tem o parametro WHERE
+                    if ((request.getParameter(BaseMyController.PARAM_WHERE) != null)){
+                        // Verifica se o parametro WHERE tem algum traço de SQL Injection
+                        if (new FuncoesPersonalizadas().isSqlInjection(request.getParameter(BaseMyController.PARAM_WHERE))){
+                            logger.warn(MensagemPadrao.ERROR_SQL_INJECTION + " - " + request.getParameter(BaseMyController.PARAM_WHERE));
 
-            StatusRetornoWebServiceBeans statusRetorno = new StatusRetornoWebServiceBeans();
-            RetornoWebServiceBeans retornoWebService = new RetornoWebServiceBeans();
+                            statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_UNAUTHORIZED);
+                            statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.UNAUTHORIZED));
 
-            if (request.getParameterMap() != null) {
-                
-                // Verifica se tem o parametro WHERE
-                if ((request.getParameter(BaseMyController.PARAM_WHERE) != null)){
-                    // Verifica se o parametro WHERE tem algum traço de SQL Injection
-                    if (new FuncoesPersonalizadas().isSqlInjection(request.getParameter(BaseMyController.PARAM_WHERE))){
-                        logger.warn(MensagemPadrao.ERROR_SQL_INJECTION + " - " + request.getParameter(BaseMyController.PARAM_WHERE));
+                            // Adiciona o status
+                            retornoWebService.statusRetorno = statusRetorno;
 
-                        statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_UNAUTHORIZED);
-                        statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.UNAUTHORIZED));
+                            StatusRetornoWebServiceBeans mensagem = new StatusRetornoWebServiceBeans();
+                            mensagem.setCodigoRetorno(0);
+                            mensagem.setMensagemRetorno(MensagemPadrao.ERROR_SQL_INJECTION + " - " + request.getParameter(BaseMyController.PARAM_WHERE));
+                            // Adiciona os dados que eh pra ser retornado
+                            retornoWebService.object = mensagem;
 
-                        // Adiciona o status
-                        retornoWebService.statusRetorno = statusRetorno;
-
-                        StatusRetornoWebServiceBeans mensagem = new StatusRetornoWebServiceBeans();
-                        mensagem.setCodigoRetorno(0);
-                        mensagem.setMensagemRetorno(MensagemPadrao.ERROR_SQL_INJECTION + " - " + request.getParameter(BaseMyController.PARAM_WHERE));
-                        // Adiciona os dados que eh pra ser retornado
-                        retornoWebService.object = mensagem;
-
-                        response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
-                        response.getWriter().write(new Gson().toJson(retornoWebService));
-                        return false;
+                            response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+                            response.getWriter().write(new Gson().toJson(retornoWebService));
+                            return false;
+                        }
                     }
-                }
-                // Checa se tem o parametro CNPJ_URL que siginifica que eh um cadastro novo
-                if ((request.getParameter(KEY_CNPJ_URL) != null) && (request.getMethod().equalsIgnoreCase("POST"))) {
-                    String where = "(CFACLIFO.CPF_CGC = '" + request.getParameter(KEY_CNPJ_URL) + "') ";
-                    if (cfaclifoService.findCustomNativeQuery(Boolean.FALSE, null, null, where, null).size() > 0) {
-                        logger.info(MensagemPadrao.LOGGER_NEW_CAD_DISPOSITIVO);
-                        return true;
-                    }
+                    // Checa se tem o parametro CNPJ_URL que siginifica que eh um cadastro novo
+                    if ((request.getParameter(KEY_CNPJ_URL) != null) && (request.getMethod().equalsIgnoreCase("POST"))) {
+                        String where = "(CFACLIFO.CPF_CGC = '" + request.getParameter(KEY_CNPJ_URL) + "') ";
+                        if (cfaclifoService.findCustomNativeQuery(Boolean.FALSE, null, null, where, null).size() > 0) {
+                            logger.info(MensagemPadrao.LOGGER_NEW_CAD_DISPOSITIVO);
+                            return true;
+                        }
 
-                } else {
-                    if ((request.getParameter(KEY_DISPOSITIVO_JSON) != null)) {
+                    } else {
+                        if ((request.getParameter(KEY_DISPOSITIVO_JSON) != null)) {
 
-                        SmadispoEntity smadispoEntity = new Gson().fromJson(request.getParameter(KEY_DISPOSITIVO_JSON), SmadispoEntity.class);
+                            SmadispoEntity smadispoEntity = new Gson().fromJson(request.getParameter(KEY_DISPOSITIVO_JSON), SmadispoEntity.class);
 
-                        // Checa se pegou o dispositivo
-                        if ((smadispoEntity != null) && (smadispoEntity.getIdentificacao() != null) && (!smadispoEntity.getIdentificacao().isEmpty())) {
+                            // Checa se pegou o dispositivo
+                            if ((smadispoEntity != null) && (smadispoEntity.getIdentificacao() != null) && (!smadispoEntity.getIdentificacao().isEmpty())) {
 
-                            String whereClifo = "(CFACLIFO.ID_CFACLIFO = (SELECT SMADISPO.ID_CFACLIFO FROM SMADISPO WHERE SMADISPO.IDENTIFICACAO = '" + smadispoEntity.getIdentificacao() + "'))";
+                                String whereClifo = "(CFACLIFO.ID_CFACLIFO = (SELECT SMADISPO.ID_CFACLIFO FROM SMADISPO WHERE SMADISPO.IDENTIFICACAO = '" + smadispoEntity.getIdentificacao() + "'))";
 
-                            List<CfaclifoEntity> listaClifo = cfaclifoService.findCustomNativeQuery(Boolean.FALSE, null, null, whereClifo, null);
+                                List<CfaclifoEntity> listaClifo = cfaclifoService.findCustomNativeQuery(Boolean.FALSE, null, null, whereClifo, null);
 
-                            // Checa se a empresa esta cadastrada no banco de dados Admin
-                            if ((listaClifo != null) && (listaClifo.size() > 0)) {
-                                // Checa se a empresa esta ativa
-                                if (listaClifo.get(0).getAtivo().equals('1')) {
-                                    // Pega a conexao com o banco de dados 
-                                    
-                                    String whereDispo = "(IDENTIFICACAO = '" + smadispoEntity.getIdentificacao() + "') ";
+                                // Checa se a empresa esta cadastrada no banco de dados Admin
+                                if ((listaClifo != null) && (listaClifo.size() > 0)) {
+                                    // Checa se a empresa esta ativa
+                                    if (listaClifo.get(0).getAtivo().equals('1')) {
+                                        // Pega a conexao com o banco de dados 
 
-                                    List<SmadispoEntity> listaDispositivo = smadispoService.findCustomNativeQuery(Boolean.FALSE, null, null, whereDispo, null);
+                                        String whereDispo = "(IDENTIFICACAO = '" + smadispoEntity.getIdentificacao() + "') ";
 
-                                    // Checa se o dispositivo esta cadastrado no Admin
-                                    if ((listaDispositivo != null) && (listaDispositivo.size() > 0)) {
-                                        // Checa se o dispositivo esta ativo
-                                        if ( (listaDispositivo.get(0).getAtivo() != null) && (listaDispositivo.get(0).getAtivo().equals('1')) ) {
+                                        List<SmadispoEntity> listaDispositivo = smadispoService.findCustomNativeQuery(Boolean.FALSE, null, null, whereDispo, null);
 
-                                            return true;
+                                        // Checa se o dispositivo esta cadastrado no Admin
+                                        if ((listaDispositivo != null) && (listaDispositivo.size() > 0)) {
+                                            // Checa se o dispositivo esta ativo
+                                            if ( (listaDispositivo.get(0).getAtivo() != null) && (listaDispositivo.get(0).getAtivo().equals('1')) ) {
+
+                                                return true;
+                                            } else {
+                                                logger.warn(MensagemPadrao.ERROR_DISPOSITIVO_INATIVO + " - " + smadispoEntity.getIdentificacao());
+
+                                                statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_UNAUTHORIZED);
+                                                statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.UNAUTHORIZED));
+                                                //statusRetorno.setExtra(e.getLocalizedMessage());
+
+                                                // Adiciona o status
+                                                retornoWebService.statusRetorno = statusRetorno;
+
+                                                StatusRetornoWebServiceBeans mensagem = new StatusRetornoWebServiceBeans();
+                                                mensagem.setCodigoRetorno(0);
+                                                mensagem.setMensagemRetorno(MensagemPadrao.ERROR_DISPOSITIVO_INATIVO);
+                                                // Adiciona os dados que eh pra ser retornado
+                                                retornoWebService.object = mensagem;
+
+                                                response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+                                                response.getWriter().write(new Gson().toJson(retornoWebService));
+                                                return false;
+                                            }
                                         } else {
-                                            logger.warn(MensagemPadrao.ERROR_DISPOSITIVO_INATIVO + " - " + smadispoEntity.getIdentificacao());
+                                            logger.warn(MensagemPadrao.ERROR_DISPOSITIVO_NAO_CADASTRADO + " - " + smadispoEntity.getIdentificacao());
 
                                             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_UNAUTHORIZED);
                                             statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.UNAUTHORIZED));
@@ -146,16 +165,17 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 
                                             StatusRetornoWebServiceBeans mensagem = new StatusRetornoWebServiceBeans();
                                             mensagem.setCodigoRetorno(0);
-                                            mensagem.setMensagemRetorno(MensagemPadrao.ERROR_DISPOSITIVO_INATIVO);
+                                            mensagem.setMensagemRetorno(MensagemPadrao.ERROR_DISPOSITIVO_NAO_CADASTRADO);
                                             // Adiciona os dados que eh pra ser retornado
                                             retornoWebService.object = mensagem;
-                                            
+
                                             response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
                                             response.getWriter().write(new Gson().toJson(retornoWebService));
                                             return false;
                                         }
+
                                     } else {
-                                        logger.warn(MensagemPadrao.ERROR_DISPOSITIVO_NAO_CADASTRADO + " - " + smadispoEntity.getIdentificacao());
+                                        logger.warn(MensagemPadrao.ERROR_EMPRESA_INATIVA + " - " + listaClifo.get(0).getCpfCgc());
 
                                         statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_UNAUTHORIZED);
                                         statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.UNAUTHORIZED));
@@ -166,7 +186,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 
                                         StatusRetornoWebServiceBeans mensagem = new StatusRetornoWebServiceBeans();
                                         mensagem.setCodigoRetorno(0);
-                                        mensagem.setMensagemRetorno(MensagemPadrao.ERROR_DISPOSITIVO_NAO_CADASTRADO);
+                                        mensagem.setMensagemRetorno(MensagemPadrao.ERROR_EMPRESA_INATIVA);
                                         // Adiciona os dados que eh pra ser retornado
                                         retornoWebService.object = mensagem;
 
@@ -174,10 +194,9 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
                                         response.getWriter().write(new Gson().toJson(retornoWebService));
                                         return false;
                                     }
-
                                 } else {
-                                    logger.warn(MensagemPadrao.ERROR_EMPRESA_INATIVA + " - " + listaClifo.get(0).getCpfCgc());
-                                    
+                                    logger.warn(MensagemPadrao.ERROR_EMPRESA_NAO_LICENCIADA);
+
                                     statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_UNAUTHORIZED);
                                     statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.UNAUTHORIZED));
                                     //statusRetorno.setExtra(e.getLocalizedMessage());
@@ -187,7 +206,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 
                                     StatusRetornoWebServiceBeans mensagem = new StatusRetornoWebServiceBeans();
                                     mensagem.setCodigoRetorno(0);
-                                    mensagem.setMensagemRetorno(MensagemPadrao.ERROR_EMPRESA_INATIVA);
+                                    mensagem.setMensagemRetorno(MensagemPadrao.ERROR_EMPRESA_NAO_LICENCIADA);
                                     // Adiciona os dados que eh pra ser retornado
                                     retornoWebService.object = mensagem;
 
@@ -195,9 +214,10 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
                                     response.getWriter().write(new Gson().toJson(retornoWebService));
                                     return false;
                                 }
+
                             } else {
-                                logger.warn(MensagemPadrao.ERROR_EMPRESA_NAO_LICENCIADA);
-                                
+                                logger.warn(MensagemPadrao.ERROR_NOT_DISPOSITIVO);
+
                                 statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_UNAUTHORIZED);
                                 statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.UNAUTHORIZED));
                                 //statusRetorno.setExtra(e.getLocalizedMessage());
@@ -207,15 +227,14 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 
                                 StatusRetornoWebServiceBeans mensagem = new StatusRetornoWebServiceBeans();
                                 mensagem.setCodigoRetorno(0);
-                                mensagem.setMensagemRetorno(MensagemPadrao.ERROR_EMPRESA_NAO_LICENCIADA);
+                                mensagem.setMensagemRetorno(MensagemPadrao.ERROR_DISPOSITIVO_SEM_UUID);
                                 // Adiciona os dados que eh pra ser retornado
                                 retornoWebService.object = mensagem;
-                                
+
                                 response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
                                 response.getWriter().write(new Gson().toJson(retornoWebService));
                                 return false;
                             }
-
                         } else {
                             logger.warn(MensagemPadrao.ERROR_NOT_DISPOSITIVO);
 
@@ -228,7 +247,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 
                             StatusRetornoWebServiceBeans mensagem = new StatusRetornoWebServiceBeans();
                             mensagem.setCodigoRetorno(0);
-                            mensagem.setMensagemRetorno(MensagemPadrao.ERROR_DISPOSITIVO_SEM_UUID);
+                            mensagem.setMensagemRetorno(MensagemPadrao.ERROR_NOT_DISPOSITIVO);
                             // Adiciona os dados que eh pra ser retornado
                             retornoWebService.object = mensagem;
 
@@ -236,37 +255,31 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
                             response.getWriter().write(new Gson().toJson(retornoWebService));
                             return false;
                         }
-                    } else {
-                        logger.warn(MensagemPadrao.ERROR_NOT_DISPOSITIVO);
-                        
-                        statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_UNAUTHORIZED);
-                        statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.UNAUTHORIZED));
-                        //statusRetorno.setExtra(e.getLocalizedMessage());
-
-                        // Adiciona o status
-                        retornoWebService.statusRetorno = statusRetorno;
-
-                        StatusRetornoWebServiceBeans mensagem = new StatusRetornoWebServiceBeans();
-                        mensagem.setCodigoRetorno(0);
-                        mensagem.setMensagemRetorno(MensagemPadrao.ERROR_NOT_DISPOSITIVO);
-                        // Adiciona os dados que eh pra ser retornado
-                        retornoWebService.object = mensagem;
-
-                        response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
-                        response.getWriter().write(new Gson().toJson(retornoWebService));
-                        return false;
                     }
                 }
-            }
 
-        } else {
-            if ((sessao != null) && (sessao.getAttribute(KEY_DISPOSITIVO) != null)) {
-                return true;
+            } else {
+                if ((sessao != null) && (sessao.getAttribute(KEY_DISPOSITIVO) != null)) {
+                    return true;
+                }
             }
+            response.sendRedirect("Login");
+            return false;
+        } catch (Exception e){
+            logger.error(MensagemPadrao.ERROR_INTERCEPTOR_AUTORIZADOR + " - " + this.getClass().getSimpleName() + " - " + e.getMessage());
+            
+            // Cria uma vareavel para retorna o status
+            statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_INTERNAL_ERROR);
+            statusRetorno.setMensagemRetorno(HttpURLConnection.HTTP_INTERNAL_ERROR + " - " + e.getMessage() );
+            statusRetorno.setExtra(e.getLocalizedMessage());
+            
+            // Adiciona o status
+            retornoWebService.statusRetorno = statusRetorno;
+            
+            response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+            response.getWriter().write(new Gson().toJson(retornoWebService));
+            return false;
         }
-
-        response.sendRedirect("Login");
-        return false;
         //return super.preHandle(request, response, handler); //To change body of generated methods, choose Tools | Templates.
     }
 

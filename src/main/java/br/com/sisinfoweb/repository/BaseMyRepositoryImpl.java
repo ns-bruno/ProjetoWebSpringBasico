@@ -62,11 +62,11 @@ public class BaseMyRepositoryImpl<T, ID extends Serializable> extends SimpleJpaR
 
         } catch (JDBCConnectionException | SQLGrammarException | ConstraintViolationException
                 | LockAcquisitionException | GenericJDBCException e) {
-            logger.error("ERRO AO EXECUTAR O SELECT CUSTOMNATIVEQUERY. | " + e.getMessage());
+            logger.error("ERRO AO EXECUTAR O SELECT findCustomNativeQuery. | " + e.getMessage());
             
             throw new CustomException(e);
         } catch (Exception e) {
-            logger.error("ERRO AO EXECUTAR O SELECT CUSTOMNATIVEQUERY. | " + e.getMessage());
+            logger.error("ERRO AO EXECUTAR O SELECT findCustomNativeQuery. | " + e.getMessage());
             
             throw new CustomException(e);
         }

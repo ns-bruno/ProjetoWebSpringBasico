@@ -31,6 +31,7 @@ public interface MensagemPadrao {
     String ERROR_STRUCT_JSON = "Erro na estrutura do JSON";
     String ERROR_CONNECTION_NOT_INIT = "Conexão (connection) com banco de dados não inicializada.";
     String ERROR_STORED_PROCEDURE = "Erro ao executar Stored Procedure. ";
+    String ERROR_INTERCEPTOR_AUTORIZADOR = "Erro desconhecido no autorizador. ";
     String LOGGER_NEW_CAD_DISPOSITIVO = "CADASTRAR UM NOVO DISPOSITIVO";
     String LOGGER_EXECUTE_FIND = "EXECUTANDO SELECT NO BANCO DE DADOS";
     String LOGGER_EXECUTE_SALVE = "EXECUTANDO INSERT/UPDATE NO BANCO DE DADOS";

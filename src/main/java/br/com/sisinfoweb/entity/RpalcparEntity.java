@@ -10,8 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
 @Entity
@@ -100,9 +98,8 @@ public class RpalcparEntity {
     private Double fcVlPagoTotal;
 
     @Column(name = "OBS", table = "RPALCPAR")
-    @Lob
     @Basic
-    private byte[] obs;
+    private String obs;
 
     public Integer getIdRpalcpar() {
         return this.idRpalcpar;
@@ -264,11 +261,11 @@ public class RpalcparEntity {
         this.fcVlPagoTotal = fcVlPagoTotal;
     }
 
-    public byte[] getObs() {
+    public String getObs() {
         return this.obs;
     }
 
-    public void setObs(byte[] obs) {
+    public void setObs(String obs) {
         this.obs = obs;
     }
 

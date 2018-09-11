@@ -23,8 +23,8 @@ public class SmadispoEntity {
     @Column(name = "ID_CFACLIFO", table = "SMADISPO")
     private Integer idCfaclifo;
     
-    @Column(name = "ID_CFACLIFO_FUN", table = "SMADISPO")
-    private Integer idCfaclifoFun;
+    @Column(name = "ID_CFACLIFO_FUNC", table = "SMADISPO")
+    private Integer idCfaclifoFunc;
     
     @Column(name = "GUID", table = "SMADISPO", nullable = false, length = 16)
     @Basic(optional = false)
@@ -79,11 +79,11 @@ public class SmadispoEntity {
     }
 
     public Integer getIdCfaclifoFun() {
-        return idCfaclifoFun;
+        return idCfaclifoFunc;
     }
 
     public void setIdCfaclifoFun(Integer idCfaclifoFun) {
-        this.idCfaclifoFun = idCfaclifoFun;
+        this.idCfaclifoFunc = idCfaclifoFun;
     }
 
     public String getGuid() {
