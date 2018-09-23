@@ -112,7 +112,9 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 
                             // Checa se pegou o dispositivo
                             if ((smadispoEntity != null) && (smadispoEntity.getIdentificacao() != null) && (!smadispoEntity.getIdentificacao().isEmpty())) {
-
+                                // Envia os dados do dispositivo para o service
+                                cfaclifoService.setSmadispoEntity(smadispoEntity);
+                                
                                 String whereClifo = "(CFACLIFO.ID_CFACLIFO = (SELECT SMADISPO.ID_CFACLIFO FROM SMADISPO WHERE SMADISPO.IDENTIFICACAO = '" + smadispoEntity.getIdentificacao() + "'))";
 
                                 List<CfaclifoEntity> listaClifo = cfaclifoService.findCustomNativeQuery(Boolean.FALSE, null, null, whereClifo, null);
@@ -121,7 +123,9 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
                                 if ((listaClifo != null) && (listaClifo.size() > 0)) {
                                     // Checa se a empresa esta ativa
                                     if (listaClifo.get(0).getAtivo().equals('1')) {
-                                        // Pega a conexao com o banco de dados 
+                                        
+                                        // Envia os dados do dispositivo para o service
+                                        smadispoService.setSmadispoEntity(smadispoEntity);
 
                                         String whereDispo = "(IDENTIFICACAO = '" + smadispoEntity.getIdentificacao() + "') ";
 

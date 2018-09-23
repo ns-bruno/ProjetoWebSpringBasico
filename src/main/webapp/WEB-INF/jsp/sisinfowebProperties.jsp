@@ -20,64 +20,102 @@
     </head>
     <body class="sidebar-mini wysihtml5-supported skin-red-light fixed" style="height: auto;">
         
-        <div class="wrapper" style="height: auto; min-height: 100%;">
+        <div class="container" style="height: 1066px; min-height: 100%">
 
-            <div class="content-wrapper" style="height: 1066px; min-height: 100%">
-
-                <!-- Conteudo da pagina -->
-                <div class="content-header">
-                    <h5>SisInfoWeb<small> Configurações</small></h5>
-                </div>
-                
-                <section class="content">
-                    <div class="col-xs-12">
-                        
-                        <!-- Cabecalho da tabela -->
-                        <div class="box-header with-border">
-                                
-                            <form class="form-inline" method="POST" modelAttribute="properties">
-                                <div class="col-xs-4 mb-2">
-                                    <!--<label for="inputChave" class="sr-only">Chave</label>-->
-                                    <input type="text" class="form-control" id="key" placeholder="Chave">
-                                </div>
-                                <div class="mx-sm-3 mb-2">
-                                    <!--<label for="inputDescricao" class="sr-only">Descricao</label>-->
-                                    <input type="text" class="form-control" id="value" placeholder="Descrição">
-                                </div>
-                                <button type="submit" class="btn btn-primary mb-2">Salvar</button>
-                            </form>
-                        </div>
-                        
-                        <!-- Corpo da tabela -->
-                        <div class="box-body">
-                            <div class="dataTables_wrapper form-inline dt-bootstrap">
-                                <table id="tablePropriedades" class="table table-bordered table-hover dataTable">
-                                    <thead>
-                                        <tr>
-                                            <th>Chave</th>
-                                            <th>Descricao</th>
-                                            <th>Ações</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <core:forEach items="${lista}" var="prop">
-                                            <tr>
-                                                <td><a class="" href="">${prop.key}</a></td>
-                                                <td><a class="" href="">${prop.value}</a></td>
-                                                <td>
-                                                    <button class="btn btn-primary">Editar</button>
-                                                    <button class="btn btn-danger">Excluir</button>
-                                                </td>
-                                            </tr>
-                                        </core:forEach>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+            <!-- Conteudo da pagina -->
+            <div class="content-header">
+                <h5>SisInfoWeb<small> Configurações</small></h5>
             </div>
 
+            <section class="content">
+                <div class="col-xs-12">
+
+                    <!-- Cabecalho da tabela -->
+<!--                        <div class="box-header with-border">
+
+                        <form class="form-inline" method="POST" modelAttribute="properties">
+                            <div class="col-xs-4 mb-2">
+                                <label for="inputChave" class="sr-only">Chave</label>
+                                <input type="text" class="form-control" id="key" placeholder="Chave">
+                            </div>
+                            <div class="mx-sm-3 mb-2">
+                                <label for="inputDescricao" class="sr-only">Descricao</label>
+                                <input type="text" class="form-control" id="value" placeholder="Descrição">
+                            </div>
+                            <button type="submit" class="btn btn-primary mb-2">Salvar</button>
+                        </form>
+                    </div>-->
+
+                    <!-- Corpo da tabela -->
+                    <div class="box-body">
+
+                        <button type="button" class="btn btn-default mb-2" data-toggle="modal" data-target="#modal-novo">Novo</button>
+                        
+                        <div class="dataTables_wrapper form-inline dt-bootstrap">
+                            <table id="tablePropriedades" class="table table-bordered table-hover dataTable">
+                                <thead>
+                                    <tr>
+                                        <th>Chave</th>
+                                        <th>Descricao</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <core:forEach items="${lista}" var="prop">
+                                        <tr>
+                                            <td><a class="" href="">${prop.key}</a></td>
+                                            <td><a class="" href="">${prop.value}</a></td>
+                                            <td>
+                                                <button class="btn btn-primary">Editar</button>
+                                                <button class="btn btn-danger">Excluir</button>
+                                            </td>
+                                        </tr>
+                                    </core:forEach>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <!-- Modal -->
+                    <div class="modal modal-primary fade" id="modal-novo">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Primary Modal</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span></button>
+                                </div>
+
+                                <div class="modal-body">
+
+                                    <div class="md-form mb-5">
+                                        <label for="inputChave">Nome da Chave</label>
+                                        <input type="text" id="inputChave" class="form-control validate" placeholder="Chave">
+                                    </div>
+
+                                    <div class="md-form mb-5">
+                                        <label for="inputDescricaoChave">Descrição da Chave</label>
+                                        <input type="email" id="inputDescricaoChave" class="form-control validate" placeholder="Descrição da Chave">
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary">Salvar</button>
+                                    <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cancelar</button>
+                                </div>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                    </div>
+                    
+                    
+                </div>
+            </section>
         </div>
+        <script src="${pageContext.request.contextPath}/lib/AdminLTE/plugins/jQuery/jquery-3.3.1.min.js"></script>
+        <!-- Bootstrap 3.3.7 (Obrigatorio) -->
+        <script src="${pageContext.request.contextPath}/lib/bootstrap/js/bootstrap.min.js"></script>
+        <script src="${pageContext.request.contextPath}/lib/AdminLTE/dist/js/adminlte.min.js" type="text/javascript"></script>
     </body>
 </html>

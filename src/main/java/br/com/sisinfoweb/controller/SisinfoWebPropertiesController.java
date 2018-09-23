@@ -12,7 +12,6 @@ import java.net.HttpURLConnection;
 import java.util.Properties;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;

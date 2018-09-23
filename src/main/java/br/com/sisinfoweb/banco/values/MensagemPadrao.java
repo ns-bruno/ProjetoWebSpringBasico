@@ -10,13 +10,13 @@ package br.com.sisinfoweb.banco.values;
  * @author Bruno
  */
 public interface MensagemPadrao {
-    String INSERT_ERROR = "Não conseguimos inserir no Host (Servidor SisInfo da empresa).";
+    String INSERT_ERROR = "Nao conseguimos inserir no Host (Servidor SisInfo da empresa).";
     String INSERT_SUCCESS = "Inserido com sucesso no Host (Servidor SisInfo da empresa).";
-    String UPDATE_ERROR = "Não conseguimos atualizar o registro no banco de dados do Host (Servidor SisInfo da empresa).";
-    String EXISTS = "Já existe no banco de dados";
-    String ERROR_FIND = "Não conseguimos realizar a pesquisa/find. ";
+    String UPDATE_ERROR = "Nao conseguimos atualizar o registro no banco de dados do Host (Servidor SisInfo da empresa).";
+    String EXISTS = "Ja existe no banco de dados";
+    String ERROR_FIND = "Nao conseguimos realizar a pesquisa/find. ";
     String ERROR_SAVE = "Erro ao tentar salvar. ";
-    String ERROR_NOT_DISPOSITIVO = "Não foi passado o parâmetro com a identificação do dispositivo";
+    String ERROR_NOT_DISPOSITIVO = "Nao foi passado o parâmetro com a identificação do dispositivo";
     String ERROR_DISPOSITIVO_INATIVO = "Dispositivo esta inativo.";
     String ERROR_SQL_INJECTION = "O parametro where que foi passado tem algum traço de SQL Injection, por isso não iremos autorizar essa conexão.";
     String ERROR_DISPOSITIVO_NAO_CADASTRADO = "Dispositivo não encontrado.";
@@ -32,6 +32,8 @@ public interface MensagemPadrao {
     String ERROR_CONNECTION_NOT_INIT = "Conexão (connection) com banco de dados não inicializada.";
     String ERROR_STORED_PROCEDURE = "Erro ao executar Stored Procedure. ";
     String ERROR_INTERCEPTOR_AUTORIZADOR = "Erro desconhecido no autorizador. ";
+    String ERROR_SMALOGWS_NULL = "A variável que tem os dados do log (SMALOGWS) esta vazia. ";
+    String ERROR_SMALOGWS_DATABASE = "Erro ao tentar salvar os dados do log (SMALOGWS) no banco de dados. ";
     String LOGGER_NEW_CAD_DISPOSITIVO = "CADASTRAR UM NOVO DISPOSITIVO";
     String LOGGER_EXECUTE_FIND = "EXECUTANDO SELECT NO BANCO DE DADOS";
     String LOGGER_EXECUTE_SALVE = "EXECUTANDO INSERT/UPDATE NO BANCO DE DADOS";

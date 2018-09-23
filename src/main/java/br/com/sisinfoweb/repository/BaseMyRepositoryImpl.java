@@ -8,7 +8,9 @@ package br.com.sisinfoweb.repository;
 import br.com.sisinfoweb.banco.values.MensagemPadrao;
 import br.com.sisinfoweb.entity.CfaclifoEntity;
 import br.com.sisinfoweb.entity.SmadispoEntity;
+import br.com.sisinfoweb.entity.SmalogwsEntity;
 import br.com.sisinfoweb.exception.CustomException;
+import br.com.sisinfoweb.funcoes.BaseMyLoggerFuncoes;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -39,6 +41,7 @@ public class BaseMyRepositoryImpl<T, ID extends Serializable> extends SimpleJpaR
     private Connection connection;
     private static final String DRIVE_FIREBIRD = "org.firebirdsql.jdbc.FBDriver";
     private SmadispoEntity smadispoEntity = null;
+    private SmalogwsEntity smalogwsEntity;
 
     @Autowired
     private final EntityManager entityManager;
@@ -116,35 +119,37 @@ public class BaseMyRepositoryImpl<T, ID extends Serializable> extends SimpleJpaR
     }
 
     /**
+     * Função que salva dados no banco de dados do Webservice, ou seja, no servidor
+     * interno do SAVARE/Webservice.
      * Retorna a quatidade de registros alterados ou inseridos.
      *
-     * @param sqlQuery
+     * @param sqlQuery - Tem que passar uma instrução de insert nativa em SQL.
      * @return
      */
     @Override
     @Transactional
     public Integer saveCustomNativeQuery(String sqlQuery) {
         try {
-            //entityManager.getTransaction().begin();
-
             logger.debug(MensagemPadrao.LOGGER_EXECUTE_FIND + " | saveCustomNativeQuery | " + sqlQuery);
 
             Integer qtdInsert = entityManager.createNativeQuery(sqlQuery).executeUpdate();
-            //entityManager.getTransaction().commit();
+            
             return qtdInsert;
 
         } catch (JDBCConnectionException | SQLGrammarException | ConstraintViolationException
                 | LockAcquisitionException | GenericJDBCException e) {
-            logger.error("ERRO AO SALVAR DADOS. | " + e.getMessage());
+            logger.error("ERRO AO SALVAR DADOS. | saveCustomNativeQuery | " + e.getMessage());
 
             throw new CustomException(e);
         } catch (Exception e) {
             logger.error(e.getMessage());
 
             throw new CustomException(e);
-        }
+        }/** finally {
+            closeEntityManager();
+        }**/
     }
-
+    
     @Override
     @Transactional
     public <S extends T> S save(S entity) {
@@ -182,7 +187,9 @@ public class BaseMyRepositoryImpl<T, ID extends Serializable> extends SimpleJpaR
         }
     }
 
-    public Connection conectaBanco() {
+    public Connection conectaBancoClient() {
+        smalogwsEntity = new SmalogwsEntity();
+	smalogwsEntity.setLevel(this.getClass().getSimpleName());
         try {
             // Checa se foi passado os dados do dispositivo
             if (smadispoEntity != null) {
@@ -204,7 +211,11 @@ public class BaseMyRepositoryImpl<T, ID extends Serializable> extends SimpleJpaR
                             cfaclifoEntity.get(0).getUsuSisinfoWebservice(),
                             cfaclifoEntity.get(0).getSenhaSisinfoWebservice());
                 } else {
-                    logger.error(MensagemPadrao.ERROR_EMPRESA_NAO_LICENCIADA);
+                    //logger.error(MensagemPadrao.ERROR_EMPRESA_NAO_LICENCIADA);
+                    smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_ERROR);
+                    smalogwsEntity.setLog(MensagemPadrao.ERROR_EMPRESA_NAO_LICENCIADA);
+                    //Instancia a classe de logger para registrar o log no banco
+                    new BaseMyLoggerFuncoes(this, smadispoEntity, smalogwsEntity);
 
                     Exception e = new Exception(MensagemPadrao.ERROR_EMPRESA_NAO_LICENCIADA);
                 
@@ -221,7 +232,11 @@ public class BaseMyRepositoryImpl<T, ID extends Serializable> extends SimpleJpaR
                     throw new CustomException(retornoWebService);*/
                 }
             } else {
-                logger.error(MensagemPadrao.ERROR_CONECT_DATABASE + " | conectaBanco() | " + MensagemPadrao.ERROR_NOT_DISPOSITIVO);
+                //logger.error(MensagemPadrao.ERROR_CONECT_DATABASE + " | conectaBanco() | " + MensagemPadrao.ERROR_NOT_DISPOSITIVO);
+                smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_ERROR);
+                smalogwsEntity.setLog(MensagemPadrao.ERROR_CONECT_DATABASE + " | conectaBanco() | " + MensagemPadrao.ERROR_NOT_DISPOSITIVO);
+                //Instancia a classe de logger para registrar o log no banco
+                new BaseMyLoggerFuncoes(this, smadispoEntity, smalogwsEntity);
 
                 Exception e = new Exception(MensagemPadrao.ERROR_CONECT_DATABASE + " | " + MensagemPadrao.ERROR_NOT_DISPOSITIVO);
                 
@@ -239,8 +254,12 @@ public class BaseMyRepositoryImpl<T, ID extends Serializable> extends SimpleJpaR
             }
             return connection;
         } catch (ClassNotFoundException | SQLException erroSQL) {
-            logger.error(MensagemPadrao.ERROR_CONECT_DATABASE + " | " + erroSQL.getMessage());
             connection = null;
+            //logger.error(MensagemPadrao.ERROR_CONECT_DATABASE + " | " + erroSQL.getMessage());
+            smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_ERROR);
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_CONECT_DATABASE + " | " + erroSQL.getMessage());
+            //Instancia a classe de logger para registrar o log no banco
+            new BaseMyLoggerFuncoes(this, smadispoEntity, smalogwsEntity);
 
             throw new CustomException(erroSQL);
 
@@ -252,13 +271,13 @@ public class BaseMyRepositoryImpl<T, ID extends Serializable> extends SimpleJpaR
     @Transactional
     public ResultSet executarSQL(String instrucaoSQL) {
         try {
-            conectaBanco();
+            conectaBancoClient();
             if ((connection != null) && (!connection.isClosed())) {
                 //statement = iniciaConexao.createStatement();
                 //return statement.executeQuery(instrucaoSQL);
-                PreparedStatement pstmt = connection.prepareStatement( "select * from aeaclase where id_aeaclase > ?" );
-                pstmt.setString( 1, "1");
-                String sqltemp = pstmt.toString();
+                //PreparedStatement pstmt = connection.prepareStatement( "select * from aeaclase where id_aeaclase > ?" );
+                //pstmt.setString( 1, "1");
+                //String sqltemp = pstmt.toString();
 
                 logger.debug(MensagemPadrao.LOGGER_EXECUTE_FIND + " | executarSQL | " + instrucaoSQL);
                 
@@ -277,7 +296,7 @@ public class BaseMyRepositoryImpl<T, ID extends Serializable> extends SimpleJpaR
     @Override
     public Serializable executarInsertOrUpdate(String instrucaoSQL) {
         try {
-            conectaBanco();
+            conectaBancoClient();
             if ((connection != null) && (!connection.isClosed())) {
 
                 logger.debug(MensagemPadrao.LOGGER_EXECUTE_FIND + " | executarInsertOrUpdate | " + instrucaoSQL);
@@ -303,7 +322,7 @@ public class BaseMyRepositoryImpl<T, ID extends Serializable> extends SimpleJpaR
         PreparedStatement preparedStatement = null;
         Integer qtd = -1;
         try {
-            conectaBanco();
+            conectaBancoClient();
             if ((connection != null) && (!connection.isClosed())) {
                 //Statement statement = connection.createStatement();
                 preparedStatement = connection.prepareStatement(instrucaoSQL);
@@ -362,7 +381,7 @@ public class BaseMyRepositoryImpl<T, ID extends Serializable> extends SimpleJpaR
     @Transactional
     public Boolean storedProcedureExecute(String instrucaoSQL){
         try {
-            conectaBanco();
+            conectaBancoClient();
             if ((connection != null) && (!connection.isClosed())) {
 
                 logger.debug(MensagemPadrao.LOGGER_EXECUTE_STORED_PROCEDURE + " | storedProcedureExecute | " + instrucaoSQL);

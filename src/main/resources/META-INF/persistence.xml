@@ -42,6 +42,7 @@
     <class>br.com.sisinfoweb.entity.RpalcparEntity</class>
     <class>br.com.sisinfoweb.entity.SmadispoEntity</class>
     <class>br.com.sisinfoweb.entity.SmaempreEntity</class>
+    <class>br.com.sisinfoweb.entity.SmalogwsEntity</class>
     <class>br.com.sisinfoweb.entity.SmausuarEntity</class>
     <class>br.com.sisinfoweb.entity.EpChecaEstoqueEntity</class>
     <class>br.com.sisinfoweb.entity.EpGeraPedVendaEntity</class>
@@ -92,12 +93,21 @@
     <class>br.com.sisinfoweb.entity.RpalcparEntity</class>
     <class>br.com.sisinfoweb.entity.SmadispoEntity</class>
     <class>br.com.sisinfoweb.entity.SmaempreEntity</class>
+    <class>br.com.sisinfoweb.entity.SmalogwsEntity</class>
     <class>br.com.sisinfoweb.entity.SmausuarEntity</class>
     <class>br.com.sisinfoweb.entity.EpChecaEstoqueEntity</class>
     <class>br.com.sisinfoweb.entity.EpGeraPedVendaEntity</class>
     <class>br.com.sisinfoweb.entity.CfacotacEntity</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
+    </properties>
+  </persistence-unit>
+  <persistence-unit name="DEFAULT_PU" transaction-type="JTA">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>br.com.sisinfoweb.entity.br.com.sisinfoweb.entity.SmalogwsEntity</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <property name="javax.persistence.schema-generation.database.action" value="create"/>
     </properties>
   </persistence-unit>
 </persistence>

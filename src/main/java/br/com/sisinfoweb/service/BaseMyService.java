@@ -9,7 +9,9 @@ import br.com.sisinfoweb.banco.beans.PageBeans;
 import br.com.sisinfoweb.banco.beans.PageableBeans;
 import br.com.sisinfoweb.banco.values.MensagemPadrao;
 import br.com.sisinfoweb.entity.SmadispoEntity;
+import br.com.sisinfoweb.entity.SmalogwsEntity;
 import br.com.sisinfoweb.exception.CustomException;
+import br.com.sisinfoweb.funcoes.BaseMyLoggerFuncoes;
 import br.com.sisinfoweb.funcoes.FuncoesPersonalizadas;
 import br.com.sisinfoweb.repository.BaseMyRepository;
 import java.io.Serializable;
@@ -24,8 +26,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.transaction.Transactional;
 import org.apache.commons.beanutils.BeanUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.init.ScriptException;
 
@@ -39,7 +39,8 @@ public class BaseMyService<R extends BaseMyRepository, E> {
 
     public String COLUMNS_RESUME = null;
     private SmadispoEntity smadispoEntity = null;
-    final static Logger logger = LoggerFactory.getLogger(Object.class);
+    private BaseMyLoggerFuncoes logger;
+    private SmalogwsEntity smalogwsEntity;
     final static Integer SIZE_BY_PAGE = 1000;
 
     @Autowired
@@ -62,14 +63,22 @@ public class BaseMyService<R extends BaseMyRepository, E> {
 
     @Transactional
     public List<E> findAll() {
+        smalogwsEntity = new SmalogwsEntity();
+        smalogwsEntity.setLevel(this.getClass().getSimpleName());
         try {
             FuncoesPersonalizadas funcoes = new FuncoesPersonalizadas();
 
             String sqlQuery = funcoes.construirSelectFromParamJson(this.getClass().getSimpleName().toUpperCase().replace("SERVICE", ""), null, null, null);
 
+            smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_DEBUG);
+            smalogwsEntity.setLog(MensagemPadrao.LOGGER_EXECUTE_FIND + " | findAll | " + sqlQuery);
+                
             return baseMyRepository.findAll(sqlQuery);
         } catch (Exception e) {
-            logger.error(MensagemPadrao.ERROR_FIND + e.getMessage());
+            smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_ERROR);
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_FIND + e.getMessage());
+            //Instancia a classe de logger para registrar o log no banco
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
 
             throw new CustomException(e);
         }
@@ -77,6 +86,8 @@ public class BaseMyService<R extends BaseMyRepository, E> {
 
     @Transactional
     public List<E> findAllClient() {
+        smalogwsEntity = new SmalogwsEntity();
+        smalogwsEntity.setLevel(this.getClass().getSimpleName());
         try {
             // Seta os dados do dispositivo
             baseMyRepository.setSmadispoEntity(smadispoEntity);
@@ -89,12 +100,18 @@ public class BaseMyService<R extends BaseMyRepository, E> {
 
             return mapResultSetToObject(resultado, Class.forName("br.com.sisinfoweb.entity." + this.getClass().getSimpleName().replace("Service", "") + "Entity"));
         } catch (ScriptException e) {
-            logger.error(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI FINDALLCLIENT. " + e.getMessage());
+            smalogwsEntity.setTipo(logger.TYPE_ERROR);
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI FINDALLCLIENT. " + e.getMessage());
+            //Instancia a classe de logger para registrar o log no banco
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
 
             throw new CustomException(e);
 
         } catch (ClassNotFoundException e) {
-            logger.error(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI FINDALLCLIENT. " + e.getMessage());
+            smalogwsEntity.setTipo(logger.TYPE_ERROR);
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI FINDALLCLIENT. " + e.getMessage());
+            //Instancia a classe de logger para registrar o log no banco
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
 
             throw new CustomException(e);
         }
@@ -103,6 +120,8 @@ public class BaseMyService<R extends BaseMyRepository, E> {
     
     @Transactional
     public PageBeans<E> findAllClient(String sort, PageableBeans pageable) {
+        smalogwsEntity = new SmalogwsEntity();
+        smalogwsEntity.setLevel(this.getClass().getSimpleName());
         try {
             int totalElements = 0;
             int size = SIZE_BY_PAGE;
@@ -160,13 +179,19 @@ public class BaseMyService<R extends BaseMyRepository, E> {
             }
 
         } catch (ScriptException e) {
-            logger.error(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI FINDCUSTOMNATIVEQUERYCLIENT. " + e.getMessage());
-            //return null;
+            smalogwsEntity.setTipo(logger.TYPE_ERROR);
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI FINDCUSTOMNATIVEQUERYCLIENT. " + e.getMessage());
+            //Instancia a classe de logger para registrar o log no banco
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
+            
             throw new CustomException(e);
 
         } catch (ClassNotFoundException | SQLException e) {
-            logger.error(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI FINDCUSTOMNATIVEQUERYCLIENTE. " + e.getMessage());
-            //return null;
+            smalogwsEntity.setTipo(logger.TYPE_ERROR);
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI FINDCUSTOMNATIVEQUERYCLIENT. " + e.getMessage());
+            //Instancia a classe de logger para registrar o log no banco
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
+            
             throw new CustomException(e);
         }
     }
@@ -174,6 +199,8 @@ public class BaseMyService<R extends BaseMyRepository, E> {
     
     @Transactional
     public E findOneByGuidClient(String guid) {
+        smalogwsEntity = new SmalogwsEntity();
+        smalogwsEntity.setLevel(this.getClass().getSimpleName());
         try {
             // Seta os dados do dispositivo
             baseMyRepository.setSmadispoEntity(smadispoEntity);
@@ -182,16 +209,27 @@ public class BaseMyService<R extends BaseMyRepository, E> {
 
             String sqlQuery = funcoes.construirSelectFromParamJson(this.getClass().getSimpleName().toUpperCase().replace("SERVICE", "").replace("CUSTOM", ""), null, "GUID = '" + guid + "'", null);
 
+            smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_DEBUG);
+            smalogwsEntity.setLog(MensagemPadrao.LOGGER_EXECUTE_FIND + " | findOneByGuidClient | " + sqlQuery);
+            //Instancia a classe de logger para registrar o log no banco
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
+            
             ResultSet resultado = baseMyRepository.executarSQL(sqlQuery);
 
             return mapResultSetToObject(resultado, Class.forName("br.com.sisinfoweb.entity." + this.getClass().getSimpleName().replace("Service", "") + "Entity")).get(0);
         } catch (ScriptException e) {
-            logger.error(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI findOneByGuidClient. " + e.getMessage());
+            smalogwsEntity.setTipo(logger.TYPE_ERROR);
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI findOneByGuidClient. " + e.getMessage());
+            //Instancia a classe de logger para registrar o log no banco
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
 
             throw new CustomException(e);
 
         } catch (ClassNotFoundException e) {
-            logger.error(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI findOneByGuidClient. " + e.getMessage());
+            smalogwsEntity.setTipo(logger.TYPE_ERROR);
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI findOneByGuidClient. " + e.getMessage());
+            //Instancia a classe de logger para registrar o log no banco
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
 
             throw new CustomException(e);
         }
@@ -199,10 +237,20 @@ public class BaseMyService<R extends BaseMyRepository, E> {
 
     @Transactional
     public E findOneByGuid(String guid) {
+        smalogwsEntity = new SmalogwsEntity();
+        smalogwsEntity.setLevel(this.getClass().getSimpleName());
         try {
+            smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_DEBUG);
+            smalogwsEntity.setLog(MensagemPadrao.LOGGER_EXECUTE_FIND + " | findOneByGuid | " + guid);
+            //Instancia a classe de logger para registrar o log no banco
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
+            
             return (E) baseMyRepository.findOneByGuid(guid);
         } catch (Exception e) {
-            logger.error(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI A BUSCA POR GUID. " + e.getMessage());
+            smalogwsEntity.setTipo(logger.TYPE_ERROR);
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI A BUSCA POR GUID. " + e.getMessage());
+            //Instancia a classe de logger para registrar o log no banco
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
 
             throw new CustomException(e);
         }
@@ -210,10 +258,11 @@ public class BaseMyService<R extends BaseMyRepository, E> {
 
     @Transactional
     public List<E> findCustomNativeQuery(Boolean resume, String sqlCustomParam, String columns, String where, String sort) {
+        smalogwsEntity = new SmalogwsEntity();
+        smalogwsEntity.setLevel(this.getClass().getSimpleName());
         try {
             // Cria um sql nativo se nao for passado um sqlCustom por parametro
             String sqlQuery;
-            logger.debug(where);
             if ((sqlCustomParam != null) && (!sqlCustomParam.isEmpty())) {
                 sqlQuery = sqlCustomParam;
 
@@ -227,14 +276,25 @@ public class BaseMyService<R extends BaseMyRepository, E> {
                     sqlQuery = funcoes.construirSelectFromParamJson(this.getClass().getSimpleName().toUpperCase().replace("SERVICE", ""), columns, where, sort);
                 }
             }
+            smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_DEBUG);
+            smalogwsEntity.setLog(MensagemPadrao.LOGGER_EXECUTE_FIND + " | findCustomNativeQuery | " + sqlQuery);
+            //Instancia a classe de logger para registrar o log no banco
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
+            
             return baseMyRepository.findCustomNativeQuery(sqlQuery);
         } catch (ScriptException e) {
-            logger.error(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI UMA QUERY NATIVA DO SERVICE. " + e.getMessage());
+            smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_ERROR);
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI UMA QUERY NATIVA DO SERVICE. " + e.getMessage());
+            
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
 
             throw new CustomException(e);
 
         } catch (Exception e) {
-            logger.error(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI UMA QUERY NATIVA DO SERVICE. " + e.getMessage());
+            smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_ERROR);
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI UMA QUERY NATIVA DO SERVICE. " + e.getMessage());
+            
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);            
 
             throw new CustomException(e);
         }
@@ -242,6 +302,8 @@ public class BaseMyService<R extends BaseMyRepository, E> {
 
     @Transactional
     public List<E> findCustomNativeQueryClient(Boolean resume, String sqlCustomParam, String columns, String where, String sort) {
+        smalogwsEntity = new SmalogwsEntity();
+        smalogwsEntity.setLevel(this.getClass().getSimpleName());
         try {
             // Seta os dados do dispositivo
             baseMyRepository.setSmadispoEntity(smadispoEntity);
@@ -261,23 +323,36 @@ public class BaseMyService<R extends BaseMyRepository, E> {
                     sqlQuery = funcoes.construirSelectFromParamJson(this.getClass().getSimpleName().toUpperCase().replace("SERVICE", ""), columns, where, sort);
                 }
             }
+            smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_DEBUG);
+            smalogwsEntity.setLog(MensagemPadrao.LOGGER_EXECUTE_FIND + " | findCustomNativeQuery | " + sqlQuery);
+            //Instancia a classe de logger para registrar o log no banco
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
+            
             ResultSet resultado = baseMyRepository.executarSQL(sqlQuery);
 
             return mapResultSetToObject(resultado, Class.forName("br.com.sisinfoweb.entity." + this.getClass().getSimpleName().replace("Service", "") + "Entity"));
         } catch (ScriptException e) {
-            logger.error(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI FINDCUSTOMNATIVEQUERYCLIENT. " + e.getMessage());
-            //return null;
+            smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_ERROR);
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI FINDCUSTOMNATIVEQUERYCLIENT. " + e.getMessage());
+            //Instancia a classe de logger para registrar o log no banco
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
+            
             throw new CustomException(e);
 
         } catch (ClassNotFoundException e) {
-            logger.error(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI FINDCUSTOMNATIVEQUERYCLIENTE. " + e.getMessage());
-            //return null;
+            smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_ERROR);
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI FINDCUSTOMNATIVEQUERYCLIENT. " + e.getMessage());
+            //Instancia a classe de logger para registrar o log no banco
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
+            
             throw new CustomException(e);
         }
     }
 
     @Transactional
     public PageBeans<E> findCustomNativeQueryClient(Boolean resume, String sqlCustomParam, String columns, String where, String sort, PageableBeans pageable) {
+        smalogwsEntity = new SmalogwsEntity();
+        smalogwsEntity.setLevel(this.getClass().getSimpleName());
         try {
             int totalElements = 0;
             int size = SIZE_BY_PAGE;
@@ -345,8 +420,13 @@ public class BaseMyService<R extends BaseMyRepository, E> {
             if (totalElements > 0) {
 
                 sqlQueryPage = "SELECT FIRST " + size + " SKIP " + (numberPage * size) + " " + sqlQuery.substring(sqlQuery.indexOf("SELECT") + 6);
-
-                 ResultSet resultado = baseMyRepository.executarSQL(sqlQueryPage);
+                
+                smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_DEBUG);
+		smalogwsEntity.setLog(MensagemPadrao.LOGGER_EXECUTE_FIND + " | findCustomNativeQueryClient | " + sqlQuery);
+		//Instancia a classe de logger para registrar o log no banco
+		new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
+                
+                ResultSet resultado = baseMyRepository.executarSQL(sqlQueryPage);
 
                 List<E> listaResultado = mapResultSetToObject(resultado, Class.forName("br.com.sisinfoweb.entity." + this.getClass().getSimpleName().replace("Service", "") + "Entity"));
 
@@ -356,29 +436,48 @@ public class BaseMyService<R extends BaseMyRepository, E> {
             }
 
         } catch (ScriptException e) {
-            logger.error(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI FINDCUSTOMNATIVEQUERYCLIENT. " + e.getMessage());
-            //return null;
+            smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_ERROR);
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI FINDCUSTOMNATIVEQUERYCLIENT. " + e.getMessage());
+            //Instancia a classe de logger para registrar o log no banco
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
+            
             throw new CustomException(e);
 
         } catch (ClassNotFoundException | SQLException e) {
-            logger.error(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI FINDCUSTOMNATIVEQUERYCLIENTE. " + e.getMessage());
-            //return null;
+            smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_ERROR);
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI FINDCUSTOMNATIVEQUERYCLIENT. " + e.getMessage());
+            //Instancia a classe de logger para registrar o log no banco
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
+            
             throw new CustomException(e);
         }
     }
 
     @Transactional
     public Serializable saveCustomNativeQuery(String queryInsert) {
+        smalogwsEntity = new SmalogwsEntity();
+        smalogwsEntity.setLevel(this.getClass().getSimpleName());
         try {
+            smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_DEBUG);
+            smalogwsEntity.setLog(MensagemPadrao.LOGGER_EXECUTE_FIND + " | saveCustomNativeQuery | " + queryInsert);
+            //Instancia a classe de logger para registrar o log no banco
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
+            
             return baseMyRepository.saveCustomNativeQuery(queryInsert);
         } catch (ScriptException e) {
-            logger.error(MensagemPadrao.ERROR_SAVE + e.getMessage());
-
+            smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_ERROR);
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_SAVE + e.getMessage());
+            //Instancia a classe de logger para registrar o log no banco
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
+            
             throw new CustomException(e);
 
         } catch (Exception e) {
-            logger.error(MensagemPadrao.ERROR_SAVE + e.getMessage());
-
+            smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_ERROR);
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_SAVE + e.getMessage());
+            //Instancia a classe de logger para registrar o log no banco
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
+            
             throw new CustomException(e);
 
         }
@@ -386,38 +485,64 @@ public class BaseMyService<R extends BaseMyRepository, E> {
 
     @Transactional
     public Serializable saveCustomNativeQueryClient(String queryInsert) {
+        smalogwsEntity = new SmalogwsEntity();
+        smalogwsEntity.setLevel(this.getClass().getSimpleName());
         try {
             // Seta os dados do dispositivo
             baseMyRepository.setSmadispoEntity(smadispoEntity);
 
+            smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_DEBUG);
+            smalogwsEntity.setLog(MensagemPadrao.LOGGER_EXECUTE_FIND + " | saveCustomNativeQueryClient | " + queryInsert);
+            //Instancia a classe de logger para registrar o log no banco
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
+            
             if ( (queryInsert.toUpperCase().contains("UPDATE OR INSERT")) || (queryInsert.toUpperCase().contains("UPDATE")) ){
                 return baseMyRepository.executarInsertOrUpdate(queryInsert);
             }else {
                 return baseMyRepository.executeInsertUpdateDelete(queryInsert);
             }
         } catch (ScriptException e) {
-            logger.error(MensagemPadrao.ERROR_SAVE + e.getMessage());
-
+            smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_ERROR);
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_SAVE + e.getMessage());
+            //Instancia a classe de logger para registrar o log no banco
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
+            
             throw new CustomException(e);
 
         } catch (Exception e) {
-            logger.error(MensagemPadrao.ERROR_SAVE + e.getMessage());
-
+            smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_ERROR);
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_SAVE + e.getMessage());
+            //Instancia a classe de logger para registrar o log no banco
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
+            
             throw new CustomException(e);
         }
     }
 
     @Transactional
     public E save(E entity) {
+        smalogwsEntity = new SmalogwsEntity();
+        smalogwsEntity.setLevel(this.getClass().getSimpleName());
         try {
+            smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_DEBUG);
+            smalogwsEntity.setLog(MensagemPadrao.LOGGER_EXECUTE_FIND + " | save | " + entity.getClass().getSimpleName());
+            //Instancia a classe de logger para registrar o log no banco
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
+                
             return (E) baseMyRepository.save(entity);
         } catch (ScriptException e) {
-            logger.error(MensagemPadrao.ERROR_SAVE + e.getMessage());
-
+            smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_ERROR);
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_SAVE + e.getMessage());
+            //Instancia a classe de logger para registrar o log no banco
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
+            
             throw new CustomException(e);
 
         } catch (Exception e) {
-            logger.error(MensagemPadrao.ERROR_SAVE + e.getMessage());
+            smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_ERROR);
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_SAVE + e.getMessage());
+            //Instancia a classe de logger para registrar o log no banco
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
 
             throw new CustomException(e);
 
@@ -426,19 +551,31 @@ public class BaseMyService<R extends BaseMyRepository, E> {
 
     @Transactional
     public Serializable saveClient(E entity) {
+        smalogwsEntity = new SmalogwsEntity();
+        smalogwsEntity.setLevel(this.getClass().getSimpleName());
         try {
             // Seta os dados do dispositivo
             baseMyRepository.setSmadispoEntity(smadispoEntity);
+            smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_DEBUG);
+            smalogwsEntity.setLog(MensagemPadrao.LOGGER_EXECUTE_FIND + " | saveClient | " + entity.getClass().getSimpleName());
+            //Instancia a classe de logger para registrar o log no banco
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
 
             return baseMyRepository.executeInsertUpdateDelete(new FuncoesPersonalizadas().construirInsertFromEntity(entity));
 
         } catch (ScriptException e) {
-            logger.error(MensagemPadrao.ERROR_SAVE + e.getMessage());
+            smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_ERROR);
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_SAVE + e.getMessage());
+            //Instancia a classe de logger para registrar o log no banco
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
 
             throw new CustomException(e);
 
         } catch (Exception e) {
-            logger.error(MensagemPadrao.ERROR_SAVE + e.getMessage());
+            smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_ERROR);
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_SAVE + e.getMessage());
+            //Instancia a classe de logger para registrar o log no banco
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
 
             throw new CustomException(e);
 
@@ -447,6 +584,8 @@ public class BaseMyService<R extends BaseMyRepository, E> {
     
     @Transactional
     public PageBeans<E> storedProcedureWithSelectClient(String nameProcedure, Map<String, Object> parameter, Boolean resume, String sqlCustomParam, String columns, String where, String sort, PageableBeans pageable) {
+        smalogwsEntity = new SmalogwsEntity();
+        smalogwsEntity.setLevel(this.getClass().getSimpleName());
         try {
             int totalElements = 0;
             int size = SIZE_BY_PAGE;
@@ -514,6 +653,11 @@ public class BaseMyService<R extends BaseMyRepository, E> {
             if (totalElements > 0) {
 
                 sqlQueryPage = "SELECT FIRST " + size + " SKIP " + (numberPage * size) + " " + sqlQuery.substring(sqlQuery.indexOf("SELECT") + 6);
+                
+                smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_DEBUG);
+                smalogwsEntity.setLog(MensagemPadrao.LOGGER_EXECUTE_STORED_PROCEDURE + " | storedProcedureWithSelectClient | " + sqlQueryPage);
+                //Instancia a classe de logger para registrar o log no banco
+                new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
 
                  ResultSet resultado = baseMyRepository.executarSQL(sqlQueryPage);
 
@@ -525,19 +669,27 @@ public class BaseMyService<R extends BaseMyRepository, E> {
             }
 
         } catch (ScriptException e) {
-            logger.error(MensagemPadrao.ERROR_STORED_PROCEDURE + "NESTE CASO FOI storedProcedureWithSelectClient. " + e.getMessage());
-            //return null;
+            smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_ERROR);
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_STORED_PROCEDURE + "NESTE CASO FOI storedProcedureWithSelectClient. " + e.getMessage());
+            //Instancia a classe de logger para registrar o log no banco
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
+            
             throw new CustomException(e);
 
         } catch (ClassNotFoundException | SQLException e) {
-            logger.error(MensagemPadrao.ERROR_STORED_PROCEDURE + "NESTE CASO FOI storedProcedureWithSelectClient. " + e.getMessage());
-            //return null;
+            smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_ERROR);
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_STORED_PROCEDURE + "NESTE CASO FOI storedProcedureWithSelectClient. " + e.getMessage());
+            //Instancia a classe de logger para registrar o log no banco
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
+            
             throw new CustomException(e);
         }
     }
     
     @Transactional
     public PageBeans<E> storedProcedureExecuteClient(String nameProcedure, Map<String, Object> parameter, PageableBeans pageable) {
+        smalogwsEntity = new SmalogwsEntity();
+        smalogwsEntity.setLevel(this.getClass().getSimpleName());
         try {
             int totalElements = 0;
             int size = SIZE_BY_PAGE;
@@ -555,6 +707,11 @@ public class BaseMyService<R extends BaseMyRepository, E> {
             } else {
                 pageable.setSize(size);
             }
+            smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_DEBUG);
+            smalogwsEntity.setLog(MensagemPadrao.LOGGER_EXECUTE_STORED_PROCEDURE + " | storedProcedureExecuteClient | " + nameProcedure + " | " + parameter);
+            //Instancia a classe de logger para registrar o log no banco
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
+            
             Boolean resultado = baseMyRepository.storedProcedureExecute(new FuncoesPersonalizadas().construirExecuteStoredProcedureFromParamJson(nameProcedure, parameter));
             // Checa se retornou a quantidade de registro
             if ((resultado != null) && (resultado)) {
@@ -582,13 +739,19 @@ public class BaseMyService<R extends BaseMyRepository, E> {
             return new PageBeans<>(pageable, null);
 
         } catch (ScriptException e) {
-            logger.error(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI FINDCUSTOMNATIVEQUERYCLIENT. " + e.getMessage());
-            //return null;
+            smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_ERROR);
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI FINDCUSTOMNATIVEQUERYCLIENT. " + e.getMessage());
+            //Instancia a classe de logger para registrar o log no banco
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
+            
             throw new CustomException(e);
 
         } catch (Exception e) {
-            logger.error(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI FINDCUSTOMNATIVEQUERYCLIENTE. " + e.getMessage());
-            //return null;
+            smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_ERROR);
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI FINDCUSTOMNATIVEQUERYCLIENT. " + e.getMessage());
+            //Instancia a classe de logger para registrar o log no banco
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
+            
             throw new CustomException(e);
         }
     }
@@ -606,6 +769,8 @@ public class BaseMyService<R extends BaseMyRepository, E> {
     @SuppressWarnings("unchecked")
     public List<E> mapResultSetToObject(ResultSet rs, Class outputClass) {
         List<E> outputList = null;
+        smalogwsEntity = new SmalogwsEntity();
+        smalogwsEntity.setLevel(this.getClass().getSimpleName());
         try {
             // make sure resultset is not null
             if (rs != null) {
@@ -654,18 +819,27 @@ public class BaseMyService<R extends BaseMyRepository, E> {
                         outputList = new ArrayList<E>();
                     }
                 } else {
-                    logger.error(MensagemPadrao.ERROR_MAPEAR_RESULTSET + "A CLASSE ENTITY NAO POSSUI A ANOTACAO @Entity");
+                    smalogwsEntity.setTipo(logger.TYPE_ERROR);
+                    smalogwsEntity.setLog(MensagemPadrao.ERROR_MAPEAR_RESULTSET + "A CLASSE ENTITY NAO POSSUI A ANOTACAO @Entity");
+                    //Instancia a classe de logger para registrar o log no banco
+                    new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
                 }
             } else {
                 return null;
             }
         } catch (IllegalAccessException | SQLException | InstantiationException  e) {
-            logger.error(MensagemPadrao.ERROR_MAPEAR_RESULTSET + e.getMessage());
+            smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_ERROR);
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_MAPEAR_RESULTSET + e.getMessage());
+            //Instancia a classe de logger para registrar o log no banco
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
 
             throw new CustomException(e);
         } catch (Exception e) {
-            logger.error(MensagemPadrao.ERROR_MAPEAR_RESULTSET + e.getMessage());
-
+            smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_ERROR);
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_MAPEAR_RESULTSET + e.getMessage());
+            //Instancia a classe de logger para registrar o log no banco
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
+            
             throw new CustomException(e);
         }
         return outputList;
