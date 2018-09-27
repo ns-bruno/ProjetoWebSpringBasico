@@ -61,6 +61,10 @@ public class BaseMyService<R extends BaseMyRepository, E> {
         this.smadispoEntity = smadispoEntity;
     }
 
+    public R getBaseMyRepository() {
+        return baseMyRepository;
+    }
+
     @Transactional
     public List<E> findAll() {
         smalogwsEntity = new SmalogwsEntity();

@@ -7,10 +7,13 @@ package br.com.sisinfoweb.controller;
 
 import br.com.sisinfoweb.banco.beans.RetornoWebServiceBeans;
 import br.com.sisinfoweb.banco.beans.StatusRetornoWebServiceBeans;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.util.Properties;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -31,6 +34,10 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class SisinfoWebPropertiesController extends BaseMyController{
+    
+    public static final String PARAM_CHAVE = "inputChave",
+                               PARAM_DESCRICAO_CAVE = "inputDescricaoChave",
+                               PARAM_DELETE_CHAVE = "deleteChave";
     
     @Autowired
     ServletContext servletContext;
@@ -91,25 +98,41 @@ public class SisinfoWebPropertiesController extends BaseMyController{
     }
     
     @RequestMapping(value = {"/SisInfoWeb.properties", "/SisInfoWeb.ini", "/sisinfoweb.ini", "/sisinfoweb.properties"}, method = RequestMethod.POST)
-    public ModelAndView post(Model model, @RequestHeader() HttpHeaders httpHeaders, @ModelAttribute("properties")Properties properties) {
+    public ModelAndView post(Model model, @RequestHeader() HttpHeaders httpHeaders, HttpServletRequest req, @ModelAttribute("properties")Properties properties) {
 
         ModelAndView modelAndView = new ModelAndView("sisinfowebProperties");
         try {
             //Agora crio uma instância de FileInputStream passando via construtor o objeto file instanciado acima
             InputStream inputStream = servletContext.getResourceAsStream("/WEB-INF/sisinfoweb.properties");
-            
+
             Properties prop = new Properties();
             //Leio o fileInputStream recuperando assim o mapa contendo chaves e valores
             prop.load(inputStream);
             //Fecho o fileInputStream
             inputStream.close();
             
-            for (Object key : prop.keySet()){
-                logger.debug(key.toString() + " : " + prop.getProperty(key.toString()));
+            // Checa se tem algum parametro
+            if( (req.getParameterMap().size() > 0) ){
+                
+                if(req.getParameter(PARAM_DELETE_CHAVE) != null){
+                    // Remove propriedade
+                    prop.remove(req.getParameter(PARAM_DELETE_CHAVE));
+                    // Salva todas as propriedades no arquivo
+                    prop.store(new FileOutputStream(servletContext.getRealPath("/WEB-INF/sisinfoweb.properties")), null);
+                }
+                if( (req.getParameter(PARAM_CHAVE) != null) && (req.getParameter(PARAM_DESCRICAO_CAVE) != null) ){
+                    // Adiciona a nova propriedade
+                    prop.setProperty(req.getParameter(PARAM_CHAVE), req.getParameter(PARAM_DESCRICAO_CAVE));
+                    // Salva todas as propriedades no arquivo
+                    prop.store(new FileOutputStream(servletContext.getRealPath("/WEB-INF/sisinfoweb.properties")), null);
+                }
+                for (Object key : prop.keySet()){
+                    logger.debug(key.toString() + " : " + prop.getProperty(key.toString()));
+                }
             }
             model.addAttribute("lista", prop);
             
-        } catch (Exception e) {
+        } catch (IOException e) {
             StatusRetornoWebServiceBeans statusRetorno = new StatusRetornoWebServiceBeans();
             RetornoWebServiceBeans retornoWebService = new RetornoWebServiceBeans();
             // Cria uma vareavel para retorna o status

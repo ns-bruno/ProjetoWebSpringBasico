@@ -11,6 +11,8 @@ import br.com.sisinfoweb.banco.values.MensagemPadrao;
 import br.com.sisinfoweb.controller.BaseMyController;
 import br.com.sisinfoweb.entity.CfaclifoEntity;
 import br.com.sisinfoweb.entity.SmadispoEntity;
+import br.com.sisinfoweb.entity.SmalogwsEntity;
+import br.com.sisinfoweb.funcoes.BaseMyLoggerFuncoes;
 import br.com.sisinfoweb.funcoes.FuncoesPersonalizadas;
 import br.com.sisinfoweb.service.CfaclifoService;
 import br.com.sisinfoweb.service.SmadispoService;
@@ -200,6 +202,13 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
                                     }
                                 } else {
                                     logger.warn(MensagemPadrao.ERROR_EMPRESA_NAO_LICENCIADA);
+                                    
+                                    SmalogwsEntity smalogwsEntity = new SmalogwsEntity();
+                                    smalogwsEntity.setLevel(this.getClass().getSimpleName());
+                                    smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_WARN);
+                                    smalogwsEntity.setLog(MensagemPadrao.ERROR_EMPRESA_NAO_LICENCIADA);
+                                    //Instancia a classe de logger para registrar o log no banco
+                                    new BaseMyLoggerFuncoes(cfaclifoService.getBaseMyRepository(), smadispoEntity, smalogwsEntity);
 
                                     statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_UNAUTHORIZED);
                                     statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.UNAUTHORIZED));
@@ -221,6 +230,13 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 
                             } else {
                                 logger.warn(MensagemPadrao.ERROR_NOT_DISPOSITIVO);
+                                
+                                SmalogwsEntity smalogwsEntity = new SmalogwsEntity();
+                                smalogwsEntity.setLevel(this.getClass().getSimpleName());
+                                smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_WARN);
+                                smalogwsEntity.setLog(MensagemPadrao.ERROR_NOT_DISPOSITIVO);
+                                //Instancia a classe de logger para registrar o log no banco
+                                new BaseMyLoggerFuncoes(cfaclifoService.getBaseMyRepository(), smadispoEntity, smalogwsEntity);
 
                                 statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_UNAUTHORIZED);
                                 statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.UNAUTHORIZED));
