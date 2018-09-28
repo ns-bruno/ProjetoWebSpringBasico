@@ -34,9 +34,13 @@ public interface MensagemPadrao {
     String ERROR_INTERCEPTOR_AUTORIZADOR = "Erro desconhecido no autorizador. ";
     String ERROR_SMALOGWS_NULL = "A variável que tem os dados do log (SMALOGWS) esta vazia. ";
     String ERROR_SMALOGWS_DATABASE = "Erro ao tentar salvar os dados do log (SMALOGWS) no banco de dados. ";
+    String ERROR_NOT_TEXT_FOR_ENCRYPT = "Não foi passodo um texto para criptografar.";
+    String ERROR_ENCRYPT_DECRYPT = "Não coseguimos criptografar/descriptografar o texto, aconteceu algum erro.";
     String LOGGER_NEW_CAD_DISPOSITIVO = "CADASTRAR UM NOVO DISPOSITIVO";
     String LOGGER_EXECUTE_FIND = "EXECUTANDO SELECT NO BANCO DE DADOS";
     String LOGGER_EXECUTE_SALVE = "EXECUTANDO INSERT/UPDATE NO BANCO DE DADOS";
     String LOGGER_CLOSE_DATABASE = "FECHANDO BANCO DE DADOS";
     String LOGGER_EXECUTE_STORED_PROCEDURE = "EXECUTE STORED PROCEDURE";
+    String LOGGER_ENCRYPT = "O texto encriptado.";
+    String LOGGER_DECRYPT = "O texto foi descriptografado.";
 }

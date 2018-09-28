@@ -149,4 +149,29 @@ public class SisinfoWebPropertiesController extends BaseMyController{
         // Adiciona o status
         return modelAndView;
     }
+    
+    @RequestMapping(value = {"/Criptografar", "/Encrypt", "/Decrypt"}, method = RequestMethod.GET)
+    public ModelAndView initCriptografar(Model model, @RequestHeader() HttpHeaders httpHeaders) {
+
+        ModelAndView modelAndView = new ModelAndView("criptografar");
+        try {
+            logger.debug("Criptografar");
+            
+        } catch (Exception e) {
+            StatusRetornoWebServiceBeans statusRetorno = new StatusRetornoWebServiceBeans();
+            RetornoWebServiceBeans retornoWebService = new RetornoWebServiceBeans();
+            // Cria uma vareavel para retorna o status
+            statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_INTERNAL_ERROR);
+            statusRetorno.setMensagemRetorno(String.valueOf(e.getMessage()));
+            statusRetorno.setExtra(e);
+            
+            // Adiciona o status
+            retornoWebService.statusRetorno = statusRetorno;
+            
+            model.addAttribute(STATUS_RETURN, retornoWebService);
+        }
+        // Cria uma vareavel para retorna o status
+        // Adiciona o status
+        return modelAndView;
+    }
 }

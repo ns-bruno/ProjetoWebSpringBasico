@@ -48,11 +48,11 @@
     </bean>
 
     <!-- la source de donnéees DBCP -->
-    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+    <bean id="dataSource" class="br.com.sisinfoweb.banco.beans.MyBaseBasicDataSource" destroy-method="close">
         <property name="driverClassName" value="org.firebirdsql.jdbc.FBDriver" />
         <property name="url" value="jdbc:firebirdsql:${GLOBAL.DataBase}" />
-        <property name="username" value="WEBSERVICE" />
-        <property name="password" value="WSS#5535" />
+        <property name="username" value="${GLOBAL.UserName}" />
+        <property name="password" value="${GLOBAL.PassWord}" />
     </bean>
     
     <!-- le gestionnaire de transactions -->

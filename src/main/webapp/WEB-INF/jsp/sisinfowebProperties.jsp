@@ -30,22 +30,6 @@
             <section class="content">
                 <div class="col-xs-12" id="app">
 
-                    <!-- Cabecalho da tabela -->
-<!--                        <div class="box-header with-border">
-
-                        <form class="form-inline" method="POST" modelAttribute="properties">
-                            <div class="col-xs-4 mb-2">
-                                <label for="inputChave" class="sr-only">Chave</label>
-                                <input type="text" class="form-control" id="key" placeholder="Chave">
-                            </div>
-                            <div class="mx-sm-3 mb-2">
-                                <label for="inputDescricao" class="sr-only">Descricao</label>
-                                <input type="text" class="form-control" id="value" placeholder="Descrição">
-                            </div>
-                            <button type="submit" class="btn btn-primary mb-2">Salvar</button>
-                        </form>
-                    </div>-->
-
                     <!-- Corpo da tabela -->
                     <div class="box-body">
 
