@@ -48,6 +48,9 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
         "index",
         "sisinfoweb.ini",
         "sisinfoweb.properties",
+        "Criptografar",
+        "Encrypt",
+        "Decrypt"
     };
 
     private static final String[] PAGINA_SEM_FILTRO_CONTEM = {

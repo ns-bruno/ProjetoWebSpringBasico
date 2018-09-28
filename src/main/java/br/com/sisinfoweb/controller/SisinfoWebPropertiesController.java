@@ -7,11 +7,15 @@ package br.com.sisinfoweb.controller;
 
 import br.com.sisinfoweb.banco.beans.RetornoWebServiceBeans;
 import br.com.sisinfoweb.banco.beans.StatusRetornoWebServiceBeans;
+import br.com.sisinfoweb.funcoes.FuncoesPersonalizadas;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -126,9 +130,9 @@ public class SisinfoWebPropertiesController extends BaseMyController{
                     // Salva todas as propriedades no arquivo
                     prop.store(new FileOutputStream(servletContext.getRealPath("/WEB-INF/sisinfoweb.properties")), null);
                 }
-                for (Object key : prop.keySet()){
+                /**for (Object key : prop.keySet()){
                     logger.debug(key.toString() + " : " + prop.getProperty(key.toString()));
-                }
+                }**/
             }
             model.addAttribute("lista", prop);
             
@@ -151,13 +155,24 @@ public class SisinfoWebPropertiesController extends BaseMyController{
     }
     
     @RequestMapping(value = {"/Criptografar", "/Encrypt", "/Decrypt"}, method = RequestMethod.GET)
-    public ModelAndView initCriptografar(Model model, @RequestHeader() HttpHeaders httpHeaders) {
+    public ModelAndView initCriptografar(Model model, @RequestHeader() HttpHeaders httpHeaders, HttpServletRequest req) {
 
         ModelAndView modelAndView = new ModelAndView("criptografar");
         try {
-            logger.debug("Criptografar");
+            logger.debug("Tela Criptografar");
+            // Checa se tem algum parametro
+            if( (req.getParameterMap().size() > 0) ){
+                
+                if(req.getParameter("selectTipo") != null){
+                    logger.info(req.getParameterMap().toString());
+                    byte [] depoisEncryptDecrypt = new FuncoesPersonalizadas().encryptDecrypt(Integer.valueOf(req.getParameter("selectTipo")), req.getParameter("textTexto"), req.getParameter("textChave"));
+                    if (depoisEncryptDecrypt != null) {
+                        model.addAttribute("retorno", new String(depoisEncryptDecrypt, "UTF-8"));
+                    }
+                }
+            }
             
-        } catch (Exception e) {
+        } catch (UnsupportedEncodingException e) {
             StatusRetornoWebServiceBeans statusRetorno = new StatusRetornoWebServiceBeans();
             RetornoWebServiceBeans retornoWebService = new RetornoWebServiceBeans();
             // Cria uma vareavel para retorna o status
