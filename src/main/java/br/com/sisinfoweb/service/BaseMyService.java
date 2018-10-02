@@ -118,6 +118,14 @@ public class BaseMyService<R extends BaseMyRepository, E> {
             new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
 
             throw new CustomException(e);
+        
+        } catch (Exception e){
+            smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_ERROR);
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI FINDALLCLIENT. " + e.getMessage());
+            //Instancia a classe de logger para registrar o log no banco
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
+            
+            throw new CustomException(e);
         }
     }
 
@@ -184,7 +192,7 @@ public class BaseMyService<R extends BaseMyRepository, E> {
 
         } catch (ScriptException e) {
             smalogwsEntity.setTipo(logger.TYPE_ERROR);
-            smalogwsEntity.setLog(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI FINDCUSTOMNATIVEQUERYCLIENT. " + e.getMessage());
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI findAllClient. " + e.getMessage());
             //Instancia a classe de logger para registrar o log no banco
             new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
             
@@ -192,7 +200,15 @@ public class BaseMyService<R extends BaseMyRepository, E> {
 
         } catch (ClassNotFoundException | SQLException e) {
             smalogwsEntity.setTipo(logger.TYPE_ERROR);
-            smalogwsEntity.setLog(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI FINDCUSTOMNATIVEQUERYCLIENT. " + e.getMessage());
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI findAllClient. " + e.getMessage());
+            //Instancia a classe de logger para registrar o log no banco
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
+            
+            throw new CustomException(e);
+        
+        } catch (Exception e) {
+            smalogwsEntity.setTipo(logger.TYPE_ERROR);
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI findAllClient. " + e.getMessage());
             //Instancia a classe de logger para registrar o log no banco
             new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
             
@@ -236,6 +252,14 @@ public class BaseMyService<R extends BaseMyRepository, E> {
             new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
 
             throw new CustomException(e);
+        
+        } catch (Exception e) {
+            smalogwsEntity.setTipo(logger.TYPE_ERROR);
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI findOneByGuidClient. " + e.getMessage());
+            //Instancia a classe de logger para registrar o log no banco
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
+
+            throw new CustomException(e);
         }
     }
 
@@ -252,7 +276,7 @@ public class BaseMyService<R extends BaseMyRepository, E> {
             return (E) baseMyRepository.findOneByGuid(guid);
         } catch (Exception e) {
             smalogwsEntity.setTipo(logger.TYPE_ERROR);
-            smalogwsEntity.setLog(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI A BUSCA POR GUID. " + e.getMessage());
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI A BUSCA POR GUID. | findOneByGuid | " + e.getMessage());
             //Instancia a classe de logger para registrar o log no banco
             new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
 
@@ -288,7 +312,7 @@ public class BaseMyService<R extends BaseMyRepository, E> {
             return baseMyRepository.findCustomNativeQuery(sqlQuery);
         } catch (ScriptException e) {
             smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_ERROR);
-            smalogwsEntity.setLog(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI UMA QUERY NATIVA DO SERVICE. " + e.getMessage());
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI UMA QUERY NATIVA DO SERVICE. findCustomNativeQuery | " + e.getMessage());
             
             new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
 
@@ -296,7 +320,7 @@ public class BaseMyService<R extends BaseMyRepository, E> {
 
         } catch (Exception e) {
             smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_ERROR);
-            smalogwsEntity.setLog(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI UMA QUERY NATIVA DO SERVICE. " + e.getMessage());
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI UMA QUERY NATIVA DO SERVICE. findCustomNativeQuery | " + e.getMessage());
             
             new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);            
 
@@ -328,7 +352,7 @@ public class BaseMyService<R extends BaseMyRepository, E> {
                 }
             }
             smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_DEBUG);
-            smalogwsEntity.setLog(MensagemPadrao.LOGGER_EXECUTE_FIND + " | findCustomNativeQuery | " + sqlQuery);
+            smalogwsEntity.setLog(MensagemPadrao.LOGGER_EXECUTE_FIND + " | findCustomNativeQueryClient | " + sqlQuery);
             //Instancia a classe de logger para registrar o log no banco
             new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
             
@@ -337,7 +361,7 @@ public class BaseMyService<R extends BaseMyRepository, E> {
             return mapResultSetToObject(resultado, Class.forName("br.com.sisinfoweb.entity." + this.getClass().getSimpleName().replace("Service", "") + "Entity"));
         } catch (ScriptException e) {
             smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_ERROR);
-            smalogwsEntity.setLog(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI FINDCUSTOMNATIVEQUERYCLIENT. " + e.getMessage());
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI findCustomNativeQueryClient. " + e.getMessage());
             //Instancia a classe de logger para registrar o log no banco
             new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
             
@@ -345,7 +369,15 @@ public class BaseMyService<R extends BaseMyRepository, E> {
 
         } catch (ClassNotFoundException e) {
             smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_ERROR);
-            smalogwsEntity.setLog(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI FINDCUSTOMNATIVEQUERYCLIENT. " + e.getMessage());
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI findCustomNativeQueryClient. " + e.getMessage());
+            //Instancia a classe de logger para registrar o log no banco
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
+            
+            throw new CustomException(e);
+            
+        } catch (Exception e) {
+            smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_ERROR);
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI findCustomNativeQueryClient. " + e.getMessage());
             //Instancia a classe de logger para registrar o log no banco
             new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
             
@@ -426,7 +458,7 @@ public class BaseMyService<R extends BaseMyRepository, E> {
                 sqlQueryPage = "SELECT FIRST " + size + " SKIP " + (numberPage * size) + " " + sqlQuery.substring(sqlQuery.indexOf("SELECT") + 6);
                 
                 smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_DEBUG);
-		smalogwsEntity.setLog(MensagemPadrao.LOGGER_EXECUTE_FIND + " | findCustomNativeQueryClient | " + sqlQuery);
+		smalogwsEntity.setLog(MensagemPadrao.LOGGER_EXECUTE_FIND + " | findCustomNativeQueryClient Pageble | " + sqlQuery);
 		//Instancia a classe de logger para registrar o log no banco
 		new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
                 
@@ -441,7 +473,7 @@ public class BaseMyService<R extends BaseMyRepository, E> {
 
         } catch (ScriptException e) {
             smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_ERROR);
-            smalogwsEntity.setLog(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI FINDCUSTOMNATIVEQUERYCLIENT. " + e.getMessage());
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI findCustomNativeQueryClient - Pageable. " + e.getMessage());
             //Instancia a classe de logger para registrar o log no banco
             new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
             
@@ -449,7 +481,14 @@ public class BaseMyService<R extends BaseMyRepository, E> {
 
         } catch (ClassNotFoundException | SQLException e) {
             smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_ERROR);
-            smalogwsEntity.setLog(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI FINDCUSTOMNATIVEQUERYCLIENT. " + e.getMessage());
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI findCustomNativeQueryClient - Pageable. " + e.getMessage());
+            //Instancia a classe de logger para registrar o log no banco
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
+            
+            throw new CustomException(e);
+        } catch (Exception e){
+            smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_ERROR);
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI findCustomNativeQueryClient - Pageable. " + e.getMessage());
             //Instancia a classe de logger para registrar o log no banco
             new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
             
@@ -470,7 +509,7 @@ public class BaseMyService<R extends BaseMyRepository, E> {
             return baseMyRepository.saveCustomNativeQuery(queryInsert);
         } catch (ScriptException e) {
             smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_ERROR);
-            smalogwsEntity.setLog(MensagemPadrao.ERROR_SAVE + e.getMessage());
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_SAVE + " | saveCustomNativeQuery | " + e.getMessage());
             //Instancia a classe de logger para registrar o log no banco
             new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
             
@@ -478,7 +517,7 @@ public class BaseMyService<R extends BaseMyRepository, E> {
 
         } catch (Exception e) {
             smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_ERROR);
-            smalogwsEntity.setLog(MensagemPadrao.ERROR_SAVE + e.getMessage());
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_SAVE + " | saveCustomNativeQuery | " + e.getMessage());
             //Instancia a classe de logger para registrar o log no banco
             new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
             
@@ -507,7 +546,7 @@ public class BaseMyService<R extends BaseMyRepository, E> {
             }
         } catch (ScriptException e) {
             smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_ERROR);
-            smalogwsEntity.setLog(MensagemPadrao.ERROR_SAVE + e.getMessage());
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_SAVE + " | saveCustomNativeQueryClient | " + e.getMessage());
             //Instancia a classe de logger para registrar o log no banco
             new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
             
@@ -515,7 +554,7 @@ public class BaseMyService<R extends BaseMyRepository, E> {
 
         } catch (Exception e) {
             smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_ERROR);
-            smalogwsEntity.setLog(MensagemPadrao.ERROR_SAVE + e.getMessage());
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_SAVE + " | saveCustomNativeQueryClient | " + e.getMessage());
             //Instancia a classe de logger para registrar o log no banco
             new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
             
@@ -536,7 +575,7 @@ public class BaseMyService<R extends BaseMyRepository, E> {
             return (E) baseMyRepository.save(entity);
         } catch (ScriptException e) {
             smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_ERROR);
-            smalogwsEntity.setLog(MensagemPadrao.ERROR_SAVE + e.getMessage());
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_SAVE + " | save | " + e.getMessage());
             //Instancia a classe de logger para registrar o log no banco
             new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
             
@@ -544,7 +583,7 @@ public class BaseMyService<R extends BaseMyRepository, E> {
 
         } catch (Exception e) {
             smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_ERROR);
-            smalogwsEntity.setLog(MensagemPadrao.ERROR_SAVE + e.getMessage());
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_SAVE + " | save | " + e.getMessage());
             //Instancia a classe de logger para registrar o log no banco
             new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
 
@@ -569,7 +608,7 @@ public class BaseMyService<R extends BaseMyRepository, E> {
 
         } catch (ScriptException e) {
             smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_ERROR);
-            smalogwsEntity.setLog(MensagemPadrao.ERROR_SAVE + e.getMessage());
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_SAVE + " | saveClient | " + e.getMessage());
             //Instancia a classe de logger para registrar o log no banco
             new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
 
@@ -577,7 +616,7 @@ public class BaseMyService<R extends BaseMyRepository, E> {
 
         } catch (Exception e) {
             smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_ERROR);
-            smalogwsEntity.setLog(MensagemPadrao.ERROR_SAVE + e.getMessage());
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_SAVE + " | saveClient | " + e.getMessage());
             //Instancia a classe de logger para registrar o log no banco
             new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
 
@@ -687,6 +726,14 @@ public class BaseMyService<R extends BaseMyRepository, E> {
             new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
             
             throw new CustomException(e);
+        
+        } catch (Exception e) {
+            smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_ERROR);
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_STORED_PROCEDURE + "NESTE CASO FOI storedProcedureWithSelectClient. " + e.getMessage());
+            //Instancia a classe de logger para registrar o log no banco
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
+            
+            throw new CustomException(e);
         }
     }
     
@@ -712,7 +759,7 @@ public class BaseMyService<R extends BaseMyRepository, E> {
                 pageable.setSize(size);
             }
             smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_DEBUG);
-            smalogwsEntity.setLog(MensagemPadrao.LOGGER_EXECUTE_STORED_PROCEDURE + " | storedProcedureExecuteClient | " + nameProcedure + " | " + parameter);
+            smalogwsEntity.setLog(MensagemPadrao.LOGGER_EXECUTE_STORED_PROCEDURE + " | storedProcedureExecuteClient - Pageable | " + nameProcedure + " | " + parameter);
             //Instancia a classe de logger para registrar o log no banco
             new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
             
@@ -744,7 +791,7 @@ public class BaseMyService<R extends BaseMyRepository, E> {
 
         } catch (ScriptException e) {
             smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_ERROR);
-            smalogwsEntity.setLog(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI FINDCUSTOMNATIVEQUERYCLIENT. " + e.getMessage());
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI storedProcedureExecuteClient - Pageable. " + e.getMessage());
             //Instancia a classe de logger para registrar o log no banco
             new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
             
@@ -752,7 +799,7 @@ public class BaseMyService<R extends BaseMyRepository, E> {
 
         } catch (Exception e) {
             smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_ERROR);
-            smalogwsEntity.setLog(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI FINDCUSTOMNATIVEQUERYCLIENT. " + e.getMessage());
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI storedProcedureExecuteClient - Pageable. " + e.getMessage());
             //Instancia a classe de logger para registrar o log no banco
             new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
             

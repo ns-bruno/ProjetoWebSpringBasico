@@ -206,6 +206,7 @@ public class SmadispoController extends BaseMyController {
                 // Pega o banco de dados do cliente
                 smadispoService.setSmadispoEntity(smadispoEntity);
 
+                // Verifica se o dispositivo nao esta cadastrado
                 if (smadispoService.findCustomNativeQueryClient(false, null, null, "IDENTIFICACAO = '" + smadispoEntity.getIdentificacao() + "'", sort).size() < 1) {
                     //String insertDispositivo = "INSERT INTO SMADISPO(DESCRICAO, IDENTIFICACAO) VALUES ('" + smadispoEntity.getDescricao() + "', '" + smadispoEntity.getIdentificacao() + "' );";
 

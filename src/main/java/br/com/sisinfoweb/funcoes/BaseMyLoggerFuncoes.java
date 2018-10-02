@@ -8,6 +8,7 @@ package br.com.sisinfoweb.funcoes;
 import br.com.sisinfoweb.banco.values.MensagemPadrao;
 import br.com.sisinfoweb.entity.SmadispoEntity;
 import br.com.sisinfoweb.entity.SmalogwsEntity;
+import br.com.sisinfoweb.exception.CustomException;
 import br.com.sisinfoweb.repository.BaseMyRepository;
 import java.net.InetAddress;
 import java.net.URLDecoder;
@@ -115,12 +116,16 @@ public class BaseMyLoggerFuncoes<R extends BaseMyRepository> implements Runnable
                 
                 // Inseri os dados do log no banco de dados
                 //baseMyRepository.saveCustomNativeQueryLogger(sqlQuery.toString());
-                baseMyRepository.saveCustomNativeQuery(sqlQuery.toString());
+                if ( ((Integer)baseMyRepository.saveCustomNativeQuery(sqlQuery.toString())) > 0){
+                    LOGGER.info(MensagemPadrao.INSERT_SUCCESS + " | " + this.getClass().getSimpleName());
+                }
             } else {
-                LOGGER.trace(MensagemPadrao.ERROR_SMALOGWS_NULL);
+                LOGGER.warn(MensagemPadrao.ERROR_SMALOGWS_NULL);
             }
         } catch (Exception e){
             LOGGER.error(MensagemPadrao.ERROR_SMALOGWS_DATABASE + e.getMessage());
+            
+            throw new CustomException(e);
         }
         notify();
     }
