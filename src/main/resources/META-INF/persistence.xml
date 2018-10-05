@@ -6,6 +6,7 @@
     <class>br.com.sisinfoweb.entity.CfaareasEntity</class>
     <class>br.com.sisinfoweb.entity.AeaclaseEntity</class>
     <class>br.com.sisinfoweb.entity.AeacodstEntity</class>
+    <class>br.com.sisinfoweb.entity.AeaconjtEntity</class>
     <class>br.com.sisinfoweb.entity.AeaembalEntity</class>
     <class>br.com.sisinfoweb.entity.AeaemtbpEntity</class>
     <class>br.com.sisinfoweb.entity.AeaestoqEntity</class>
@@ -57,6 +58,7 @@
     <class>br.com.sisinfoweb.entity.CfaareasEntity</class>
     <class>br.com.sisinfoweb.entity.AeaclaseEntity</class>
     <class>br.com.sisinfoweb.entity.AeacodstEntity</class>
+    <class>br.com.sisinfoweb.entity.AeaconjtEntity</class>
     <class>br.com.sisinfoweb.entity.AeaembalEntity</class>
     <class>br.com.sisinfoweb.entity.AeaemtbpEntity</class>
     <class>br.com.sisinfoweb.entity.AeaestoqEntity</class>
