@@ -8,8 +8,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "AEAPRECO")
@@ -50,6 +48,14 @@ public class AeaprecoEntity {
     @Column(name = "CT_INTEG", table = "AEAPRECO")
     @Basic
     private Integer ctInteg;
+    
+    @Column(name = "CALCULA_JUROS", table = "AEAPRECO")
+    @Basic
+    private Character calculaJuros;
+    
+    @Column(name = "FORMA", table = "AEAPRECO")
+    @Basic
+    private Character forma;
 
     @Column(name = "VENDA_ATAC", table = "AEAPRECO", nullable = false)
     @Basic(optional = false)
@@ -129,6 +135,22 @@ public class AeaprecoEntity {
 
     public void setCtInteg(Integer ctInteg) {
         this.ctInteg = ctInteg;
+    }
+
+    public Character getCalculaJuros() {
+        return calculaJuros;
+    }
+
+    public void setCalculaJuros(Character calculaJuros) {
+        this.calculaJuros = calculaJuros;
+    }
+
+    public Character getForma() {
+        return forma;
+    }
+
+    public void setForma(Character forma) {
+        this.forma = forma;
     }
 
     public double getVendaAtac() {
