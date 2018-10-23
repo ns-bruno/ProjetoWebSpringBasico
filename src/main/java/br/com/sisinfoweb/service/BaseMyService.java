@@ -69,6 +69,7 @@ public class BaseMyService<R extends BaseMyRepository, E> {
     public List<E> findAll() {
         smalogwsEntity = new SmalogwsEntity();
         smalogwsEntity.setLevel(this.getClass().getSimpleName());
+        smalogwsEntity.setMetodo(new Object() {} .getClass().getEnclosingMethod().getName());
         try {
             FuncoesPersonalizadas funcoes = new FuncoesPersonalizadas();
 
@@ -92,6 +93,7 @@ public class BaseMyService<R extends BaseMyRepository, E> {
     public List<E> findAllClient() {
         smalogwsEntity = new SmalogwsEntity();
         smalogwsEntity.setLevel(this.getClass().getSimpleName());
+        smalogwsEntity.setMetodo(new Object() {} .getClass().getEnclosingMethod().getName());
         try {
             // Seta os dados do dispositivo
             baseMyRepository.setSmadispoEntity(smadispoEntity);
@@ -134,6 +136,7 @@ public class BaseMyService<R extends BaseMyRepository, E> {
     public PageBeans<E> findAllClient(String sort, PageableBeans pageable) {
         smalogwsEntity = new SmalogwsEntity();
         smalogwsEntity.setLevel(this.getClass().getSimpleName());
+        smalogwsEntity.setMetodo(new Object() {} .getClass().getEnclosingMethod().getName());
         try {
             int totalElements = 0;
             int size = SIZE_BY_PAGE;
@@ -221,6 +224,7 @@ public class BaseMyService<R extends BaseMyRepository, E> {
     public E findOneByGuidClient(String guid) {
         smalogwsEntity = new SmalogwsEntity();
         smalogwsEntity.setLevel(this.getClass().getSimpleName());
+        smalogwsEntity.setMetodo(new Object() {} .getClass().getEnclosingMethod().getName());
         try {
             // Seta os dados do dispositivo
             baseMyRepository.setSmadispoEntity(smadispoEntity);
@@ -267,6 +271,7 @@ public class BaseMyService<R extends BaseMyRepository, E> {
     public E findOneByGuid(String guid) {
         smalogwsEntity = new SmalogwsEntity();
         smalogwsEntity.setLevel(this.getClass().getSimpleName());
+        smalogwsEntity.setMetodo(new Object() {} .getClass().getEnclosingMethod().getName());
         try {
             smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_DEBUG);
             smalogwsEntity.setLog(MensagemPadrao.LOGGER_EXECUTE_FIND + " | findOneByGuid | " + guid);
@@ -288,6 +293,7 @@ public class BaseMyService<R extends BaseMyRepository, E> {
     public List<E> findCustomNativeQuery(Boolean resume, String sqlCustomParam, String columns, String where, String sort) {
         smalogwsEntity = new SmalogwsEntity();
         smalogwsEntity.setLevel(this.getClass().getSimpleName());
+        smalogwsEntity.setMetodo(new Object() {} .getClass().getEnclosingMethod().getName());
         try {
             // Cria um sql nativo se nao for passado um sqlCustom por parametro
             String sqlQuery;
@@ -332,6 +338,7 @@ public class BaseMyService<R extends BaseMyRepository, E> {
     public List<E> findCustomNativeQueryClient(Boolean resume, String sqlCustomParam, String columns, String where, String sort) {
         smalogwsEntity = new SmalogwsEntity();
         smalogwsEntity.setLevel(this.getClass().getSimpleName());
+        smalogwsEntity.setMetodo(new Object() {} .getClass().getEnclosingMethod().getName());
         try {
             // Seta os dados do dispositivo
             baseMyRepository.setSmadispoEntity(smadispoEntity);
@@ -389,6 +396,7 @@ public class BaseMyService<R extends BaseMyRepository, E> {
     public PageBeans<E> findCustomNativeQueryClient(Boolean resume, String sqlCustomParam, String columns, String where, String sort, PageableBeans pageable) {
         smalogwsEntity = new SmalogwsEntity();
         smalogwsEntity.setLevel(this.getClass().getSimpleName());
+        smalogwsEntity.setMetodo(new Object() {} .getClass().getEnclosingMethod().getName());
         try {
             int totalElements = 0;
             int size = SIZE_BY_PAGE;
@@ -500,6 +508,7 @@ public class BaseMyService<R extends BaseMyRepository, E> {
     public Serializable saveCustomNativeQuery(String queryInsert) {
         smalogwsEntity = new SmalogwsEntity();
         smalogwsEntity.setLevel(this.getClass().getSimpleName());
+        smalogwsEntity.setMetodo(new Object() {} .getClass().getEnclosingMethod().getName());
         try {
             smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_DEBUG);
             smalogwsEntity.setLog(MensagemPadrao.LOGGER_EXECUTE_FIND + " | saveCustomNativeQuery | " + queryInsert);
@@ -530,6 +539,7 @@ public class BaseMyService<R extends BaseMyRepository, E> {
     public Serializable saveCustomNativeQueryClient(String queryInsert) {
         smalogwsEntity = new SmalogwsEntity();
         smalogwsEntity.setLevel(this.getClass().getSimpleName());
+        smalogwsEntity.setMetodo(new Object() {} .getClass().getEnclosingMethod().getName());
         try {
             // Seta os dados do dispositivo
             baseMyRepository.setSmadispoEntity(smadispoEntity);
@@ -566,6 +576,7 @@ public class BaseMyService<R extends BaseMyRepository, E> {
     public E save(E entity) {
         smalogwsEntity = new SmalogwsEntity();
         smalogwsEntity.setLevel(this.getClass().getSimpleName());
+        smalogwsEntity.setMetodo(new Object() {} .getClass().getEnclosingMethod().getName());
         try {
             smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_DEBUG);
             smalogwsEntity.setLog(MensagemPadrao.LOGGER_EXECUTE_FIND + " | save | " + entity.getClass().getSimpleName());
@@ -596,6 +607,7 @@ public class BaseMyService<R extends BaseMyRepository, E> {
     public Serializable saveClient(E entity) {
         smalogwsEntity = new SmalogwsEntity();
         smalogwsEntity.setLevel(this.getClass().getSimpleName());
+        smalogwsEntity.setMetodo(new Object() {} .getClass().getEnclosingMethod().getName());
         try {
             // Seta os dados do dispositivo
             baseMyRepository.setSmadispoEntity(smadispoEntity);
@@ -629,6 +641,7 @@ public class BaseMyService<R extends BaseMyRepository, E> {
     public PageBeans<E> storedProcedureWithSelectClient(String nameProcedure, Map<String, Object> parameter, Boolean resume, String sqlCustomParam, String columns, String where, String sort, PageableBeans pageable) {
         smalogwsEntity = new SmalogwsEntity();
         smalogwsEntity.setLevel(this.getClass().getSimpleName());
+        smalogwsEntity.setMetodo(new Object() {} .getClass().getEnclosingMethod().getName());
         try {
             int totalElements = 0;
             int size = SIZE_BY_PAGE;
@@ -741,6 +754,7 @@ public class BaseMyService<R extends BaseMyRepository, E> {
     public PageBeans<E> storedProcedureExecuteClient(String nameProcedure, Map<String, Object> parameter, PageableBeans pageable) {
         smalogwsEntity = new SmalogwsEntity();
         smalogwsEntity.setLevel(this.getClass().getSimpleName());
+        smalogwsEntity.setMetodo(new Object() {} .getClass().getEnclosingMethod().getName());
         try {
             int totalElements = 0;
             int size = SIZE_BY_PAGE;
@@ -822,6 +836,7 @@ public class BaseMyService<R extends BaseMyRepository, E> {
         List<E> outputList = null;
         smalogwsEntity = new SmalogwsEntity();
         smalogwsEntity.setLevel(this.getClass().getSimpleName());
+        smalogwsEntity.setMetodo(new Object() {} .getClass().getEnclosingMethod().getName());
         try {
             // make sure resultset is not null
             if (rs != null) {
