@@ -90,7 +90,7 @@ public class SmalogwsEntity {
     @Column(name = "ANEXO", table = "SMALOGWS")
     @Lob
     @Basic
-    private byte[] anexo;
+    private Object anexo;
 
     public Integer getIdSmalogws() {
         return this.idSmalogws;
@@ -228,11 +228,11 @@ public class SmalogwsEntity {
         this.log = log;
     }
 
-    public byte[] getAnexo() {
+    public Object getAnexo() {
         return this.anexo;
     }
 
-    public void setAnexo(byte[] anexo) {
+    public void setAnexo(Object anexo) {
         this.anexo = anexo;
     }
 

@@ -97,7 +97,7 @@ public class BaseMyLoggerFuncoes<R extends BaseMyRepository> implements Runnable
                 if ( prop.containsKey(PROPERTIES_LOG + smalogwsEntity.getMetodo()) ){
                     levelPermitido = prop.getProperty(PROPERTIES_LOG + smalogwsEntity.getMetodo());
                 }
-                if ( (prop.containsKey(PROPERTIES_LOG + smalogwsEntity.getLevel())) || (prop.containsKey(PROPERTIES_LOG + smalogwsEntity.getLevel().replace("Service", ""))) ){
+                if ( (prop.containsKey(PROPERTIES_LOG + smalogwsEntity.getLevel())) ){
                     levelPermitido = prop.getProperty(PROPERTIES_LOG + smalogwsEntity.getLevel());
                 }
                 if ( (prop.containsKey(PROPERTIES_LOG + smalogwsEntity.getLevel().replace("Service", ""))) ){
@@ -188,17 +188,19 @@ public class BaseMyLoggerFuncoes<R extends BaseMyRepository> implements Runnable
                     }
                     String selectIdClifo = "(SELECT SMADISPO.ID_CFACLIFO FROM SMADISPO WHERE SMADISPO.IDENTIFICACAO = '" + smadispoEntity.getIdentificacao() + "')";
 
-                    sqlQuery.append("INSERT INTO SMALOGWS(ID_CFACLIFO, TIPO, ORIGEM, LEVEL, METODO, IP, LATITUDE, LONGITUDE, LOG) VALUES (");
+                    sqlQuery.append("INSERT INTO SMALOGWS(ID_CFACLIFO, TIPO, ORIGEM, LEVEL, METODO, IP, LATITUDE, LONGITUDE, LOG, ANEXO) VALUES (");
                     sqlQuery.append(selectIdClifo).append(", "); // ID_CFACLIFO
                     sqlQuery.append("'").append(smalogwsEntity.getTipo()).append("', "); // TIPO
                     sqlQuery.append("'").append(builder.toString().substring(builder.toString().lastIndexOf("/") + 1)).append("', "); // ORIGEM
                     sqlQuery.append("'").append(smalogwsEntity.getLevel()).append("', "); // LEVEL
-                    sqlQuery.append("'").append(smalogwsEntity.getMetodo()).append("', "); // METODO
+                    if(smalogwsEntity.getMetodo() != null){ sqlQuery.append("'").append(smalogwsEntity.getMetodo()).append("', "); }else{ sqlQuery.append("null, "); } // METODO
                     sqlQuery.append("'").append(InetAddress.getLocalHost().getHostAddress()).append("', "); // IP
                     sqlQuery.append(0).append(", "); // LATITUDE
                     sqlQuery.append(0).append(", "); // LONGITUDE
-                    sqlQuery.append("'").append(smalogwsEntity.getLog().replace("\'", "")).append("');");
-
+                    sqlQuery.append("'").append(smalogwsEntity.getLog().replace("\'", "")).append("', "); //LOG
+                    if(smalogwsEntity.getAnexo() != null){ sqlQuery.append("'").append(smalogwsEntity.getAnexo()).append("' "); }else{ sqlQuery.append("null"); } // ANEXO
+                    sqlQuery.append(");");
+                    
                     // Inseri os dados do log no banco de dados
                     if ( ((Integer)baseMyRepository.saveCustomNativeQuery(sqlQuery.toString())) > 0){
                         LOGGER.info(MensagemPadrao.INSERT_SUCCESS + " | " + this.getClass().getSimpleName());

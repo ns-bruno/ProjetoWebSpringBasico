@@ -62,6 +62,30 @@ public class SmadispoEntity {
     @Basic
     private Character ativo;
 
+    /**
+     * toString() personalizado, para retornar todos os campos de forma estruturada.
+     * @return 
+     */
+    @Override
+    public String toString() {
+        StringBuilder returnString = new StringBuilder();
+        if ((idSmadispo != null) && (idSmadispo != 0)){ returnString.append("idSmadispo: ").append(idSmadispo).append("\n"); }
+        if ((idCfaclifo != null) && (idCfaclifo != 0)){ returnString.append("idCfaclifo: ").append(idCfaclifo).append("\n"); }
+        if ((idCfaclifo != null) && (idCfaclifo != 0)){ returnString.append("idCfaclifo: ").append(idCfaclifo).append("\n"); }
+        if ((idCfaclifoFunc != null) && (idCfaclifoFunc != 0)){ returnString.append("idCfaclifoFunc: ").append(idCfaclifoFunc).append("\n"); }
+        if ((guid != null) && (guid.length() > 0)){ returnString.append("guid: ").append(guid).append("\n"); }
+        if ((usCad != null) && (usCad.length() > 0)){ returnString.append("usCad: ").append(usCad).append("\n"); }
+        if ((dtCad != null) && (dtCad.length() > 0)){ returnString.append("dtCad: ").append(dtCad).append("\n"); }
+        if ((dtAlt != null) && (dtAlt.length() > 0)){ returnString.append("dtAlt: ").append(dtAlt).append("\n"); }
+        if ((ctInteg != null) && (ctInteg != 0)){ returnString.append("ctInteg: ").append(ctInteg).append("\n"); }
+        if ((codigo != null) && (codigo != 0)){ returnString.append("codigo: ").append(codigo).append("\n"); }
+        if ((descricao != null) && (descricao.length() > 0)){ returnString.append("descricao: ").append(descricao).append("\n"); }
+        if ((identificacao != null) && (identificacao.length() > 0)){ returnString.append("identificacao: ").append(identificacao).append("\n"); }
+        if ((ativo != null) ){ returnString.append("ativo:").append(ativo).append("\n"); }
+        
+        return returnString.toString();
+    }
+    
     public Integer getIdSmadispo() {
         return this.idSmadispo;
     }

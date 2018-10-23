@@ -210,6 +210,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
                                     smalogwsEntity.setLevel(this.getClass().getSimpleName());
                                     smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_WARN);
                                     smalogwsEntity.setLog(MensagemPadrao.ERROR_EMPRESA_NAO_LICENCIADA);
+                                    smalogwsEntity.setAnexo(smadispoEntity.toString());
                                     //Instancia a classe de logger para registrar o log no banco
                                     new BaseMyLoggerFuncoes(cfaclifoService.getBaseMyRepository(), smadispoEntity, smalogwsEntity);
 
@@ -238,6 +239,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
                                 smalogwsEntity.setLevel(this.getClass().getSimpleName());
                                 smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_WARN);
                                 smalogwsEntity.setLog(MensagemPadrao.ERROR_NOT_DISPOSITIVO);
+                                smalogwsEntity.setAnexo(smadispoEntity.toString());
                                 //Instancia a classe de logger para registrar o log no banco
                                 new BaseMyLoggerFuncoes(cfaclifoService.getBaseMyRepository(), smadispoEntity, smalogwsEntity);
 
