@@ -19,7 +19,6 @@ import static br.com.sisinfoweb.controller.BaseMyController.PARAM_SORT;
 import static br.com.sisinfoweb.controller.BaseMyController.PARAM_SQL_QUERY;
 import static br.com.sisinfoweb.controller.BaseMyController.PARAM_WHERE;
 import static br.com.sisinfoweb.controller.BaseMyController.logger;
-import br.com.sisinfoweb.entity.AeaclaseEntity;
 import br.com.sisinfoweb.entity.AeaconjtEntity;
 import br.com.sisinfoweb.entity.SmadispoEntity;
 import br.com.sisinfoweb.service.AeaconjtService;
@@ -47,7 +46,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class AeaconjtController extends BaseMyController{
     
     @Autowired
-    AeaconjtService aeaconjtService;
+    private AeaconjtService aeaconjtService;
     
     @RequestMapping(value = {"/Aeaconjt"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody

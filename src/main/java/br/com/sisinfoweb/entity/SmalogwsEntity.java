@@ -63,9 +63,13 @@ public class SmalogwsEntity {
     @Basic
     private String origem;
 
-    @Column(name = "LEVEL", table = "SMALOGWS", length = 15)
+    @Column(name = "LEVEL", table = "SMALOGWS", length = 40)
     @Basic
     private String level;
+    
+    @Column(name = "METODO", table = "SMALOGWS", length = 40)
+    @Basic
+    private String metodo;
 
     @Column(name = "IP", table = "SMALOGWS", length = 128)
     @Basic
@@ -182,6 +186,14 @@ public class SmalogwsEntity {
 
     public void setLevel(String level) {
         this.level = level;
+    }
+
+    public String getMetodo() {
+        return metodo;
+    }
+
+    public void setMetodo(String metodo) {
+        this.metodo = metodo;
     }
 
     public String getIp() {
