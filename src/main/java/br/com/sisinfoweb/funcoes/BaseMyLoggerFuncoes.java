@@ -88,12 +88,22 @@ public class BaseMyLoggerFuncoes<R extends BaseMyRepository> implements Runnable
                 //Leio o fileInputStream recuperando assim o mapa contendo chaves e valores
                 prop.load(inputStream);
                 
+                if ( prop.containsKey(PROPERTIES_LOG + smalogwsEntity.getLevel().replace("Service", "") + "." + smalogwsEntity.getMetodo()) ){
+                    levelPermitido = prop.getProperty(PROPERTIES_LOG + smalogwsEntity.getLevel().replace("Service", "") + "." + smalogwsEntity.getMetodo());
+                }
+                if ( prop.containsKey(PROPERTIES_LOG + smalogwsEntity.getLevel() + "." + smalogwsEntity.getMetodo()) ){
+                    levelPermitido = prop.getProperty(PROPERTIES_LOG + smalogwsEntity.getLevel() + "." + smalogwsEntity.getMetodo());
+                }
                 if ( prop.containsKey(PROPERTIES_LOG + smalogwsEntity.getMetodo()) ){
                     levelPermitido = prop.getProperty(PROPERTIES_LOG + smalogwsEntity.getMetodo());
                 }
                 if ( (prop.containsKey(PROPERTIES_LOG + smalogwsEntity.getLevel())) || (prop.containsKey(PROPERTIES_LOG + smalogwsEntity.getLevel().replace("Service", ""))) ){
                     levelPermitido = prop.getProperty(PROPERTIES_LOG + smalogwsEntity.getLevel());
                 }
+                if ( (prop.containsKey(PROPERTIES_LOG + smalogwsEntity.getLevel().replace("Service", ""))) ){
+                    levelPermitido = prop.getProperty(PROPERTIES_LOG + smalogwsEntity.getLevel().replace("Service", ""));
+                }
+                
                 if (smalogwsEntity.getTipo().equalsIgnoreCase(TYPE_ERROR)){
                     LOGGER.error(smalogwsEntity.getLog());
 
