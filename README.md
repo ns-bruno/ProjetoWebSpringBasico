@@ -68,6 +68,7 @@ SisInfoWeb/
 │           │   ├── dispatcher-servlet.xml
 │           │   ├── glassfish-resources.xml
 │           │   ├── glassfish-web.xml
+│           │   ├── sisinfoweb.properties
 │           │   └── web.xml
 │           └── index.html
 ├── nb-configuration.xml
