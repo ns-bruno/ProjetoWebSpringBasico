@@ -258,9 +258,9 @@ public class CfaclifoController extends BaseMyController{
             insertCliente.append( ((cliente.has("tipoClientePessoa")) && (cliente.getAsJsonObject("tipoClientePessoa").has("idTipoCliente")) && (cliente.getAsJsonObject("tipoClientePessoa").get("idTipoCliente").getAsInt() > 0) ) ? cliente.getAsJsonObject("tipoClientePessoa").get("idTipoCliente").getAsInt() : "null" ).append(", ");
             insertCliente.append( ((cliente.has("statusPessoa")) && (cliente.getAsJsonObject("statusPessoa").has("idStatus")) && (cliente.getAsJsonObject("statusPessoa").get("idStatus").getAsInt() > 0) ) ? cliente.getAsJsonObject("statusPessoa").get("idStatus").getAsInt() : "null" ).append(", ");
             insertCliente.append("( SELECT CFACLIFO.ID_SMAEMRPE FROM CFACLIFO WHERE CFACLIFO.ID_CFACLIFO = (SELECT SMADISPO.ID_CFACLIFO_FUNC FROM SMADISPO WHERE SMADISPO.IDENTIFICACAO = '").append(smadispoEntity.getIdentificacao()).append("') )").append(", ");
-            insertCliente.append("'").append(cliente.get("cpfCnpj")).append("'").append(", ");
+            insertCliente.append("'").append(cliente.get("cpfCnpj").getAsString()).append("'").append(", ");
             insertCliente.append( ((cliente.has("IeRg")) && (cliente.get("IeRg").getAsString().length() > 0) ) ? ("'" + cliente.get("IeRg").getAsString() + "'") :"null" ).append(", ");
-            insertCliente.append("'").append(cliente.get("nomeRazao")).append("'").append(", ");
+            insertCliente.append("'").append(cliente.get("nomeRazao").getAsString().replace("'", "\'")).append("'").append(", ");
             insertCliente.append( ((cliente.has("nomeFantasia")) && (cliente.get("nomeFantasia").getAsString().length() > 0) ) ? ("'" + cliente.get("nomeFantasia").getAsString() + "'") :"null" ).append(", ");
             insertCliente.append("'1'").append(", ");
             insertCliente.append( ((cliente.has("pessoa")) && (cliente.get("pessoa").getAsString().length() > 0) ) ? ("'" + cliente.get("pessoa").getAsString() + "'") :"null" ).append(", ");

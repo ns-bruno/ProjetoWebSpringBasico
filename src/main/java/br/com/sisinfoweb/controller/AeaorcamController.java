@@ -173,7 +173,7 @@ public class AeaorcamController extends BaseMyController{
                                     + ( (orcamento.has("enderecoCliente") && orcamento.get("enderecoCliente") != null && orcamento.get("enderecoCliente").getAsString().length() > 0) ? "'" + orcamento.get("enderecoCliente").getAsString() + "'" : "null") + ", "
                                     + ( (orcamento.has("bairroCliente") && orcamento.get("bairroCliente") != null && orcamento.get("bairroCliente").getAsString().length() > 0) ? "'" + orcamento.get("bairroCliente").getAsString() + "'" : "null" )+ ", "
                                     + ( (orcamento.has("cepCliente") && orcamento.get("cepCliente") != null && orcamento.get("cepCliente").getAsString().length() > 0) ? "'" + orcamento.get("cepCliente").getAsString() + "'" : "null" )+ ", "
-                                    + ( ( (orcamento.has("observacao")) && (orcamento.get("observacao") != null) && (!orcamento.get("observacao").getAsString().isEmpty()) ) ? "'"+orcamento.get("observacao").getAsString() + "', " : "null, ")
+                                    + ( ( (orcamento.has("observacao")) && (orcamento.get("observacao") != null) && (!orcamento.get("observacao").getAsString().isEmpty()) ) ? "'"+orcamento.get("observacao").getAsString().replace("'", "\'") + "', " : "null, ")
                                     + "'X') MATCHING (GUID);";
             
             Integer qtdInsert = (Integer) aeaorcamService.saveCustomNativeQueryClient(insertOrcamento);
@@ -209,7 +209,7 @@ public class AeaorcamController extends BaseMyController{
                                         + itemOrcamento.get("valorDesconto").getAsDouble() + ","
                                         + "" +(((itemOrcamento.has("promocao")) && (!itemOrcamento.get("promocao").getAsString().isEmpty())) ? itemOrcamento.get("promocao").getAsString() : "'0'" )+ ","
                                         + "'" +(((itemOrcamento.has("tipoProduto")) && (!itemOrcamento.get("tipoProduto").getAsString().isEmpty())) ? itemOrcamento.get("tipoProduto").getAsString() : "null" )+ "',"
-                                        + (((itemOrcamento.has("complemento")) && (itemOrcamento.get("complemento") != null) && (itemOrcamento.get("complemento").getAsString().length() > 0)) ?  "'" + itemOrcamento.get("complemento").getAsString() + "'" : "null" )+ ") MATCHING (GUID)";
+                                        + (((itemOrcamento.has("complemento")) && (itemOrcamento.get("complemento") != null) && (itemOrcamento.get("complemento").getAsString().length() > 0)) ?  "'" + itemOrcamento.get("complemento").getAsString().replace("'", "\'") + "'" : "null" )+ ") MATCHING (GUID)";
                     
                     if (((Integer)aeaorcamService.saveCustomNativeQueryClient(insertItem)) <= 0){
                         itensInseridoSucesso = false;

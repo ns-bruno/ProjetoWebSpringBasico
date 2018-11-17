@@ -5,8 +5,8 @@
  */
 package br.com.sisinfoweb.service;
 
-import br.com.sisinfoweb.entity.AeaclaseEntity;
-import br.com.sisinfoweb.repository.AeaclaseRepository;
+import br.com.sisinfoweb.entity.AeaitgprEntity;
+import br.com.sisinfoweb.repository.AeaitgprRepository;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -16,10 +16,11 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @Transactional
-public class AeaclaseService extends BaseMyService<AeaclaseRepository, AeaclaseEntity>{
-    
-    public AeaclaseService(AeaclaseRepository aeaclaseRepository) {
-        super(aeaclaseRepository);
+public class AeaitgprService extends BaseMyService<AeaitgprRepository, AeaitgprEntity>{
+
+    public AeaitgprService(AeaitgprRepository aeaitgprRepository){
+        super(aeaitgprRepository);
     }
+    
     
 }
