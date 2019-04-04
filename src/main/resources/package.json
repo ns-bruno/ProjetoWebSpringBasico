@@ -1,0 +1,29 @@
+{
+  "name": "SisInfoWeb",
+  "description": "Projeto para usar banco de dados do SisInfo em um servidor REST e para usar em sistema de ERP na web.",
+  "version": "1.0.9",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nsbrno/ProjetoWebSpringBasico.git"
+  },
+  "keywords": [],
+  "author": "Bruno Nogueira Silva",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nsbrno/ProjetoWebSpringBasico/issues"
+  },
+  "homepage": "https://github.com/nsbrno/ProjetoWebSpringBasico/blob/SisInfoWeb/README.md",
+  "contributors": [],
+  "dependencies": {},
+  "devDependencies": {
+    "ts-loader": "^5.3.3",
+    "typescript": "^3.4.1",
+    "uglifyjs-webpack-plugin": "^2.1.2",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0"
+  }
+}

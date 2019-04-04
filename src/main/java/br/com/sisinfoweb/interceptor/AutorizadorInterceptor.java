@@ -39,6 +39,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
     final static Logger logger = LoggerFactory.getLogger(Object.class);
     public static final String KEY_DISPOSITIVO = "keyDispositivo";
     public static final String KEY_DISPOSITIVO_JSON = "dispositivo";
+    public static final String KEY_SMAUSUAR_JSON = "smausuar";
     public static final String KEY_CNPJ_URL = "cnpjUrl";
 
     private static final String[] PAGINA_SEM_FILTRO_TERMINA_COM = {
@@ -78,7 +79,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
                     || ((request.getHeader(HttpHeaders.CONTENT_TYPE) != null) && (request.getHeader(HttpHeaders.CONTENT_TYPE).contains(MediaType.APPLICATION_JSON_VALUE)))) {
 
                 if (request.getParameterMap() != null) {
-
+                    
                     // Verifica se tem o parametro WHERE
                     if ((request.getParameter(BaseMyController.PARAM_WHERE) != null)){
                         // Verifica se o parametro WHERE tem algum traço de SQL Injection
@@ -92,7 +93,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
                             retornoWebService.statusRetorno = statusRetorno;
 
                             StatusRetornoWebServiceBeans mensagem = new StatusRetornoWebServiceBeans();
-                            mensagem.setCodigoRetorno(0);
+                            mensagem.setCodigoRetorno(HttpURLConnection.HTTP_UNAUTHORIZED);
                             mensagem.setMensagemRetorno(MensagemPadrao.ERROR_SQL_INJECTION + " - " + request.getParameter(BaseMyController.PARAM_WHERE));
                             // Adiciona os dados que eh pra ser retornado
                             retornoWebService.object = mensagem;
@@ -124,7 +125,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 
                                 List<CfaclifoEntity> listaClifo = cfaclifoService.findCustomNativeQuery(Boolean.FALSE, null, null, whereClifo, null);
 
-                                // Checa se a empresa esta cadastrada no banco de dados Admin
+                                // Checa se a empresa esta cadastrada no banco de dados Admin(WebService)
                                 if ((listaClifo != null) && (listaClifo.size() > 0)) {
                                     // Checa se a empresa esta ativa
                                     if (listaClifo.get(0).getAtivo().equals('1')) {
@@ -143,7 +144,16 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 
                                                 return true;
                                             } else {
-                                                logger.warn(MensagemPadrao.ERROR_DISPOSITIVO_INATIVO + " - " + smadispoEntity.getIdentificacao());
+                                                //logger.warn(MensagemPadrao.ERROR_DISPOSITIVO_INATIVO + " - " + smadispoEntity.getIdentificacao());
+                                                
+                                                SmalogwsEntity smalogwsEntity = new SmalogwsEntity();
+                                                smalogwsEntity.setLevel(this.getClass().getSimpleName());
+                                                smalogwsEntity.setMetodo(new Object() {} .getClass().getEnclosingMethod().getName());
+                                                smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_WARN);
+                                                smalogwsEntity.setLog(MensagemPadrao.ERROR_DISPOSITIVO_INATIVO + " - " + smadispoEntity.getIdentificacao());
+                                                smalogwsEntity.setAnexo(smadispoEntity.toString());
+                                                //Instancia a classe de logger para registrar o log no banco
+                                                new BaseMyLoggerFuncoes(cfaclifoService.getBaseMyRepository(), smadispoEntity, smalogwsEntity);
 
                                                 statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_UNAUTHORIZED);
                                                 statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.UNAUTHORIZED));
@@ -153,7 +163,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
                                                 retornoWebService.statusRetorno = statusRetorno;
 
                                                 StatusRetornoWebServiceBeans mensagem = new StatusRetornoWebServiceBeans();
-                                                mensagem.setCodigoRetorno(0);
+                                                mensagem.setCodigoRetorno(HttpURLConnection.HTTP_UNAUTHORIZED);
                                                 mensagem.setMensagemRetorno(MensagemPadrao.ERROR_DISPOSITIVO_INATIVO);
                                                 // Adiciona os dados que eh pra ser retornado
                                                 retornoWebService.object = mensagem;
@@ -163,7 +173,16 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
                                                 return false;
                                             }
                                         } else {
-                                            logger.warn(MensagemPadrao.ERROR_DISPOSITIVO_NAO_CADASTRADO + " - " + smadispoEntity.getIdentificacao());
+                                            //logger.warn(MensagemPadrao.ERROR_DISPOSITIVO_NAO_CADASTRADO + " - " + smadispoEntity.getIdentificacao());
+                                            
+                                            SmalogwsEntity smalogwsEntity = new SmalogwsEntity();
+                                            smalogwsEntity.setLevel(this.getClass().getSimpleName());
+                                            smalogwsEntity.setMetodo(new Object() {} .getClass().getEnclosingMethod().getName());
+                                            smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_WARN);
+                                            smalogwsEntity.setLog(MensagemPadrao.ERROR_DISPOSITIVO_NAO_CADASTRADO + " - " + smadispoEntity.getIdentificacao());
+                                            smalogwsEntity.setAnexo(smadispoEntity.toString());
+                                            //Instancia a classe de logger para registrar o log no banco
+                                            new BaseMyLoggerFuncoes(cfaclifoService.getBaseMyRepository(), smadispoEntity, smalogwsEntity);
 
                                             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_UNAUTHORIZED);
                                             statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.UNAUTHORIZED));
@@ -173,7 +192,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
                                             retornoWebService.statusRetorno = statusRetorno;
 
                                             StatusRetornoWebServiceBeans mensagem = new StatusRetornoWebServiceBeans();
-                                            mensagem.setCodigoRetorno(0);
+                                            mensagem.setCodigoRetorno(HttpURLConnection.HTTP_UNAUTHORIZED);
                                             mensagem.setMensagemRetorno(MensagemPadrao.ERROR_DISPOSITIVO_NAO_CADASTRADO);
                                             // Adiciona os dados que eh pra ser retornado
                                             retornoWebService.object = mensagem;
@@ -184,7 +203,16 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
                                         }
 
                                     } else {
-                                        logger.warn(MensagemPadrao.ERROR_EMPRESA_INATIVA + " - " + listaClifo.get(0).getCpfCgc());
+                                        //logger.warn(MensagemPadrao.ERROR_EMPRESA_INATIVA + " - " + listaClifo.get(0).getCpfCgc());
+                                        
+                                        SmalogwsEntity smalogwsEntity = new SmalogwsEntity();
+                                        smalogwsEntity.setLevel(this.getClass().getSimpleName());
+                                        smalogwsEntity.setMetodo(new Object() {} .getClass().getEnclosingMethod().getName());
+                                        smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_WARN);
+                                        smalogwsEntity.setLog(MensagemPadrao.ERROR_EMPRESA_INATIVA + " - " + listaClifo.get(0).getCpfCgc());
+                                        smalogwsEntity.setAnexo(smadispoEntity.toString());
+                                        //Instancia a classe de logger para registrar o log no banco
+                                        new BaseMyLoggerFuncoes(cfaclifoService.getBaseMyRepository(), smadispoEntity, smalogwsEntity);
 
                                         statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_UNAUTHORIZED);
                                         statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.UNAUTHORIZED));
@@ -194,7 +222,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
                                         retornoWebService.statusRetorno = statusRetorno;
 
                                         StatusRetornoWebServiceBeans mensagem = new StatusRetornoWebServiceBeans();
-                                        mensagem.setCodigoRetorno(0);
+                                        mensagem.setCodigoRetorno(HttpURLConnection.HTTP_UNAUTHORIZED);
                                         mensagem.setMensagemRetorno(MensagemPadrao.ERROR_EMPRESA_INATIVA);
                                         // Adiciona os dados que eh pra ser retornado
                                         retornoWebService.object = mensagem;
@@ -204,12 +232,13 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
                                         return false;
                                     }
                                 } else {
-                                    logger.warn(MensagemPadrao.ERROR_EMPRESA_NAO_LICENCIADA);
+                                    //logger.warn(MensagemPadrao.ERROR_EMPRESA_NAO_LICENCIADA);
                                     
                                     SmalogwsEntity smalogwsEntity = new SmalogwsEntity();
                                     smalogwsEntity.setLevel(this.getClass().getSimpleName());
+                                    smalogwsEntity.setMetodo(new Object() {} .getClass().getEnclosingMethod().getName());
                                     smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_WARN);
-                                    smalogwsEntity.setLog(MensagemPadrao.ERROR_EMPRESA_NAO_LICENCIADA);
+                                    smalogwsEntity.setLog(MensagemPadrao.ERROR_EMPRESA_NAO_LICENCIADA + " - Dispositivo: " + smadispoEntity.getIdentificacao());
                                     smalogwsEntity.setAnexo(smadispoEntity.toString());
                                     //Instancia a classe de logger para registrar o log no banco
                                     new BaseMyLoggerFuncoes(cfaclifoService.getBaseMyRepository(), smadispoEntity, smalogwsEntity);
@@ -222,7 +251,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
                                     retornoWebService.statusRetorno = statusRetorno;
 
                                     StatusRetornoWebServiceBeans mensagem = new StatusRetornoWebServiceBeans();
-                                    mensagem.setCodigoRetorno(0);
+                                    mensagem.setCodigoRetorno(HttpURLConnection.HTTP_UNAUTHORIZED);
                                     mensagem.setMensagemRetorno(MensagemPadrao.ERROR_EMPRESA_NAO_LICENCIADA);
                                     // Adiciona os dados que eh pra ser retornado
                                     retornoWebService.object = mensagem;
@@ -233,10 +262,11 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
                                 }
 
                             } else {
-                                logger.warn(MensagemPadrao.ERROR_NOT_DISPOSITIVO);
+                                //logger.warn(MensagemPadrao.ERROR_NOT_DISPOSITIVO);
                                 
                                 SmalogwsEntity smalogwsEntity = new SmalogwsEntity();
                                 smalogwsEntity.setLevel(this.getClass().getSimpleName());
+                                smalogwsEntity.setMetodo(new Object() {} .getClass().getEnclosingMethod().getName());
                                 smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_WARN);
                                 smalogwsEntity.setLog(MensagemPadrao.ERROR_NOT_DISPOSITIVO);
                                 smalogwsEntity.setAnexo(smadispoEntity.toString());
@@ -251,7 +281,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
                                 retornoWebService.statusRetorno = statusRetorno;
 
                                 StatusRetornoWebServiceBeans mensagem = new StatusRetornoWebServiceBeans();
-                                mensagem.setCodigoRetorno(0);
+                                mensagem.setCodigoRetorno(HttpURLConnection.HTTP_UNAUTHORIZED);
                                 mensagem.setMensagemRetorno(MensagemPadrao.ERROR_DISPOSITIVO_SEM_UUID);
                                 // Adiciona os dados que eh pra ser retornado
                                 retornoWebService.object = mensagem;
@@ -271,7 +301,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
                             retornoWebService.statusRetorno = statusRetorno;
 
                             StatusRetornoWebServiceBeans mensagem = new StatusRetornoWebServiceBeans();
-                            mensagem.setCodigoRetorno(0);
+                            mensagem.setCodigoRetorno(HttpURLConnection.HTTP_UNAUTHORIZED);
                             mensagem.setMensagemRetorno(MensagemPadrao.ERROR_NOT_DISPOSITIVO);
                             // Adiciona os dados que eh pra ser retornado
                             retornoWebService.object = mensagem;
@@ -282,7 +312,6 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
                         }
                     }
                 }
-
             } else {
                 if ((sessao != null) && (sessao.getAttribute(KEY_DISPOSITIVO) != null)) {
                     return true;

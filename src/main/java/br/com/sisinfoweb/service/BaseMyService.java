@@ -349,8 +349,7 @@ public class BaseMyService<R extends BaseMyRepository, E> {
                     sqlQuery = new FuncoesPersonalizadas().construirSelectFromParamJson(this.getClass().getSimpleName().toUpperCase().replace("SERVICE", ""), COLUMNS_RESUME, where, sort);
 
                 } else {
-                    FuncoesPersonalizadas funcoes = new FuncoesPersonalizadas();
-                    sqlQuery = funcoes.construirSelectFromParamJson(this.getClass().getSimpleName().toUpperCase().replace("SERVICE", ""), columns, where, sort);
+                    sqlQuery = new FuncoesPersonalizadas().construirSelectFromParamJson(this.getClass().getSimpleName().toUpperCase().replace("SERVICE", ""), columns, where, sort);
                 }
             }
             smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_DEBUG);
@@ -387,6 +386,19 @@ public class BaseMyService<R extends BaseMyRepository, E> {
         }
     }
 
+    /**
+     * Função usada para buscar dados no banco de dados do cliente, ou seja,
+     * faz um select direto na base de dados do cliente que esta cadastrado no banco admin(WebService).
+     * 
+     * @param resume
+     * @param sqlCustomParam
+     * @param columns
+     * @param where
+     * @param sort
+     * @param pageable
+     * @return <code>PageBeans</code> - Contem um controle de paginação e uma lista com os dados.
+     * @see PageBeans
+     */
     @Transactional
     public PageBeans<E> findCustomNativeQueryClient(Boolean resume, String sqlCustomParam, String columns, String where, String sort, PageableBeans pageable) {
         smalogwsEntity = new SmalogwsEntity();

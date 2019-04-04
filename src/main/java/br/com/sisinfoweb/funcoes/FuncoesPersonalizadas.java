@@ -468,16 +468,16 @@ public class FuncoesPersonalizadas {
      * @param encriptaDecripta - Obrigatorio, pode ser 0 para encriptar, ou 1 para descriptografar.
      * @param texto
      * @param chaveEncriptacao
-     * @return - Eh retornado um Object de acordo com a opcao escolhida no @param encriptaDecripta. 
-     * <br>
-     * Retorna <code>byte[]</code> se for para encriptar, retorna <code>String</code> se for para descriptografar.
+     * @return - Retorna <code>byte[]</code> para qualquer tido, criptografar ou descriptografar.
+     * Vai retornar nulo(null) caso não seja um texto válido para descriptografar ou se acontecer
+     * qualquer tipo de erro.
      */
     public byte[] encryptDecrypt(int encriptaDecripta, String texto, String chaveEncriptacao) {
         try{
             Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
             SecretKeySpec keySecretKeySpec = new SecretKeySpec(chaveEncriptacao.getBytes("UTF-8"), "AES");
 
-            if ((texto != null)) {
+            if ((texto != null) && (!texto.isEmpty()) && (texto.length() > 1)) {
                 if ((encriptaDecripta == KEY_ENCRYPT) ){
                     cipher.init(Cipher.ENCRYPT_MODE, keySecretKeySpec, new IvParameterSpec(ConfiguracoesGerais.IV_DEFAULT_ENCRYPT_DECRYPT.getBytes("UTF-8")));
 

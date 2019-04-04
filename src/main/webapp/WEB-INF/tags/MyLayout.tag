@@ -1,7 +1,7 @@
 <%-- 
     Document   : MyLayout
     Created on : 12/04/2017, 17:48:59
-    Author     : Bruno
+    Author     : Bruno Nogueira Silva
 --%>
 
 <%@tag description="Classe personalizada para paginas logadas" pageEncoding="UTF-8"%>

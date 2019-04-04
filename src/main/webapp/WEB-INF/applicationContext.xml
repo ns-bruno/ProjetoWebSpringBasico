@@ -22,7 +22,7 @@
     
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-          p:prefix="/WEB-INF/jsp/"
+          p:prefix="/WEB-INF/pages/"
           p:suffix=".jsp" />
     
     <bean id="sisinfowebProperties"
@@ -47,7 +47,8 @@
         </property>
     </bean>
 
-    <!-- la source de donnéees DBCP -->
+    <!-- Configuracoes de conexao do banco de dados.
+         Pode se alterado os dados no arquivo de .properties, mas tem que reiniciar o servico do dominio.    -->
     <bean id="dataSource" class="br.com.sisinfoweb.banco.beans.MyBaseBasicDataSource" destroy-method="close">
         <property name="driverClassName" value="org.firebirdsql.jdbc.FBDriver" />
         <property name="url" value="jdbc:firebirdsql:${GLOBAL.DataBase}" />

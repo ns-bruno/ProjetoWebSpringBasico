@@ -61,6 +61,20 @@ public class SmadispoEntity {
     @Column(name = "ATIVO", table = "SMADISPO")
     @Basic
     private Character ativo;
+    
+    /**
+     * Nome de usuario para fazer login no sistema e no banco de dados
+     */
+    @Column(name = "NOME", table = "SMADISPO", length = 60)
+    @Basic
+    private String nome;
+    
+    /**
+     * Senha do usuario para fazer login no sistema e no banco de dados
+     */
+    @Column(name = "SENHA", table = "SMADISPO", length = 20)
+    @Basic
+    private String senha;
 
     /**
      * toString() personalizado, para retornar todos os campos de forma estruturada.
@@ -82,6 +96,7 @@ public class SmadispoEntity {
         if ((descricao != null) && (descricao.length() > 0)){ returnString.append("descricao: ").append(descricao).append("\n"); }
         if ((identificacao != null) && (identificacao.length() > 0)){ returnString.append("identificacao: ").append(identificacao).append("\n"); }
         if ((ativo != null) ){ returnString.append("ativo:").append(ativo).append("\n"); }
+        if ((nome != null) ){ returnString.append("nome:").append(nome).append("\n"); }
         
         return returnString.toString();
     }
@@ -180,6 +195,30 @@ public class SmadispoEntity {
 
     public void setAtivo(Character ativo) {
         this.ativo = ativo;
+    }
+
+    public Integer getIdCfaclifoFunc() {
+        return idCfaclifoFunc;
+    }
+
+    public void setIdCfaclifoFunc(Integer idCfaclifoFunc) {
+        this.idCfaclifoFunc = idCfaclifoFunc;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
 }

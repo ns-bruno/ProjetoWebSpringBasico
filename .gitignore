@@ -1,2 +1,7 @@
 /nbproject/
 /src/main/java/br/com/sisinfoweb/configuracao/ConfiguracoesGerais.java
+/node/node_modules/
+/src/main/webapp/WEB-INF/node/node_modules/
+/src/main/webapp/WEB-INF/node/
+/src/main/webapp/WEB-INF/node_modules/
+/src/main/resources/node_modules/

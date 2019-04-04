@@ -208,8 +208,8 @@ public class BaseMyRepositoryImpl<T, ID extends Serializable> extends SimpleJpaR
                     Class.forName(DRIVE_FIREBIRD);
                     connection = DriverManager.getConnection(
                             "jdbc:firebirdsql:" + cfaclifoEntity.get(0).getIpServidorSisinfo() + "/" + cfaclifoEntity.get(0).getPortaBancoSisinfo() + ":" + cfaclifoEntity.get(0).getCaminhoBancoSisinfo() + "?rewriteBatchedStatements=true",
-                            cfaclifoEntity.get(0).getUsuSisinfoWebservice(),
-                            cfaclifoEntity.get(0).getSenhaSisinfoWebservice());
+                            ( (smadispoEntity.getNome() != null && !smadispoEntity.getNome().isEmpty()) ? smadispoEntity.getNome() : cfaclifoEntity.get(0).getUsuSisinfoWebservice() ),
+                            ( (smadispoEntity.getSenha() != null && !smadispoEntity.getSenha().isEmpty()) ? smadispoEntity.getSenha() : cfaclifoEntity.get(0).getSenhaSisinfoWebservice() ));
                 } else {
                     //logger.error(MensagemPadrao.ERROR_EMPRESA_NAO_LICENCIADA);
                     smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_ERROR);

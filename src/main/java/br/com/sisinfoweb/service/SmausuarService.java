@@ -18,8 +18,11 @@ import org.springframework.stereotype.Service;
 @Transactional
 public class SmausuarService extends BaseMyService<SmausuarRepository, SmausuarEntity>{
     
+    private static final String COLUMNS_RESUME_SMAUSUAR = "ID_SMAUSUAR, ID_SMAEMPRE, ID_CFACLIFO, ID_CBANUMCX, GUID, US_CAD, DT_CAD, DT_ALT, CT_INTEG, NOME, ACESSO_TOTAL ";
+    
     public SmausuarService(SmausuarRepository smaempreRepository) {
         super(smaempreRepository);
+        super.COLUMNS_RESUME = COLUMNS_RESUME_SMAUSUAR;
     }
     
 }

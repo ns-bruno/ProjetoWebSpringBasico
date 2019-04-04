@@ -14,10 +14,16 @@ public interface MensagemPadrao {
     String INSERT_SUCCESS = "Inserido com sucesso no Host (Servidor SisInfo da empresa).";
     String UPDATE_ERROR = "Nao conseguimos atualizar o registro no banco de dados do Host (Servidor SisInfo da empresa).";
     String EXISTS = "Ja existe no banco de dados";
+    String ERROR = "Oops! Não conseguimos realizar o que queriamos.";
     String ERROR_FIND = "Nao conseguimos realizar a pesquisa/find. ";
     String ERROR_SAVE = "Erro ao tentar salvar. ";
-    String ERROR_NOT_DISPOSITIVO = "Nao foi passado o parâmetro com a identificação do dispositivo";
+    String ERROR_NOT_DISPOSITIVO = "Nao foi passado o parâmetro com a identificação do dispositivo, ou com os dados do usuário.";
+    String ERROR_NOT_USUARIO_SENHA = "Nao foi passado os dados do usuário e/ou senha.";
+    String ERROR_NOT_FOUND_USUARIO = "Usuário não encontrado, verificar se foi escrito corretamente e/ou se esse nome de usuário esta cadastrado no banco de dados da sua empresa.";
+    String ERROR_NOT_FOUND_USUARIO_CFACLIFO = "Usuário não esta cadastrado na tabela CFACLIFO, precisamos que estaja cadastrado para chegar se este usuário esta ativo.";
+    String ERROR_NOT_FOUND_SENHA = "Senha não esta correta, verificar se a senha foi escrita corretamente e/ou se esta cadastrada no banco de dados da sua empresa.";
     String ERROR_DISPOSITIVO_INATIVO = "Dispositivo esta inativo.";
+    String ERROR_USUARIO_INATIVO = "Usuário esta inativo.";
     String ERROR_SQL_INJECTION = "O parametro where que foi passado tem algum traço de SQL Injection, por isso não iremos autorizar essa conexão.";
     String ERROR_DISPOSITIVO_NAO_CADASTRADO = "Dispositivo não encontrado.";
     String ERROR_DISPOSITIVO_SEM_UUID = "Dispositivo sem o UUID(Chave de identificacao).";
@@ -34,7 +40,7 @@ public interface MensagemPadrao {
     String ERROR_INTERCEPTOR_AUTORIZADOR = "Erro desconhecido no autorizador. ";
     String ERROR_SMALOGWS_NULL = "A variável que tem os dados do log (SMALOGWS) esta vazia. ";
     String ERROR_SMALOGWS_DATABASE = "Erro ao tentar salvar os dados do log (SMALOGWS) no banco de dados. ";
-    String ERROR_NOT_TEXT_FOR_ENCRYPT = "Não foi passodo um texto para criptografar.";
+    String ERROR_NOT_TEXT_FOR_ENCRYPT = "Não recebemos nenhum texto para criptografar.";
     String ERROR_ENCRYPT_DECRYPT = "Não coseguimos criptografar/descriptografar o texto, aconteceu algum erro.";
     String LOGGER_NEW_CAD_DISPOSITIVO = "CADASTRAR UM NOVO DISPOSITIVO";
     String LOGGER_EXECUTE_FIND = "EXECUTANDO SELECT NO BANCO DE DADOS";

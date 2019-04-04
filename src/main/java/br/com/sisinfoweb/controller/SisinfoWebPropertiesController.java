@@ -65,7 +65,7 @@ public class SisinfoWebPropertiesController extends BaseMyController{
     @RequestMapping(value = {"/SisInfoWeb.properties", "/SisInfoWeb.ini", "/sisinfoweb.ini", "/sisinfoweb.properties"}, method = RequestMethod.GET)
     public ModelAndView init(Model model, @RequestHeader() HttpHeaders httpHeaders) {
 
-        ModelAndView modelAndView = new ModelAndView("sisinfowebProperties");
+        ModelAndView modelAndView = new ModelAndView("jsp/sisinfowebProperties");
         try {
             //Agora crio uma instância de FileInputStream passando via construtor o objeto file instanciado acima
             InputStream inputStream = servletContext.getResourceAsStream("/WEB-INF/sisinfoweb.properties");
@@ -100,7 +100,10 @@ public class SisinfoWebPropertiesController extends BaseMyController{
     }
     
     @RequestMapping(value = {"/SisInfoWeb.properties", "/SisInfoWeb.ini", "/sisinfoweb.ini", "/sisinfoweb.properties"}, method = RequestMethod.POST)
-    public ModelAndView post(Model model, @RequestHeader() HttpHeaders httpHeaders, HttpServletRequest req, @ModelAttribute("properties")Properties properties) {
+    public ModelAndView post(   Model model, 
+                                @RequestHeader() HttpHeaders httpHeaders, 
+                                HttpServletRequest req, 
+                                @ModelAttribute("properties")Properties properties) {
 
         ModelAndView modelAndView = new ModelAndView("sisinfowebProperties");
         try {

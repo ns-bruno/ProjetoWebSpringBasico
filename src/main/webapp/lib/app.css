@@ -1,0 +1,11 @@
+/* 
+    Created on : 21/01/2019, 17:29:35
+    Author     : Bruno Nogueira Silva
+*/
+
+
+
+.my-v-text-field input{
+    /*Transforma todas entrada de texto em maiuscula*/
+    text-transform: uppercase
+}

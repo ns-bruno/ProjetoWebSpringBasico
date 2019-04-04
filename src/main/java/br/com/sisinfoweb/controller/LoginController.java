@@ -40,7 +40,7 @@ public class LoginController extends BaseMyController {
                                 @RequestHeader() HttpHeaders httpHeaders, 
                                 @RequestParam(defaultValue = "{}", required = false) String dispositivo) {
 
-        return new ModelAndView("login");
+        return new ModelAndView("login/login");
     }
 
     @RequestMapping(value = {"/Login", "/login"}, method = RequestMethod.POST)
@@ -63,13 +63,13 @@ public class LoginController extends BaseMyController {
                 if (smausuarEntity.getSenha().equalsIgnoreCase(senha)) {
                     session.setAttribute(AutorizadorInterceptor.KEY_DISPOSITIVO, smausuarEntity.getIdSmausuar());
 
-                    modelAndView.setViewName("dashboard");
+                    modelAndView.setViewName("jsp/dashboard");
                 } else {
                     model.addAttribute("error", "Senha não confere com o usuário.");
                 }
             } else {
                 modelAndView.addObject(model);
-                modelAndView.setViewName("login");
+                modelAndView.setViewName("jsp/loginOld");
             }
         } else {
             throw new Exception("Usuário não localizado");

@@ -45,6 +45,7 @@
     <class>br.com.sisinfoweb.entity.SmadispoEntity</class>
     <class>br.com.sisinfoweb.entity.SmaempreEntity</class>
     <class>br.com.sisinfoweb.entity.SmalogwsEntity</class>
+    <class>br.com.sisinfoweb.entity.SmamenusEntity</class>
     <class>br.com.sisinfoweb.entity.SmausuarEntity</class>
     <class>br.com.sisinfoweb.entity.EpChecaEstoqueEntity</class>
     <class>br.com.sisinfoweb.entity.EpGeraPedVendaEntity</class>
