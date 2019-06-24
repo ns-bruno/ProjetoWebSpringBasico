@@ -5,20 +5,17 @@
  */
 package br.com.sisinfoweb.controller;
 
-import br.com.sisinfoweb.banco.beans.RetornoWebServiceBeans;
-import static br.com.sisinfoweb.exception.ControllerException.DEFAULT_ERROR_VIEW;
 import br.com.sisinfoweb.exception.CustomException;
 import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.core.annotation.AnnotationUtils;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+import static br.com.sisinfoweb.exception.ControllerException.DEFAULT_ERROR_NOT_FOUND;
 
 /**
  *
@@ -42,7 +39,7 @@ public class ExceptionCustomController extends ResponseEntityExceptionHandler{
         ModelAndView mav = new ModelAndView();
         mav.addObject("exception", e);
         mav.addObject("url", req.getRequestURL());
-        mav.setViewName(DEFAULT_ERROR_VIEW);
+        mav.setViewName(DEFAULT_ERROR_NOT_FOUND);
         return mav;
     }
 }

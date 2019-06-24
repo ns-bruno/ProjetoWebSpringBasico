@@ -85,7 +85,7 @@ public class AeaorcamController extends BaseMyController{
             }
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_OK);
-            statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.OK));
+            statusRetorno.setMensagemRetorno(MensagemPadrao.SUCCESS);
             
             // Adiciona o status
             retornoWebService.statusRetorno = statusRetorno;

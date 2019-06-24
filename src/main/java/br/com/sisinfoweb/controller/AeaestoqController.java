@@ -17,11 +17,9 @@ import br.com.sisinfoweb.service.AeaestoqService;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import java.net.HttpURLConnection;
-import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -82,7 +80,7 @@ public class AeaestoqController extends BaseMyController{
             }
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_OK);
-            statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.OK));
+            statusRetorno.setMensagemRetorno(MensagemPadrao.SUCCESS);
             
             // Adiciona o status
             retornoWebService.statusRetorno = statusRetorno;

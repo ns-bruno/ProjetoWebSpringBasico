@@ -15,8 +15,6 @@ import br.com.sisinfoweb.entity.CfaclifoEntity;
 import br.com.sisinfoweb.entity.SmadispoEntity;
 import br.com.sisinfoweb.service.CfaclifoService;
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
@@ -87,7 +85,7 @@ public class CfaclifoController extends BaseMyController{
             }
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_OK);
-            statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.OK));
+            statusRetorno.setMensagemRetorno(MensagemPadrao.SUCCESS);
             
             // Adiciona o status
             retornoWebService.statusRetorno = statusRetorno;
@@ -154,7 +152,7 @@ public class CfaclifoController extends BaseMyController{
             }
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_OK);
-            statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.OK));
+            statusRetorno.setMensagemRetorno(MensagemPadrao.SUCCESS);
             
             // Adiciona o status
             retornoWebService.statusRetorno = statusRetorno;
@@ -206,7 +204,7 @@ public class CfaclifoController extends BaseMyController{
             }
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_OK);
-            statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.OK));
+            statusRetorno.setMensagemRetorno(MensagemPadrao.SUCCESS);
             
             // Adiciona o status
             retornoWebService.statusRetorno = statusRetorno;

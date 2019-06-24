@@ -17,15 +17,15 @@ public class SmadispoEntity {
 
     @Column(name = "ID_SMADISPO", table = "SMADISPO", nullable = false)
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idSmadispo;
-    
+
     @Column(name = "ID_CFACLIFO", table = "SMADISPO")
     private Integer idCfaclifo;
-    
+
     @Column(name = "ID_CFACLIFO_FUNC", table = "SMADISPO")
     private Integer idCfaclifoFunc;
-    
+
     @Column(name = "GUID", table = "SMADISPO", nullable = false, length = 16)
     @Basic(optional = false)
     private String guid;
@@ -61,46 +61,78 @@ public class SmadispoEntity {
     @Column(name = "ATIVO", table = "SMADISPO")
     @Basic
     private Character ativo;
-    
+
     /**
-     * Nome de usuario para fazer login no sistema e no banco de dados
+     * Nome de usuario para fazer login no sistema e no banco de dados atraves
+     * de uma pagina web ou pelo webservice
      */
     @Column(name = "NOME", table = "SMADISPO", length = 60)
     @Basic
     private String nome;
-    
+
     /**
-     * Senha do usuario para fazer login no sistema e no banco de dados
+     * Senha do usuario para fazer login no sistema e no banco de dados atraves
+     * de uma pagina web ou pelo webservice
      */
     @Column(name = "SENHA", table = "SMADISPO", length = 20)
     @Basic
     private String senha;
 
     /**
-     * toString() personalizado, para retornar todos os campos de forma estruturada.
-     * @return 
+     * toString() personalizado, para retornar todos os campos de forma
+     * estruturada.
+     *
+     * @return
      */
     @Override
     public String toString() {
         StringBuilder returnString = new StringBuilder();
-        if ((idSmadispo != null) && (idSmadispo != 0)){ returnString.append("idSmadispo: ").append(idSmadispo).append("\n"); }
-        if ((idCfaclifo != null) && (idCfaclifo != 0)){ returnString.append("idCfaclifo: ").append(idCfaclifo).append("\n"); }
-        if ((idCfaclifo != null) && (idCfaclifo != 0)){ returnString.append("idCfaclifo: ").append(idCfaclifo).append("\n"); }
-        if ((idCfaclifoFunc != null) && (idCfaclifoFunc != 0)){ returnString.append("idCfaclifoFunc: ").append(idCfaclifoFunc).append("\n"); }
-        if ((guid != null) && (guid.length() > 0)){ returnString.append("guid: ").append(guid).append("\n"); }
-        if ((usCad != null) && (usCad.length() > 0)){ returnString.append("usCad: ").append(usCad).append("\n"); }
-        if ((dtCad != null) && (dtCad.length() > 0)){ returnString.append("dtCad: ").append(dtCad).append("\n"); }
-        if ((dtAlt != null) && (dtAlt.length() > 0)){ returnString.append("dtAlt: ").append(dtAlt).append("\n"); }
-        if ((ctInteg != null) && (ctInteg != 0)){ returnString.append("ctInteg: ").append(ctInteg).append("\n"); }
-        if ((codigo != null) && (codigo != 0)){ returnString.append("codigo: ").append(codigo).append("\n"); }
-        if ((descricao != null) && (descricao.length() > 0)){ returnString.append("descricao: ").append(descricao).append("\n"); }
-        if ((identificacao != null) && (identificacao.length() > 0)){ returnString.append("identificacao: ").append(identificacao).append("\n"); }
-        if ((ativo != null) ){ returnString.append("ativo:").append(ativo).append("\n"); }
-        if ((nome != null) ){ returnString.append("nome:").append(nome).append("\n"); }
-        
+        if ((idSmadispo != null) && (idSmadispo != 0)) {
+            returnString.append("idSmadispo: ").append(idSmadispo).append("\n");
+        }
+        if ((idCfaclifo != null) && (idCfaclifo != 0)) {
+            returnString.append("idCfaclifo: ").append(idCfaclifo).append("\n");
+        }
+        if ((idCfaclifo != null) && (idCfaclifo != 0)) {
+            returnString.append("idCfaclifo: ").append(idCfaclifo).append("\n");
+        }
+        if ((idCfaclifoFunc != null) && (idCfaclifoFunc != 0)) {
+            returnString.append("idCfaclifoFunc: ").append(idCfaclifoFunc).append("\n");
+        }
+        if ((guid != null) && (guid.length() > 0)) {
+            returnString.append("guid: ").append(guid).append("\n");
+        }
+        if ((usCad != null) && (usCad.length() > 0)) {
+            returnString.append("usCad: ").append(usCad).append("\n");
+        }
+        if ((dtCad != null) && (dtCad.length() > 0)) {
+            returnString.append("dtCad: ").append(dtCad).append("\n");
+        }
+        if ((dtAlt != null) && (dtAlt.length() > 0)) {
+            returnString.append("dtAlt: ").append(dtAlt).append("\n");
+        }
+        if ((ctInteg != null) && (ctInteg != 0)) {
+            returnString.append("ctInteg: ").append(ctInteg).append("\n");
+        }
+        if ((codigo != null) && (codigo != 0)) {
+            returnString.append("codigo: ").append(codigo).append("\n");
+        }
+        if ((descricao != null) && (descricao.length() > 0)) {
+            returnString.append("descricao: ").append(descricao).append("\n");
+        }
+        if ((identificacao != null) && (identificacao.length() > 0)) {
+            returnString.append("identificacao: ").append(identificacao).append("\n");
+        }
+        if ((ativo != null)) {
+            returnString.append("ativo:").append(ativo).append("\n");
+        }
+        if ((nome != null)) {
+            returnString.append("nome:").append(nome).append("\n");
+        }
+
         return returnString.toString();
     }
-    
+
     public Integer getIdSmadispo() {
         return this.idSmadispo;
     }

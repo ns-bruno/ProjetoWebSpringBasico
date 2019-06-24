@@ -7,6 +7,7 @@ package br.com.sisinfoweb.funcoes;
 
 import br.com.sisinfoweb.banco.values.MensagemPadrao;
 import br.com.sisinfoweb.configuracao.ConfiguracoesGerais;
+import br.com.sisinfoweb.exception.CustomException;
 import com.google.gson.JsonSyntaxException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
@@ -498,6 +499,7 @@ public class FuncoesPersonalizadas {
                  InvalidKeyException | NoSuchAlgorithmException | 
                  BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException e){
             logger.error(MensagemPadrao.ERROR_ENCRYPT_DECRYPT + " | " + e.getMessage());
+            throw new CustomException(e);
         }
         return null;
     }

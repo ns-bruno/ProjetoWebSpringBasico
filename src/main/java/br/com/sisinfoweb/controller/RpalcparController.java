@@ -10,16 +10,6 @@ import br.com.sisinfoweb.banco.beans.PageableBeans;
 import br.com.sisinfoweb.banco.beans.RetornoWebServiceBeans;
 import br.com.sisinfoweb.banco.beans.StatusRetornoWebServiceBeans;
 import br.com.sisinfoweb.banco.values.MensagemPadrao;
-import static br.com.sisinfoweb.controller.BaseMyController.PARAM_COLUMN_SELECTED;
-import static br.com.sisinfoweb.controller.BaseMyController.PARAM_DISPOSITIVO;
-import static br.com.sisinfoweb.controller.BaseMyController.PARAM_PAGE_NUMBER;
-import static br.com.sisinfoweb.controller.BaseMyController.PARAM_RESUME;
-import static br.com.sisinfoweb.controller.BaseMyController.PARAM_SIZE;
-import static br.com.sisinfoweb.controller.BaseMyController.PARAM_SORT;
-import static br.com.sisinfoweb.controller.BaseMyController.PARAM_SQL_QUERY;
-import static br.com.sisinfoweb.controller.BaseMyController.PARAM_WHERE;
-import static br.com.sisinfoweb.controller.BaseMyController.logger;
-import br.com.sisinfoweb.entity.AeaclaseEntity;
 import br.com.sisinfoweb.entity.RpalcparEntity;
 import br.com.sisinfoweb.entity.SmadispoEntity;
 import br.com.sisinfoweb.service.RpalcparService;
@@ -29,7 +19,6 @@ import java.net.HttpURLConnection;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -91,7 +80,7 @@ public class RpalcparController extends BaseMyController{
             }
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_OK);
-            statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.OK));
+            statusRetorno.setMensagemRetorno(MensagemPadrao.SUCCESS);
             
             // Adiciona o status
             retornoWebService.statusRetorno = statusRetorno;

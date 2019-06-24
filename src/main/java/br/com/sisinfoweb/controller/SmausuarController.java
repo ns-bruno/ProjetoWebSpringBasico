@@ -123,7 +123,7 @@ public class SmausuarController extends BaseMyController{
             }
             // Cria uma vareavel para retorna o status
             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_OK);
-            statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.OK));
+            statusRetorno.setMensagemRetorno(MensagemPadrao.SUCCESS);
             
             // Adiciona o status
             retornoWebService.statusRetorno = statusRetorno;
@@ -245,7 +245,7 @@ public class SmausuarController extends BaseMyController{
                             
                             // Cria uma vareavel para retorna o status
                             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_OK);
-                            statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.OK));
+                            statusRetorno.setMensagemRetorno(MensagemPadrao.SUCCESS);
 
                             // Adiciona o status
                             retornoWebService.statusRetorno = statusRetorno;
@@ -266,7 +266,7 @@ public class SmausuarController extends BaseMyController{
                             new BaseMyLoggerFuncoes(cfaclifoService.getBaseMyRepository(), smadispoEntity, smalogwsEntity);
 
                             statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_INTERNAL_ERROR);
-                            statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR));
+                            statusRetorno.setMensagemRetorno(MensagemPadrao.ERROR_USUARIO_INATIVO);
                             //statusRetorno.setExtra(e);
 
                             // Adiciona o status
@@ -291,7 +291,7 @@ public class SmausuarController extends BaseMyController{
                         new BaseMyLoggerFuncoes(cfaclifoService.getBaseMyRepository(), smadispoEntity, smalogwsEntity);
 
                         statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_INTERNAL_ERROR);
-                        statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR));
+                        statusRetorno.setMensagemRetorno(MensagemPadrao.ERROR_NOT_FOUND_USUARIO_CFACLIFO);
                         //statusRetorno.setExtra(e);
 
                         // Adiciona o status
@@ -316,7 +316,7 @@ public class SmausuarController extends BaseMyController{
                     new BaseMyLoggerFuncoes(cfaclifoService.getBaseMyRepository(), smadispoEntity, smalogwsEntity);
 
                     statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_UNAUTHORIZED);
-                    statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.UNAUTHORIZED));
+                    statusRetorno.setMensagemRetorno(MensagemPadrao.ERROR_NOT_FOUND_USUARIO);
                     //statusRetorno.setExtra(e);
 
                     // Adiciona o status
@@ -342,7 +342,7 @@ public class SmausuarController extends BaseMyController{
                 new BaseMyLoggerFuncoes(cfaclifoService.getBaseMyRepository(), smadispoEntity, smalogwsEntity);
 
                 statusRetorno.setCodigoRetorno(HttpURLConnection.HTTP_UNAUTHORIZED);
-                statusRetorno.setMensagemRetorno(String.valueOf(HttpStatus.UNAUTHORIZED));
+                statusRetorno.setMensagemRetorno(MensagemPadrao.ERROR_NOT_USUARIO_SENHA);
                 //statusRetorno.setExtra(e);
 
                 // Adiciona o status
@@ -354,8 +354,8 @@ public class SmausuarController extends BaseMyController{
                 // Adiciona os dados que eh pra ser retornado
                 retornoWebService.object = mensagem;
 
-                response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
-                response.getWriter().write(new Gson().toJson(retornoWebService));
+                //response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+                //response.getWriter().write(new Gson().toJson(retornoWebService));
             }
             
         } catch (JsonSyntaxException | JsonIOException e) {

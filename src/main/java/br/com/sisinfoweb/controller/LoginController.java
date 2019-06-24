@@ -63,13 +63,13 @@ public class LoginController extends BaseMyController {
                 if (smausuarEntity.getSenha().equalsIgnoreCase(senha)) {
                     session.setAttribute(AutorizadorInterceptor.KEY_DISPOSITIVO, smausuarEntity.getIdSmausuar());
 
-                    modelAndView.setViewName("jsp/dashboard");
+                    modelAndView.setViewName("login/login");
                 } else {
                     model.addAttribute("error", "Senha não confere com o usuário.");
                 }
             } else {
                 modelAndView.addObject(model);
-                modelAndView.setViewName("jsp/loginOld");
+                modelAndView.setViewName("login/login");
             }
         } else {
             throw new Exception("Usuário não localizado");
