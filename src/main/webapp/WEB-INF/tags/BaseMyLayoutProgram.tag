@@ -21,6 +21,7 @@
                 <div>
                     <!-- Adiciona o Navigation Drawer (menus). -->
                     <%@include file="components/MyNavigationDrawer.tag" %>
+                    
                     <!-- Adiciona o toolbar no topo da pagina. -->
                     <%@include file="components/MyToolbar.tag" %>
 
