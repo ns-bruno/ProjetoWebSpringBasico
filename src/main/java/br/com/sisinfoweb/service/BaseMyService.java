@@ -261,6 +261,55 @@ public class BaseMyService<R extends BaseMyRepository, E> {
             throw new CustomException(e);
         }
     }
+    
+    @Transactional
+    public E findOneByIdClient(String id) {
+        smalogwsEntity = new SmalogwsEntity();
+        smalogwsEntity.setLevel(this.getClass().getSimpleName());
+        smalogwsEntity.setMetodo(new Object() {} .getClass().getEnclosingMethod().getName());
+        try {
+            // Seta os dados do dispositivo
+            baseMyRepository.setSmadispoEntity(smadispoEntity);
+
+            FuncoesPersonalizadas funcoes = new FuncoesPersonalizadas();
+
+            String nameTable = this.getClass().getSimpleName().toUpperCase().replace("SERVICE", "").replace("CUSTOM", "");
+            
+            String sqlQuery = funcoes.construirSelectFromParamJson(nameTable, null, "ID_" + nameTable + " = " + id, null);
+
+            smalogwsEntity.setTipo(BaseMyLoggerFuncoes.TYPE_DEBUG);
+            smalogwsEntity.setLog(MensagemPadrao.LOGGER_EXECUTE_FIND + " | findOneByIdClient | " + sqlQuery);
+            //Instancia a classe de logger para registrar o log no banco
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
+            
+            ResultSet resultado = baseMyRepository.executarSQL(sqlQuery);
+
+            return mapResultSetToObject(resultado, Class.forName("br.com.sisinfoweb.entity." + this.getClass().getSimpleName().replace("Service", "") + "Entity")).get(0);
+        } catch (ScriptException e) {
+            smalogwsEntity.setTipo(logger.TYPE_ERROR);
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI findOneByGuidClient. " + e.getMessage());
+            //Instancia a classe de logger para registrar o log no banco
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
+
+            throw new CustomException(e);
+
+        } catch (ClassNotFoundException e) {
+            smalogwsEntity.setTipo(logger.TYPE_ERROR);
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI findOneByGuidClient. " + e.getMessage());
+            //Instancia a classe de logger para registrar o log no banco
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
+
+            throw new CustomException(e);
+        
+        } catch (Exception e) {
+            smalogwsEntity.setTipo(logger.TYPE_ERROR);
+            smalogwsEntity.setLog(MensagemPadrao.ERROR_FIND + "NESTE CASO FOI findOneByGuidClient. " + e.getMessage());
+            //Instancia a classe de logger para registrar o log no banco
+            new BaseMyLoggerFuncoes(baseMyRepository, smadispoEntity, smalogwsEntity);
+
+            throw new CustomException(e);
+        }
+    }
 
     @Transactional
     public E findOneByGuid(String guid) {
@@ -283,7 +332,7 @@ public class BaseMyService<R extends BaseMyRepository, E> {
             throw new CustomException(e);
         }
     }
-
+    
     @Transactional
     public List<E> findCustomNativeQuery(Boolean resume, String sqlCustomParam, String columns, String where, String sort) {
         smalogwsEntity = new SmalogwsEntity();
@@ -442,9 +491,9 @@ public class BaseMyService<R extends BaseMyRepository, E> {
             }
             // Verifica se foi passado as configuracoes da paginacao
             if (pageable == null) {
-                pageable = new PageableBeans();
+                pageable = new PageableBeans(0, 0);
             }
-            if (pageable.getSize() > 0) {
+            if ( (pageable.getSize() != null) && (pageable.getSize() > 0) ) {
                 size = pageable.getSize();
             } else {
                 pageable.setSize(size);
@@ -462,7 +511,7 @@ public class BaseMyService<R extends BaseMyRepository, E> {
             pageable.setTotalPages(totalPages);
 
             // Verifica se foi passado o numero da pagina
-            if (pageable.getPageNumber() >= 0) {
+            if ( (pageable.getPageNumber() != null) && (pageable.getPageNumber() >= 0) ) {
                 numberPage = pageable.getPageNumber();
             } else {
                 pageable.setPageNumber(numberPage);
@@ -610,6 +659,12 @@ public class BaseMyService<R extends BaseMyRepository, E> {
         }
     }
 
+    /**
+     * 
+     * @param entity
+     * @return Retorna o ID do insert na tabela, ou seja, retorna ID_NOME_TABELA.
+     * Esse retorno acontece pois na construção do insert é inserido a clausula RETURNING.
+     */
     @Transactional
     public Serializable saveClient(E entity) {
         smalogwsEntity = new SmalogwsEntity();

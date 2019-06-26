@@ -117,6 +117,32 @@ public class BaseMyRepositoryImpl<T, ID extends Serializable> extends SimpleJpaR
             throw new CustomException(e);
         }
     }
+    
+    @Override
+    @Transactional
+    public T findOneById(String id) {
+        try {
+            String nameTable = this.getDomainClass().getSimpleName().toUpperCase().replace("ENTITY", "").replace("CUSTOM", "");
+            // Monta um select na linguagem JPQL
+            String consultaJpql = "SELECT A FROM " + nameTable + " A WHERE A.ID_" + nameTable + " = :ID";
+
+            logger.debug(MensagemPadrao.LOGGER_EXECUTE_FIND + " | findOneById | " + consultaJpql);
+
+            Query query = entityManager.createQuery(consultaJpql, this.getDomainClass());
+            query.setParameter("ID", id);
+
+            return (T) query.getSingleResult();
+        } catch (JDBCConnectionException | SQLGrammarException | ConstraintViolationException
+                | LockAcquisitionException | GenericJDBCException e) {
+            logger.error("ERRO AO EXECUTAR SELECT POR ID. | " + e.getMessage());
+            
+            throw new CustomException(e);
+        } catch (Exception e) {
+            logger.error("ERRO AO EXECUTAR SELECT POR ID. | " + e.getMessage());
+            
+            throw new CustomException(e);
+        }
+    }
 
     /**
      * Função que salva dados no banco de dados do Webservice, ou seja, no servidor

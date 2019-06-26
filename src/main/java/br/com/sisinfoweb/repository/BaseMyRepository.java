@@ -6,7 +6,6 @@
 package br.com.sisinfoweb.repository;
 
 import br.com.sisinfoweb.entity.SmadispoEntity;
-import br.com.sisinfoweb.entity.SmalogwsEntity;
 import java.io.Serializable;
 import java.sql.ResultSet;
 import java.util.List;
@@ -33,6 +32,8 @@ public interface BaseMyRepository<T, ID extends Serializable> extends PagingAndS
     List<T> findAll(String sqlQuery);
     
     T findOneByGuid(String guid);
+    
+    T findOneById(String id);
     
     /**
      * Função que salva dados no banco de dados do Webservice, ou seja, no servidor

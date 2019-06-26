@@ -330,6 +330,12 @@ public class FuncoesPersonalizadas {
         return query.toString();
     }
 
+    /**
+     * 
+     * @param entityClass
+     * @return Retorna um insert completo na linguagem SQL.
+     * Esse retorno acontece pois na construção do insert é inserido a clausula RETURNING.
+     */
     public String construirInsertFromEntity(Object entityClass) {
         StringBuilder sql = new StringBuilder();
         StringBuilder valuesColumns = new StringBuilder();
