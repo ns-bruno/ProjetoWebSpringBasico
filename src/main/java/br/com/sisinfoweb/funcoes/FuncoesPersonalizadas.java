@@ -484,7 +484,7 @@ public class FuncoesPersonalizadas {
             Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
             SecretKeySpec keySecretKeySpec = new SecretKeySpec(chaveEncriptacao.getBytes("UTF-8"), "AES");
 
-            if ((texto != null) && (!texto.isEmpty()) && (texto.length() > 1)) {
+            if ((texto != null) && (!texto.isEmpty()) && (texto.length() > 0)) {
                 if ((encriptaDecripta == KEY_ENCRYPT) ){
                     cipher.init(Cipher.ENCRYPT_MODE, keySecretKeySpec, new IvParameterSpec(ConfiguracoesGerais.IV_DEFAULT_ENCRYPT_DECRYPT.getBytes("UTF-8")));
 
@@ -500,6 +500,9 @@ public class FuncoesPersonalizadas {
                 }
             } else {
                 logger.warn(MensagemPadrao.ERROR_NOT_TEXT_FOR_ENCRYPT);
+                
+                Exception e = new Exception(MensagemPadrao.ERROR_NOT_TEXT_FOR_ENCRYPT);
+                throw new CustomException(e);
             }
         } catch (UnsupportedEncodingException | InvalidAlgorithmParameterException | 
                  InvalidKeyException | NoSuchAlgorithmException | 
